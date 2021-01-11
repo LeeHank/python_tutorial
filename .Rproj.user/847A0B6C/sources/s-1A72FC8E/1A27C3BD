@@ -3,9 +3,9 @@
     "path": "/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/env_setting.R",
     "project_path": "env_setting.R",
     "type": "r_source",
-    "hash": "2368155458",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1610385256532.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -13,7 +13,7 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "8,2",
+        "cursorPosition": "15,0",
         "scrollLine": "0"
     },
     "folds": "",
@@ -21,7 +21,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1610385821220,
+    "last_content_update": 1610386279341,
     "read_only": false,
     "read_only_alternatives": []
 }

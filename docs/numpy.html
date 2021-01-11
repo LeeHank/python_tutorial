@@ -352,6 +352,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>29</b> </a></li>
+<li class="chapter" data-level="30" data-path="module-and-package.html"><a href="module-and-package.html"><i class="fa fa-check"></i><b>30</b> Module and Package</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="module-and-package.html"><a href="module-and-package.html#什麼是module"><i class="fa fa-check"></i><b>30.1</b> 什麼是module？</a></li>
+<li class="chapter" data-level="30.2" data-path="module-and-package.html"><a href="module-and-package.html#什麼是package"><i class="fa fa-check"></i><b>30.2</b> 什麼是package？</a></li>
+<li class="chapter" data-level="30.3" data-path="module-and-package.html"><a href="module-and-package.html#python的內建module"><i class="fa fa-check"></i><b>30.3</b> Python的內建module</a></li>
+<li class="chapter" data-level="30.4" data-path="module-and-package.html"><a href="module-and-package.html#第三方module和package"><i class="fa fa-check"></i><b>30.4</b> 第三方module和package</a></li>
+<li class="chapter" data-level="30.5" data-path="module-and-package.html"><a href="module-and-package.html#關於import語句"><i class="fa fa-check"></i><b>30.5</b> 關於import語句</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -443,13 +451,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb48-2"><a href="numpy.html#cb48-2"></a>weight <span class="op">=</span> np.<span class="bu">round</span>(np.random.normal(<span class="fl">60.32</span>, <span class="dv">15</span>, <span class="dv">5000</span>), <span class="dv">2</span>)</span>
 <span id="cb48-3"><a href="numpy.html#cb48-3"></a>np_city <span class="op">=</span> np.column_stack((height, weight))</span>
 <span id="cb48-4"><a href="numpy.html#cb48-4"></a>np_city</span>
-<span id="cb48-5"><a href="numpy.html#cb48-5"></a><span class="co">#&gt; array([[ 1.6 , 55.18],</span></span>
-<span id="cb48-6"><a href="numpy.html#cb48-6"></a><span class="co">#&gt;        [ 1.9 , 75.84],</span></span>
-<span id="cb48-7"><a href="numpy.html#cb48-7"></a><span class="co">#&gt;        [ 1.95, 58.58],</span></span>
+<span id="cb48-5"><a href="numpy.html#cb48-5"></a><span class="co">#&gt; array([[ 1.35, 61.26],</span></span>
+<span id="cb48-6"><a href="numpy.html#cb48-6"></a><span class="co">#&gt;        [ 1.58, 74.37],</span></span>
+<span id="cb48-7"><a href="numpy.html#cb48-7"></a><span class="co">#&gt;        [ 2.23, 58.26],</span></span>
 <span id="cb48-8"><a href="numpy.html#cb48-8"></a><span class="co">#&gt;        ...,</span></span>
-<span id="cb48-9"><a href="numpy.html#cb48-9"></a><span class="co">#&gt;        [ 1.64, 44.59],</span></span>
-<span id="cb48-10"><a href="numpy.html#cb48-10"></a><span class="co">#&gt;        [ 1.62, 44.08],</span></span>
-<span id="cb48-11"><a href="numpy.html#cb48-11"></a><span class="co">#&gt;        [ 1.86, 66.79]])</span></span></code></pre></div>
+<span id="cb48-9"><a href="numpy.html#cb48-9"></a><span class="co">#&gt;        [ 1.5 , 51.09],</span></span>
+<span id="cb48-10"><a href="numpy.html#cb48-10"></a><span class="co">#&gt;        [ 2.05, 46.75],</span></span>
+<span id="cb48-11"><a href="numpy.html#cb48-11"></a><span class="co">#&gt;        [ 2.15, 51.48]])</span></span></code></pre></div>
 </div>
 <div id="summary-statistics" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Summary statistics</h3>
@@ -458,21 +466,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-3"><a href="numpy.html#cb49-3"></a><span class="bu">print</span>(<span class="st">&quot;Average: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(avg))</span>
 <span id="cb49-4"><a href="numpy.html#cb49-4"></a></span>
 <span id="cb49-5"><a href="numpy.html#cb49-5"></a><span class="co"># Print median height. Replace &#39;None&#39;</span></span>
-<span id="cb49-6"><a href="numpy.html#cb49-6"></a><span class="co">#&gt; Average: 1.7512159999999999</span></span>
+<span id="cb49-6"><a href="numpy.html#cb49-6"></a><span class="co">#&gt; Average: 1.755406</span></span>
 <span id="cb49-7"><a href="numpy.html#cb49-7"></a>med <span class="op">=</span> np.median(np_city[:,<span class="dv">0</span>])</span>
 <span id="cb49-8"><a href="numpy.html#cb49-8"></a><span class="bu">print</span>(<span class="st">&quot;Median: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(med))</span>
 <span id="cb49-9"><a href="numpy.html#cb49-9"></a></span>
 <span id="cb49-10"><a href="numpy.html#cb49-10"></a><span class="co"># Print out the standard deviation on height. Replace &#39;None&#39;</span></span>
-<span id="cb49-11"><a href="numpy.html#cb49-11"></a><span class="co">#&gt; Median: 1.75</span></span>
+<span id="cb49-11"><a href="numpy.html#cb49-11"></a><span class="co">#&gt; Median: 1.76</span></span>
 <span id="cb49-12"><a href="numpy.html#cb49-12"></a>stddev <span class="op">=</span> np.std(np_city[:,<span class="dv">0</span>])</span>
 <span id="cb49-13"><a href="numpy.html#cb49-13"></a><span class="bu">print</span>(<span class="st">&quot;Standard Deviation: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(stddev))</span>
 <span id="cb49-14"><a href="numpy.html#cb49-14"></a></span>
 <span id="cb49-15"><a href="numpy.html#cb49-15"></a><span class="co"># Print out correlation between first and second column. Replace &#39;None&#39;</span></span>
-<span id="cb49-16"><a href="numpy.html#cb49-16"></a><span class="co">#&gt; Standard Deviation: 0.2006268210982769</span></span>
+<span id="cb49-16"><a href="numpy.html#cb49-16"></a><span class="co">#&gt; Standard Deviation: 0.19686400169660273</span></span>
 <span id="cb49-17"><a href="numpy.html#cb49-17"></a>corr <span class="op">=</span> np.corrcoef(np_city[:,<span class="dv">0</span>], np_city[:,<span class="dv">1</span>])</span>
 <span id="cb49-18"><a href="numpy.html#cb49-18"></a><span class="bu">print</span>(<span class="st">&quot;Correlation: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(corr))</span>
-<span id="cb49-19"><a href="numpy.html#cb49-19"></a><span class="co">#&gt; Correlation: [[ 1.         -0.00858665]</span></span>
-<span id="cb49-20"><a href="numpy.html#cb49-20"></a><span class="co">#&gt;  [-0.00858665  1.        ]]</span></span></code></pre></div>
+<span id="cb49-19"><a href="numpy.html#cb49-19"></a><span class="co">#&gt; Correlation: [[ 1.         -0.00680839]</span></span>
+<span id="cb49-20"><a href="numpy.html#cb49-20"></a><span class="co">#&gt;  [-0.00680839  1.        ]]</span></span></code></pre></div>
 
 </div>
 </div>

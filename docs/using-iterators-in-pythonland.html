@@ -352,6 +352,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>29</b> </a></li>
+<li class="chapter" data-level="30" data-path="module-and-package.html"><a href="module-and-package.html"><i class="fa fa-check"></i><b>30</b> Module and Package</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="module-and-package.html"><a href="module-and-package.html#什麼是module"><i class="fa fa-check"></i><b>30.1</b> 什麼是module？</a></li>
+<li class="chapter" data-level="30.2" data-path="module-and-package.html"><a href="module-and-package.html#什麼是package"><i class="fa fa-check"></i><b>30.2</b> 什麼是package？</a></li>
+<li class="chapter" data-level="30.3" data-path="module-and-package.html"><a href="module-and-package.html#python的內建module"><i class="fa fa-check"></i><b>30.3</b> Python的內建module</a></li>
+<li class="chapter" data-level="30.4" data-path="module-and-package.html"><a href="module-and-package.html#第三方module和package"><i class="fa fa-check"></i><b>30.4</b> 第三方module和package</a></li>
+<li class="chapter" data-level="30.5" data-path="module-and-package.html"><a href="module-and-package.html#關於import語句"><i class="fa fa-check"></i><b>30.5</b> 關於import語句</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -414,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="using-iterators-in-pythonland.html#cb181-1"></a><span class="bu">print</span>(flash1)</span>
 <span id="cb181-2"><a href="using-iterators-in-pythonland.html#cb181-2"></a><span class="co">#&gt; [1, 2, 3, 4, 5]</span></span>
 <span id="cb181-3"><a href="using-iterators-in-pythonland.html#cb181-3"></a><span class="bu">print</span>(flash2)</span>
-<span id="cb181-4"><a href="using-iterators-in-pythonland.html#cb181-4"></a><span class="co">#&gt; &lt;list_iterator object at 0x13f54f9a0&gt;</span></span></code></pre></div>
+<span id="cb181-4"><a href="using-iterators-in-pythonland.html#cb181-4"></a><span class="co">#&gt; &lt;list_iterator object at 0x13ac14f70&gt;</span></span></code></pre></div>
 <ul>
 <li>對flash1和flash2用<code>next()</code>，可以看到iterable會回你error，因為只有iterator才對<code>next()</code>有反應。對iterator用<code>next()</code>，他則會一次吐一個值給你</li>
 </ul>
@@ -591,7 +599,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb194-5"><a href="using-iterators-in-pythonland.html#cb194-5"></a>            <span class="st">&#39;kitty pryde&#39;</span>]</span>
 <span id="cb194-6"><a href="using-iterators-in-pythonland.html#cb194-6"></a>enum_mutants <span class="op">=</span> <span class="bu">enumerate</span>(mutants)</span>
 <span id="cb194-7"><a href="using-iterators-in-pythonland.html#cb194-7"></a><span class="bu">print</span>(enum_mutants)</span>
-<span id="cb194-8"><a href="using-iterators-in-pythonland.html#cb194-8"></a><span class="co">#&gt; &lt;enumerate object at 0x13f6b5a40&gt;</span></span></code></pre></div>
+<span id="cb194-8"><a href="using-iterators-in-pythonland.html#cb194-8"></a><span class="co">#&gt; &lt;enumerate object at 0x13ac1cd00&gt;</span></span></code></pre></div>
 <ul>
 <li>對mutant這個iterable做完enumerate後，他現在是一個enumerate object。但他很傲嬌的不給你看裡面有什麼。所以，用老招，把他改成list，看看裡面有什麼：</li>
 </ul>
@@ -652,7 +660,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ok，我打包好了，他現在變成一個zip object</li>
 </ul>
 <div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="using-iterators-in-pythonland.html#cb200-1"></a><span class="bu">print</span>(mutant_zip)</span>
-<span id="cb200-2"><a href="using-iterators-in-pythonland.html#cb200-2"></a><span class="co">#&gt; &lt;zip object at 0x13eae3340&gt;</span></span></code></pre></div>
+<span id="cb200-2"><a href="using-iterators-in-pythonland.html#cb200-2"></a><span class="co">#&gt; &lt;zip object at 0x13d4b6ac0&gt;</span></span></code></pre></div>
 <ul>
 <li>很傲嬌，不給看，那一樣用老招，把他轉成list後print出來</li>
 </ul>

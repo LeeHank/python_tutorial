@@ -148,3 +148,9 @@ writing-an-iterator-to-load-data-in-chunks-1
 writing-an-iterator-to-load-data-in-chunks-2
 writing-an-iterator-to-load-data-in-chunks-3
 section-1
+module-and-package
+什麼是module
+什麼是package
+python的內建module
+第三方module和package
+關於import語句

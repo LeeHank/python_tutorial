@@ -1,5 +1,6 @@
 install.packages("renv")
 install.packages("reticulate")
+install.packages("formatR")
 
 renv::init()
 renv::use_python()

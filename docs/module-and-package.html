@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Logic, Control Flow and Filtering | Python Tutorial</title>
+  <title>Chapter 30 Module and Package | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Logic, Control Flow and Filtering | Python Tutorial" />
+  <meta property="og:title" content="Chapter 30 Module and Package | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Logic, Control Flow and Filtering | Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 30 Module and Package | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pandas.html"/>
-<link rel="next" href="loops.html"/>
+<link rel="prev" href="section-1.html"/>
+
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -380,179 +380,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logic-control-flow-and-filtering" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Logic, Control Flow and Filtering</h1>
-<div id="comparison-operators" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Comparison operators</h2>
+<div id="module-and-package" class="section level1" number="30">
+<h1><span class="header-section-number">Chapter 30</span> Module and Package</h1>
+<div id="什麼是module" class="section level2" number="30.1">
+<h2><span class="header-section-number">30.1</span> 什麼是module？</h2>
 <ul>
-<li><blockquote>
-<p>, &lt;, &gt;=, &lt;=, ==, !=</p>
-</blockquote></li>
-<li>用在字串的比較時，我比較不熟，所以整理一下：</li>
-</ul>
-<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="logic-control-flow-and-filtering.html#cb82-1"></a><span class="co">&quot;Chars&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;Chloe&quot;</span></span>
-<span id="cb82-2"><a href="logic-control-flow-and-filtering.html#cb82-2"></a><span class="co">#&gt; False</span></span></code></pre></div>
-<ul>
-<li>他會每一個字逐一比較，照字母順序比</li>
-</ul>
-<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="logic-control-flow-and-filtering.html#cb83-1"></a><span class="co"># Comparison of booleans</span></span>
-<span id="cb83-2"><a href="logic-control-flow-and-filtering.html#cb83-2"></a><span class="va">True</span> <span class="op">==</span> <span class="va">False</span></span>
-<span id="cb83-3"><a href="logic-control-flow-and-filtering.html#cb83-3"></a></span>
-<span id="cb83-4"><a href="logic-control-flow-and-filtering.html#cb83-4"></a><span class="co"># Comparison of integers</span></span>
-<span id="cb83-5"><a href="logic-control-flow-and-filtering.html#cb83-5"></a><span class="co">#&gt; False</span></span>
-<span id="cb83-6"><a href="logic-control-flow-and-filtering.html#cb83-6"></a><span class="op">-</span><span class="dv">5</span><span class="op">*</span><span class="dv">15</span> <span class="op">!=</span> <span class="dv">75</span></span>
-<span id="cb83-7"><a href="logic-control-flow-and-filtering.html#cb83-7"></a></span>
-<span id="cb83-8"><a href="logic-control-flow-and-filtering.html#cb83-8"></a><span class="co"># Comparison of strings</span></span>
-<span id="cb83-9"><a href="logic-control-flow-and-filtering.html#cb83-9"></a><span class="co">#&gt; True</span></span>
-<span id="cb83-10"><a href="logic-control-flow-and-filtering.html#cb83-10"></a><span class="co">&quot;pyscript&quot;</span> <span class="op">==</span> <span class="st">&quot;PyScript&quot;</span></span>
-<span id="cb83-11"><a href="logic-control-flow-and-filtering.html#cb83-11"></a></span>
-<span id="cb83-12"><a href="logic-control-flow-and-filtering.html#cb83-12"></a><span class="co"># Compare a boolean with an integer</span></span>
-<span id="cb83-13"><a href="logic-control-flow-and-filtering.html#cb83-13"></a><span class="co">#&gt; False</span></span>
-<span id="cb83-14"><a href="logic-control-flow-and-filtering.html#cb83-14"></a><span class="va">True</span> <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb83-15"><a href="logic-control-flow-and-filtering.html#cb83-15"></a><span class="co">#&gt; True</span></span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="logic-control-flow-and-filtering.html#cb84-1"></a><span class="co"># Create arrays</span></span>
-<span id="cb84-2"><a href="logic-control-flow-and-filtering.html#cb84-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb84-3"><a href="logic-control-flow-and-filtering.html#cb84-3"></a>my_house <span class="op">=</span> np.array([<span class="fl">18.0</span>, <span class="fl">20.0</span>, <span class="fl">10.75</span>, <span class="fl">9.50</span>])</span>
-<span id="cb84-4"><a href="logic-control-flow-and-filtering.html#cb84-4"></a>your_house <span class="op">=</span> np.array([<span class="fl">14.0</span>, <span class="fl">24.0</span>, <span class="fl">14.25</span>, <span class="fl">9.0</span>])</span>
-<span id="cb84-5"><a href="logic-control-flow-and-filtering.html#cb84-5"></a></span>
-<span id="cb84-6"><a href="logic-control-flow-and-filtering.html#cb84-6"></a><span class="co"># my_house greater than or equal to 18</span></span>
-<span id="cb84-7"><a href="logic-control-flow-and-filtering.html#cb84-7"></a><span class="bu">print</span>(my_house <span class="op">&gt;=</span> <span class="dv">18</span>)</span>
-<span id="cb84-8"><a href="logic-control-flow-and-filtering.html#cb84-8"></a></span>
-<span id="cb84-9"><a href="logic-control-flow-and-filtering.html#cb84-9"></a><span class="co"># my_house less than your_house</span></span>
-<span id="cb84-10"><a href="logic-control-flow-and-filtering.html#cb84-10"></a><span class="co">#&gt; [ True  True False False]</span></span>
-<span id="cb84-11"><a href="logic-control-flow-and-filtering.html#cb84-11"></a><span class="bu">print</span>(my_house <span class="op">&lt;</span> your_house)</span>
-<span id="cb84-12"><a href="logic-control-flow-and-filtering.html#cb84-12"></a><span class="co">#&gt; [False  True  True False]</span></span></code></pre></div>
-</div>
-<div id="boolean-operators" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Boolean Operators</h2>
-<ul>
-<li>True “and” False<br />
+<li>把function, class, objects…寫在一個script，方便我們去source他，這個script就叫module<br />
 </li>
-<li>True “or” False<br />
-</li>
-<li>“not” True (R的寫法是!TRUE)<br />
-</li>
-<li>“not” False (R的寫法是!FALSE)</li>
+<li>例如，我寫了一個<code>math.py</code>如下：</li>
 </ul>
-<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="logic-control-flow-and-filtering.html#cb85-1"></a><span class="co"># Define variables</span></span>
-<span id="cb85-2"><a href="logic-control-flow-and-filtering.html#cb85-2"></a>my_kitchen <span class="op">=</span> <span class="fl">18.0</span></span>
-<span id="cb85-3"><a href="logic-control-flow-and-filtering.html#cb85-3"></a>your_kitchen <span class="op">=</span> <span class="fl">14.0</span></span>
-<span id="cb85-4"><a href="logic-control-flow-and-filtering.html#cb85-4"></a></span>
-<span id="cb85-5"><a href="logic-control-flow-and-filtering.html#cb85-5"></a><span class="co"># my_kitchen bigger than 10 and smaller than 18?</span></span>
-<span id="cb85-6"><a href="logic-control-flow-and-filtering.html#cb85-6"></a><span class="bu">print</span>(my_kitchen <span class="op">&gt;</span> <span class="dv">10</span> <span class="kw">and</span> my_kitchen <span class="op">&lt;</span> <span class="dv">18</span>)</span>
-<span id="cb85-7"><a href="logic-control-flow-and-filtering.html#cb85-7"></a></span>
-<span id="cb85-8"><a href="logic-control-flow-and-filtering.html#cb85-8"></a><span class="co"># my_kitchen smaller than 14 or bigger than 17?</span></span>
-<span id="cb85-9"><a href="logic-control-flow-and-filtering.html#cb85-9"></a><span class="co">#&gt; False</span></span>
-<span id="cb85-10"><a href="logic-control-flow-and-filtering.html#cb85-10"></a><span class="bu">print</span>(my_kitchen <span class="op">&lt;</span> <span class="dv">14</span> <span class="kw">or</span> my_kitchen <span class="op">&gt;</span> <span class="dv">17</span>)</span>
-<span id="cb85-11"><a href="logic-control-flow-and-filtering.html#cb85-11"></a></span>
-<span id="cb85-12"><a href="logic-control-flow-and-filtering.html#cb85-12"></a><span class="co"># Double my_kitchen smaller than triple your_kitchen?</span></span>
-<span id="cb85-13"><a href="logic-control-flow-and-filtering.html#cb85-13"></a><span class="co">#&gt; True</span></span>
-<span id="cb85-14"><a href="logic-control-flow-and-filtering.html#cb85-14"></a><span class="bu">print</span>(my_kitchen <span class="op">*</span><span class="dv">2</span> <span class="op">&lt;</span> your_kitchen <span class="op">*</span><span class="dv">3</span>)</span>
-<span id="cb85-15"><a href="logic-control-flow-and-filtering.html#cb85-15"></a><span class="co">#&gt; True</span></span></code></pre></div>
-</div>
-<div id="numpy-np.logical_andnp.logical_ornp.logical_not" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Numpy np.logical_and()/np.logical_or()/np.logical_not()</h2>
+<div class="sourceCode" id="cb238"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb238-1"><a href="module-and-package.html#cb238-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb238-2"><a href="module-and-package.html#cb238-2"></a></span>
+<span id="cb238-3"><a href="module-and-package.html#cb238-3"></a><span class="kw">def</span> my_max(<span class="op">*</span>args):</span>
+<span id="cb238-4"><a href="module-and-package.html#cb238-4"></a>  <span class="bu">print</span>(<span class="st">&quot;最大值是&quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.<span class="bu">max</span>(np.array(args))))</span>
+<span id="cb238-5"><a href="module-and-package.html#cb238-5"></a></span>
+<span id="cb238-6"><a href="module-and-package.html#cb238-6"></a><span class="kw">def</span> my_min(<span class="op">*</span>args):</span>
+<span id="cb238-7"><a href="module-and-package.html#cb238-7"></a>  <span class="bu">print</span>(<span class="st">&quot;最小值是&quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.<span class="bu">min</span>(np.array(args))))</span>
+<span id="cb238-8"><a href="module-and-package.html#cb238-8"></a>  </span>
+<span id="cb238-9"><a href="module-and-package.html#cb238-9"></a><span class="kw">class</span> People:</span>
+<span id="cb238-10"><a href="module-and-package.html#cb238-10"></a>  <span class="kw">def</span> <span class="fu">__index__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb238-11"><a href="module-and-package.html#cb238-11"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb238-12"><a href="module-and-package.html#cb238-12"></a>    <span class="va">self</span>.age <span class="op">=</span> age</span>
+<span id="cb238-13"><a href="module-and-package.html#cb238-13"></a></span>
+<span id="cb238-14"><a href="module-and-package.html#cb238-14"></a>MAX_NUM <span class="op">=</span> <span class="dv">100</span></span></code></pre></div>
 <ul>
-<li>如果a是一個numpy array，我們不能寫出<code>a &gt;7 or a&lt;10</code>這種寫法，必須寫成 <code>np.logical_or(a&gt;7, a&lt;10)</code></li>
+<li>那<code>math.py</code>這個檔案，就叫module</li>
 </ul>
-<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="logic-control-flow-and-filtering.html#cb86-1"></a><span class="co"># Create arrays</span></span>
-<span id="cb86-2"><a href="logic-control-flow-and-filtering.html#cb86-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb86-3"><a href="logic-control-flow-and-filtering.html#cb86-3"></a>my_house <span class="op">=</span> np.array([<span class="fl">18.0</span>, <span class="fl">20.0</span>, <span class="fl">10.75</span>, <span class="fl">9.50</span>])</span>
-<span id="cb86-4"><a href="logic-control-flow-and-filtering.html#cb86-4"></a>your_house <span class="op">=</span> np.array([<span class="fl">14.0</span>, <span class="fl">24.0</span>, <span class="fl">14.25</span>, <span class="fl">9.0</span>])</span>
-<span id="cb86-5"><a href="logic-control-flow-and-filtering.html#cb86-5"></a></span>
-<span id="cb86-6"><a href="logic-control-flow-and-filtering.html#cb86-6"></a><span class="co"># my_house greater than 18.5 or smaller than 10</span></span>
-<span id="cb86-7"><a href="logic-control-flow-and-filtering.html#cb86-7"></a><span class="bu">print</span>(np.logical_or(my_house <span class="op">&gt;</span> <span class="fl">18.5</span>, my_house <span class="op">&lt;</span> <span class="dv">10</span>))</span>
-<span id="cb86-8"><a href="logic-control-flow-and-filtering.html#cb86-8"></a></span>
-<span id="cb86-9"><a href="logic-control-flow-and-filtering.html#cb86-9"></a><span class="co"># Both my_house and your_house smaller than 11</span></span>
-<span id="cb86-10"><a href="logic-control-flow-and-filtering.html#cb86-10"></a><span class="co">#&gt; [False  True False  True]</span></span>
-<span id="cb86-11"><a href="logic-control-flow-and-filtering.html#cb86-11"></a><span class="bu">print</span>(np.logical_and(my_house <span class="op">&lt;</span><span class="dv">11</span>, your_house<span class="op">&lt;</span><span class="dv">11</span>))</span>
-<span id="cb86-12"><a href="logic-control-flow-and-filtering.html#cb86-12"></a><span class="co">#&gt; [False False False  True]</span></span></code></pre></div>
 </div>
-<div id="if-elif-else" class="section level2" number="10.4">
-<h2><span class="header-section-number">10.4</span> if, elif, else</h2>
-<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="logic-control-flow-and-filtering.html#cb87-1"></a>z <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb87-2"><a href="logic-control-flow-and-filtering.html#cb87-2"></a><span class="cf">if</span> z<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb87-3"><a href="logic-control-flow-and-filtering.html#cb87-3"></a>  <span class="bu">print</span>(<span class="st">&quot;checking &quot;</span> <span class="op">+</span> <span class="bu">str</span>(z))</span>
-<span id="cb87-4"><a href="logic-control-flow-and-filtering.html#cb87-4"></a>  <span class="bu">print</span>(<span class="st">&quot;z is even&quot;</span>)</span>
-<span id="cb87-5"><a href="logic-control-flow-and-filtering.html#cb87-5"></a><span class="cf">else</span>:</span>
-<span id="cb87-6"><a href="logic-control-flow-and-filtering.html#cb87-6"></a>  <span class="bu">print</span>(<span class="st">&quot;z is odd&quot;</span>)</span>
-<span id="cb87-7"><a href="logic-control-flow-and-filtering.html#cb87-7"></a><span class="co">#&gt; checking 4</span></span>
-<span id="cb87-8"><a href="logic-control-flow-and-filtering.html#cb87-8"></a><span class="co">#&gt; z is even</span></span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="logic-control-flow-and-filtering.html#cb88-1"></a>z <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb88-2"><a href="logic-control-flow-and-filtering.html#cb88-2"></a><span class="cf">if</span> z <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb88-3"><a href="logic-control-flow-and-filtering.html#cb88-3"></a>  <span class="bu">print</span>(<span class="st">&quot;z is divisible by 2&quot;</span>)</span>
-<span id="cb88-4"><a href="logic-control-flow-and-filtering.html#cb88-4"></a><span class="cf">elif</span> z <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb88-5"><a href="logic-control-flow-and-filtering.html#cb88-5"></a>  <span class="bu">print</span>(<span class="st">&quot;z is divisible by 3&quot;</span>)</span>
-<span id="cb88-6"><a href="logic-control-flow-and-filtering.html#cb88-6"></a><span class="cf">else</span>:</span>
-<span id="cb88-7"><a href="logic-control-flow-and-filtering.html#cb88-7"></a>  <span class="bu">print</span>(<span class="st">&quot;z is neither divisible by 2 nor by 3&quot;</span>)</span>
-<span id="cb88-8"><a href="logic-control-flow-and-filtering.html#cb88-8"></a><span class="co">#&gt; z is divisible by 2</span></span></code></pre></div>
+<div id="什麼是package" class="section level2" number="30.2">
+<h2><span class="header-section-number">30.2</span> 什麼是package？</h2>
+<ul>
+<li>只要一個資料夾，裡面有<code>__init__.py</code>這個檔案，那這個資料夾就叫package<br />
+</li>
+<li>例如，我現在在目前的directory下，新增一個<code>my_package</code>資料夾，然後此資料夾裡面新增一個<code>__init__.py</code>的檔：</li>
+</ul>
+<div class="sourceCode" id="cb239"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb239-1"><a href="module-and-package.html#cb239-1"></a><span class="co"># bash</span></span>
+<span id="cb239-2"><a href="module-and-package.html#cb239-2"></a><span class="fu">mkdir</span> my_package</span>
+<span id="cb239-3"><a href="module-and-package.html#cb239-3"></a><span class="fu">touch</span> ./my_package/__init__.py</span></code></pre></div>
+<ul>
+<li>此時，<code>my_package</code>這個資料夾，就叫一個package了<br />
+</li>
+<li>我們可以把剛剛寫好的module(math.py)，放到這個資料夾底下，現在my_package就長成：</li>
+</ul>
+<div class="sourceCode" id="cb240"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb240-1"><a href="module-and-package.html#cb240-1"></a><span class="co"># bash</span></span>
+<span id="cb240-2"><a href="module-and-package.html#cb240-2"></a><span class="fu">ls</span> ./my_package</span>
+<span id="cb240-3"><a href="module-and-package.html#cb240-3"></a><span class="co">#&gt; __init__.py</span></span>
+<span id="cb240-4"><a href="module-and-package.html#cb240-4"></a><span class="co">#&gt; __pycache__</span></span>
+<span id="cb240-5"><a href="module-and-package.html#cb240-5"></a><span class="co">#&gt; math.py</span></span></code></pre></div>
+<ul>
+<li>想像之前做<code>import numpy as np</code>，那現在就是<code>import my_package.math as mm</code><br />
+</li>
+<li>那之前用<code>np.array()</code>這個function時，就好像現在用<code>mm.my_max()</code>這個function</li>
+</ul>
+<div class="sourceCode" id="cb241"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="module-and-package.html#cb241-1"></a><span class="im">import</span> my_package.math <span class="im">as</span> mm</span>
+<span id="cb241-2"><a href="module-and-package.html#cb241-2"></a>mm.my_max(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
+<span id="cb241-3"><a href="module-and-package.html#cb241-3"></a><span class="co">#&gt; 最大值是5</span></span></code></pre></div>
 </div>
-<div id="filtering-pandas-dataframe" class="section level2" number="10.5">
-<h2><span class="header-section-number">10.5</span> Filtering pandas DataFrame</h2>
-<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="logic-control-flow-and-filtering.html#cb89-1"></a><span class="co"># Import cars data</span></span>
-<span id="cb89-2"><a href="logic-control-flow-and-filtering.html#cb89-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb89-3"><a href="logic-control-flow-and-filtering.html#cb89-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb89-4"><a href="logic-control-flow-and-filtering.html#cb89-4"></a></span>
-<span id="cb89-5"><a href="logic-control-flow-and-filtering.html#cb89-5"></a><span class="co"># Extract drives_right column as Series: dr</span></span>
-<span id="cb89-6"><a href="logic-control-flow-and-filtering.html#cb89-6"></a>dr <span class="op">=</span> cars[<span class="st">&#39;drives_right&#39;</span>]</span>
-<span id="cb89-7"><a href="logic-control-flow-and-filtering.html#cb89-7"></a><span class="bu">type</span>(dr)</span>
-<span id="cb89-8"><a href="logic-control-flow-and-filtering.html#cb89-8"></a><span class="co"># Use dr to subset cars: sel</span></span>
-<span id="cb89-9"><a href="logic-control-flow-and-filtering.html#cb89-9"></a><span class="co">#&gt; &lt;class &#39;pandas.core.series.Series&#39;&gt;</span></span>
-<span id="cb89-10"><a href="logic-control-flow-and-filtering.html#cb89-10"></a>sel <span class="op">=</span> cars[dr]</span>
-<span id="cb89-11"><a href="logic-control-flow-and-filtering.html#cb89-11"></a></span>
-<span id="cb89-12"><a href="logic-control-flow-and-filtering.html#cb89-12"></a><span class="co"># Print sel</span></span>
-<span id="cb89-13"><a href="logic-control-flow-and-filtering.html#cb89-13"></a><span class="bu">print</span>(sel)</span>
-<span id="cb89-14"><a href="logic-control-flow-and-filtering.html#cb89-14"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
-<span id="cb89-15"><a href="logic-control-flow-and-filtering.html#cb89-15"></a><span class="co">#&gt; US            809  United States          True</span></span>
-<span id="cb89-16"><a href="logic-control-flow-and-filtering.html#cb89-16"></a><span class="co">#&gt; RU            200         Russia          True</span></span>
-<span id="cb89-17"><a href="logic-control-flow-and-filtering.html#cb89-17"></a><span class="co">#&gt; MOR            70        Morocco          True</span></span>
-<span id="cb89-18"><a href="logic-control-flow-and-filtering.html#cb89-18"></a><span class="co">#&gt; EG             45          Egypt          True</span></span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="logic-control-flow-and-filtering.html#cb90-1"></a><span class="co"># Import cars data</span></span>
-<span id="cb90-2"><a href="logic-control-flow-and-filtering.html#cb90-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb90-3"><a href="logic-control-flow-and-filtering.html#cb90-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb90-4"><a href="logic-control-flow-and-filtering.html#cb90-4"></a></span>
-<span id="cb90-5"><a href="logic-control-flow-and-filtering.html#cb90-5"></a><span class="co"># Convert code to a one-liner</span></span>
-<span id="cb90-6"><a href="logic-control-flow-and-filtering.html#cb90-6"></a>sel <span class="op">=</span> cars[cars[<span class="st">&#39;drives_right&#39;</span>]]</span>
-<span id="cb90-7"><a href="logic-control-flow-and-filtering.html#cb90-7"></a></span>
-<span id="cb90-8"><a href="logic-control-flow-and-filtering.html#cb90-8"></a><span class="co"># Print sel</span></span>
-<span id="cb90-9"><a href="logic-control-flow-and-filtering.html#cb90-9"></a><span class="bu">print</span>(sel)</span>
-<span id="cb90-10"><a href="logic-control-flow-and-filtering.html#cb90-10"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
-<span id="cb90-11"><a href="logic-control-flow-and-filtering.html#cb90-11"></a><span class="co">#&gt; US            809  United States          True</span></span>
-<span id="cb90-12"><a href="logic-control-flow-and-filtering.html#cb90-12"></a><span class="co">#&gt; RU            200         Russia          True</span></span>
-<span id="cb90-13"><a href="logic-control-flow-and-filtering.html#cb90-13"></a><span class="co">#&gt; MOR            70        Morocco          True</span></span>
-<span id="cb90-14"><a href="logic-control-flow-and-filtering.html#cb90-14"></a><span class="co">#&gt; EG             45          Egypt          True</span></span></code></pre></div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="logic-control-flow-and-filtering.html#cb91-1"></a><span class="co"># Import cars data</span></span>
-<span id="cb91-2"><a href="logic-control-flow-and-filtering.html#cb91-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb91-3"><a href="logic-control-flow-and-filtering.html#cb91-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb91-4"><a href="logic-control-flow-and-filtering.html#cb91-4"></a></span>
-<span id="cb91-5"><a href="logic-control-flow-and-filtering.html#cb91-5"></a><span class="co"># Create car_maniac: observations that have a cars_per_cap over 500</span></span>
-<span id="cb91-6"><a href="logic-control-flow-and-filtering.html#cb91-6"></a>cpc <span class="op">=</span> cars[<span class="st">&#39;cars_per_cap&#39;</span>]</span>
-<span id="cb91-7"><a href="logic-control-flow-and-filtering.html#cb91-7"></a>many_cars <span class="op">=</span> cpc<span class="op">&gt;</span><span class="dv">500</span></span>
-<span id="cb91-8"><a href="logic-control-flow-and-filtering.html#cb91-8"></a></span>
-<span id="cb91-9"><a href="logic-control-flow-and-filtering.html#cb91-9"></a></span>
-<span id="cb91-10"><a href="logic-control-flow-and-filtering.html#cb91-10"></a><span class="co"># Print car_maniac</span></span>
-<span id="cb91-11"><a href="logic-control-flow-and-filtering.html#cb91-11"></a>car_maniac <span class="op">=</span> cars[many_cars]</span>
-<span id="cb91-12"><a href="logic-control-flow-and-filtering.html#cb91-12"></a><span class="bu">print</span>(car_maniac)</span>
-<span id="cb91-13"><a href="logic-control-flow-and-filtering.html#cb91-13"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
-<span id="cb91-14"><a href="logic-control-flow-and-filtering.html#cb91-14"></a><span class="co">#&gt; US            809  United States          True</span></span>
-<span id="cb91-15"><a href="logic-control-flow-and-filtering.html#cb91-15"></a><span class="co">#&gt; AUS           731      Australia         False</span></span>
-<span id="cb91-16"><a href="logic-control-flow-and-filtering.html#cb91-16"></a><span class="co">#&gt; JAP           588          Japan         False</span></span></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="logic-control-flow-and-filtering.html#cb92-1"></a><span class="co"># Import cars data</span></span>
-<span id="cb92-2"><a href="logic-control-flow-and-filtering.html#cb92-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb92-3"><a href="logic-control-flow-and-filtering.html#cb92-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb92-4"><a href="logic-control-flow-and-filtering.html#cb92-4"></a></span>
-<span id="cb92-5"><a href="logic-control-flow-and-filtering.html#cb92-5"></a><span class="co"># Import numpy, you&#39;ll need this</span></span>
-<span id="cb92-6"><a href="logic-control-flow-and-filtering.html#cb92-6"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb92-7"><a href="logic-control-flow-and-filtering.html#cb92-7"></a></span>
-<span id="cb92-8"><a href="logic-control-flow-and-filtering.html#cb92-8"></a><span class="co"># Create medium: observations with cars_per_cap between 100 and 500</span></span>
-<span id="cb92-9"><a href="logic-control-flow-and-filtering.html#cb92-9"></a>cpc <span class="op">=</span> cars[<span class="st">&#39;cars_per_cap&#39;</span>]</span>
-<span id="cb92-10"><a href="logic-control-flow-and-filtering.html#cb92-10"></a>between <span class="op">=</span> np.logical_and(cpc<span class="op">&gt;</span><span class="dv">100</span>, cpc<span class="op">&lt;</span><span class="dv">500</span>)</span>
-<span id="cb92-11"><a href="logic-control-flow-and-filtering.html#cb92-11"></a>medium <span class="op">=</span> cars[between]</span>
-<span id="cb92-12"><a href="logic-control-flow-and-filtering.html#cb92-12"></a></span>
-<span id="cb92-13"><a href="logic-control-flow-and-filtering.html#cb92-13"></a><span class="co"># Print medium</span></span>
-<span id="cb92-14"><a href="logic-control-flow-and-filtering.html#cb92-14"></a><span class="bu">print</span>(medium)</span>
-<span id="cb92-15"><a href="logic-control-flow-and-filtering.html#cb92-15"></a><span class="co">#&gt;     cars_per_cap country  drives_right</span></span>
-<span id="cb92-16"><a href="logic-control-flow-and-filtering.html#cb92-16"></a><span class="co">#&gt; RU           200  Russia          True</span></span></code></pre></div>
+<div id="python的內建module" class="section level2" number="30.3">
+<h2><span class="header-section-number">30.3</span> Python的內建module</h2>
+<ul>
+<li>我們可以用<code>sys</code>這個package中的<code>sys.path</code>指令，來看內建的module都放到哪裡了</li>
+</ul>
+<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="module-and-package.html#cb242-1"></a><span class="im">import</span> sys</span>
+<span id="cb242-2"><a href="module-and-package.html#cb242-2"></a>sys.path</span>
+<span id="cb242-3"><a href="module-and-package.html#cb242-3"></a><span class="co">#&gt; [&#39;&#39;, &#39;/Users/hanklee/.pyenv/versions/3.8.0/bin&#39;, &#39;/Users/hanklee/.pyenv/versions/3.8.0/lib/python38.zip&#39;, &#39;/Users/hanklee/.pyenv/versions/3.8.0/lib/python3.8&#39;, &#39;/Users/hanklee/.pyenv/versions/3.8.0/lib/python3.8/lib-dynload&#39;, &#39;/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/renv/python/virtualenvs/renv-python-3.8.0/lib/python3.8/site-packages&#39;, &#39;/Users/hanklee/Library/Application Support/renv/cache/v5/R-4.0/x86_64-apple-darwin17.0/reticulate/1.18/fbd35cac6ae7554d0e4f440bca1adf3a/reticulate/python&#39;, &#39;/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/renv/python/virtualenvs/renv-python-3.8.0/lib/python38.zip&#39;, &#39;/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/renv/python/virtualenvs/renv-python-3.8.0/lib/python3.8&#39;, &#39;/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/renv/python/virtualenvs/renv-python-3.8.0/lib/python3.8/lib-dynload&#39;]</span></span></code></pre></div>
+<ul>
+<li>可以發現，內建的modules，都放在“/Users/hanklee/.pyenv/versions/3.8.0/lib/”這裡面</li>
+</ul>
+</div>
+<div id="第三方module和package" class="section level2" number="30.4">
+<h2><span class="header-section-number">30.4</span> 第三方module和package</h2>
+<ul>
+<li>第三方的modules(e.g. pandas這種你自己pip install的東西)，會放在“/Users/hanklee/.pyenv/versions/3.8.0/lib/”這裡面</li>
+</ul>
+</div>
+<div id="關於import語句" class="section level2" number="30.5">
+<h2><span class="header-section-number">30.5</span> 關於import語句</h2>
+<ul>
+<li>三種寫法：
+<ul>
+<li>import {package}: e.g. import numpy<br />
+</li>
+<li>import {package} as {nick_name}: e.g. import numpy as np</li>
+<li>from {package} import {function}: e.g. from numpy import array<br />
+</li>
+<li>from {package} import *: e.g. from numpy import *<br />
+</li>
+</ul></li>
+<li>使用時機上，import內建或第三方套件時，習慣用第一種和第二種; import自己寫的local package/module時，習慣用第三種(或是像keras這種超大package，裡面一堆module的，也會用這種寫法，例如： from keras.layers import Dense); 第四種是最雷最不推薦的，因為這樣寫會把numpy中所有methods, attributes全都到倒local environment中，很可能覆蓋掉你前面定義過的東西<br />
+</li>
+<li>至於在程式寫作的慣例上，import的package會寫在script的最上面，且排列如下：</li>
+</ul>
+<div class="sourceCode" id="cb243"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="module-and-package.html#cb243-1"></a><span class="im">import</span> sys <span class="co">#內建package寫在最上面</span></span>
+<span id="cb243-2"><a href="module-and-package.html#cb243-2"></a></span>
+<span id="cb243-3"><a href="module-and-package.html#cb243-3"></a><span class="im">import</span> flask <span class="co">#第三方package寫在第二層  </span></span>
+<span id="cb243-4"><a href="module-and-package.html#cb243-4"></a></span>
+<span id="cb243-5"><a href="module-and-package.html#cb243-5"></a><span class="im">from</span> my_package.math <span class="im">import</span> my_max <span class="co">#自己寫的local package寫在第三層 </span></span></code></pre></div>
+
 </div>
 </div>
             </section>
@@ -560,8 +484,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="pandas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="loops.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="section-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

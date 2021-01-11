@@ -4,6 +4,7 @@ python/
 staging/
 
 .Rproj.user
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata

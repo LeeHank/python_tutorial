@@ -25,3 +25,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 library(reticulate)
 ```
+
+# About this book  
+
+* 這本書記錄我自學的過程，也可作為未來查找code的reference  

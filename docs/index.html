@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 NumPy | Python Tutorial</title>
+  <title>Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 NumPy | Python Tutorial" />
+  <meta property="og:title" content="Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 NumPy | Python Tutorial" />
+  <meta name="twitter:title" content="Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="list-.html"/>
 
+<link rel="next" href="python-basics.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,118 +214,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="numpy" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> NumPy</h1>
-<div id="why-numpy" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Why NumPy</h2>
-<ul>
-<li>為啥要用NumPy呢? 其實簡單的理由就是，list無法做數學運算，他只能拿來存東西…</li>
-</ul>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="numpy.html#cb40-1"></a>height <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>]</span>
-<span id="cb40-2"><a href="numpy.html#cb40-2"></a>weight <span class="op">=</span> [<span class="fl">65.4</span>, <span class="fl">59.2</span>, <span class="fl">63.6</span>, <span class="fl">88.4</span>, <span class="fl">68.7</span>]</span>
-<span id="cb40-3"><a href="numpy.html#cb40-3"></a>weight<span class="op">/</span>(height<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb40-4"><a href="numpy.html#cb40-4"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: unsupported operand type(s) for ** or pow(): &#39;list&#39; and &#39;int&#39;</span></span>
-<span id="cb40-5"><a href="numpy.html#cb40-5"></a><span class="co">#&gt; </span></span>
-<span id="cb40-6"><a href="numpy.html#cb40-6"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb40-7"><a href="numpy.html#cb40-7"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
-<ul>
-<li>因為list原本就是設計來存取資料的，它允許每個element可以是不同的type<br />
-</li>
-<li>所以，即使你每個element都放float這種type，list還是list，不會變成numerical list<br />
-</li>
-<li>所以你要叫list做數學運算時，他就不知道怎麼算了，畢竟他也不知道這個list是不是全都numerical的資訊<br />
-</li>
-<li>而NumPy，就是numerical python的縮寫，他的np.array，就是numerical list，所以只要啟用numpy，就可以做計算了</li>
-</ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="numpy.html#cb41-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb41-2"><a href="numpy.html#cb41-2"></a>height <span class="op">=</span> np.array([<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>])</span>
-<span id="cb41-3"><a href="numpy.html#cb41-3"></a>weight <span class="op">=</span> np.array([<span class="fl">65.4</span>, <span class="fl">59.2</span>, <span class="fl">63.6</span>, <span class="fl">88.4</span>, <span class="fl">68.7</span>])</span>
-<span id="cb41-4"><a href="numpy.html#cb41-4"></a>weight<span class="op">/</span>(height<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb41-5"><a href="numpy.html#cb41-5"></a><span class="co">#&gt; array([21.85171573, 20.97505669, 21.75028214, 24.7473475 , 21.44127836])</span></span></code></pre></div>
-<ul>
-<li>我們可以把np.array想成R的vector，如果你的array裡面放了不同type的東西，他會全部轉成string</li>
-</ul>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="numpy.html#cb42-1"></a>np.array([<span class="fl">1.0</span>, <span class="st">&quot;is&quot;</span>, <span class="va">True</span>])</span>
-<span id="cb42-2"><a href="numpy.html#cb42-2"></a><span class="co">#&gt; array([&#39;1.0&#39;, &#39;is&#39;, &#39;True&#39;], dtype=&#39;&lt;U32&#39;)</span></span></code></pre></div>
-<ul>
-<li>所以，我們可以把對np.array所做的行為，想成在R裡面對vector所做的行為，而list的行為，都要往“儲存資料”的角度去想：</li>
-</ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="numpy.html#cb43-1"></a>python_list <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
-<span id="cb43-2"><a href="numpy.html#cb43-2"></a>python_list <span class="op">+</span> python_list</span>
-<span id="cb43-3"><a href="numpy.html#cb43-3"></a><span class="co">#&gt; [1, 2, 3, 1, 2, 3]</span></span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="numpy.html#cb44-1"></a>numpy_array <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
-<span id="cb44-2"><a href="numpy.html#cb44-2"></a>numpy_array <span class="op">+</span> numpy_array</span>
-<span id="cb44-3"><a href="numpy.html#cb44-3"></a><span class="co">#&gt; array([2, 4, 6])</span></span></code></pre></div>
+<div id="header">
+<h1 class="title">Python Tutorial</h1>
+<p class="author"><em>Hank Lee</em></p>
+<p class="date"><em>2021-01-12</em></p>
 </div>
-<div id="subset-np.array" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Subset np.array</h2>
+<div id="about-this-book" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
 <ul>
-<li>也因為numpy可以做運算，所以在subset上，比list又更好用了</li>
+<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
 </ul>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="numpy.html#cb45-1"></a>height_list <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>]</span>
-<span id="cb45-2"><a href="numpy.html#cb45-2"></a>height_array <span class="op">=</span> np.array([<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>])</span>
-<span id="cb45-3"><a href="numpy.html#cb45-3"></a></span>
-<span id="cb45-4"><a href="numpy.html#cb45-4"></a>height_list[<span class="dv">1</span>]</span>
-<span id="cb45-5"><a href="numpy.html#cb45-5"></a><span class="co">#&gt; 1.68</span></span>
-<span id="cb45-6"><a href="numpy.html#cb45-6"></a>height_array[<span class="dv">1</span>]</span>
-<span id="cb45-7"><a href="numpy.html#cb45-7"></a><span class="co">#&gt; 1.68</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="numpy.html#cb46-1"></a>height_list[height_list<span class="op">&gt;</span><span class="fl">1.71</span>]</span>
-<span id="cb46-2"><a href="numpy.html#cb46-2"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: &#39;&gt;&#39; not supported between instances of &#39;list&#39; and &#39;float&#39;</span></span>
-<span id="cb46-3"><a href="numpy.html#cb46-3"></a><span class="co">#&gt; </span></span>
-<span id="cb46-4"><a href="numpy.html#cb46-4"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb46-5"><a href="numpy.html#cb46-5"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="numpy.html#cb47-1"></a>height_array[height_array<span class="op">&gt;</span><span class="fl">1.71</span>]</span>
-<span id="cb47-2"><a href="numpy.html#cb47-2"></a><span class="co">#&gt; array([1.73, 1.89, 1.79])</span></span></code></pre></div>
-</div>
-<div id="statistics-functions" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Statistics functions</h2>
-<div id="generate-data" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Generate data</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="numpy.html#cb48-1"></a>height <span class="op">=</span> np.<span class="bu">round</span>(np.random.normal(<span class="fl">1.75</span>, <span class="fl">0.20</span>, <span class="dv">5000</span>), <span class="dv">2</span>)</span>
-<span id="cb48-2"><a href="numpy.html#cb48-2"></a>weight <span class="op">=</span> np.<span class="bu">round</span>(np.random.normal(<span class="fl">60.32</span>, <span class="dv">15</span>, <span class="dv">5000</span>), <span class="dv">2</span>)</span>
-<span id="cb48-3"><a href="numpy.html#cb48-3"></a>np_city <span class="op">=</span> np.column_stack((height, weight))</span>
-<span id="cb48-4"><a href="numpy.html#cb48-4"></a>np_city</span>
-<span id="cb48-5"><a href="numpy.html#cb48-5"></a><span class="co">#&gt; array([[ 1.46, 66.73],</span></span>
-<span id="cb48-6"><a href="numpy.html#cb48-6"></a><span class="co">#&gt;        [ 1.73, 58.31],</span></span>
-<span id="cb48-7"><a href="numpy.html#cb48-7"></a><span class="co">#&gt;        [ 1.79, 57.13],</span></span>
-<span id="cb48-8"><a href="numpy.html#cb48-8"></a><span class="co">#&gt;        ...,</span></span>
-<span id="cb48-9"><a href="numpy.html#cb48-9"></a><span class="co">#&gt;        [ 1.76, 70.53],</span></span>
-<span id="cb48-10"><a href="numpy.html#cb48-10"></a><span class="co">#&gt;        [ 1.34, 50.67],</span></span>
-<span id="cb48-11"><a href="numpy.html#cb48-11"></a><span class="co">#&gt;        [ 1.92, 51.52]])</span></span></code></pre></div>
-</div>
-<div id="summary-statistics" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Summary statistics</h3>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="numpy.html#cb49-1"></a><span class="co"># Print mean height (first column)</span></span>
-<span id="cb49-2"><a href="numpy.html#cb49-2"></a>avg <span class="op">=</span> np.mean(np_city[:,<span class="dv">0</span>])</span>
-<span id="cb49-3"><a href="numpy.html#cb49-3"></a><span class="bu">print</span>(<span class="st">&quot;Average: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(avg))</span>
-<span id="cb49-4"><a href="numpy.html#cb49-4"></a></span>
-<span id="cb49-5"><a href="numpy.html#cb49-5"></a><span class="co"># Print median height. Replace &#39;None&#39;</span></span>
-<span id="cb49-6"><a href="numpy.html#cb49-6"></a><span class="co">#&gt; Average: 1.750686</span></span>
-<span id="cb49-7"><a href="numpy.html#cb49-7"></a>med <span class="op">=</span> np.median(np_city[:,<span class="dv">0</span>])</span>
-<span id="cb49-8"><a href="numpy.html#cb49-8"></a><span class="bu">print</span>(<span class="st">&quot;Median: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(med))</span>
-<span id="cb49-9"><a href="numpy.html#cb49-9"></a></span>
-<span id="cb49-10"><a href="numpy.html#cb49-10"></a><span class="co"># Print out the standard deviation on height. Replace &#39;None&#39;</span></span>
-<span id="cb49-11"><a href="numpy.html#cb49-11"></a><span class="co">#&gt; Median: 1.75</span></span>
-<span id="cb49-12"><a href="numpy.html#cb49-12"></a>stddev <span class="op">=</span> np.std(np_city[:,<span class="dv">0</span>])</span>
-<span id="cb49-13"><a href="numpy.html#cb49-13"></a><span class="bu">print</span>(<span class="st">&quot;Standard Deviation: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(stddev))</span>
-<span id="cb49-14"><a href="numpy.html#cb49-14"></a></span>
-<span id="cb49-15"><a href="numpy.html#cb49-15"></a><span class="co"># Print out correlation between first and second column. Replace &#39;None&#39;</span></span>
-<span id="cb49-16"><a href="numpy.html#cb49-16"></a><span class="co">#&gt; Standard Deviation: 0.2004507655360787</span></span>
-<span id="cb49-17"><a href="numpy.html#cb49-17"></a>corr <span class="op">=</span> np.corrcoef(np_city[:,<span class="dv">0</span>], np_city[:,<span class="dv">1</span>])</span>
-<span id="cb49-18"><a href="numpy.html#cb49-18"></a><span class="bu">print</span>(<span class="st">&quot;Correlation: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(corr))</span>
-<span id="cb49-19"><a href="numpy.html#cb49-19"></a><span class="co">#&gt; Correlation: [[1.         0.00576678]</span></span>
-<span id="cb49-20"><a href="numpy.html#cb49-20"></a><span class="co">#&gt;  [0.00576678 1.        ]]</span></span></code></pre></div>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="list-.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
+<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -13,3 +13,6 @@ reticulate::py_install("pandas")
 # 修改bookdown.yml和_output.yml
 # git add .
 # git commit -m "change bookdown output defaults."
+# git remote add origin https://github.com/LeeHank/python_tutorial.git
+# git branch -M main
+# git push -u origin main

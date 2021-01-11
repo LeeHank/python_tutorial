@@ -4,6 +4,7 @@ install.packages("reticulate")
 renv::init()
 renv::use_python()
 reticulate::py_install("pandas")
+reticulate::py_install("matplotlib")
 
 # bash
 # pip install --upgrade pip

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python Tutorial</title>
+  <title>Chapter 9 Pandas | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python Tutorial" />
+  <meta property="og:title" content="Chapter 9 Pandas | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 9 Pandas | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="python-basics.html"/>
+<link rel="prev" href="-dictionary.html"/>
+<link rel="next" href="logic-control-flow-and-filtering.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,25 +290,228 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python Tutorial</h1>
-<p class="author"><em>Hank Lee</em></p>
-<p class="date"><em>2021-01-12</em></p>
-</div>
-<div id="about-this-book" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
+<div id="pandas" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Pandas</h1>
+<div id="創建pd.dataframe" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> 創建pd.DataFrame</h2>
+<div id="將dictionary轉成data.frame" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> 將dictionary轉成data.frame</h3>
+<div id="法一-像r那樣做" class="section level4" number="9.1.1.1">
+<h4><span class="header-section-number">9.1.1.1</span> 法一： 像R那樣做</h4>
 <ul>
-<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
+<li>回憶一下，在R裡面，怎麼自己建立data.frame? 通常都是這樣做： data = data.frame(a = c(), b = c(), c = c())<br />
+</li>
+<li>當我們這樣做的時候，其實對應到dictionary，不就是一個一個的key value嗎？ 所以概念完全一樣：</li>
 </ul>
-
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="pandas.html#cb64-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb64-2"><a href="pandas.html#cb64-2"></a>data_dic <span class="op">=</span> {</span>
+<span id="cb64-3"><a href="pandas.html#cb64-3"></a>     <span class="st">&#39;Country&#39;</span>: [<span class="st">&#39;Belgium&#39;</span>, <span class="st">&#39;India&#39;</span>, <span class="st">&#39;Brazil&#39;</span>],</span>
+<span id="cb64-4"><a href="pandas.html#cb64-4"></a>     <span class="st">&#39;Capital&#39;</span>: [<span class="st">&#39;Brussels&#39;</span>, <span class="st">&#39;New Delhi&#39;</span>, <span class="st">&#39;Brasília&#39;</span>],</span>
+<span id="cb64-5"><a href="pandas.html#cb64-5"></a>     <span class="st">&#39;Population&#39;</span>: [<span class="dv">11190846</span>, <span class="dv">1303171035</span>, <span class="dv">207847528</span>]</span>
+<span id="cb64-6"><a href="pandas.html#cb64-6"></a>}</span>
+<span id="cb64-7"><a href="pandas.html#cb64-7"></a>data_df <span class="op">=</span> pd.DataFrame(data_dic)</span>
+<span id="cb64-8"><a href="pandas.html#cb64-8"></a>data_df</span>
+<span id="cb64-9"><a href="pandas.html#cb64-9"></a><span class="co">#&gt;    Country    Capital  Population</span></span>
+<span id="cb64-10"><a href="pandas.html#cb64-10"></a><span class="co">#&gt; 0  Belgium   Brussels    11190846</span></span>
+<span id="cb64-11"><a href="pandas.html#cb64-11"></a><span class="co">#&gt; 1    India  New Delhi  1303171035</span></span>
+<span id="cb64-12"><a href="pandas.html#cb64-12"></a><span class="co">#&gt; 2   Brazil   Brasília   207847528</span></span></code></pre></div>
+</div>
+<div id="法二-對付api-request下來的那種json" class="section level4" number="9.1.1.2">
+<h4><span class="header-section-number">9.1.1.2</span> 法二： 對付API request下來的那種JSON</h4>
+</div>
+</div>
+<div id="將2d-array轉成data.fream" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> 將2d-array轉成data.fream</h3>
+<ul>
+<li>在R裡面，我們有時也會先有一個matrix，然後把他轉成data.frame，做法是：as.data.frame(matrix)<br />
+</li>
+<li>那既然pandas是建立在numpy上，那也可將2-dim array轉成dataframe，做法也雷同： pd.DataFrame(matrix)</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="pandas.html#cb65-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb65-2"><a href="pandas.html#cb65-2"></a>matrix <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>],[<span class="dv">3</span>,<span class="dv">4</span>]])</span>
+<span id="cb65-3"><a href="pandas.html#cb65-3"></a><span class="bu">print</span>(matrix)</span>
+<span id="cb65-4"><a href="pandas.html#cb65-4"></a><span class="co">#&gt; [[1 2]</span></span>
+<span id="cb65-5"><a href="pandas.html#cb65-5"></a><span class="co">#&gt;  [3 4]]</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="pandas.html#cb66-1"></a>data_pd2 <span class="op">=</span> pd.DataFrame(matrix)</span>
+<span id="cb66-2"><a href="pandas.html#cb66-2"></a><span class="bu">print</span>(data_pd2)</span>
+<span id="cb66-3"><a href="pandas.html#cb66-3"></a><span class="co">#&gt;    0  1</span></span>
+<span id="cb66-4"><a href="pandas.html#cb66-4"></a><span class="co">#&gt; 0  1  2</span></span>
+<span id="cb66-5"><a href="pandas.html#cb66-5"></a><span class="co">#&gt; 1  3  4</span></span></code></pre></div>
+<ul>
+<li>不過，把matrix轉成data.frame後，我們還缺少column name，所以，在R裡，都還會做colnames(data) = c()<br />
+</li>
+<li>那在pd裡，我們該如何把現有的dataframe加上欄位名稱呢？這個後面再講</li>
+</ul>
+</div>
+<div id="讀csv檔" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> 讀csv檔</h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="pandas.html#cb67-1"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&quot;./data/cars.csv&quot;</span>)</span>
+<span id="cb67-2"><a href="pandas.html#cb67-2"></a><span class="bu">print</span>(cars)</span>
+<span id="cb67-3"><a href="pandas.html#cb67-3"></a><span class="co">#&gt;   Unnamed: 0  cars_per_cap        country  drives_right</span></span>
+<span id="cb67-4"><a href="pandas.html#cb67-4"></a><span class="co">#&gt; 0         US           809  United States          True</span></span>
+<span id="cb67-5"><a href="pandas.html#cb67-5"></a><span class="co">#&gt; 1        AUS           731      Australia         False</span></span>
+<span id="cb67-6"><a href="pandas.html#cb67-6"></a><span class="co">#&gt; 2        JAP           588          Japan         False</span></span>
+<span id="cb67-7"><a href="pandas.html#cb67-7"></a><span class="co">#&gt; 3         IN            18          India         False</span></span>
+<span id="cb67-8"><a href="pandas.html#cb67-8"></a><span class="co">#&gt; 4         RU           200         Russia          True</span></span>
+<span id="cb67-9"><a href="pandas.html#cb67-9"></a><span class="co">#&gt; 5        MOR            70        Morocco          True</span></span>
+<span id="cb67-10"><a href="pandas.html#cb67-10"></a><span class="co">#&gt; 6         EG            45          Egypt          True</span></span></code></pre></div>
+<ul>
+<li>看起來，第一個column比較像row_name，所以可以把它指定為index_col:</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="pandas.html#cb68-1"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&quot;./data/cars.csv&quot;</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb68-2"><a href="pandas.html#cb68-2"></a><span class="bu">print</span>(cars)</span>
+<span id="cb68-3"><a href="pandas.html#cb68-3"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
+<span id="cb68-4"><a href="pandas.html#cb68-4"></a><span class="co">#&gt; US            809  United States          True</span></span>
+<span id="cb68-5"><a href="pandas.html#cb68-5"></a><span class="co">#&gt; AUS           731      Australia         False</span></span>
+<span id="cb68-6"><a href="pandas.html#cb68-6"></a><span class="co">#&gt; JAP           588          Japan         False</span></span>
+<span id="cb68-7"><a href="pandas.html#cb68-7"></a><span class="co">#&gt; IN             18          India         False</span></span>
+<span id="cb68-8"><a href="pandas.html#cb68-8"></a><span class="co">#&gt; RU            200         Russia          True</span></span>
+<span id="cb68-9"><a href="pandas.html#cb68-9"></a><span class="co">#&gt; MOR            70        Morocco          True</span></span>
+<span id="cb68-10"><a href="pandas.html#cb68-10"></a><span class="co">#&gt; EG             45          Egypt          True</span></span></code></pre></div>
+</div>
+</div>
+<div id="select" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Select</h2>
+<div id="section" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> [] &amp; [[]]</h3>
+<ul>
+<li>如果今天用<code>[]</code>來select出一個columm，那做出來的type會是series，不是data.frame</li>
+</ul>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="pandas.html#cb69-1"></a>one_bracket <span class="op">=</span> cars[<span class="st">&quot;country&quot;</span>]</span>
+<span id="cb69-2"><a href="pandas.html#cb69-2"></a><span class="bu">print</span>(one_bracket)</span>
+<span id="cb69-3"><a href="pandas.html#cb69-3"></a><span class="co">#&gt; US     United States</span></span>
+<span id="cb69-4"><a href="pandas.html#cb69-4"></a><span class="co">#&gt; AUS        Australia</span></span>
+<span id="cb69-5"><a href="pandas.html#cb69-5"></a><span class="co">#&gt; JAP            Japan</span></span>
+<span id="cb69-6"><a href="pandas.html#cb69-6"></a><span class="co">#&gt; IN             India</span></span>
+<span id="cb69-7"><a href="pandas.html#cb69-7"></a><span class="co">#&gt; RU            Russia</span></span>
+<span id="cb69-8"><a href="pandas.html#cb69-8"></a><span class="co">#&gt; MOR          Morocco</span></span>
+<span id="cb69-9"><a href="pandas.html#cb69-9"></a><span class="co">#&gt; EG             Egypt</span></span>
+<span id="cb69-10"><a href="pandas.html#cb69-10"></a><span class="co">#&gt; Name: country, dtype: object</span></span>
+<span id="cb69-11"><a href="pandas.html#cb69-11"></a><span class="bu">print</span>(<span class="bu">type</span>(one_bracket))</span>
+<span id="cb69-12"><a href="pandas.html#cb69-12"></a><span class="co">#&gt; &lt;class &#39;pandas.core.series.Series&#39;&gt;</span></span></code></pre></div>
+<ul>
+<li>但如果用兩個brackets <code>[[]]</code>，就會select出一個data.frame</li>
+</ul>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="pandas.html#cb70-1"></a>two_bracket <span class="op">=</span> cars[[<span class="st">&quot;country&quot;</span>]]</span>
+<span id="cb70-2"><a href="pandas.html#cb70-2"></a><span class="bu">print</span>(two_bracket)</span>
+<span id="cb70-3"><a href="pandas.html#cb70-3"></a><span class="co">#&gt;            country</span></span>
+<span id="cb70-4"><a href="pandas.html#cb70-4"></a><span class="co">#&gt; US   United States</span></span>
+<span id="cb70-5"><a href="pandas.html#cb70-5"></a><span class="co">#&gt; AUS      Australia</span></span>
+<span id="cb70-6"><a href="pandas.html#cb70-6"></a><span class="co">#&gt; JAP          Japan</span></span>
+<span id="cb70-7"><a href="pandas.html#cb70-7"></a><span class="co">#&gt; IN           India</span></span>
+<span id="cb70-8"><a href="pandas.html#cb70-8"></a><span class="co">#&gt; RU          Russia</span></span>
+<span id="cb70-9"><a href="pandas.html#cb70-9"></a><span class="co">#&gt; MOR        Morocco</span></span>
+<span id="cb70-10"><a href="pandas.html#cb70-10"></a><span class="co">#&gt; EG           Egypt</span></span>
+<span id="cb70-11"><a href="pandas.html#cb70-11"></a><span class="bu">print</span>(<span class="bu">type</span>(two_bracket))</span>
+<span id="cb70-12"><a href="pandas.html#cb70-12"></a><span class="co">#&gt; &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span></span></code></pre></div>
+<ul>
+<li>而且，兩個bracket，恰好用在你要select多個column</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="pandas.html#cb71-1"></a>two_bracket2 <span class="op">=</span> cars[[<span class="st">&quot;country&quot;</span>, <span class="st">&quot;drives_right&quot;</span>]]</span>
+<span id="cb71-2"><a href="pandas.html#cb71-2"></a><span class="bu">print</span>(two_bracket2)</span>
+<span id="cb71-3"><a href="pandas.html#cb71-3"></a><span class="co">#&gt;            country  drives_right</span></span>
+<span id="cb71-4"><a href="pandas.html#cb71-4"></a><span class="co">#&gt; US   United States          True</span></span>
+<span id="cb71-5"><a href="pandas.html#cb71-5"></a><span class="co">#&gt; AUS      Australia         False</span></span>
+<span id="cb71-6"><a href="pandas.html#cb71-6"></a><span class="co">#&gt; JAP          Japan         False</span></span>
+<span id="cb71-7"><a href="pandas.html#cb71-7"></a><span class="co">#&gt; IN           India         False</span></span>
+<span id="cb71-8"><a href="pandas.html#cb71-8"></a><span class="co">#&gt; RU          Russia          True</span></span>
+<span id="cb71-9"><a href="pandas.html#cb71-9"></a><span class="co">#&gt; MOR        Morocco          True</span></span>
+<span id="cb71-10"><a href="pandas.html#cb71-10"></a><span class="co">#&gt; EG           Egypt          True</span></span></code></pre></div>
+<ul>
+<li>最後，如果要切row出來，那因為row代表的是index，所以會用數字切 ，例如，切最開始到第三個index:</li>
+</ul>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="pandas.html#cb72-1"></a><span class="bu">print</span>(cars[:<span class="dv">3</span>])</span>
+<span id="cb72-2"><a href="pandas.html#cb72-2"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
+<span id="cb72-3"><a href="pandas.html#cb72-3"></a><span class="co">#&gt; US            809  United States          True</span></span>
+<span id="cb72-4"><a href="pandas.html#cb72-4"></a><span class="co">#&gt; AUS           731      Australia         False</span></span>
+<span id="cb72-5"><a href="pandas.html#cb72-5"></a><span class="co">#&gt; JAP           588          Japan         False</span></span></code></pre></div>
+</div>
+<div id="loc-and-iloc" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> loc and iloc</h3>
+<ul>
+<li>loc and iloc是pandas的method，所以是用<code>data.loc[列名,行名]</code>, <code>data.iloc[列index,行index]</code>來運作<br />
+</li>
+<li>loc是吃key的(i.e. column name, row name)，iloc是吃index(i.e. number)</li>
+</ul>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="pandas.html#cb73-1"></a>cars</span>
+<span id="cb73-2"><a href="pandas.html#cb73-2"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
+<span id="cb73-3"><a href="pandas.html#cb73-3"></a><span class="co">#&gt; US            809  United States          True</span></span>
+<span id="cb73-4"><a href="pandas.html#cb73-4"></a><span class="co">#&gt; AUS           731      Australia         False</span></span>
+<span id="cb73-5"><a href="pandas.html#cb73-5"></a><span class="co">#&gt; JAP           588          Japan         False</span></span>
+<span id="cb73-6"><a href="pandas.html#cb73-6"></a><span class="co">#&gt; IN             18          India         False</span></span>
+<span id="cb73-7"><a href="pandas.html#cb73-7"></a><span class="co">#&gt; RU            200         Russia          True</span></span>
+<span id="cb73-8"><a href="pandas.html#cb73-8"></a><span class="co">#&gt; MOR            70        Morocco          True</span></span>
+<span id="cb73-9"><a href="pandas.html#cb73-9"></a><span class="co">#&gt; EG             45          Egypt          True</span></span></code></pre></div>
+<ul>
+<li>抓出列名是JAP, 行名是drives_right的資料</li>
+</ul>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="pandas.html#cb74-1"></a><span class="bu">print</span>(cars.loc[<span class="st">&quot;JAP&quot;</span>,<span class="st">&quot;drives_right&quot;</span>])</span>
+<span id="cb74-2"><a href="pandas.html#cb74-2"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="pandas.html#cb75-1"></a><span class="bu">print</span>(cars.iloc[<span class="dv">2</span>,<span class="dv">2</span>])</span>
+<span id="cb75-2"><a href="pandas.html#cb75-2"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<ul>
+<li>抓出列名是RU, MOR，行名是drives_right的資料</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="pandas.html#cb76-1"></a><span class="bu">print</span>(cars.loc[[<span class="st">&quot;RU&quot;</span>, <span class="st">&quot;MOR&quot;</span>],<span class="st">&quot;drives_right&quot;</span>])</span>
+<span id="cb76-2"><a href="pandas.html#cb76-2"></a><span class="co">#&gt; RU     True</span></span>
+<span id="cb76-3"><a href="pandas.html#cb76-3"></a><span class="co">#&gt; MOR    True</span></span>
+<span id="cb76-4"><a href="pandas.html#cb76-4"></a><span class="co">#&gt; Name: drives_right, dtype: bool</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="pandas.html#cb77-1"></a><span class="bu">print</span>(cars.iloc[[<span class="dv">4</span>,<span class="dv">5</span>],<span class="dv">2</span>])</span>
+<span id="cb77-2"><a href="pandas.html#cb77-2"></a><span class="co">#&gt; RU     True</span></span>
+<span id="cb77-3"><a href="pandas.html#cb77-3"></a><span class="co">#&gt; MOR    True</span></span>
+<span id="cb77-4"><a href="pandas.html#cb77-4"></a><span class="co">#&gt; Name: drives_right, dtype: bool</span></span></code></pre></div>
+<ul>
+<li>以series的type，抓出drives_right這個column</li>
+</ul>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="pandas.html#cb78-1"></a><span class="bu">print</span>(cars.loc[:,<span class="st">&quot;drives_right&quot;</span>])</span>
+<span id="cb78-2"><a href="pandas.html#cb78-2"></a><span class="co">#&gt; US      True</span></span>
+<span id="cb78-3"><a href="pandas.html#cb78-3"></a><span class="co">#&gt; AUS    False</span></span>
+<span id="cb78-4"><a href="pandas.html#cb78-4"></a><span class="co">#&gt; JAP    False</span></span>
+<span id="cb78-5"><a href="pandas.html#cb78-5"></a><span class="co">#&gt; IN     False</span></span>
+<span id="cb78-6"><a href="pandas.html#cb78-6"></a><span class="co">#&gt; RU      True</span></span>
+<span id="cb78-7"><a href="pandas.html#cb78-7"></a><span class="co">#&gt; MOR     True</span></span>
+<span id="cb78-8"><a href="pandas.html#cb78-8"></a><span class="co">#&gt; EG      True</span></span>
+<span id="cb78-9"><a href="pandas.html#cb78-9"></a><span class="co">#&gt; Name: drives_right, dtype: bool</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="pandas.html#cb79-1"></a><span class="bu">print</span>(cars.iloc[:,<span class="dv">2</span>])</span>
+<span id="cb79-2"><a href="pandas.html#cb79-2"></a><span class="co">#&gt; US      True</span></span>
+<span id="cb79-3"><a href="pandas.html#cb79-3"></a><span class="co">#&gt; AUS    False</span></span>
+<span id="cb79-4"><a href="pandas.html#cb79-4"></a><span class="co">#&gt; JAP    False</span></span>
+<span id="cb79-5"><a href="pandas.html#cb79-5"></a><span class="co">#&gt; IN     False</span></span>
+<span id="cb79-6"><a href="pandas.html#cb79-6"></a><span class="co">#&gt; RU      True</span></span>
+<span id="cb79-7"><a href="pandas.html#cb79-7"></a><span class="co">#&gt; MOR     True</span></span>
+<span id="cb79-8"><a href="pandas.html#cb79-8"></a><span class="co">#&gt; EG      True</span></span>
+<span id="cb79-9"><a href="pandas.html#cb79-9"></a><span class="co">#&gt; Name: drives_right, dtype: bool</span></span></code></pre></div>
+<ul>
+<li>以DataFrame的type，抓出drives_right這個column</li>
+</ul>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="pandas.html#cb80-1"></a><span class="bu">print</span>(cars.loc[:, [<span class="st">&quot;drives_right&quot;</span>]])</span>
+<span id="cb80-2"><a href="pandas.html#cb80-2"></a><span class="co">#&gt;      drives_right</span></span>
+<span id="cb80-3"><a href="pandas.html#cb80-3"></a><span class="co">#&gt; US           True</span></span>
+<span id="cb80-4"><a href="pandas.html#cb80-4"></a><span class="co">#&gt; AUS         False</span></span>
+<span id="cb80-5"><a href="pandas.html#cb80-5"></a><span class="co">#&gt; JAP         False</span></span>
+<span id="cb80-6"><a href="pandas.html#cb80-6"></a><span class="co">#&gt; IN          False</span></span>
+<span id="cb80-7"><a href="pandas.html#cb80-7"></a><span class="co">#&gt; RU           True</span></span>
+<span id="cb80-8"><a href="pandas.html#cb80-8"></a><span class="co">#&gt; MOR          True</span></span>
+<span id="cb80-9"><a href="pandas.html#cb80-9"></a><span class="co">#&gt; EG           True</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="pandas.html#cb81-1"></a><span class="bu">print</span>(cars.iloc[:,[<span class="dv">2</span>]])</span>
+<span id="cb81-2"><a href="pandas.html#cb81-2"></a><span class="co">#&gt;      drives_right</span></span>
+<span id="cb81-3"><a href="pandas.html#cb81-3"></a><span class="co">#&gt; US           True</span></span>
+<span id="cb81-4"><a href="pandas.html#cb81-4"></a><span class="co">#&gt; AUS         False</span></span>
+<span id="cb81-5"><a href="pandas.html#cb81-5"></a><span class="co">#&gt; JAP         False</span></span>
+<span id="cb81-6"><a href="pandas.html#cb81-6"></a><span class="co">#&gt; IN          False</span></span>
+<span id="cb81-7"><a href="pandas.html#cb81-7"></a><span class="co">#&gt; RU           True</span></span>
+<span id="cb81-8"><a href="pandas.html#cb81-8"></a><span class="co">#&gt; MOR          True</span></span>
+<span id="cb81-9"><a href="pandas.html#cb81-9"></a><span class="co">#&gt; EG           True</span></span></code></pre></div>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="-dictionary.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logic-control-flow-and-filtering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python Tutorial</title>
+  <title>Chapter 8 資料結構： dictionary | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python Tutorial" />
+  <meta property="og:title" content="Chapter 8 資料結構： dictionary | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 8 資料結構： dictionary | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="python-basics.html"/>
+<link rel="prev" href="customization.html"/>
+<link rel="next" href="pandas.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,25 +290,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python Tutorial</h1>
-<p class="author"><em>Hank Lee</em></p>
-<p class="date"><em>2021-01-12</em></p>
-</div>
-<div id="about-this-book" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
+<div id="資料結構-dictionary" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> 資料結構： dictionary</h1>
 <ul>
-<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
+<li>dictionary和list的差別在於：
+<ol style="list-style-type: decimal">
+<li>dictionary用 {}表示，list用[]表示<br />
+</li>
+<li>dictionary沒有順序性，list有<br />
+</li>
+<li>dictionary一定是key-value的pair，他是index by key(所以你要select他的element，是輸入key); list是index by number(所以你要select他的element，是輸入index number)<br />
+</li>
+<li>dictionary的key是immutable，value是mutable，而list全都是mutable</li>
+</ol></li>
 </ul>
-
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="-dictionary.html#cb57-1"></a>d1 <span class="op">=</span> {<span class="st">&#39;apple&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;pear&#39;</span>:<span class="dv">2</span>, <span class="st">&#39;orange&#39;</span>:<span class="dv">3</span>}</span>
+<span id="cb57-2"><a href="-dictionary.html#cb57-2"></a>d1</span>
+<span id="cb57-3"><a href="-dictionary.html#cb57-3"></a><span class="co">#&gt; {&#39;apple&#39;: 1, &#39;pear&#39;: 2, &#39;orange&#39;: 3}</span></span></code></pre></div>
+<div id="select-element-用-dictionarykey" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> select element 用 dictionary[‘key’]</h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="-dictionary.html#cb58-1"></a>d1[<span class="st">&#39;apple&#39;</span>]</span>
+<span id="cb58-2"><a href="-dictionary.html#cb58-2"></a><span class="co">#&gt; 1</span></span></code></pre></div>
+</div>
+<div id="刪除用del-dictionkey" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> 刪除用del diction[‘key’]</h2>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="-dictionary.html#cb59-1"></a><span class="bu">print</span>(d1)</span>
+<span id="cb59-2"><a href="-dictionary.html#cb59-2"></a><span class="co">#&gt; {&#39;apple&#39;: 1, &#39;pear&#39;: 2, &#39;orange&#39;: 3}</span></span>
+<span id="cb59-3"><a href="-dictionary.html#cb59-3"></a><span class="kw">del</span> d1[<span class="st">&#39;pear&#39;</span>]</span>
+<span id="cb59-4"><a href="-dictionary.html#cb59-4"></a><span class="bu">print</span>(d1)</span>
+<span id="cb59-5"><a href="-dictionary.html#cb59-5"></a><span class="co">#&gt; {&#39;apple&#39;: 1, &#39;orange&#39;: 3}</span></span></code></pre></div>
+</div>
+<div id="添加一個element進去用-dictionarynew-key-new_value" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> 添加一個element進去用 dictionary[‘new key’] = new_value</h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="-dictionary.html#cb60-1"></a>d1[<span class="st">&#39;b&#39;</span>] <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb60-2"><a href="-dictionary.html#cb60-2"></a>d1</span>
+<span id="cb60-3"><a href="-dictionary.html#cb60-3"></a><span class="co">#&gt; {&#39;apple&#39;: 1, &#39;orange&#39;: 3, &#39;b&#39;: 20}</span></span></code></pre></div>
+</div>
+<div id="更新key的value用-dictionarykey-new_value" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> 更新key的value用 dictionary[‘key’] = new_value</h2>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="-dictionary.html#cb61-1"></a>d1[<span class="st">&#39;b&#39;</span>] <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb61-2"><a href="-dictionary.html#cb61-2"></a>d1</span>
+<span id="cb61-3"><a href="-dictionary.html#cb61-3"></a><span class="co">#&gt; {&#39;apple&#39;: 1, &#39;orange&#39;: 3, &#39;b&#39;: 300}</span></span></code></pre></div>
+</div>
+<div id="dictionary中的key一定是字串但value可以是任何東西" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> dictionary中的key一定是字串，但value可以是任何東西</h2>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="-dictionary.html#cb62-1"></a><span class="kw">def</span> func():</span>
+<span id="cb62-2"><a href="-dictionary.html#cb62-2"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb62-3"><a href="-dictionary.html#cb62-3"></a></span>
+<span id="cb62-4"><a href="-dictionary.html#cb62-4"></a>d4 <span class="op">=</span> {<span class="st">&#39;apple&#39;</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], <span class="co">#value是list</span></span>
+<span id="cb62-5"><a href="-dictionary.html#cb62-5"></a>      <span class="st">&#39;pear&#39;</span>:{<span class="st">&#39;gg&#39;</span>:<span class="dv">3</span>, <span class="st">&#39;yy&#39;</span>:<span class="st">&#39;aa&#39;</span>}, <span class="co">#value是dictionary</span></span>
+<span id="cb62-6"><a href="-dictionary.html#cb62-6"></a>      <span class="st">&#39;orange&#39;</span>:func} <span class="co">#value是function  </span></span>
+<span id="cb62-7"><a href="-dictionary.html#cb62-7"></a>d4</span>
+<span id="cb62-8"><a href="-dictionary.html#cb62-8"></a><span class="co">#&gt; {&#39;apple&#39;: [1, 2, 3], &#39;pear&#39;: {&#39;gg&#39;: 3, &#39;yy&#39;: &#39;aa&#39;}, &#39;orange&#39;: &lt;function func at 0x130596940&gt;}</span></span></code></pre></div>
+</div>
+<div id="select這種複雜dictionary就一層一層剝下去" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> select這種複雜dictionary就一層一層剝下去</h2>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="-dictionary.html#cb63-1"></a><span class="bu">print</span>(d4[<span class="st">&#39;pear&#39;</span>][<span class="st">&#39;gg&#39;</span>])</span>
+<span id="cb63-2"><a href="-dictionary.html#cb63-2"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="customization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pandas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python Tutorial</title>
+  <title>Chapter 5 Matplotlib | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python Tutorial" />
+  <meta property="og:title" content="Chapter 5 Matplotlib | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 5 Matplotlib | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="python-basics.html"/>
+<link rel="prev" href="numpy.html"/>
+<link rel="next" href="scatter-plot.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,25 +290,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python Tutorial</h1>
-<p class="author"><em>Hank Lee</em></p>
-<p class="date"><em>2021-01-12</em></p>
+<div id="matplotlib" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Matplotlib</h1>
+<div id="line-plot" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> line plot</h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="matplotlib.html#cb50-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb50-2"><a href="matplotlib.html#cb50-2"></a>year <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1970</span>, <span class="dv">1990</span>, <span class="dv">2010</span>]</span>
+<span id="cb50-3"><a href="matplotlib.html#cb50-3"></a>pop <span class="op">=</span> [<span class="fl">2.519</span>, <span class="fl">3.692</span>, <span class="fl">5.263</span>, <span class="fl">6.972</span>] <span class="co">#pop = population, 單位: billion</span></span>
+<span id="cb50-4"><a href="matplotlib.html#cb50-4"></a>plt.plot(year, pop) <span class="co">#只寫到這邊，不會畫圖，因為他還不知道你要不要加title那些</span></span>
+<span id="cb50-5"><a href="matplotlib.html#cb50-5"></a>plt.show() <span class="co">#寫show的話，他才知道你指令都輸入完了，才會畫圖</span></span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-51-1.png" /><!-- --></p>
 </div>
-<div id="about-this-book" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
-<ul>
-<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
-</ul>
-
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="numpy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scatter-plot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

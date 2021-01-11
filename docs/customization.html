@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python Tutorial</title>
+  <title>Chapter 7 Customization | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python Tutorial" />
+  <meta property="og:title" content="Chapter 7 Customization | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 7 Customization | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="python-basics.html"/>
+<link rel="prev" href="scatter-plot.html"/>
+<link rel="next" href="-dictionary.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,25 +290,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python Tutorial</h1>
-<p class="author"><em>Hank Lee</em></p>
-<p class="date"><em>2021-01-12</em></p>
+<div id="customization" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Customization</h1>
+<div id="xy-labels-and-title" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> x,y labels and title</h2>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="customization.html#cb54-1"></a>plt.plot(year, pop)</span>
+<span id="cb54-2"><a href="customization.html#cb54-2"></a>plt.xlabel(<span class="st">&#39;Year&#39;</span>)</span>
+<span id="cb54-3"><a href="customization.html#cb54-3"></a>plt.ylabel(<span class="st">&#39;Population&#39;</span>)</span>
+<span id="cb54-4"><a href="customization.html#cb54-4"></a>plt.title(<span class="st">&#39;World Population Projections&#39;</span>)</span>
+<span id="cb54-5"><a href="customization.html#cb54-5"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-55-1.png" /><!-- --></p>
 </div>
-<div id="about-this-book" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
+<div id="ticks" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Ticks</h2>
 <ul>
-<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
+<li>可以把x or y軸，調成你要顯示的尺度+你要的label</li>
 </ul>
-
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="customization.html#cb55-1"></a>plt.plot(year, pop)</span>
+<span id="cb55-2"><a href="customization.html#cb55-2"></a>plt.xlabel(<span class="st">&#39;Year&#39;</span>)</span>
+<span id="cb55-3"><a href="customization.html#cb55-3"></a>plt.ylabel(<span class="st">&#39;Population&#39;</span>)</span>
+<span id="cb55-4"><a href="customization.html#cb55-4"></a>plt.title(<span class="st">&#39;World Population Projections&#39;</span>)</span>
+<span id="cb55-5"><a href="customization.html#cb55-5"></a></span>
+<span id="cb55-6"><a href="customization.html#cb55-6"></a><span class="co"># Definition of tick_val and tick_lab</span></span>
+<span id="cb55-7"><a href="customization.html#cb55-7"></a>tick_val <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb55-8"><a href="customization.html#cb55-8"></a>tick_lab <span class="op">=</span> [<span class="st">&#39;0k&#39;</span>, <span class="st">&#39;2k&#39;</span>, <span class="st">&#39;4k&#39;</span>, <span class="st">&#39;6k&#39;</span>, <span class="st">&#39;8k&#39;</span>, <span class="st">&#39;10k&#39;</span>]</span>
+<span id="cb55-9"><a href="customization.html#cb55-9"></a></span>
+<span id="cb55-10"><a href="customization.html#cb55-10"></a><span class="co"># Adapt the ticks on the x-axis</span></span>
+<span id="cb55-11"><a href="customization.html#cb55-11"></a>plt.yticks(tick_val, tick_lab)</span>
+<span id="cb55-12"><a href="customization.html#cb55-12"></a></span>
+<span id="cb55-13"><a href="customization.html#cb55-13"></a><span class="co"># After customizing, display the plot</span></span>
+<span id="cb55-14"><a href="customization.html#cb55-14"></a><span class="co">#&gt; ([&lt;matplotlib.axis.YTick object at 0x130578970&gt;, &lt;matplotlib.axis.YTick object at 0x13043f3d0&gt;, &lt;matplotlib.axis.YTick object at 0x13056fd30&gt;, &lt;matplotlib.axis.YTick object at 0x1305bba30&gt;, &lt;matplotlib.axis.YTick object at 0x1305bbf10&gt;, &lt;matplotlib.axis.YTick object at 0x1305bf460&gt;], [Text(0, 0, &#39;0k&#39;), Text(0, 2, &#39;2k&#39;), Text(0, 4, &#39;4k&#39;), Text(0, 6, &#39;6k&#39;), Text(0, 8, &#39;8k&#39;), Text(0, 10, &#39;10k&#39;)])</span></span>
+<span id="cb55-15"><a href="customization.html#cb55-15"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-56-1.png" /><!-- --></p>
+</div>
+<div id="加入第三軸-s-size" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> 加入第三軸： s (size)</h2>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="customization.html#cb56-1"></a>age <span class="op">=</span> [<span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">25</span>, <span class="dv">66</span>]</span>
+<span id="cb56-2"><a href="customization.html#cb56-2"></a>plt.scatter(year, pop, s <span class="op">=</span> age)</span>
+<span id="cb56-3"><a href="customization.html#cb56-3"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-57-1.png" /><!-- --></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scatter-plot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="-dictionary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

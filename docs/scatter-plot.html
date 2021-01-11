@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python Tutorial</title>
+  <title>Chapter 6 scatter plot | Python Tutorial</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python Tutorial" />
+  <meta property="og:title" content="Chapter 6 scatter plot | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 6 scatter plot | Python Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="python-basics.html"/>
+<link rel="prev" href="matplotlib.html"/>
+<link rel="next" href="customization.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,25 +290,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python Tutorial</h1>
-<p class="author"><em>Hank Lee</em></p>
-<p class="date"><em>2021-01-12</em></p>
-</div>
-<div id="about-this-book" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About this book</h1>
+<div id="scatter-plot" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> scatter plot</h1>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="scatter-plot.html#cb51-1"></a>plt.scatter(year, pop)</span>
+<span id="cb51-2"><a href="scatter-plot.html#cb51-2"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-52-1.png" /><!-- --></p>
 <ul>
-<li>這本書記錄我自學的過程，也可作為未來查找code的reference</li>
+<li>如果想把<code>pop</code>換成log scale，那就加上<code>plt.yscale('log')</code></li>
 </ul>
-
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="scatter-plot.html#cb52-1"></a>plt.scatter(year, pop)</span>
+<span id="cb52-2"><a href="scatter-plot.html#cb52-2"></a>plt.yscale(<span class="st">&#39;log&#39;</span>)</span>
+<span id="cb52-3"><a href="scatter-plot.html#cb52-3"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-53-1.png" /><!-- --></p>
+<div id="histogram" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Histogram</h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="scatter-plot.html#cb53-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb53-2"><a href="scatter-plot.html#cb53-2"></a>data <span class="op">=</span> np.random.normal(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb53-3"><a href="scatter-plot.html#cb53-3"></a>plt.hist(data, bins <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb53-4"><a href="scatter-plot.html#cb53-4"></a><span class="co">#&gt; (array([2., 1., 2., 1., 4.]), array([4.00125328, 4.41696731, 4.83268135, 5.24839538, 5.66410942,</span></span>
+<span id="cb53-5"><a href="scatter-plot.html#cb53-5"></a><span class="co">#&gt;        6.07982345]), &lt;BarContainer object of 5 artists&gt;)</span></span>
+<span id="cb53-6"><a href="scatter-plot.html#cb53-6"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-54-1.png" /><!-- --></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="python-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="matplotlib.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="customization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

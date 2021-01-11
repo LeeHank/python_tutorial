@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Case Study: Hacker Statistics | Python Tutorial</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Case Study: Hacker Statistics | Python Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Case Study: Hacker Statistics | Python Tutorial" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Hank Lee" />
+
+
+<meta name="date" content="2021-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="loops.html"/>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Python Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this book</a></li>
+<li class="chapter" data-level="2" data-path="python-basics.html"><a href="python-basics.html"><i class="fa fa-check"></i><b>2</b> Python Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="python-basics.html"><a href="python-basics.html#variable-and-types"><i class="fa fa-check"></i><b>2.1</b> Variable and Types</a></li>
+<li class="chapter" data-level="2.2" data-path="python-basics.html"><a href="python-basics.html#operations"><i class="fa fa-check"></i><b>2.2</b> Operations</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="python-basics.html"><a href="python-basics.html#字串的operations"><i class="fa fa-check"></i><b>2.2.1</b> 字串的operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="python-basics.html"><a href="python-basics.html#methods"><i class="fa fa-check"></i><b>2.3</b> Methods</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="python-basics.html"><a href="python-basics.html#字串的methods"><i class="fa fa-check"></i><b>2.3.1</b> 字串的methods</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="python-basics.html"><a href="python-basics.html#packages"><i class="fa fa-check"></i><b>2.4</b> packages:</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="python-basics.html"><a href="python-basics.html#install-package"><i class="fa fa-check"></i><b>2.4.1</b> Install package</a></li>
+<li class="chapter" data-level="2.4.2" data-path="python-basics.html"><a href="python-basics.html#import-package"><i class="fa fa-check"></i><b>2.4.2</b> Import package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>3</b> List基本介紹</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="list-.html"><a href="list-.html#建立list"><i class="fa fa-check"></i><b>3.1</b> 建立list</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="list-.html"><a href="list-.html#單維list"><i class="fa fa-check"></i><b>3.1.1</b> 單維list</a></li>
+<li class="chapter" data-level="3.1.2" data-path="list-.html"><a href="list-.html#多維list"><i class="fa fa-check"></i><b>3.1.2</b> 多維list</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="list-.html"><a href="list-.html#selecting-list-elements"><i class="fa fa-check"></i><b>3.2</b> Selecting List Elements</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="list-.html"><a href="list-.html#subset"><i class="fa fa-check"></i><b>3.2.1</b> Subset</a></li>
+<li class="chapter" data-level="3.2.2" data-path="list-.html"><a href="list-.html#slice"><i class="fa fa-check"></i><b>3.2.2</b> Slice</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="list-.html"><a href="list-.html#replace"><i class="fa fa-check"></i><b>3.3</b> Replace</a></li>
+<li class="chapter" data-level="3.4" data-path="list-.html"><a href="list-.html#operation"><i class="fa fa-check"></i><b>3.4</b> Operation</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="list-.html"><a href="list-.html#list1-list2-clist1-list2"><i class="fa fa-check"></i><b>3.4.1</b> list1 + list2 = c(list1, list2)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="list-.html"><a href="list-.html#list1-2-replist1-2"><i class="fa fa-check"></i><b>3.4.2</b> list1 * 2 = rep(list1, 2)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="list-.html"><a href="list-.html#methods-1"><i class="fa fa-check"></i><b>3.5</b> Methods</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="list-.html"><a href="list-.html#list.appendx-r的clist-x"><i class="fa fa-check"></i><b>3.5.1</b> list.append(x) = R的c(list, x)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="list-.html"><a href="list-.html#list.pop-移除最後一個element"><i class="fa fa-check"></i><b>3.5.2</b> list.pop() = 移除最後一個element</a></li>
+<li class="chapter" data-level="3.5.3" data-path="list-.html"><a href="list-.html#list.removea-r的-listwhichlist-a1"><i class="fa fa-check"></i><b>3.5.3</b> list.remove(a) = R的 list[which(list == a)[1]]</a></li>
+<li class="chapter" data-level="3.5.4" data-path="list-.html"><a href="list-.html#list.sort-r的sortlist"><i class="fa fa-check"></i><b>3.5.4</b> list.sort() = R的sort(list)</a></li>
+<li class="chapter" data-level="3.5.5" data-path="list-.html"><a href="list-.html#list.reverse"><i class="fa fa-check"></i><b>3.5.5</b> list.reverse()</a></li>
+<li class="chapter" data-level="3.5.6" data-path="list-.html"><a href="list-.html#list.insertindex-x-我要把x插入到index的前面"><i class="fa fa-check"></i><b>3.5.6</b> list.insert(index, x) = 我要把x插入到index的前面</a></li>
+<li class="chapter" data-level="3.5.7" data-path="list-.html"><a href="list-.html#list.indexa-r的whichlist1-a1"><i class="fa fa-check"></i><b>3.5.7</b> list.index(a) = R的which(list1 == a)[1]</a></li>
+<li class="chapter" data-level="3.5.8" data-path="list-.html"><a href="list-.html#list.countx-計算x在list中出現幾次"><i class="fa fa-check"></i><b>3.5.8</b> list.count(x) = 計算x在list中出現幾次</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="list-.html"><a href="list-.html#list-是-mutable"><i class="fa fa-check"></i><b>3.6</b> List 是 mutable</a></li>
+<li class="chapter" data-level="3.7" data-path="list-.html"><a href="list-.html#list的功能最常用來做for-loop"><i class="fa fa-check"></i><b>3.7</b> List的功能（最常用來做for loop)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> NumPy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#why-numpy"><i class="fa fa-check"></i><b>4.1</b> Why NumPy</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#subset-np.array"><i class="fa fa-check"></i><b>4.2</b> Subset np.array</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#statistics-functions"><i class="fa fa-check"></i><b>4.3</b> Statistics functions</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="numpy.html"><a href="numpy.html#generate-data"><i class="fa fa-check"></i><b>4.3.1</b> Generate data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="numpy.html"><a href="numpy.html#summary-statistics"><i class="fa fa-check"></i><b>4.3.2</b> Summary statistics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="matplotlib.html"><a href="matplotlib.html"><i class="fa fa-check"></i><b>5</b> Matplotlib</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="matplotlib.html"><a href="matplotlib.html#line-plot"><i class="fa fa-check"></i><b>5.1</b> line plot</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scatter-plot.html"><a href="scatter-plot.html"><i class="fa fa-check"></i><b>6</b> scatter plot</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="scatter-plot.html"><a href="scatter-plot.html#histogram"><i class="fa fa-check"></i><b>6.1</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="customization.html"><a href="customization.html"><i class="fa fa-check"></i><b>7</b> Customization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="customization.html"><a href="customization.html#xy-labels-and-title"><i class="fa fa-check"></i><b>7.1</b> x,y labels and title</a></li>
+<li class="chapter" data-level="7.2" data-path="customization.html"><a href="customization.html#ticks"><i class="fa fa-check"></i><b>7.2</b> Ticks</a></li>
+<li class="chapter" data-level="7.3" data-path="customization.html"><a href="customization.html#加入第三軸-s-size"><i class="fa fa-check"></i><b>7.3</b> 加入第三軸： s (size)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="-dictionary.html"><a href="-dictionary.html"><i class="fa fa-check"></i><b>8</b> 資料結構： dictionary</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="-dictionary.html"><a href="-dictionary.html#select-element-用-dictionarykey"><i class="fa fa-check"></i><b>8.1</b> select element 用 dictionary[‘key’]</a></li>
+<li class="chapter" data-level="8.2" data-path="-dictionary.html"><a href="-dictionary.html#刪除用del-dictionkey"><i class="fa fa-check"></i><b>8.2</b> 刪除用del diction[‘key’]</a></li>
+<li class="chapter" data-level="8.3" data-path="-dictionary.html"><a href="-dictionary.html#添加一個element進去用-dictionarynew-key-new_value"><i class="fa fa-check"></i><b>8.3</b> 添加一個element進去用 dictionary[‘new key’] = new_value</a></li>
+<li class="chapter" data-level="8.4" data-path="-dictionary.html"><a href="-dictionary.html#更新key的value用-dictionarykey-new_value"><i class="fa fa-check"></i><b>8.4</b> 更新key的value用 dictionary[‘key’] = new_value</a></li>
+<li class="chapter" data-level="8.5" data-path="-dictionary.html"><a href="-dictionary.html#dictionary中的key一定是字串但value可以是任何東西"><i class="fa fa-check"></i><b>8.5</b> dictionary中的key一定是字串，但value可以是任何東西</a></li>
+<li class="chapter" data-level="8.6" data-path="-dictionary.html"><a href="-dictionary.html#select這種複雜dictionary就一層一層剝下去"><i class="fa fa-check"></i><b>8.6</b> select這種複雜dictionary就一層一層剝下去</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>9</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="pandas.html"><a href="pandas.html#創建pd.dataframe"><i class="fa fa-check"></i><b>9.1</b> 創建pd.DataFrame</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="pandas.html"><a href="pandas.html#將dictionary轉成data.frame"><i class="fa fa-check"></i><b>9.1.1</b> 將dictionary轉成data.frame</a></li>
+<li class="chapter" data-level="9.1.2" data-path="pandas.html"><a href="pandas.html#將2d-array轉成data.fream"><i class="fa fa-check"></i><b>9.1.2</b> 將2d-array轉成data.fream</a></li>
+<li class="chapter" data-level="9.1.3" data-path="pandas.html"><a href="pandas.html#讀csv檔"><i class="fa fa-check"></i><b>9.1.3</b> 讀csv檔</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="pandas.html"><a href="pandas.html#select"><i class="fa fa-check"></i><b>9.2</b> Select</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="pandas.html"><a href="pandas.html#section"><i class="fa fa-check"></i><b>9.2.1</b> [] &amp; [[]]</a></li>
+<li class="chapter" data-level="9.2.2" data-path="pandas.html"><a href="pandas.html#loc-and-iloc"><i class="fa fa-check"></i><b>9.2.2</b> loc and iloc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html"><i class="fa fa-check"></i><b>10</b> Logic, Control Flow and Filtering</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#comparison-operators"><i class="fa fa-check"></i><b>10.1</b> Comparison operators</a></li>
+<li class="chapter" data-level="10.2" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#boolean-operators"><i class="fa fa-check"></i><b>10.2</b> Boolean Operators</a></li>
+<li class="chapter" data-level="10.3" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#numpy-np.logical_andnp.logical_ornp.logical_not"><i class="fa fa-check"></i><b>10.3</b> Numpy np.logical_and()/np.logical_or()/np.logical_not()</a></li>
+<li class="chapter" data-level="10.4" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#if-elif-else"><i class="fa fa-check"></i><b>10.4</b> if, elif, else</a></li>
+<li class="chapter" data-level="10.5" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#filtering-pandas-dataframe"><i class="fa fa-check"></i><b>10.5</b> Filtering pandas DataFrame</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>11</b> Loops</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="loops.html"><a href="loops.html#while-loop"><i class="fa fa-check"></i><b>11.1</b> while loop</a></li>
+<li class="chapter" data-level="11.2" data-path="loops.html"><a href="loops.html#for-loop"><i class="fa fa-check"></i><b>11.2</b> for loop</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="loops.html"><a href="loops.html#loop-over-a-list"><i class="fa fa-check"></i><b>11.2.1</b> loop over a list</a></li>
+<li class="chapter" data-level="11.2.2" data-path="loops.html"><a href="loops.html#loop-over-string"><i class="fa fa-check"></i><b>11.2.2</b> loop over string</a></li>
+<li class="chapter" data-level="11.2.3" data-path="loops.html"><a href="loops.html#loop-over-dictionary"><i class="fa fa-check"></i><b>11.2.3</b> loop over dictionary</a></li>
+<li class="chapter" data-level="11.2.4" data-path="loops.html"><a href="loops.html#loop-over-numpy-array"><i class="fa fa-check"></i><b>11.2.4</b> loop over Numpy array</a></li>
+<li class="chapter" data-level="11.2.5" data-path="loops.html"><a href="loops.html#loop-over-dataframe"><i class="fa fa-check"></i><b>11.2.5</b> loop over DataFrame</a></li>
+<li class="chapter" data-level="11.2.6" data-path="loops.html"><a href="loops.html#add-column-by-for-loops"><i class="fa fa-check"></i><b>11.2.6</b> add column by for loops</a></li>
+<li class="chapter" data-level="11.2.7" data-path="loops.html"><a href="loops.html#add-column-by-apply-method"><i class="fa fa-check"></i><b>11.2.7</b> add column by apply method</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html"><i class="fa fa-check"></i><b>12</b> Case Study: Hacker Statistics</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#產出random-number"><i class="fa fa-check"></i><b>12.1</b> 產出random number</a></li>
+<li class="chapter" data-level="12.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子1次的實驗"><i class="fa fa-check"></i><b>12.2</b> 擲骰子1次的實驗</a></li>
+<li class="chapter" data-level="12.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子100次的實驗"><i class="fa fa-check"></i><b>12.3</b> 擲骰子100次的實驗</a></li>
+<li class="chapter" data-level="12.4" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正樓層不能0"><i class="fa fa-check"></i><b>12.4</b> 修正樓層不能&lt;0</a></li>
+<li class="chapter" data-level="12.5" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正有0.1的機會會回到原點"><i class="fa fa-check"></i><b>12.5</b> 修正有0.1%的機會，會回到原點</a></li>
+<li class="chapter" data-level="12.6" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#做1000個run每個run都做100次擲骰子的實驗"><i class="fa fa-check"></i><b>12.6</b> 做1000個run，每個run都做100次擲骰子的實驗</a></li>
+<li class="chapter" data-level="12.7" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擷取每個run的最後一筆資訊"><i class="fa fa-check"></i><b>12.7</b> 擷取每個run的最後一筆資訊</a></li>
+<li class="chapter" data-level="12.8" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#計算可以爬到60層樓以上的機率"><i class="fa fa-check"></i><b>12.8</b> 計算可以爬到60層樓以上的機率</a></li>
+<li class="chapter" data-level="12.9" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#appendix"><i class="fa fa-check"></i><b>12.9</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#畫一下endpoint的distribution"><i class="fa fa-check"></i><b>12.9.1</b> 畫一下endpoint的distribution</a></li>
+<li class="chapter" data-level="12.9.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#第一個run我的爬樓梯過程長怎樣"><i class="fa fa-check"></i><b>12.9.2</b> 第一個run，我的爬樓梯過程長怎樣？</a></li>
+<li class="chapter" data-level="12.9.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#visualize所有run的爬樓梯過程"><i class="fa fa-check"></i><b>12.9.3</b> Visualize所有run的爬樓梯過程</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="case-study-hacker-statistics" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Case Study: Hacker Statistics</h1>
+<ul>
+<li>現在我們想來進行一個遊戲：擲骰子爬帝國大廈，遊戲規則如下：
+<ul>
+<li>如果擲出1,2點，那要往下走一層樓<br />
+</li>
+<li>如果擲出3,4,5點，那可以往上走一層樓<br />
+</li>
+<li>如果擲出6點，那可以再擲一次骰子，骰到幾點就往上爬幾樓<br />
+</li>
+<li>最低只能往下爬到0樓，超過都不算了<br />
+</li>
+<li>每爬完一次樓層，都有0.1%的機會，會失足摔回第0層<br />
+</li>
+</ul></li>
+<li>現在準備擲100次骰子，請問可以爬到60層樓的機率為何？<br />
+</li>
+<li>要回答這個問題，可以用：
+<ul>
+<li>解析解：就直接照理論推導去計算<br />
+</li>
+<li>模擬解：直接做隨機實驗看結果(aka: Hack Statistics)<br />
+</li>
+</ul></li>
+<li>這一個章節，就打算用模擬解，來回答這個題目</li>
+</ul>
+<div id="產出random-number" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> 產出random number</h2>
+<ul>
+<li>我們會用numpy中的一個sub-package，叫<code>random</code>，來進行亂數產生<br />
+</li>
+<li>所以，如果numpy被你縮寫成<code>np</code>，那接下來的function都會寫成<code>np.random.xxx()</code>，意思就是用到random這個sub-package<br />
+</li>
+<li>常見的function整理如下：
+<ul>
+<li><code>np.random.seed()</code>: 設random seed<br />
+</li>
+<li><code>np.random.rand()</code>: 產出0~1的隨機亂數，看起來就是連續型U(0,1)<br />
+</li>
+<li><code>np.random.randint(start, stop)</code>: 就是離散型U(start, stop-1)。所以如果以擲銅板為例，就會寫<code>np.random.randint(0,2)</code>，那亂數就是0 or 1; 以擲骰子為例，就會是<code>np.random.randint(1,7)</code>，亂數就是1,2,3,4,5,6。<br />
+</li>
+<li>來練習一下</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb109-1"><a href="case-study-hacker-statistics.html#cb109-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb109-2"><a href="case-study-hacker-statistics.html#cb109-2"></a>np.random.rand()</span>
+<span id="cb109-3"><a href="case-study-hacker-statistics.html#cb109-3"></a><span class="co">#&gt; 0.5740242035609764</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="case-study-hacker-statistics.html#cb110-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb110-2"><a href="case-study-hacker-statistics.html#cb110-2"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb110-3"><a href="case-study-hacker-statistics.html#cb110-3"></a>np.random.randint(<span class="dv">0</span>,<span class="dv">7</span>) <span class="co"># result is 6</span></span>
+<span id="cb110-4"><a href="case-study-hacker-statistics.html#cb110-4"></a><span class="co">#&gt; 6</span></span></code></pre></div>
+</div>
+<div id="擲骰子1次的實驗" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> 擲骰子1次的實驗</h2>
+<ul>
+<li>現在，假設我們在50樓，然後要做一次擲骰子遊戲，我想看，我直到多少，以及，擲完後，我會變成在幾樓</li>
+</ul>
+<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="case-study-hacker-statistics.html#cb111-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb111-2"><a href="case-study-hacker-statistics.html#cb111-2"></a>np.random.seed(<span class="dv">12</span>)</span>
+<span id="cb111-3"><a href="case-study-hacker-statistics.html#cb111-3"></a><span class="co"># Starting step</span></span>
+<span id="cb111-4"><a href="case-study-hacker-statistics.html#cb111-4"></a>step <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb111-5"><a href="case-study-hacker-statistics.html#cb111-5"></a></span>
+<span id="cb111-6"><a href="case-study-hacker-statistics.html#cb111-6"></a><span class="co"># Roll the dice</span></span>
+<span id="cb111-7"><a href="case-study-hacker-statistics.html#cb111-7"></a>dice <span class="op">=</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb111-8"><a href="case-study-hacker-statistics.html#cb111-8"></a></span>
+<span id="cb111-9"><a href="case-study-hacker-statistics.html#cb111-9"></a><span class="co"># Finish the control construct</span></span>
+<span id="cb111-10"><a href="case-study-hacker-statistics.html#cb111-10"></a><span class="cf">if</span> dice <span class="op">&lt;=</span> <span class="dv">2</span> :</span>
+<span id="cb111-11"><a href="case-study-hacker-statistics.html#cb111-11"></a>    step <span class="op">=</span> step <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb111-12"><a href="case-study-hacker-statistics.html#cb111-12"></a><span class="cf">elif</span> dice <span class="op">&gt;</span> <span class="dv">2</span> <span class="kw">and</span> dice <span class="op">&lt;</span><span class="dv">6</span> :</span>
+<span id="cb111-13"><a href="case-study-hacker-statistics.html#cb111-13"></a>    step <span class="op">=</span> step <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb111-14"><a href="case-study-hacker-statistics.html#cb111-14"></a><span class="cf">else</span> :</span>
+<span id="cb111-15"><a href="case-study-hacker-statistics.html#cb111-15"></a>    step <span class="op">=</span> step <span class="op">+</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb111-16"><a href="case-study-hacker-statistics.html#cb111-16"></a></span>
+<span id="cb111-17"><a href="case-study-hacker-statistics.html#cb111-17"></a><span class="co"># Print out dice and step</span></span>
+<span id="cb111-18"><a href="case-study-hacker-statistics.html#cb111-18"></a><span class="bu">print</span>(dice)</span>
+<span id="cb111-19"><a href="case-study-hacker-statistics.html#cb111-19"></a><span class="co">#&gt; 4</span></span>
+<span id="cb111-20"><a href="case-study-hacker-statistics.html#cb111-20"></a><span class="bu">print</span>(step)</span>
+<span id="cb111-21"><a href="case-study-hacker-statistics.html#cb111-21"></a><span class="co">#&gt; 1</span></span></code></pre></div>
+<ul>
+<li>我們可以看到，擲到4點，要往上爬一層，所以結果是從0 floor爬到1 floor (step現在是1)</li>
+</ul>
+</div>
+<div id="擲骰子100次的實驗" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> 擲骰子100次的實驗</h2>
+<ul>
+<li>那如果我現在想玩十次，那我會想記錄這10次的骰子結果，以及每次執行完我會爬到哪一層。那就可以善用list這個資料結構，和.append這個method</li>
+</ul>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="case-study-hacker-statistics.html#cb112-1"></a>np.random.seed(<span class="dv">17</span>)</span>
+<span id="cb112-2"><a href="case-study-hacker-statistics.html#cb112-2"></a></span>
+<span id="cb112-3"><a href="case-study-hacker-statistics.html#cb112-3"></a>random_walk <span class="op">=</span> [<span class="dv">0</span>] <span class="co"># 一開始在0樓，他是list的data structure</span></span>
+<span id="cb112-4"><a href="case-study-hacker-statistics.html#cb112-4"></a>dice_history <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb112-5"><a href="case-study-hacker-statistics.html#cb112-5"></a></span>
+<span id="cb112-6"><a href="case-study-hacker-statistics.html#cb112-6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co">#執行10次  </span></span>
+<span id="cb112-7"><a href="case-study-hacker-statistics.html#cb112-7"></a>  dice <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb112-8"><a href="case-study-hacker-statistics.html#cb112-8"></a>  dice_history.append(dice)   </span>
+<span id="cb112-9"><a href="case-study-hacker-statistics.html#cb112-9"></a>  </span>
+<span id="cb112-10"><a href="case-study-hacker-statistics.html#cb112-10"></a>  step <span class="op">=</span> random_walk[<span class="op">-</span><span class="dv">1</span>] <span class="co">#現在所屬樓層，是random walk這個list的最後一個element</span></span>
+<span id="cb112-11"><a href="case-study-hacker-statistics.html#cb112-11"></a>  </span>
+<span id="cb112-12"><a href="case-study-hacker-statistics.html#cb112-12"></a>  <span class="cf">if</span> dice <span class="op">&lt;=</span> <span class="dv">2</span>:</span>
+<span id="cb112-13"><a href="case-study-hacker-statistics.html#cb112-13"></a>    step <span class="op">=</span> step<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb112-14"><a href="case-study-hacker-statistics.html#cb112-14"></a>  <span class="cf">elif</span> dice <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb112-15"><a href="case-study-hacker-statistics.html#cb112-15"></a>    step <span class="op">=</span> step<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb112-16"><a href="case-study-hacker-statistics.html#cb112-16"></a>  <span class="cf">else</span>:</span>
+<span id="cb112-17"><a href="case-study-hacker-statistics.html#cb112-17"></a>    step <span class="op">=</span> step <span class="op">+</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb112-18"><a href="case-study-hacker-statistics.html#cb112-18"></a>  </span>
+<span id="cb112-19"><a href="case-study-hacker-statistics.html#cb112-19"></a>  random_walk.append(step)</span>
+<span id="cb112-20"><a href="case-study-hacker-statistics.html#cb112-20"></a></span>
+<span id="cb112-21"><a href="case-study-hacker-statistics.html#cb112-21"></a><span class="bu">print</span>(random_walk)</span>
+<span id="cb112-22"><a href="case-study-hacker-statistics.html#cb112-22"></a><span class="co">#&gt; [0, -1, -2, -3, 2, 3, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 4, 3, 2, 8, 7, 6, 12, 13, 14, 13, 14, 15, 16, 17, 18, 17, 18, 17, 16, 17, 18, 19, 20, 21, 22, 23, 22, 21, 22, 23, 22, 21, 20, 19, 18, 19, 20, 23, 24, 25, 29, 30, 31, 32, 33, 38, 37, 36, 37, 38, 37, 38, 39, 43, 44, 43, 49, 51, 52, 53, 52, 53, 54, 55, 54, 55, 54, 53, 54, 53, 54, 53, 54, 55, 56, 57, 58, 57, 58, 64, 65, 66, 65, 64, 67]</span></span>
+<span id="cb112-23"><a href="case-study-hacker-statistics.html#cb112-23"></a><span class="bu">print</span>(dice_history)</span>
+<span id="cb112-24"><a href="case-study-hacker-statistics.html#cb112-24"></a><span class="co">#&gt; [0, 2, 2, 1, 6, 5, 5, 2, 2, 2, 1, 3, 3, 4, 4, 4, 2, 2, 2, 6, 2, 1, 6, 3, 5, 2, 6, 4, 3, 4, 3, 2, 5, 2, 1, 4, 4, 3, 4, 4, 3, 4, 1, 2, 3, 3, 2, 1, 2, 1, 1, 5, 5, 6, 5, 5, 6, 4, 4, 4, 6, 6, 2, 2, 4, 5, 2, 4, 3, 6, 4, 2, 6, 6, 4, 4, 1, 4, 3, 3, 1, 3, 2, 1, 5, 1, 3, 2, 5, 3, 5, 4, 3, 1, 3, 6, 4, 4, 2, 1, 6]</span></span></code></pre></div>
+<ul>
+<li>看起來應該是做對了，因為一開始擲到2，要往下一層樓，從0樓往下一層樓，就會是-1樓，所以沒做錯<br />
+</li>
+<li>但是，剛剛有個規定是說，如果樓層往下走，走到最低只能是0，不能是負的<br />
+</li>
+<li>所以，接下來我們要用<code>max()</code>這個function來幫我們把關，例如： <code>step = max(step-1, 0)</code></li>
+</ul>
+</div>
+<div id="修正樓層不能0" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> 修正樓層不能&lt;0</h2>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="case-study-hacker-statistics.html#cb113-1"></a>np.random.seed(<span class="dv">17</span>)</span>
+<span id="cb113-2"><a href="case-study-hacker-statistics.html#cb113-2"></a></span>
+<span id="cb113-3"><a href="case-study-hacker-statistics.html#cb113-3"></a>random_walk <span class="op">=</span> [<span class="dv">0</span>] <span class="co"># 一開始在0樓，他是list的data structure</span></span>
+<span id="cb113-4"><a href="case-study-hacker-statistics.html#cb113-4"></a>dice_history <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb113-5"><a href="case-study-hacker-statistics.html#cb113-5"></a></span>
+<span id="cb113-6"><a href="case-study-hacker-statistics.html#cb113-6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co">#執行100次  </span></span>
+<span id="cb113-7"><a href="case-study-hacker-statistics.html#cb113-7"></a>  dice <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb113-8"><a href="case-study-hacker-statistics.html#cb113-8"></a>  dice_history.append(dice)   </span>
+<span id="cb113-9"><a href="case-study-hacker-statistics.html#cb113-9"></a>  </span>
+<span id="cb113-10"><a href="case-study-hacker-statistics.html#cb113-10"></a>  step <span class="op">=</span> random_walk[<span class="op">-</span><span class="dv">1</span>] <span class="co">#現在所屬樓層，是random walk這個list的最後一個element</span></span>
+<span id="cb113-11"><a href="case-study-hacker-statistics.html#cb113-11"></a>  </span>
+<span id="cb113-12"><a href="case-study-hacker-statistics.html#cb113-12"></a>  <span class="cf">if</span> dice <span class="op">&lt;=</span> <span class="dv">2</span>:</span>
+<span id="cb113-13"><a href="case-study-hacker-statistics.html#cb113-13"></a>    <span class="co"># 確保往下走，最低只會走到0</span></span>
+<span id="cb113-14"><a href="case-study-hacker-statistics.html#cb113-14"></a>    step <span class="op">=</span> <span class="bu">max</span>(step<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb113-15"><a href="case-study-hacker-statistics.html#cb113-15"></a>  <span class="cf">elif</span> dice <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb113-16"><a href="case-study-hacker-statistics.html#cb113-16"></a>    step <span class="op">=</span> step<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb113-17"><a href="case-study-hacker-statistics.html#cb113-17"></a>  <span class="cf">else</span>:</span>
+<span id="cb113-18"><a href="case-study-hacker-statistics.html#cb113-18"></a>    step <span class="op">=</span> step <span class="op">+</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb113-19"><a href="case-study-hacker-statistics.html#cb113-19"></a>  </span>
+<span id="cb113-20"><a href="case-study-hacker-statistics.html#cb113-20"></a>  random_walk.append(step)</span>
+<span id="cb113-21"><a href="case-study-hacker-statistics.html#cb113-21"></a></span>
+<span id="cb113-22"><a href="case-study-hacker-statistics.html#cb113-22"></a><span class="bu">print</span>(random_walk)</span>
+<span id="cb113-23"><a href="case-study-hacker-statistics.html#cb113-23"></a><span class="co">#&gt; [0, 0, 0, 0, 5, 6, 7, 6, 5, 4, 3, 4, 5, 6, 7, 8, 7, 6, 5, 11, 10, 9, 15, 16, 17, 16, 17, 18, 19, 20, 21, 20, 21, 20, 19, 20, 21, 22, 23, 24, 25, 26, 25, 24, 25, 26, 25, 24, 23, 22, 21, 22, 23, 26, 27, 28, 32, 33, 34, 35, 36, 41, 40, 39, 40, 41, 40, 41, 42, 46, 47, 46, 52, 54, 55, 56, 55, 56, 57, 58, 57, 58, 57, 56, 57, 56, 57, 56, 57, 58, 59, 60, 61, 60, 61, 67, 68, 69, 68, 67, 70]</span></span>
+<span id="cb113-24"><a href="case-study-hacker-statistics.html#cb113-24"></a><span class="bu">print</span>(dice_history)</span>
+<span id="cb113-25"><a href="case-study-hacker-statistics.html#cb113-25"></a><span class="co">#&gt; [0, 2, 2, 1, 6, 5, 5, 2, 2, 2, 1, 3, 3, 4, 4, 4, 2, 2, 2, 6, 2, 1, 6, 3, 5, 2, 6, 4, 3, 4, 3, 2, 5, 2, 1, 4, 4, 3, 4, 4, 3, 4, 1, 2, 3, 3, 2, 1, 2, 1, 1, 5, 5, 6, 5, 5, 6, 4, 4, 4, 6, 6, 2, 2, 4, 5, 2, 4, 3, 6, 4, 2, 6, 6, 4, 4, 1, 4, 3, 3, 1, 3, 2, 1, 5, 1, 3, 2, 5, 3, 5, 4, 3, 1, 3, 6, 4, 4, 2, 1, 6]</span></span></code></pre></div>
+<ul>
+<li>good，好多了，現在沒有走到負數樓層了<br />
+</li>
+<li>但還有一個規則沒用到，就是每走完一層樓，他有0.1%的機會，會回到原點(step重設為0)<br />
+</li>
+<li>那很簡單，我就用<code>np.random.rand() &lt; 0.001</code>當條件就好，如果條件滿足，那就把step重設為0</li>
+</ul>
+</div>
+<div id="修正有0.1的機會會回到原點" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> 修正有0.1%的機會，會回到原點</h2>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="case-study-hacker-statistics.html#cb114-1"></a>np.random.seed(<span class="dv">17</span>)</span>
+<span id="cb114-2"><a href="case-study-hacker-statistics.html#cb114-2"></a></span>
+<span id="cb114-3"><a href="case-study-hacker-statistics.html#cb114-3"></a>random_walk <span class="op">=</span> [<span class="dv">0</span>] <span class="co"># 一開始在0樓，他是list的data structure</span></span>
+<span id="cb114-4"><a href="case-study-hacker-statistics.html#cb114-4"></a>dice_history <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb114-5"><a href="case-study-hacker-statistics.html#cb114-5"></a></span>
+<span id="cb114-6"><a href="case-study-hacker-statistics.html#cb114-6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co">#執行100次  </span></span>
+<span id="cb114-7"><a href="case-study-hacker-statistics.html#cb114-7"></a>  dice <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb114-8"><a href="case-study-hacker-statistics.html#cb114-8"></a>  dice_history.append(dice)   </span>
+<span id="cb114-9"><a href="case-study-hacker-statistics.html#cb114-9"></a>  </span>
+<span id="cb114-10"><a href="case-study-hacker-statistics.html#cb114-10"></a>  step <span class="op">=</span> random_walk[<span class="op">-</span><span class="dv">1</span>] <span class="co">#現在所屬樓層，是random walk這個list的最後一個element</span></span>
+<span id="cb114-11"><a href="case-study-hacker-statistics.html#cb114-11"></a>  </span>
+<span id="cb114-12"><a href="case-study-hacker-statistics.html#cb114-12"></a>  <span class="cf">if</span> dice <span class="op">&lt;=</span> <span class="dv">2</span>:</span>
+<span id="cb114-13"><a href="case-study-hacker-statistics.html#cb114-13"></a>    <span class="co"># 確保往下走，最低只會走到0</span></span>
+<span id="cb114-14"><a href="case-study-hacker-statistics.html#cb114-14"></a>    step <span class="op">=</span> <span class="bu">max</span>(step<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb114-15"><a href="case-study-hacker-statistics.html#cb114-15"></a>  <span class="cf">elif</span> dice <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb114-16"><a href="case-study-hacker-statistics.html#cb114-16"></a>    step <span class="op">=</span> step<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb114-17"><a href="case-study-hacker-statistics.html#cb114-17"></a>  <span class="cf">else</span>:</span>
+<span id="cb114-18"><a href="case-study-hacker-statistics.html#cb114-18"></a>    step <span class="op">=</span> step <span class="op">+</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb114-19"><a href="case-study-hacker-statistics.html#cb114-19"></a>  </span>
+<span id="cb114-20"><a href="case-study-hacker-statistics.html#cb114-20"></a>  <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> <span class="fl">0.001</span>:</span>
+<span id="cb114-21"><a href="case-study-hacker-statistics.html#cb114-21"></a>    step <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb114-22"><a href="case-study-hacker-statistics.html#cb114-22"></a>  </span>
+<span id="cb114-23"><a href="case-study-hacker-statistics.html#cb114-23"></a>  random_walk.append(step)</span>
+<span id="cb114-24"><a href="case-study-hacker-statistics.html#cb114-24"></a></span>
+<span id="cb114-25"><a href="case-study-hacker-statistics.html#cb114-25"></a><span class="bu">print</span>(random_walk)</span>
+<span id="cb114-26"><a href="case-study-hacker-statistics.html#cb114-26"></a><span class="co">#&gt; [0, 0, 0, 1, 2, 1, 2, 3, 2, 1, 3, 6, 5, 6, 7, 6, 7, 8, 7, 8, 7, 6, 9, 13, 14, 13, 12, 13, 14, 15, 21, 20, 21, 20, 21, 20, 21, 20, 21, 22, 28, 27, 30, 31, 32, 33, 34, 33, 32, 36, 35, 36, 35, 41, 42, 41, 42, 41, 40, 41, 40, 39, 40, 39, 40, 41, 43, 47, 48, 49, 53, 52, 53, 52, 53, 54, 53, 52, 53, 54, 55, 54, 53, 52, 56, 57, 58, 59, 60, 59, 60, 61, 60, 61, 60, 61, 63, 64, 63, 64, 65]</span></span></code></pre></div>
+</div>
+<div id="做1000個run每個run都做100次擲骰子的實驗" class="section level2" number="12.6">
+<h2><span class="header-section-number">12.6</span> 做1000個run，每個run都做100次擲骰子的實驗</h2>
+<ul>
+<li>現在，我想先新增一個空list，然後每run完一次擲骰子100次的遊戲後，我就把這次的結果list塞進來，那我做完1000個run，就會得到一個list，此list裡面有1000個element，每個element都是100*1的list!!</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="case-study-hacker-statistics.html#cb115-1"></a>np.random.seed(<span class="dv">17</span>)</span>
+<span id="cb115-2"><a href="case-study-hacker-statistics.html#cb115-2"></a></span>
+<span id="cb115-3"><a href="case-study-hacker-statistics.html#cb115-3"></a>all_walks <span class="op">=</span> []</span>
+<span id="cb115-4"><a href="case-study-hacker-statistics.html#cb115-4"></a></span>
+<span id="cb115-5"><a href="case-study-hacker-statistics.html#cb115-5"></a><span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb115-6"><a href="case-study-hacker-statistics.html#cb115-6"></a>  <span class="co"># 之前的code塞進來  </span></span>
+<span id="cb115-7"><a href="case-study-hacker-statistics.html#cb115-7"></a>  random_walk <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb115-8"><a href="case-study-hacker-statistics.html#cb115-8"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co">#執行100次  </span></span>
+<span id="cb115-9"><a href="case-study-hacker-statistics.html#cb115-9"></a>    dice <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb115-10"><a href="case-study-hacker-statistics.html#cb115-10"></a>    step <span class="op">=</span> random_walk[<span class="op">-</span><span class="dv">1</span>] </span>
+<span id="cb115-11"><a href="case-study-hacker-statistics.html#cb115-11"></a>    <span class="cf">if</span> dice <span class="op">&lt;=</span> <span class="dv">2</span>:</span>
+<span id="cb115-12"><a href="case-study-hacker-statistics.html#cb115-12"></a>      <span class="co"># 確保往下走，最低只會走到0</span></span>
+<span id="cb115-13"><a href="case-study-hacker-statistics.html#cb115-13"></a>      step <span class="op">=</span> <span class="bu">max</span>(step<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb115-14"><a href="case-study-hacker-statistics.html#cb115-14"></a>    <span class="cf">elif</span> dice <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb115-15"><a href="case-study-hacker-statistics.html#cb115-15"></a>      step <span class="op">=</span> step<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb115-16"><a href="case-study-hacker-statistics.html#cb115-16"></a>    <span class="cf">else</span>:</span>
+<span id="cb115-17"><a href="case-study-hacker-statistics.html#cb115-17"></a>      step <span class="op">=</span> step <span class="op">+</span> np.random.randint(<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb115-18"><a href="case-study-hacker-statistics.html#cb115-18"></a>    </span>
+<span id="cb115-19"><a href="case-study-hacker-statistics.html#cb115-19"></a>    <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> <span class="fl">0.001</span>:</span>
+<span id="cb115-20"><a href="case-study-hacker-statistics.html#cb115-20"></a>      step <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb115-21"><a href="case-study-hacker-statistics.html#cb115-21"></a>    </span>
+<span id="cb115-22"><a href="case-study-hacker-statistics.html#cb115-22"></a>    random_walk.append(step)</span>
+<span id="cb115-23"><a href="case-study-hacker-statistics.html#cb115-23"></a>  </span>
+<span id="cb115-24"><a href="case-study-hacker-statistics.html#cb115-24"></a>  all_walks.append(random_walk)</span>
+<span id="cb115-25"><a href="case-study-hacker-statistics.html#cb115-25"></a></span>
+<span id="cb115-26"><a href="case-study-hacker-statistics.html#cb115-26"></a><span class="co"># print(all_walks)</span></span></code></pre></div>
+</div>
+<div id="擷取每個run的最後一筆資訊" class="section level2" number="12.7">
+<h2><span class="header-section-number">12.7</span> 擷取每個run的最後一筆資訊</h2>
+<ul>
+<li>現在<code>all_walks[]</code>這個list，是個1000*100的list，而我們要取的是每個sub-list中的最後一個。所以，可以這樣做：</li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="case-study-hacker-statistics.html#cb116-1"></a>end_points <span class="op">=</span> []</span>
+<span id="cb116-2"><a href="case-study-hacker-statistics.html#cb116-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb116-3"><a href="case-study-hacker-statistics.html#cb116-3"></a>  end <span class="op">=</span> all_walks[i][<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb116-4"><a href="case-study-hacker-statistics.html#cb116-4"></a>  end_points.append(end)</span>
+<span id="cb116-5"><a href="case-study-hacker-statistics.html#cb116-5"></a><span class="bu">print</span>(end_points[:<span class="dv">10</span>])</span>
+<span id="cb116-6"><a href="case-study-hacker-statistics.html#cb116-6"></a><span class="co">#&gt; [65, 91, 62, 73, 98, 85, 75, 83, 77, 102]</span></span></code></pre></div>
+<ul>
+<li>這邊，也可以用另一個小技巧，先把list轉成np.array，就可以直接抓出一整排結果</li>
+</ul>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="case-study-hacker-statistics.html#cb117-1"></a>np_aw <span class="op">=</span> np.array(all_walks)</span>
+<span id="cb117-2"><a href="case-study-hacker-statistics.html#cb117-2"></a>np_end_points <span class="op">=</span> np_aw[:,<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb117-3"><a href="case-study-hacker-statistics.html#cb117-3"></a><span class="bu">print</span>(np_end_points[:<span class="dv">10</span>])</span>
+<span id="cb117-4"><a href="case-study-hacker-statistics.html#cb117-4"></a><span class="co">#&gt; [ 65  91  62  73  98  85  75  83  77 102]</span></span></code></pre></div>
+</div>
+<div id="計算可以爬到60層樓以上的機率" class="section level2" number="12.8">
+<h2><span class="header-section-number">12.8</span> 計算可以爬到60層樓以上的機率</h2>
+<ul>
+<li>既然已經有1000筆的模擬結果，那我們就看這些結果&gt;60的比例有多高就好：</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="case-study-hacker-statistics.html#cb118-1"></a>np.mean(np_end_points <span class="op">&gt;=</span> <span class="dv">60</span>)</span>
+<span id="cb118-2"><a href="case-study-hacker-statistics.html#cb118-2"></a><span class="co">#&gt; 0.771</span></span></code></pre></div>
+<ul>
+<li>實驗結果： 有77%的機率，可以爬到60樓以上！！</li>
+</ul>
+</div>
+<div id="appendix" class="section level2" number="12.9">
+<h2><span class="header-section-number">12.9</span> Appendix</h2>
+<ul>
+<li>接下來，我們可以用剛剛的data，做一點視覺化的練習</li>
+</ul>
+<div id="畫一下endpoint的distribution" class="section level3" number="12.9.1">
+<h3><span class="header-section-number">12.9.1</span> 畫一下endpoint的distribution</h3>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="case-study-hacker-statistics.html#cb119-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb119-2"><a href="case-study-hacker-statistics.html#cb119-2"></a>plt.hist(np_end_points)</span>
+<span id="cb119-3"><a href="case-study-hacker-statistics.html#cb119-3"></a><span class="co">#&gt; (array([ 16.,  20.,  16.,  56., 137., 246., 287., 139.,  71.,  12.]), array([  0. ,  12.2,  24.4,  36.6,  48.8,  61. ,  73.2,  85.4,  97.6,</span></span>
+<span id="cb119-4"><a href="case-study-hacker-statistics.html#cb119-4"></a><span class="co">#&gt;        109.8, 122. ]), &lt;BarContainer object of 10 artists&gt;)</span></span>
+<span id="cb119-5"><a href="case-study-hacker-statistics.html#cb119-5"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-120-1.png" /><!-- --></p>
+</div>
+<div id="第一個run我的爬樓梯過程長怎樣" class="section level3" number="12.9.2">
+<h3><span class="header-section-number">12.9.2</span> 第一個run，我的爬樓梯過程長怎樣？</h3>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="case-study-hacker-statistics.html#cb120-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb120-2"><a href="case-study-hacker-statistics.html#cb120-2"></a></span>
+<span id="cb120-3"><a href="case-study-hacker-statistics.html#cb120-3"></a>first_run <span class="op">=</span> np_aw[<span class="dv">1</span>,:]</span>
+<span id="cb120-4"><a href="case-study-hacker-statistics.html#cb120-4"></a>plt.plot(first_run)</span>
+<span id="cb120-5"><a href="case-study-hacker-statistics.html#cb120-5"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-121-1.png" /><!-- --></p>
+</div>
+<div id="visualize所有run的爬樓梯過程" class="section level3" number="12.9.3">
+<h3><span class="header-section-number">12.9.3</span> Visualize所有run的爬樓梯過程</h3>
+<div class="sourceCode" id="cb121"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="case-study-hacker-statistics.html#cb121-1"></a>plt.plot(np_aw)</span>
+<span id="cb121-2"><a href="case-study-hacker-statistics.html#cb121-2"></a><span class="co">#&gt; [&lt;matplotlib.lines.Line2D object at 0x130367fa0&gt;, &lt;matplotlib.lines.Line2D object at 0x130367340&gt;, &lt;matplotlib.lines.Line2D object at 0x1303cdee0&gt;, &lt;matplotlib.lines.Line2D object at 0x1303cda30&gt;, &lt;matplotlib.lines.Line2D object at 0x1303cdeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1303da6d0&gt;, &lt;matplotlib.lines.Line2D object at 0x1303da1c0&gt;, &lt;matplotlib.lines.Line2D object at 0x1303da280&gt;, &lt;matplotlib.lines.Line2D object at 0x1303daa00&gt;, &lt;matplotlib.lines.Line2D object at 0x1303dafa0&gt;, &lt;matplotlib.lines.Line2D object at 0x1323c1e20&gt;, &lt;matplotlib.lines.Line2D object at 0x13053efa0&gt;, &lt;matplotlib.lines.Line2D object at 0x1304736d0&gt;, &lt;matplotlib.lines.Line2D object at 0x1304739d0&gt;, &lt;matplotlib.lines.Line2D object at 0x1304651f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13043f640&gt;, &lt;matplotlib.lines.Line2D object at 0x130484fd0&gt;, &lt;matplotlib.lines.Line2D object at 0x13045d280&gt;, &lt;matplotlib.lines.Line2D object at 0x13045d040&gt;, &lt;matplotlib.lines.Line2D object at 0x12f0105e0&gt;, &lt;matplotlib.lines.Line2D object at 0x12f010a60&gt;, &lt;matplotlib.lines.Line2D object at 0x12f010940&gt;, &lt;matplotlib.lines.Line2D object at 0x12f0106d0&gt;, &lt;matplotlib.lines.Line2D object at 0x12f010f70&gt;, &lt;matplotlib.lines.Line2D object at 0x12f010b50&gt;, &lt;matplotlib.lines.Line2D object at 0x130362a00&gt;, &lt;matplotlib.lines.Line2D object at 0x1303624f0&gt;, &lt;matplotlib.lines.Line2D object at 0x130362160&gt;, &lt;matplotlib.lines.Line2D object at 0x130349f40&gt;, &lt;matplotlib.lines.Line2D object at 0x130349ca0&gt;, &lt;matplotlib.lines.Line2D object at 0x130349340&gt;, &lt;matplotlib.lines.Line2D object at 0x130349af0&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01da00&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01d070&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01de50&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01d850&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01d880&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01dfd0&gt;, &lt;matplotlib.lines.Line2D object at 0x12f01d430&gt;, &lt;matplotlib.lines.Line2D object at 0x12ef99850&gt;, &lt;matplotlib.lines.Line2D object at 0x12ef99be0&gt;, &lt;matplotlib.lines.Line2D object at 0x12ef99c10&gt;, &lt;matplotlib.lines.Line2D object at 0x12ef99df0&gt;, &lt;matplotlib.lines.Line2D object at 0x12ef998e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1323e7ee0&gt;, &lt;matplotlib.lines.Line2D object at 0x1323e7fd0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324000d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132400190&gt;, &lt;matplotlib.lines.Line2D object at 0x132400250&gt;, &lt;matplotlib.lines.Line2D object at 0x132400310&gt;, &lt;matplotlib.lines.Line2D object at 0x1324003d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132400490&gt;, &lt;matplotlib.lines.Line2D object at 0x132400550&gt;, &lt;matplotlib.lines.Line2D object at 0x132400610&gt;, &lt;matplotlib.lines.Line2D object at 0x1324006d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132400790&gt;, &lt;matplotlib.lines.Line2D object at 0x132400850&gt;, &lt;matplotlib.lines.Line2D object at 0x132400910&gt;, &lt;matplotlib.lines.Line2D object at 0x1324009d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132400a90&gt;, &lt;matplotlib.lines.Line2D object at 0x132400b50&gt;, &lt;matplotlib.lines.Line2D object at 0x132400c10&gt;, &lt;matplotlib.lines.Line2D object at 0x132400cd0&gt;, &lt;matplotlib.lines.Line2D object at 0x132400d90&gt;, &lt;matplotlib.lines.Line2D object at 0x132400e50&gt;, &lt;matplotlib.lines.Line2D object at 0x132400f10&gt;, &lt;matplotlib.lines.Line2D object at 0x132400fd0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324070d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132407190&gt;, &lt;matplotlib.lines.Line2D object at 0x132407250&gt;, &lt;matplotlib.lines.Line2D object at 0x132407310&gt;, &lt;matplotlib.lines.Line2D object at 0x1324073d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132407490&gt;, &lt;matplotlib.lines.Line2D object at 0x132407550&gt;, &lt;matplotlib.lines.Line2D object at 0x132407610&gt;, &lt;matplotlib.lines.Line2D object at 0x1324076d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132407790&gt;, &lt;matplotlib.lines.Line2D object at 0x132407850&gt;, &lt;matplotlib.lines.Line2D object at 0x132407910&gt;, &lt;matplotlib.lines.Line2D object at 0x1324079d0&gt;, &lt;matplotlib.lines.Line2D object at 0x132407a90&gt;, &lt;matplotlib.lines.Line2D object at 0x132407b50&gt;, &lt;matplotlib.lines.Line2D object at 0x132407c10&gt;, &lt;matplotlib.lines.Line2D object at 0x132407cd0&gt;, &lt;matplotlib.lines.Line2D object at 0x132407d90&gt;, &lt;matplotlib.lines.Line2D object at 0x132407e50&gt;, &lt;matplotlib.lines.Line2D object at 0x132407f10&gt;, &lt;matplotlib.lines.Line2D object at 0x132407fd0&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d0d0&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d190&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d250&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d310&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d3d0&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d490&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d550&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d610&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d6d0&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d790&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d850&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d910&gt;, &lt;matplotlib.lines.Line2D object at 0x13240d9d0&gt;]</span></span>
+<span id="cb121-3"><a href="case-study-hacker-statistics.html#cb121-3"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-122-1.png" /><!-- -->
+* hmm…看起來很怪異，那是因為，<code>plt.plot()</code>是一個column畫一個line，但我們現在是希望他一個row畫一個line<br />
+* 那很簡單，就做轉置就好</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="case-study-hacker-statistics.html#cb122-1"></a>np_aw_t <span class="op">=</span> np.transpose(np_aw)</span>
+<span id="cb122-2"><a href="case-study-hacker-statistics.html#cb122-2"></a>plt.plot(np_aw_t)</span>
+<span id="cb122-3"><a href="case-study-hacker-statistics.html#cb122-3"></a><span class="co">#&gt; [&lt;matplotlib.lines.Line2D object at 0x132548430&gt;, &lt;matplotlib.lines.Line2D object at 0x132548520&gt;, &lt;matplotlib.lines.Line2D object at 0x1325485e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325486a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132548760&gt;, &lt;matplotlib.lines.Line2D object at 0x132548820&gt;, &lt;matplotlib.lines.Line2D object at 0x1325488e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325489a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132548a60&gt;, &lt;matplotlib.lines.Line2D object at 0x132548b20&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f6670&gt;, &lt;matplotlib.lines.Line2D object at 0x132548c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132548d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132548df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132548eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132548f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132550070&gt;, &lt;matplotlib.lines.Line2D object at 0x132550130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325501f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325502b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550370&gt;, &lt;matplotlib.lines.Line2D object at 0x132550430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325504f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325505b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550670&gt;, &lt;matplotlib.lines.Line2D object at 0x132550730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325507f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325508b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550970&gt;, &lt;matplotlib.lines.Line2D object at 0x132550a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132550af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132550d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132550df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132550f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132556070&gt;, &lt;matplotlib.lines.Line2D object at 0x132556130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325561f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325562b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556370&gt;, &lt;matplotlib.lines.Line2D object at 0x132556430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325564f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325565b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556670&gt;, &lt;matplotlib.lines.Line2D object at 0x132556730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325567f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325568b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556970&gt;, &lt;matplotlib.lines.Line2D object at 0x132556a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132556af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132556d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132556df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132556f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d070&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d130&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d370&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d430&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d670&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d730&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255d970&gt;, &lt;matplotlib.lines.Line2D object at 0x13255da30&gt;, &lt;matplotlib.lines.Line2D object at 0x13255daf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255dbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255dc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13255dd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13255ddf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255deb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13255df70&gt;, &lt;matplotlib.lines.Line2D object at 0x132565070&gt;, &lt;matplotlib.lines.Line2D object at 0x132565130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325651f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325652b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565370&gt;, &lt;matplotlib.lines.Line2D object at 0x132565430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325654f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325655b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565670&gt;, &lt;matplotlib.lines.Line2D object at 0x132565730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325657f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325658b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565970&gt;, &lt;matplotlib.lines.Line2D object at 0x132565a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132565af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132565d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132565df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132565f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b070&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b130&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b370&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b430&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b670&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b730&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256b970&gt;, &lt;matplotlib.lines.Line2D object at 0x13256ba30&gt;, &lt;matplotlib.lines.Line2D object at 0x13256baf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256bbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256bc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13256bd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13256bdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256beb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13256bf70&gt;, &lt;matplotlib.lines.Line2D object at 0x132571070&gt;, &lt;matplotlib.lines.Line2D object at 0x132571130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325711f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325712b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571370&gt;, &lt;matplotlib.lines.Line2D object at 0x132571430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325714f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325715b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571670&gt;, &lt;matplotlib.lines.Line2D object at 0x132571730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325717f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325718b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571970&gt;, &lt;matplotlib.lines.Line2D object at 0x132571a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132571af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132571d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132571df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132571f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132577070&gt;, &lt;matplotlib.lines.Line2D object at 0x132577130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325771f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325772b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577370&gt;, &lt;matplotlib.lines.Line2D object at 0x132577430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325774f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325775b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577670&gt;, &lt;matplotlib.lines.Line2D object at 0x132577730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325777f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325778b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577970&gt;, &lt;matplotlib.lines.Line2D object at 0x132577a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132577af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132577d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132577df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132577f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b070&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b130&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b370&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b430&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b670&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b730&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257b970&gt;, &lt;matplotlib.lines.Line2D object at 0x13257ba30&gt;, &lt;matplotlib.lines.Line2D object at 0x13257baf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257bbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257bc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13257bd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13257bdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257beb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13257bf70&gt;, &lt;matplotlib.lines.Line2D object at 0x132581070&gt;, &lt;matplotlib.lines.Line2D object at 0x132581130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325811f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325812b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581370&gt;, &lt;matplotlib.lines.Line2D object at 0x132581430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325814f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325815b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581670&gt;, &lt;matplotlib.lines.Line2D object at 0x132581730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325817f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325818b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581970&gt;, &lt;matplotlib.lines.Line2D object at 0x132581a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132581af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132581d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132581df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132581f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132588070&gt;, &lt;matplotlib.lines.Line2D object at 0x132588130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325881f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325882b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588370&gt;, &lt;matplotlib.lines.Line2D object at 0x132588430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325884f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325885b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588670&gt;, &lt;matplotlib.lines.Line2D object at 0x132588730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325887f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325888b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588970&gt;, &lt;matplotlib.lines.Line2D object at 0x132588a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132588af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132588d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132588df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1323dcf70&gt;, &lt;matplotlib.lines.Line2D object at 0x1323dc610&gt;, &lt;matplotlib.lines.Line2D object at 0x1323dc550&gt;, &lt;matplotlib.lines.Line2D object at 0x1323d0910&gt;, &lt;matplotlib.lines.Line2D object at 0x1323d0790&gt;, &lt;matplotlib.lines.Line2D object at 0x1323e7970&gt;, &lt;matplotlib.lines.Line2D object at 0x130333610&gt;, &lt;matplotlib.lines.Line2D object at 0x132500820&gt;, &lt;matplotlib.lines.Line2D object at 0x1325008e0&gt;, &lt;matplotlib.lines.Line2D object at 0x132500250&gt;, &lt;matplotlib.lines.Line2D object at 0x132500370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325003a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132500070&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fa370&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fa850&gt;, &lt;matplotlib.lines.Line2D object at 0x1324faeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fae50&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fab50&gt;, &lt;matplotlib.lines.Line2D object at 0x1324faa00&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fa550&gt;, &lt;matplotlib.lines.Line2D object at 0x1324fa610&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f3700&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f3820&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f3850&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f32e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324f3190&gt;, &lt;matplotlib.lines.Line2D object at 0x1324eeac0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324eef10&gt;, &lt;matplotlib.lines.Line2D object at 0x1324eed60&gt;, &lt;matplotlib.lines.Line2D object at 0x1324eee20&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee790&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee8e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee400&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee310&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee280&gt;, &lt;matplotlib.lines.Line2D object at 0x1324ee0d0&gt;, &lt;matplotlib.lines.Line2D object at 0x1324e4d00&gt;, &lt;matplotlib.lines.Line2D object at 0x1324e4fd0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132588f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132591070&gt;, &lt;matplotlib.lines.Line2D object at 0x132591130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325911f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325912b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591370&gt;, &lt;matplotlib.lines.Line2D object at 0x132591430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325914f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325915b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591670&gt;, &lt;matplotlib.lines.Line2D object at 0x132591730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325917f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325918b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591970&gt;, &lt;matplotlib.lines.Line2D object at 0x132591a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132591af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132591d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132591df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132591f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132596070&gt;, &lt;matplotlib.lines.Line2D object at 0x132596130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325961f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325962b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596370&gt;, &lt;matplotlib.lines.Line2D object at 0x132596430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325964f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325965b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596670&gt;, &lt;matplotlib.lines.Line2D object at 0x132596730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325967f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325968b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596970&gt;, &lt;matplotlib.lines.Line2D object at 0x132596a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132596af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132596d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132596df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132596f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b070&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b130&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b370&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b430&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b670&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b730&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259b970&gt;, &lt;matplotlib.lines.Line2D object at 0x13259ba30&gt;, &lt;matplotlib.lines.Line2D object at 0x13259baf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259bbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259bc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13259bd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13259bdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259beb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13259bf70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a21f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a22b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a24f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a25b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a27f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a28b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a2f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a81f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a82b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a84f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a85b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a87f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a88b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325a8f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ae970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aea30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aeaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aebb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aec70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aed30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aedf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aeeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325aef70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b41f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b42b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b44f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b45b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b47f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b48b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325b4f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ba970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325baa30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325baaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325babb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bac70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bad30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325badf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325baeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325baf70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bf970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfa30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfc70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfd30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bfeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325bff70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c61f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c62b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c64f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c65b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c67f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c68b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325c6f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cc970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cca30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccc70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccd30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325cceb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ccf70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d21f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d22b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d24f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d25b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d27f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d28b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d2f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d81f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d82b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d84f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d85b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d87f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d88b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325d8f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dd970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dda30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddc70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddd30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325dddf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ddf70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e31f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e32b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e34f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e35b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e37f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e38b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e3f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e91f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e92b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e94f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e95b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e97f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e98b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325e9f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325ef970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efa30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efc70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efd30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325efeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325eff70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f51f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f52b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f54f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f55b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f57f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f58b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5a30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5af0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5c70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5d30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5df0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325f5f70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb070&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb130&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb370&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb430&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb670&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb730&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fb970&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fba30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbc70&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbd30&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x1325fbf70&gt;, &lt;matplotlib.lines.Line2D object at 0x132601070&gt;, &lt;matplotlib.lines.Line2D object at 0x132601130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326011f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326012b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601370&gt;, &lt;matplotlib.lines.Line2D object at 0x132601430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326014f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326015b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601670&gt;, &lt;matplotlib.lines.Line2D object at 0x132601730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326017f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326018b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601970&gt;, &lt;matplotlib.lines.Line2D object at 0x132601a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132601af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132601d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132601df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132601f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132607070&gt;, &lt;matplotlib.lines.Line2D object at 0x132607130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326071f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326072b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607370&gt;, &lt;matplotlib.lines.Line2D object at 0x132607430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326074f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326075b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607670&gt;, &lt;matplotlib.lines.Line2D object at 0x132607730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326077f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326078b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607970&gt;, &lt;matplotlib.lines.Line2D object at 0x132607a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132607af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132607d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132607df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132607f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d070&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d130&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d370&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d430&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d670&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d730&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260d970&gt;, &lt;matplotlib.lines.Line2D object at 0x13260da30&gt;, &lt;matplotlib.lines.Line2D object at 0x13260daf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260dbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260dc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13260dd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13260ddf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260deb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13260df70&gt;, &lt;matplotlib.lines.Line2D object at 0x132613070&gt;, &lt;matplotlib.lines.Line2D object at 0x132613130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326131f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326132b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613370&gt;, &lt;matplotlib.lines.Line2D object at 0x132613430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326134f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326135b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613670&gt;, &lt;matplotlib.lines.Line2D object at 0x132613730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326137f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326138b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613970&gt;, &lt;matplotlib.lines.Line2D object at 0x132613a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132613af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132613d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132613df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132613f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132619070&gt;, &lt;matplotlib.lines.Line2D object at 0x132619130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326191f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326192b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619370&gt;, &lt;matplotlib.lines.Line2D object at 0x132619430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326194f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326195b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619670&gt;, &lt;matplotlib.lines.Line2D object at 0x132619730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326197f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326198b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619970&gt;, &lt;matplotlib.lines.Line2D object at 0x132619a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132619af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132619d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132619df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132619f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e070&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e130&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e370&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e430&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e670&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e730&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261e970&gt;, &lt;matplotlib.lines.Line2D object at 0x13261ea30&gt;, &lt;matplotlib.lines.Line2D object at 0x13261eaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261ebb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261ec70&gt;, &lt;matplotlib.lines.Line2D object at 0x13261ed30&gt;, &lt;matplotlib.lines.Line2D object at 0x13261edf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261eeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13261ef70&gt;, &lt;matplotlib.lines.Line2D object at 0x132624070&gt;, &lt;matplotlib.lines.Line2D object at 0x132624130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326241f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326242b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624370&gt;, &lt;matplotlib.lines.Line2D object at 0x132624430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326244f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326245b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624670&gt;, &lt;matplotlib.lines.Line2D object at 0x132624730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326247f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326248b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624970&gt;, &lt;matplotlib.lines.Line2D object at 0x132624a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132624af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132624d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132624df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132624f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a070&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a130&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a370&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a430&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a670&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a730&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262a970&gt;, &lt;matplotlib.lines.Line2D object at 0x13262aa30&gt;, &lt;matplotlib.lines.Line2D object at 0x13262aaf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262abb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262ac70&gt;, &lt;matplotlib.lines.Line2D object at 0x13262ad30&gt;, &lt;matplotlib.lines.Line2D object at 0x13262adf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262aeb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13262af70&gt;, &lt;matplotlib.lines.Line2D object at 0x132630070&gt;, &lt;matplotlib.lines.Line2D object at 0x132630130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326301f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326302b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630370&gt;, &lt;matplotlib.lines.Line2D object at 0x132630430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326304f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326305b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630670&gt;, &lt;matplotlib.lines.Line2D object at 0x132630730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326307f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326308b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630970&gt;, &lt;matplotlib.lines.Line2D object at 0x132630a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132630af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132630d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132630df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132630f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132636070&gt;, &lt;matplotlib.lines.Line2D object at 0x132636130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326361f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326362b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636370&gt;, &lt;matplotlib.lines.Line2D object at 0x132636430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326364f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326365b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636670&gt;, &lt;matplotlib.lines.Line2D object at 0x132636730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326367f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326368b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636970&gt;, &lt;matplotlib.lines.Line2D object at 0x132636a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132636af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132636d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132636df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132636f70&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c070&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c130&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c1f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c2b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c370&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c430&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c4f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c5b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c670&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c730&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c7f0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c8b0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263c970&gt;, &lt;matplotlib.lines.Line2D object at 0x13263ca30&gt;, &lt;matplotlib.lines.Line2D object at 0x13263caf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263cbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263cc70&gt;, &lt;matplotlib.lines.Line2D object at 0x13263cd30&gt;, &lt;matplotlib.lines.Line2D object at 0x13263cdf0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263ceb0&gt;, &lt;matplotlib.lines.Line2D object at 0x13263cf70&gt;, &lt;matplotlib.lines.Line2D object at 0x132642070&gt;, &lt;matplotlib.lines.Line2D object at 0x132642130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326421f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326422b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642370&gt;, &lt;matplotlib.lines.Line2D object at 0x132642430&gt;, &lt;matplotlib.lines.Line2D object at 0x1326424f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326425b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642670&gt;, &lt;matplotlib.lines.Line2D object at 0x132642730&gt;, &lt;matplotlib.lines.Line2D object at 0x1326427f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326428b0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642970&gt;, &lt;matplotlib.lines.Line2D object at 0x132642a30&gt;, &lt;matplotlib.lines.Line2D object at 0x132642af0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642bb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642c70&gt;, &lt;matplotlib.lines.Line2D object at 0x132642d30&gt;, &lt;matplotlib.lines.Line2D object at 0x132642df0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642eb0&gt;, &lt;matplotlib.lines.Line2D object at 0x132642f70&gt;, &lt;matplotlib.lines.Line2D object at 0x132648070&gt;, &lt;matplotlib.lines.Line2D object at 0x132648130&gt;, &lt;matplotlib.lines.Line2D object at 0x1326481f0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326482e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326483a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648460&gt;, &lt;matplotlib.lines.Line2D object at 0x132648520&gt;, &lt;matplotlib.lines.Line2D object at 0x1326485e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326486a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648760&gt;, &lt;matplotlib.lines.Line2D object at 0x132648820&gt;, &lt;matplotlib.lines.Line2D object at 0x1326488e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326489a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648a60&gt;, &lt;matplotlib.lines.Line2D object at 0x132648b20&gt;, &lt;matplotlib.lines.Line2D object at 0x132648be0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648ca0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648d60&gt;, &lt;matplotlib.lines.Line2D object at 0x132648e20&gt;, &lt;matplotlib.lines.Line2D object at 0x132648ee0&gt;, &lt;matplotlib.lines.Line2D object at 0x132648fa0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e0a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e160&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e220&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e2e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e3a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e460&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e520&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e5e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e6a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e760&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e820&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e8e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264e9a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264ea60&gt;, &lt;matplotlib.lines.Line2D object at 0x13264eb20&gt;, &lt;matplotlib.lines.Line2D object at 0x13264ebe0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264eca0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264ed60&gt;, &lt;matplotlib.lines.Line2D object at 0x13264ee20&gt;, &lt;matplotlib.lines.Line2D object at 0x13264eee0&gt;, &lt;matplotlib.lines.Line2D object at 0x13264efa0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326540a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654160&gt;, &lt;matplotlib.lines.Line2D object at 0x132654220&gt;, &lt;matplotlib.lines.Line2D object at 0x1326542e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326543a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654460&gt;, &lt;matplotlib.lines.Line2D object at 0x132654520&gt;, &lt;matplotlib.lines.Line2D object at 0x1326545e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326546a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654760&gt;, &lt;matplotlib.lines.Line2D object at 0x132654820&gt;, &lt;matplotlib.lines.Line2D object at 0x1326548e0&gt;, &lt;matplotlib.lines.Line2D object at 0x1326549a0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654a60&gt;, &lt;matplotlib.lines.Line2D object at 0x132654b20&gt;, &lt;matplotlib.lines.Line2D object at 0x132654be0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654ca0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654d60&gt;, &lt;matplotlib.lines.Line2D object at 0x132654e20&gt;, &lt;matplotlib.lines.Line2D object at 0x132654ee0&gt;, &lt;matplotlib.lines.Line2D object at 0x132654fa0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a0a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a160&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a220&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a2e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a3a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a460&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a520&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a5e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a6a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a760&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a820&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a8e0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265a9a0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265aa60&gt;, &lt;matplotlib.lines.Line2D object at 0x13265ab20&gt;, &lt;matplotlib.lines.Line2D object at 0x13265abe0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265aca0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265ad60&gt;, &lt;matplotlib.lines.Line2D object at 0x13265ae20&gt;, &lt;matplotlib.lines.Line2D object at 0x13265aee0&gt;, &lt;matplotlib.lines.Line2D object at 0x13265afa0&gt;]</span></span>
+<span id="cb122-4"><a href="case-study-hacker-statistics.html#cb122-4"></a>plt.show()</span></code></pre></div>
+<p><img src="python_tutorial_files/figure-html/unnamed-chunk-123-1.png" /><!-- --></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="loops.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["python_tutorial.pdf", "python_tutorial.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

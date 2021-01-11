@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Loops | Python Tutorial</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Loops | Python Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Loops | Python Tutorial" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Hank Lee" />
+
+
+<meta name="date" content="2021-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="logic-control-flow-and-filtering.html"/>
+<link rel="next" href="case-study-hacker-statistics.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Python Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this book</a></li>
+<li class="chapter" data-level="2" data-path="python-basics.html"><a href="python-basics.html"><i class="fa fa-check"></i><b>2</b> Python Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="python-basics.html"><a href="python-basics.html#variable-and-types"><i class="fa fa-check"></i><b>2.1</b> Variable and Types</a></li>
+<li class="chapter" data-level="2.2" data-path="python-basics.html"><a href="python-basics.html#operations"><i class="fa fa-check"></i><b>2.2</b> Operations</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="python-basics.html"><a href="python-basics.html#字串的operations"><i class="fa fa-check"></i><b>2.2.1</b> 字串的operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="python-basics.html"><a href="python-basics.html#methods"><i class="fa fa-check"></i><b>2.3</b> Methods</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="python-basics.html"><a href="python-basics.html#字串的methods"><i class="fa fa-check"></i><b>2.3.1</b> 字串的methods</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="python-basics.html"><a href="python-basics.html#packages"><i class="fa fa-check"></i><b>2.4</b> packages:</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="python-basics.html"><a href="python-basics.html#install-package"><i class="fa fa-check"></i><b>2.4.1</b> Install package</a></li>
+<li class="chapter" data-level="2.4.2" data-path="python-basics.html"><a href="python-basics.html#import-package"><i class="fa fa-check"></i><b>2.4.2</b> Import package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>3</b> List基本介紹</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="list-.html"><a href="list-.html#建立list"><i class="fa fa-check"></i><b>3.1</b> 建立list</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="list-.html"><a href="list-.html#單維list"><i class="fa fa-check"></i><b>3.1.1</b> 單維list</a></li>
+<li class="chapter" data-level="3.1.2" data-path="list-.html"><a href="list-.html#多維list"><i class="fa fa-check"></i><b>3.1.2</b> 多維list</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="list-.html"><a href="list-.html#selecting-list-elements"><i class="fa fa-check"></i><b>3.2</b> Selecting List Elements</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="list-.html"><a href="list-.html#subset"><i class="fa fa-check"></i><b>3.2.1</b> Subset</a></li>
+<li class="chapter" data-level="3.2.2" data-path="list-.html"><a href="list-.html#slice"><i class="fa fa-check"></i><b>3.2.2</b> Slice</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="list-.html"><a href="list-.html#replace"><i class="fa fa-check"></i><b>3.3</b> Replace</a></li>
+<li class="chapter" data-level="3.4" data-path="list-.html"><a href="list-.html#operation"><i class="fa fa-check"></i><b>3.4</b> Operation</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="list-.html"><a href="list-.html#list1-list2-clist1-list2"><i class="fa fa-check"></i><b>3.4.1</b> list1 + list2 = c(list1, list2)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="list-.html"><a href="list-.html#list1-2-replist1-2"><i class="fa fa-check"></i><b>3.4.2</b> list1 * 2 = rep(list1, 2)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="list-.html"><a href="list-.html#methods-1"><i class="fa fa-check"></i><b>3.5</b> Methods</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="list-.html"><a href="list-.html#list.appendx-r的clist-x"><i class="fa fa-check"></i><b>3.5.1</b> list.append(x) = R的c(list, x)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="list-.html"><a href="list-.html#list.pop-移除最後一個element"><i class="fa fa-check"></i><b>3.5.2</b> list.pop() = 移除最後一個element</a></li>
+<li class="chapter" data-level="3.5.3" data-path="list-.html"><a href="list-.html#list.removea-r的-listwhichlist-a1"><i class="fa fa-check"></i><b>3.5.3</b> list.remove(a) = R的 list[which(list == a)[1]]</a></li>
+<li class="chapter" data-level="3.5.4" data-path="list-.html"><a href="list-.html#list.sort-r的sortlist"><i class="fa fa-check"></i><b>3.5.4</b> list.sort() = R的sort(list)</a></li>
+<li class="chapter" data-level="3.5.5" data-path="list-.html"><a href="list-.html#list.reverse"><i class="fa fa-check"></i><b>3.5.5</b> list.reverse()</a></li>
+<li class="chapter" data-level="3.5.6" data-path="list-.html"><a href="list-.html#list.insertindex-x-我要把x插入到index的前面"><i class="fa fa-check"></i><b>3.5.6</b> list.insert(index, x) = 我要把x插入到index的前面</a></li>
+<li class="chapter" data-level="3.5.7" data-path="list-.html"><a href="list-.html#list.indexa-r的whichlist1-a1"><i class="fa fa-check"></i><b>3.5.7</b> list.index(a) = R的which(list1 == a)[1]</a></li>
+<li class="chapter" data-level="3.5.8" data-path="list-.html"><a href="list-.html#list.countx-計算x在list中出現幾次"><i class="fa fa-check"></i><b>3.5.8</b> list.count(x) = 計算x在list中出現幾次</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="list-.html"><a href="list-.html#list-是-mutable"><i class="fa fa-check"></i><b>3.6</b> List 是 mutable</a></li>
+<li class="chapter" data-level="3.7" data-path="list-.html"><a href="list-.html#list的功能最常用來做for-loop"><i class="fa fa-check"></i><b>3.7</b> List的功能（最常用來做for loop)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> NumPy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#why-numpy"><i class="fa fa-check"></i><b>4.1</b> Why NumPy</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#subset-np.array"><i class="fa fa-check"></i><b>4.2</b> Subset np.array</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#statistics-functions"><i class="fa fa-check"></i><b>4.3</b> Statistics functions</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="numpy.html"><a href="numpy.html#generate-data"><i class="fa fa-check"></i><b>4.3.1</b> Generate data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="numpy.html"><a href="numpy.html#summary-statistics"><i class="fa fa-check"></i><b>4.3.2</b> Summary statistics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="matplotlib.html"><a href="matplotlib.html"><i class="fa fa-check"></i><b>5</b> Matplotlib</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="matplotlib.html"><a href="matplotlib.html#line-plot"><i class="fa fa-check"></i><b>5.1</b> line plot</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scatter-plot.html"><a href="scatter-plot.html"><i class="fa fa-check"></i><b>6</b> scatter plot</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="scatter-plot.html"><a href="scatter-plot.html#histogram"><i class="fa fa-check"></i><b>6.1</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="customization.html"><a href="customization.html"><i class="fa fa-check"></i><b>7</b> Customization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="customization.html"><a href="customization.html#xy-labels-and-title"><i class="fa fa-check"></i><b>7.1</b> x,y labels and title</a></li>
+<li class="chapter" data-level="7.2" data-path="customization.html"><a href="customization.html#ticks"><i class="fa fa-check"></i><b>7.2</b> Ticks</a></li>
+<li class="chapter" data-level="7.3" data-path="customization.html"><a href="customization.html#加入第三軸-s-size"><i class="fa fa-check"></i><b>7.3</b> 加入第三軸： s (size)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="-dictionary.html"><a href="-dictionary.html"><i class="fa fa-check"></i><b>8</b> 資料結構： dictionary</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="-dictionary.html"><a href="-dictionary.html#select-element-用-dictionarykey"><i class="fa fa-check"></i><b>8.1</b> select element 用 dictionary[‘key’]</a></li>
+<li class="chapter" data-level="8.2" data-path="-dictionary.html"><a href="-dictionary.html#刪除用del-dictionkey"><i class="fa fa-check"></i><b>8.2</b> 刪除用del diction[‘key’]</a></li>
+<li class="chapter" data-level="8.3" data-path="-dictionary.html"><a href="-dictionary.html#添加一個element進去用-dictionarynew-key-new_value"><i class="fa fa-check"></i><b>8.3</b> 添加一個element進去用 dictionary[‘new key’] = new_value</a></li>
+<li class="chapter" data-level="8.4" data-path="-dictionary.html"><a href="-dictionary.html#更新key的value用-dictionarykey-new_value"><i class="fa fa-check"></i><b>8.4</b> 更新key的value用 dictionary[‘key’] = new_value</a></li>
+<li class="chapter" data-level="8.5" data-path="-dictionary.html"><a href="-dictionary.html#dictionary中的key一定是字串但value可以是任何東西"><i class="fa fa-check"></i><b>8.5</b> dictionary中的key一定是字串，但value可以是任何東西</a></li>
+<li class="chapter" data-level="8.6" data-path="-dictionary.html"><a href="-dictionary.html#select這種複雜dictionary就一層一層剝下去"><i class="fa fa-check"></i><b>8.6</b> select這種複雜dictionary就一層一層剝下去</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>9</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="pandas.html"><a href="pandas.html#創建pd.dataframe"><i class="fa fa-check"></i><b>9.1</b> 創建pd.DataFrame</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="pandas.html"><a href="pandas.html#將dictionary轉成data.frame"><i class="fa fa-check"></i><b>9.1.1</b> 將dictionary轉成data.frame</a></li>
+<li class="chapter" data-level="9.1.2" data-path="pandas.html"><a href="pandas.html#將2d-array轉成data.fream"><i class="fa fa-check"></i><b>9.1.2</b> 將2d-array轉成data.fream</a></li>
+<li class="chapter" data-level="9.1.3" data-path="pandas.html"><a href="pandas.html#讀csv檔"><i class="fa fa-check"></i><b>9.1.3</b> 讀csv檔</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="pandas.html"><a href="pandas.html#select"><i class="fa fa-check"></i><b>9.2</b> Select</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="pandas.html"><a href="pandas.html#section"><i class="fa fa-check"></i><b>9.2.1</b> [] &amp; [[]]</a></li>
+<li class="chapter" data-level="9.2.2" data-path="pandas.html"><a href="pandas.html#loc-and-iloc"><i class="fa fa-check"></i><b>9.2.2</b> loc and iloc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html"><i class="fa fa-check"></i><b>10</b> Logic, Control Flow and Filtering</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#comparison-operators"><i class="fa fa-check"></i><b>10.1</b> Comparison operators</a></li>
+<li class="chapter" data-level="10.2" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#boolean-operators"><i class="fa fa-check"></i><b>10.2</b> Boolean Operators</a></li>
+<li class="chapter" data-level="10.3" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#numpy-np.logical_andnp.logical_ornp.logical_not"><i class="fa fa-check"></i><b>10.3</b> Numpy np.logical_and()/np.logical_or()/np.logical_not()</a></li>
+<li class="chapter" data-level="10.4" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#if-elif-else"><i class="fa fa-check"></i><b>10.4</b> if, elif, else</a></li>
+<li class="chapter" data-level="10.5" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#filtering-pandas-dataframe"><i class="fa fa-check"></i><b>10.5</b> Filtering pandas DataFrame</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>11</b> Loops</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="loops.html"><a href="loops.html#while-loop"><i class="fa fa-check"></i><b>11.1</b> while loop</a></li>
+<li class="chapter" data-level="11.2" data-path="loops.html"><a href="loops.html#for-loop"><i class="fa fa-check"></i><b>11.2</b> for loop</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="loops.html"><a href="loops.html#loop-over-a-list"><i class="fa fa-check"></i><b>11.2.1</b> loop over a list</a></li>
+<li class="chapter" data-level="11.2.2" data-path="loops.html"><a href="loops.html#loop-over-string"><i class="fa fa-check"></i><b>11.2.2</b> loop over string</a></li>
+<li class="chapter" data-level="11.2.3" data-path="loops.html"><a href="loops.html#loop-over-dictionary"><i class="fa fa-check"></i><b>11.2.3</b> loop over dictionary</a></li>
+<li class="chapter" data-level="11.2.4" data-path="loops.html"><a href="loops.html#loop-over-numpy-array"><i class="fa fa-check"></i><b>11.2.4</b> loop over Numpy array</a></li>
+<li class="chapter" data-level="11.2.5" data-path="loops.html"><a href="loops.html#loop-over-dataframe"><i class="fa fa-check"></i><b>11.2.5</b> loop over DataFrame</a></li>
+<li class="chapter" data-level="11.2.6" data-path="loops.html"><a href="loops.html#add-column-by-for-loops"><i class="fa fa-check"></i><b>11.2.6</b> add column by for loops</a></li>
+<li class="chapter" data-level="11.2.7" data-path="loops.html"><a href="loops.html#add-column-by-apply-method"><i class="fa fa-check"></i><b>11.2.7</b> add column by apply method</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html"><i class="fa fa-check"></i><b>12</b> Case Study: Hacker Statistics</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#產出random-number"><i class="fa fa-check"></i><b>12.1</b> 產出random number</a></li>
+<li class="chapter" data-level="12.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子1次的實驗"><i class="fa fa-check"></i><b>12.2</b> 擲骰子1次的實驗</a></li>
+<li class="chapter" data-level="12.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子100次的實驗"><i class="fa fa-check"></i><b>12.3</b> 擲骰子100次的實驗</a></li>
+<li class="chapter" data-level="12.4" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正樓層不能0"><i class="fa fa-check"></i><b>12.4</b> 修正樓層不能&lt;0</a></li>
+<li class="chapter" data-level="12.5" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正有0.1的機會會回到原點"><i class="fa fa-check"></i><b>12.5</b> 修正有0.1%的機會，會回到原點</a></li>
+<li class="chapter" data-level="12.6" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#做1000個run每個run都做100次擲骰子的實驗"><i class="fa fa-check"></i><b>12.6</b> 做1000個run，每個run都做100次擲骰子的實驗</a></li>
+<li class="chapter" data-level="12.7" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擷取每個run的最後一筆資訊"><i class="fa fa-check"></i><b>12.7</b> 擷取每個run的最後一筆資訊</a></li>
+<li class="chapter" data-level="12.8" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#計算可以爬到60層樓以上的機率"><i class="fa fa-check"></i><b>12.8</b> 計算可以爬到60層樓以上的機率</a></li>
+<li class="chapter" data-level="12.9" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#appendix"><i class="fa fa-check"></i><b>12.9</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#畫一下endpoint的distribution"><i class="fa fa-check"></i><b>12.9.1</b> 畫一下endpoint的distribution</a></li>
+<li class="chapter" data-level="12.9.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#第一個run我的爬樓梯過程長怎樣"><i class="fa fa-check"></i><b>12.9.2</b> 第一個run，我的爬樓梯過程長怎樣？</a></li>
+<li class="chapter" data-level="12.9.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#visualize所有run的爬樓梯過程"><i class="fa fa-check"></i><b>12.9.3</b> Visualize所有run的爬樓梯過程</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loops" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Loops</h1>
+<div id="while-loop" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> while loop</h2>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="loops.html#cb93-1"></a>error <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb93-2"><a href="loops.html#cb93-2"></a><span class="cf">while</span> error <span class="op">&gt;</span><span class="dv">1</span>:</span>
+<span id="cb93-3"><a href="loops.html#cb93-3"></a>  error <span class="op">=</span> error<span class="op">/</span><span class="dv">4</span></span>
+<span id="cb93-4"><a href="loops.html#cb93-4"></a>  <span class="bu">print</span>(error)</span>
+<span id="cb93-5"><a href="loops.html#cb93-5"></a><span class="co">#&gt; 12.5</span></span>
+<span id="cb93-6"><a href="loops.html#cb93-6"></a><span class="co">#&gt; 3.125</span></span>
+<span id="cb93-7"><a href="loops.html#cb93-7"></a><span class="co">#&gt; 0.78125</span></span></code></pre></div>
+</div>
+<div id="for-loop" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> for loop</h2>
+<div id="loop-over-a-list" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> loop over a list</h3>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="loops.html#cb94-1"></a>fam <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>]</span>
+<span id="cb94-2"><a href="loops.html#cb94-2"></a><span class="cf">for</span> height <span class="kw">in</span> fam:</span>
+<span id="cb94-3"><a href="loops.html#cb94-3"></a>  <span class="bu">print</span>(height)</span>
+<span id="cb94-4"><a href="loops.html#cb94-4"></a><span class="co">#&gt; 1.73</span></span>
+<span id="cb94-5"><a href="loops.html#cb94-5"></a><span class="co">#&gt; 1.68</span></span>
+<span id="cb94-6"><a href="loops.html#cb94-6"></a><span class="co">#&gt; 1.71</span></span>
+<span id="cb94-7"><a href="loops.html#cb94-7"></a><span class="co">#&gt; 1.89</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="loops.html#cb95-1"></a><span class="co"># house list of lists</span></span>
+<span id="cb95-2"><a href="loops.html#cb95-2"></a>house <span class="op">=</span> [[<span class="st">&quot;hallway&quot;</span>, <span class="fl">11.25</span>], </span>
+<span id="cb95-3"><a href="loops.html#cb95-3"></a>         [<span class="st">&quot;kitchen&quot;</span>, <span class="fl">18.0</span>], </span>
+<span id="cb95-4"><a href="loops.html#cb95-4"></a>         [<span class="st">&quot;living room&quot;</span>, <span class="fl">20.0</span>], </span>
+<span id="cb95-5"><a href="loops.html#cb95-5"></a>         [<span class="st">&quot;bedroom&quot;</span>, <span class="fl">10.75</span>], </span>
+<span id="cb95-6"><a href="loops.html#cb95-6"></a>         [<span class="st">&quot;bathroom&quot;</span>, <span class="fl">9.50</span>]]</span>
+<span id="cb95-7"><a href="loops.html#cb95-7"></a>         </span>
+<span id="cb95-8"><a href="loops.html#cb95-8"></a><span class="co"># Build a for loop from scratch</span></span>
+<span id="cb95-9"><a href="loops.html#cb95-9"></a><span class="cf">for</span> i <span class="kw">in</span> house:</span>
+<span id="cb95-10"><a href="loops.html#cb95-10"></a>    <span class="bu">print</span>(<span class="st">&quot;the &quot;</span><span class="op">+</span>i[<span class="dv">0</span>]<span class="op">+</span><span class="st">&quot; is &quot;</span><span class="op">+</span><span class="bu">str</span>(i[<span class="dv">1</span>])<span class="op">+</span><span class="st">&quot; sqm&quot;</span>)</span>
+<span id="cb95-11"><a href="loops.html#cb95-11"></a><span class="co">#&gt; the hallway is 11.25 sqm</span></span>
+<span id="cb95-12"><a href="loops.html#cb95-12"></a><span class="co">#&gt; the kitchen is 18.0 sqm</span></span>
+<span id="cb95-13"><a href="loops.html#cb95-13"></a><span class="co">#&gt; the living room is 20.0 sqm</span></span>
+<span id="cb95-14"><a href="loops.html#cb95-14"></a><span class="co">#&gt; the bedroom is 10.75 sqm</span></span>
+<span id="cb95-15"><a href="loops.html#cb95-15"></a><span class="co">#&gt; the bathroom is 9.5 sqm</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="loops.html#cb96-1"></a>fam <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>]</span>
+<span id="cb96-2"><a href="loops.html#cb96-2"></a><span class="cf">for</span> index, height <span class="kw">in</span> <span class="bu">enumerate</span>(fam):</span>
+<span id="cb96-3"><a href="loops.html#cb96-3"></a>  <span class="bu">print</span>(<span class="st">&quot;index&quot;</span> <span class="op">+</span> <span class="bu">str</span>(index) <span class="op">+</span> <span class="st">&quot;:&quot;</span> <span class="op">+</span> <span class="bu">str</span>(height))</span>
+<span id="cb96-4"><a href="loops.html#cb96-4"></a><span class="co">#&gt; index0:1.73</span></span>
+<span id="cb96-5"><a href="loops.html#cb96-5"></a><span class="co">#&gt; index1:1.68</span></span>
+<span id="cb96-6"><a href="loops.html#cb96-6"></a><span class="co">#&gt; index2:1.71</span></span>
+<span id="cb96-7"><a href="loops.html#cb96-7"></a><span class="co">#&gt; index3:1.89</span></span></code></pre></div>
+</div>
+<div id="loop-over-string" class="section level3" number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> loop over string</h3>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="loops.html#cb97-1"></a><span class="cf">for</span> c <span class="kw">in</span> <span class="st">&quot;family&quot;</span>:</span>
+<span id="cb97-2"><a href="loops.html#cb97-2"></a>  <span class="bu">print</span>(c)</span>
+<span id="cb97-3"><a href="loops.html#cb97-3"></a><span class="co">#&gt; f</span></span>
+<span id="cb97-4"><a href="loops.html#cb97-4"></a><span class="co">#&gt; a</span></span>
+<span id="cb97-5"><a href="loops.html#cb97-5"></a><span class="co">#&gt; m</span></span>
+<span id="cb97-6"><a href="loops.html#cb97-6"></a><span class="co">#&gt; i</span></span>
+<span id="cb97-7"><a href="loops.html#cb97-7"></a><span class="co">#&gt; l</span></span>
+<span id="cb97-8"><a href="loops.html#cb97-8"></a><span class="co">#&gt; y</span></span></code></pre></div>
+</div>
+<div id="loop-over-dictionary" class="section level3" number="11.2.3">
+<h3><span class="header-section-number">11.2.3</span> loop over dictionary</h3>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="loops.html#cb98-1"></a>world <span class="op">=</span> {</span>
+<span id="cb98-2"><a href="loops.html#cb98-2"></a>  <span class="st">&quot;afghanistan&quot;</span>: <span class="fl">30.55</span>,</span>
+<span id="cb98-3"><a href="loops.html#cb98-3"></a>  <span class="st">&quot;albania&quot;</span>: <span class="fl">2.77</span>,</span>
+<span id="cb98-4"><a href="loops.html#cb98-4"></a>  <span class="st">&quot;algeria&quot;</span>: <span class="fl">39.21</span></span>
+<span id="cb98-5"><a href="loops.html#cb98-5"></a>}</span>
+<span id="cb98-6"><a href="loops.html#cb98-6"></a></span>
+<span id="cb98-7"><a href="loops.html#cb98-7"></a><span class="cf">for</span> key, value <span class="kw">in</span> world.items():</span>
+<span id="cb98-8"><a href="loops.html#cb98-8"></a>  <span class="bu">print</span>(key <span class="op">+</span> <span class="st">&quot; -- &quot;</span> <span class="op">+</span> <span class="bu">str</span>(value))</span>
+<span id="cb98-9"><a href="loops.html#cb98-9"></a><span class="co">#&gt; afghanistan -- 30.55</span></span>
+<span id="cb98-10"><a href="loops.html#cb98-10"></a><span class="co">#&gt; albania -- 2.77</span></span>
+<span id="cb98-11"><a href="loops.html#cb98-11"></a><span class="co">#&gt; algeria -- 39.21</span></span></code></pre></div>
+</div>
+<div id="loop-over-numpy-array" class="section level3" number="11.2.4">
+<h3><span class="header-section-number">11.2.4</span> loop over Numpy array</h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="loops.html#cb99-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb99-2"><a href="loops.html#cb99-2"></a>np_height <span class="op">=</span> np.array([<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>])</span>
+<span id="cb99-3"><a href="loops.html#cb99-3"></a>np_weight <span class="op">=</span> np.array([<span class="fl">65.4</span>, <span class="fl">59.2</span>, <span class="fl">63.6</span>, <span class="fl">88.4</span>, <span class="fl">68.7</span>])</span>
+<span id="cb99-4"><a href="loops.html#cb99-4"></a>bmi <span class="op">=</span> np_weight <span class="op">/</span> np_height <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb99-5"><a href="loops.html#cb99-5"></a></span>
+<span id="cb99-6"><a href="loops.html#cb99-6"></a><span class="cf">for</span> val <span class="kw">in</span> bmi:</span>
+<span id="cb99-7"><a href="loops.html#cb99-7"></a>  <span class="bu">print</span>(val)</span>
+<span id="cb99-8"><a href="loops.html#cb99-8"></a><span class="co">#&gt; 21.85171572722109</span></span>
+<span id="cb99-9"><a href="loops.html#cb99-9"></a><span class="co">#&gt; 20.97505668934241</span></span>
+<span id="cb99-10"><a href="loops.html#cb99-10"></a><span class="co">#&gt; 21.750282138093777</span></span>
+<span id="cb99-11"><a href="loops.html#cb99-11"></a><span class="co">#&gt; 24.74734749867025</span></span>
+<span id="cb99-12"><a href="loops.html#cb99-12"></a><span class="co">#&gt; 21.44127836209856</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="loops.html#cb100-1"></a>meas <span class="op">=</span> np.array([np_height, np_weight])</span>
+<span id="cb100-2"><a href="loops.html#cb100-2"></a>meas</span>
+<span id="cb100-3"><a href="loops.html#cb100-3"></a><span class="co">#&gt; array([[ 1.73,  1.68,  1.71,  1.89,  1.79],</span></span>
+<span id="cb100-4"><a href="loops.html#cb100-4"></a><span class="co">#&gt;        [65.4 , 59.2 , 63.6 , 88.4 , 68.7 ]])</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="loops.html#cb101-1"></a><span class="cf">for</span> val <span class="kw">in</span> meas:</span>
+<span id="cb101-2"><a href="loops.html#cb101-2"></a>  <span class="bu">print</span>(val)</span>
+<span id="cb101-3"><a href="loops.html#cb101-3"></a><span class="co">#&gt; [1.73 1.68 1.71 1.89 1.79]</span></span>
+<span id="cb101-4"><a href="loops.html#cb101-4"></a><span class="co">#&gt; [65.4 59.2 63.6 88.4 68.7]</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="loops.html#cb102-1"></a><span class="cf">for</span> val <span class="kw">in</span> np.nditer(meas):</span>
+<span id="cb102-2"><a href="loops.html#cb102-2"></a>  <span class="bu">print</span>(val)</span>
+<span id="cb102-3"><a href="loops.html#cb102-3"></a><span class="co">#&gt; 1.73</span></span>
+<span id="cb102-4"><a href="loops.html#cb102-4"></a><span class="co">#&gt; 1.68</span></span>
+<span id="cb102-5"><a href="loops.html#cb102-5"></a><span class="co">#&gt; 1.71</span></span>
+<span id="cb102-6"><a href="loops.html#cb102-6"></a><span class="co">#&gt; 1.89</span></span>
+<span id="cb102-7"><a href="loops.html#cb102-7"></a><span class="co">#&gt; 1.79</span></span>
+<span id="cb102-8"><a href="loops.html#cb102-8"></a><span class="co">#&gt; 65.4</span></span>
+<span id="cb102-9"><a href="loops.html#cb102-9"></a><span class="co">#&gt; 59.2</span></span>
+<span id="cb102-10"><a href="loops.html#cb102-10"></a><span class="co">#&gt; 63.6</span></span>
+<span id="cb102-11"><a href="loops.html#cb102-11"></a><span class="co">#&gt; 88.4</span></span>
+<span id="cb102-12"><a href="loops.html#cb102-12"></a><span class="co">#&gt; 68.7</span></span></code></pre></div>
+</div>
+<div id="loop-over-dataframe" class="section level3" number="11.2.5">
+<h3><span class="header-section-number">11.2.5</span> loop over DataFrame</h3>
+<ul>
+<li>去loop一個DataFrame，在Ｒ裡面是很少這樣做的。但python得這樣做，所以得學<br />
+</li>
+<li>先讀一下資料</li>
+</ul>
+<div class="sourceCode" id="cb103"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="loops.html#cb103-1"></a><span class="co"># Import cars data</span></span>
+<span id="cb103-2"><a href="loops.html#cb103-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb103-3"><a href="loops.html#cb103-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb103-4"><a href="loops.html#cb103-4"></a>cars</span>
+<span id="cb103-5"><a href="loops.html#cb103-5"></a><span class="co">#&gt;      cars_per_cap        country  drives_right</span></span>
+<span id="cb103-6"><a href="loops.html#cb103-6"></a><span class="co">#&gt; US            809  United States          True</span></span>
+<span id="cb103-7"><a href="loops.html#cb103-7"></a><span class="co">#&gt; AUS           731      Australia         False</span></span>
+<span id="cb103-8"><a href="loops.html#cb103-8"></a><span class="co">#&gt; JAP           588          Japan         False</span></span>
+<span id="cb103-9"><a href="loops.html#cb103-9"></a><span class="co">#&gt; IN             18          India         False</span></span>
+<span id="cb103-10"><a href="loops.html#cb103-10"></a><span class="co">#&gt; RU            200         Russia          True</span></span>
+<span id="cb103-11"><a href="loops.html#cb103-11"></a><span class="co">#&gt; MOR            70        Morocco          True</span></span>
+<span id="cb103-12"><a href="loops.html#cb103-12"></a><span class="co">#&gt; EG             45          Egypt          True</span></span></code></pre></div>
+<ul>
+<li>for loop要下兩個參數，一個是loop每個row的label，另一個是此row下的raw data<br />
+</li>
+<li>另外，因為你是要loop每個row，所以要加上<code>.iterrows()</code>這個語法</li>
+</ul>
+<div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="loops.html#cb104-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows():</span>
+<span id="cb104-2"><a href="loops.html#cb104-2"></a>  <span class="bu">print</span>(lab)</span>
+<span id="cb104-3"><a href="loops.html#cb104-3"></a><span class="co">#&gt; US</span></span>
+<span id="cb104-4"><a href="loops.html#cb104-4"></a><span class="co">#&gt; AUS</span></span>
+<span id="cb104-5"><a href="loops.html#cb104-5"></a><span class="co">#&gt; JAP</span></span>
+<span id="cb104-6"><a href="loops.html#cb104-6"></a><span class="co">#&gt; IN</span></span>
+<span id="cb104-7"><a href="loops.html#cb104-7"></a><span class="co">#&gt; RU</span></span>
+<span id="cb104-8"><a href="loops.html#cb104-8"></a><span class="co">#&gt; MOR</span></span>
+<span id="cb104-9"><a href="loops.html#cb104-9"></a><span class="co">#&gt; EG</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="loops.html#cb105-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows():</span>
+<span id="cb105-2"><a href="loops.html#cb105-2"></a>  <span class="bu">print</span>(row)</span>
+<span id="cb105-3"><a href="loops.html#cb105-3"></a><span class="co">#&gt; cars_per_cap              809</span></span>
+<span id="cb105-4"><a href="loops.html#cb105-4"></a><span class="co">#&gt; country         United States</span></span>
+<span id="cb105-5"><a href="loops.html#cb105-5"></a><span class="co">#&gt; drives_right             True</span></span>
+<span id="cb105-6"><a href="loops.html#cb105-6"></a><span class="co">#&gt; Name: US, dtype: object</span></span>
+<span id="cb105-7"><a href="loops.html#cb105-7"></a><span class="co">#&gt; cars_per_cap          731</span></span>
+<span id="cb105-8"><a href="loops.html#cb105-8"></a><span class="co">#&gt; country         Australia</span></span>
+<span id="cb105-9"><a href="loops.html#cb105-9"></a><span class="co">#&gt; drives_right        False</span></span>
+<span id="cb105-10"><a href="loops.html#cb105-10"></a><span class="co">#&gt; Name: AUS, dtype: object</span></span>
+<span id="cb105-11"><a href="loops.html#cb105-11"></a><span class="co">#&gt; cars_per_cap      588</span></span>
+<span id="cb105-12"><a href="loops.html#cb105-12"></a><span class="co">#&gt; country         Japan</span></span>
+<span id="cb105-13"><a href="loops.html#cb105-13"></a><span class="co">#&gt; drives_right    False</span></span>
+<span id="cb105-14"><a href="loops.html#cb105-14"></a><span class="co">#&gt; Name: JAP, dtype: object</span></span>
+<span id="cb105-15"><a href="loops.html#cb105-15"></a><span class="co">#&gt; cars_per_cap       18</span></span>
+<span id="cb105-16"><a href="loops.html#cb105-16"></a><span class="co">#&gt; country         India</span></span>
+<span id="cb105-17"><a href="loops.html#cb105-17"></a><span class="co">#&gt; drives_right    False</span></span>
+<span id="cb105-18"><a href="loops.html#cb105-18"></a><span class="co">#&gt; Name: IN, dtype: object</span></span>
+<span id="cb105-19"><a href="loops.html#cb105-19"></a><span class="co">#&gt; cars_per_cap       200</span></span>
+<span id="cb105-20"><a href="loops.html#cb105-20"></a><span class="co">#&gt; country         Russia</span></span>
+<span id="cb105-21"><a href="loops.html#cb105-21"></a><span class="co">#&gt; drives_right      True</span></span>
+<span id="cb105-22"><a href="loops.html#cb105-22"></a><span class="co">#&gt; Name: RU, dtype: object</span></span>
+<span id="cb105-23"><a href="loops.html#cb105-23"></a><span class="co">#&gt; cars_per_cap         70</span></span>
+<span id="cb105-24"><a href="loops.html#cb105-24"></a><span class="co">#&gt; country         Morocco</span></span>
+<span id="cb105-25"><a href="loops.html#cb105-25"></a><span class="co">#&gt; drives_right       True</span></span>
+<span id="cb105-26"><a href="loops.html#cb105-26"></a><span class="co">#&gt; Name: MOR, dtype: object</span></span>
+<span id="cb105-27"><a href="loops.html#cb105-27"></a><span class="co">#&gt; cars_per_cap       45</span></span>
+<span id="cb105-28"><a href="loops.html#cb105-28"></a><span class="co">#&gt; country         Egypt</span></span>
+<span id="cb105-29"><a href="loops.html#cb105-29"></a><span class="co">#&gt; drives_right     True</span></span>
+<span id="cb105-30"><a href="loops.html#cb105-30"></a><span class="co">#&gt; Name: EG, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="loops.html#cb106-1"></a><span class="co"># Import cars data</span></span>
+<span id="cb106-2"><a href="loops.html#cb106-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb106-3"><a href="loops.html#cb106-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb106-4"><a href="loops.html#cb106-4"></a></span>
+<span id="cb106-5"><a href="loops.html#cb106-5"></a><span class="co"># Adapt for loop</span></span>
+<span id="cb106-6"><a href="loops.html#cb106-6"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows() :</span>
+<span id="cb106-7"><a href="loops.html#cb106-7"></a>    <span class="bu">print</span>(lab<span class="op">+</span><span class="st">&quot;: &quot;</span><span class="op">+</span><span class="bu">str</span>(row[<span class="st">&#39;cars_per_cap&#39;</span>]))</span>
+<span id="cb106-8"><a href="loops.html#cb106-8"></a><span class="co">#&gt; US: 809</span></span>
+<span id="cb106-9"><a href="loops.html#cb106-9"></a><span class="co">#&gt; AUS: 731</span></span>
+<span id="cb106-10"><a href="loops.html#cb106-10"></a><span class="co">#&gt; JAP: 588</span></span>
+<span id="cb106-11"><a href="loops.html#cb106-11"></a><span class="co">#&gt; IN: 18</span></span>
+<span id="cb106-12"><a href="loops.html#cb106-12"></a><span class="co">#&gt; RU: 200</span></span>
+<span id="cb106-13"><a href="loops.html#cb106-13"></a><span class="co">#&gt; MOR: 70</span></span>
+<span id="cb106-14"><a href="loops.html#cb106-14"></a><span class="co">#&gt; EG: 45</span></span></code></pre></div>
+</div>
+<div id="add-column-by-for-loops" class="section level3" number="11.2.6">
+<h3><span class="header-section-number">11.2.6</span> add column by for loops</h3>
+<ul>
+<li>如果我今天想加入新的一個column，他是原本的column全改成大寫，哪怎麼做？<br />
+</li>
+<li>我可以for loop那個column的每個row，轉大寫後，才存到對應的新column</li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="loops.html#cb107-1"></a><span class="co"># Import cars data</span></span>
+<span id="cb107-2"><a href="loops.html#cb107-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb107-3"><a href="loops.html#cb107-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb107-4"><a href="loops.html#cb107-4"></a></span>
+<span id="cb107-5"><a href="loops.html#cb107-5"></a><span class="co"># Code for loop that adds COUNTRY column</span></span>
+<span id="cb107-6"><a href="loops.html#cb107-6"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows():</span>
+<span id="cb107-7"><a href="loops.html#cb107-7"></a>    cars.loc[lab, <span class="st">&quot;COUNTRY&quot;</span>] <span class="op">=</span> row[<span class="st">&#39;country&#39;</span>].upper()</span>
+<span id="cb107-8"><a href="loops.html#cb107-8"></a></span>
+<span id="cb107-9"><a href="loops.html#cb107-9"></a><span class="co"># Print cars</span></span>
+<span id="cb107-10"><a href="loops.html#cb107-10"></a><span class="bu">print</span>(cars)</span>
+<span id="cb107-11"><a href="loops.html#cb107-11"></a><span class="co">#&gt;      cars_per_cap        country  drives_right        COUNTRY</span></span>
+<span id="cb107-12"><a href="loops.html#cb107-12"></a><span class="co">#&gt; US            809  United States          True  UNITED STATES</span></span>
+<span id="cb107-13"><a href="loops.html#cb107-13"></a><span class="co">#&gt; AUS           731      Australia         False      AUSTRALIA</span></span>
+<span id="cb107-14"><a href="loops.html#cb107-14"></a><span class="co">#&gt; JAP           588          Japan         False          JAPAN</span></span>
+<span id="cb107-15"><a href="loops.html#cb107-15"></a><span class="co">#&gt; IN             18          India         False          INDIA</span></span>
+<span id="cb107-16"><a href="loops.html#cb107-16"></a><span class="co">#&gt; RU            200         Russia          True         RUSSIA</span></span>
+<span id="cb107-17"><a href="loops.html#cb107-17"></a><span class="co">#&gt; MOR            70        Morocco          True        MOROCCO</span></span>
+<span id="cb107-18"><a href="loops.html#cb107-18"></a><span class="co">#&gt; EG             45          Egypt          True          EGYPT</span></span></code></pre></div>
+<ul>
+<li>但…這樣的效率實在太差。如果是想對整個column做事的話，建議用.apply method!</li>
+</ul>
+</div>
+<div id="add-column-by-apply-method" class="section level3" number="11.2.7">
+<h3><span class="header-section-number">11.2.7</span> add column by apply method</h3>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="loops.html#cb108-1"></a><span class="co"># Import cars data</span></span>
+<span id="cb108-2"><a href="loops.html#cb108-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb108-3"><a href="loops.html#cb108-3"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">&#39;./data/cars.csv&#39;</span>, index_col <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb108-4"><a href="loops.html#cb108-4"></a></span>
+<span id="cb108-5"><a href="loops.html#cb108-5"></a><span class="co"># Use .apply(str.upper)</span></span>
+<span id="cb108-6"><a href="loops.html#cb108-6"></a>cars[<span class="st">&quot;COUNTRY&quot;</span>] <span class="op">=</span> cars[<span class="st">&quot;country&quot;</span>].<span class="bu">apply</span>(<span class="bu">str</span>.upper)</span>
+<span id="cb108-7"><a href="loops.html#cb108-7"></a>cars</span>
+<span id="cb108-8"><a href="loops.html#cb108-8"></a><span class="co">#&gt;      cars_per_cap        country  drives_right        COUNTRY</span></span>
+<span id="cb108-9"><a href="loops.html#cb108-9"></a><span class="co">#&gt; US            809  United States          True  UNITED STATES</span></span>
+<span id="cb108-10"><a href="loops.html#cb108-10"></a><span class="co">#&gt; AUS           731      Australia         False      AUSTRALIA</span></span>
+<span id="cb108-11"><a href="loops.html#cb108-11"></a><span class="co">#&gt; JAP           588          Japan         False          JAPAN</span></span>
+<span id="cb108-12"><a href="loops.html#cb108-12"></a><span class="co">#&gt; IN             18          India         False          INDIA</span></span>
+<span id="cb108-13"><a href="loops.html#cb108-13"></a><span class="co">#&gt; RU            200         Russia          True         RUSSIA</span></span>
+<span id="cb108-14"><a href="loops.html#cb108-14"></a><span class="co">#&gt; MOR            70        Morocco          True        MOROCCO</span></span>
+<span id="cb108-15"><a href="loops.html#cb108-15"></a><span class="co">#&gt; EG             45          Egypt          True          EGYPT</span></span></code></pre></div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="logic-control-flow-and-filtering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="case-study-hacker-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["python_tutorial.pdf", "python_tutorial.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

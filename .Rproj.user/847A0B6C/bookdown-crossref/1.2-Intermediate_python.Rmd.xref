@@ -1,0 +1,55 @@
+h1:matplotlib Matplotlib
+h2:line-plot line plot
+h1:scatter-plot scatter plot
+h2:histogram Histogram
+h1:customization Customization
+h2:xy-labels-and-title x,y labels and title
+h2:ticks Ticks
+h2:加入第三軸-s-size 加入第三軸： s (size)
+h1:資料結構-dictionary 資料結構： dictionary
+h2:select-element-用-dictionarykey select element 用 dictionary[]
+h2:刪除用del-dictionkey 刪除用del diction[]
+h2:添加一個element進去用-dictionarynew-key-new_value 添加一個element進去用 dictionary[] = new_value
+h2:更新key的value用-dictionarykey-new_value 更新key的value用 dictionary[] = new_value
+h2:dictionary中的key一定是字串但value可以是任何東西 dictionary中的key一定是字串，但value可以是任何東西
+h2:select這種複雜dictionary就一層一層剝下去 select這種複雜dictionary就一層一層剝下去
+h1:pandas Pandas
+h2:創建pd.dataframe 創建pd.DataFrame
+h3:將dictionary轉成data.frame 將dictionary轉成data.frame
+h4:法一-像r那樣做 法一： 像R那樣做
+h4:法二-對付api-request下來的那種json 法二： 對付API request下來的那種JSON
+h3:將2d-array轉成data.fream 將2d-array轉成data.fream
+h3:讀csv檔 讀csv檔
+h2:select Select
+h3:section [] & [[]]
+h3:loc-and-iloc loc and iloc
+h1:logic-control-flow-and-filtering Logic, Control Flow and Filtering
+h2:comparison-operators Comparison operators
+h2:boolean-operators Boolean Operators
+h2:numpy-np.logical_andnp.logical_ornp.logical_not Numpy np.logical_and()/np.logical_or()/np.logical_not()
+h2:if-elif-else if, elif, else
+h2:filtering-pandas-dataframe Filtering pandas DataFrame
+h1:loops Loops
+h2:while-loop while loop
+h2:for-loop for loop
+h3:loop-over-a-list loop over a list
+h3:loop-over-string loop over string
+h3:loop-over-dictionary loop over dictionary
+h3:loop-over-numpy-array loop over Numpy array
+h3:loop-over-dataframe loop over DataFrame
+h3:add-column-by-for-loops add column by for loops
+h3:add-column-by-apply-method add column by apply method
+h1:case-study-hacker-statistics Case Study: Hacker Statistics
+h2:產出random-number 產出random number
+h2:擲骰子1次的實驗 擲骰子1次的實驗
+h2:擲骰子100次的實驗 擲骰子100次的實驗
+h2:修正樓層不能0 修正樓層不能<0
+h2:修正有0.1的機會會回到原點 修正有0.1%的機會，會回到原點
+h2:做1000個run每個run都做100次擲骰子的實驗 做1000個run，每個run都做100次擲骰子的實驗
+h2:擷取每個run的最後一筆資訊 擷取每個run的最後一筆資訊
+h2:計算可以爬到60層樓以上的機率 計算可以爬到60層樓以上的機率
+h2:appendix Appendix
+h3:畫一下endpoint的distribution 畫一下endpoint的distribution
+h3:第一個run我的爬樓梯過程長怎樣 第一個run，我的爬樓梯過程長怎樣？
+h3:visualize所有run的爬樓梯過程 Visualize所有run的爬樓梯過程
+

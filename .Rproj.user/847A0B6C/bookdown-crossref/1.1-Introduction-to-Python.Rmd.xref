@@ -1,0 +1,42 @@
+h1:python-basics Python Basics
+h2:variable-and-types Variable and Types
+h2:operations Operations
+h3:字串的operations 字串的operations
+h4:想paste字串直接用 想paste字串，直接用+
+h2:methods Methods
+h3:字串的methods 字串的methods
+h4:upper-把字串全轉成大寫 .upper() 把字串全轉成大寫
+h4:capitalize-把字首改大寫 .capitalize() 把字首改大寫
+h4:count-可以算某個字母出現幾次 .count() 可以算某個字母出現幾次
+h2:packages packages:
+h3:install-package Install package
+h3:import-package Import package
+h1:list基本介紹 List基本介紹
+h2:建立list 建立list
+h3:單維list 單維list
+h3:多維list 多維list
+h2:selecting-list-elements Selecting List Elements
+h3:subset Subset
+h3:slice Slice
+h2:replace Replace
+h2:operation Operation
+h3:list1-list2-clist1-list2 list1 + list2 = c(list1, list2)
+h3:list1-2-replist1-2 list1 * 2 = rep(list1, 2)
+h2:methods-1 Methods
+h3:list.appendx-r的clist-x list.append(x) = R的c(list, x)
+h3:list.pop-移除最後一個element list.pop() = 移除最後一個element
+h3:list.removea-r的-listwhichlist-a1 list.remove(a) = R的 list[which(list == a)[1]]
+h3:list.sort-r的sortlist list.sort() = R的sort(list)
+h3:list.reverse list.reverse()
+h3:list.insertindex-x-我要把x插入到index的前面 list.insert(index, x) = 我要把x插入到index的前面
+h3:list.indexa-r的whichlist1-a1 list.index(a) = R的which(list1 == a)[1]
+h3:list.countx-計算x在list中出現幾次 list.count(x) = 計算x在list中出現幾次
+h2:list-是-mutable List 是 mutable
+h2:list的功能最常用來做for-loop List的功能（最常用來做for loop)
+h1:numpy NumPy
+h2:why-numpy Why NumPy
+h2:subset-np.array Subset np.array
+h2:statistics-functions Statistics functions
+h3:generate-data Generate data
+h3:summary-statistics Summary statistics
+

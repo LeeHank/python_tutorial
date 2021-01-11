@@ -1,0 +1,31 @@
+--- 
+title: "Python Tutorial"
+author: "Hank Lee"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE,
+                      comment = "#>")
+
+library(reticulate)
+```
+
+# About this book  
+
+* 這本書記錄我自學的過程，也可作為未來查找code的reference  

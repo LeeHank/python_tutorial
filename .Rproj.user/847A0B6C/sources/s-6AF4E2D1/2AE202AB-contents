@@ -1,0 +1,11 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+_bookdown_files
+
+renv/library/
+renv/lock/
+renv/python/
+renv/staging/

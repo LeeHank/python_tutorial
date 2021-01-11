@@ -1,0 +1,29 @@
+h1:using-iterators-in-pythonland Using iterators in PythonLand
+h2:枯燥但必須知道的一些理論 枯燥但必須知道的一些理論
+h3:定義iterable-iterator 定義：Iterable, Iterator
+h3:練習分辨iterable和iterator 練習分辨iterable和iterator
+h3:用range做出來的object是iterable 用做出來的object，是iterable
+h3:傲嬌的iterable可用list或加星號來揭開面紗 傲嬌的iterable，可用list()或加星號來揭開面紗
+h3:我到底為什麼要學iterators 我到底為什麼要學iterators…
+h2:playing-with-iterators playing with iterators
+h3:enumerate enumerate
+h3:zip zip
+h1:list-comprehension List comprehension
+h2:simple-for-loop simple for loop
+h2:nested-for-loop nested for loop
+h2:conditional-for-loop conditional for loop
+h3:if if
+h3:if-else if-else
+h2:practice Practice
+h1:dictionary-comprehension Dictionary comprehension
+h1:generator Generator
+h2:generator-expression-and-generator-object Generator expression and generator object
+h2:學generator要幹麻 學generator要幹麻？
+h2:generator-function Generator function
+h1:綜合練習 綜合練習
+h2:pandas-case pandas case
+h3:writing-an-iterator-to-load-data-in-chunks-1 Writing an iterator to load data in chunks (1)
+h3:writing-an-iterator-to-load-data-in-chunks-2 Writing an iterator to load data in chunks (2)
+h3:writing-an-iterator-to-load-data-in-chunks-3 Writing an iterator to load data in chunks (3)
+h1:section 
+

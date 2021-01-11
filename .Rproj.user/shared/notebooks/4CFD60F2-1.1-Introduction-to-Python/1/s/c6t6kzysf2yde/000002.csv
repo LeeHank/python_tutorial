@@ -1,0 +1,11 @@
+"0","reticulate::repl_python()"
+"2","Python 3.8.0 (/Volumes/GoogleDrive/我的雲端硬碟/0. codepool_python/python_tutorial/renv/python/virtualenvs/renv-python-3.8.0/bin/python)
+Reticulate 1.18 REPL -- A Python interpreter in R.
+"
+"0","str1 = str(1000)"
+"0","print(str1)"
+"1","1000
+"
+"0","print(type(str1))"
+"1","<class 'str'>
+"

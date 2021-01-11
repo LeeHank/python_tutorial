@@ -1,0 +1,645 @@
+# Using iterators in PythonLand  
+
+## 枯燥但必須知道的一些理論  
+
+### 定義：Iterable, Iterator  
+
+* 先來定義這兩個名詞  
+* Iterable (可迭代物件):  
+   - 直觀定義：可以對他用for迴圈的object，我們叫他iterable。所以iterable指是一種特殊的object，哪種object？可對他做for迴圈的那種object。例如list, strings, dictionary都是iterable型的object  
+   - 正式的定義是：可以對他做`iter()`的object，叫iterable    
+* Iterator (迭代器):  
+   - 剛剛說，可以對他做`iter()`的object，我們叫他iterable，所以，做完後的object，我們叫他iterator  
+   - 例如： `a = [1,2,3]`， a是 iterable(因為，我可以對他做`iter()`); 而`aa = iter([1,2,3])`，aa是iterator  
+   - iterator的特性是，你對他用一次`next()`，他就會吐出一個值。你再`next()`一次，他再吐一個值。如果此iterator有n個element，你要next n次，才會全部吐完。  
+   - 所以確認一個物件是不是iterator，你就`next()`他看看就知道了。    
+
+### 練習分辨iterable和iterator  
+
+```{python}
+flash1 = [1,2,3,4,5]
+flash2 = iter(flash1)
+```
+
+* 我們發現對flash1做`iter()`是ok的，所以flash1是可以iter的，我們就知道falsh1是iterable型的object  
+* 而此時，flash2是被`iter()`完的物件，我們就稱它為iterator  
+* 去`print()`看看兩者，可以看到iterable會直接給你看結果，iterator則是很矜持，不給你看，只有你對他用`next()`時才會給你看  
+
+```{python}
+print(flash1)
+print(flash2)
+```
+
+* 對flash1和flash2用`next()`，可以看到iterable會回你error，因為只有iterator才對`next()`有反應。對iterator用`next()`，他則會一次吐一個值給你  
+
+```{python error = TRUE}
+next(flash1)
+```
+
+```{python}
+next(flash2)
+next(flash2)
+next(flash2)
+next(flash2)
+next(flash2)
+```
+* 來個反例吧：  
+
+```{python error = TRUE}
+num = 12345
+num_iter = iter(num)
+```
+
+* 看到了吧，不是隨便一個object都可以對他做`iter()`，error message直接跟你說，int這種object不是iterable的object  
+
+### 用`range()`做出來的object，是iterable  
+
+```{python}
+aa = range(0,5)
+aaa = iter(aa)
+```
+
+* 我們對aa做`iter()`，發現是ok的，所以aa是iterator  
+* 其實我們早就知道了，因為從直觀定義來看，range()物件是可以用for迴圈的，所以他是iterator  
+* 但有意思的是，既然range()是iterable，那我做完`iter()`的aaa就是iterator，那我每對他做一次`next()`，他就應該會吐一個值來：  
+
+```{python}
+next(aaa)
+next(aaa)
+next(aaa)
+next(aaa)
+next(aaa)
+```
+
+### 傲嬌的iterable，可用list()或加星號來揭開面紗  
+
+* 剛剛知道range()的object是iterable，當你對他用`print()`的時候，你會發現他不給你看裡面啊！！  
+
+```{python}
+aa = range(0,5)
+print(aa)
+```
+
+* 所以，你要把他轉成list，他才會乖乖給你看  
+```{python}
+print(list(aa))
+```
+
+* 或是，加星號：  
+
+```{python}
+print(*aa)
+```
+
+* 喔嗚...，加星號所print出的東西，看起來是一個一個print出來的，怎麼跟`next()`做出來的效果這麼像？that's right，其實加星號的作用就是：  
+  * 先做`iter()`把他轉成iterator  
+  * 再一路`next()`到底  
+
+```{python}
+aaa = iter(aa)
+for i in aa:
+  print(next(aaa))
+```
+
+### 我到底為什麼要學iterators...  
+
+* 這邊很快的來講一個應用。在大數據的時代，我們常常從DB拉下來的data.frame就非常巨大，所以通常不會直接全部拉下來然後存成一個變數，因為這樣會讓你的記憶體直接炸裂  
+* 那，取而代之的做法，就是先拉一批進來，然後做些處理，得到結果後，刪掉這批資料，再拉下一批進來。等到最後一批進來並得到結果後，再把剛剛前面所有結果整合起來，得到最終結果  
+* 那，這邊的一批一批依序進來，不就是iterator在做的事嗎？  
+* 所以現在給一個實際情境，假設我們電腦硬碟中，有一個超大的excel表，裡面是放twitter資料。然後，這筆資料中有一個欄位是lang(語言)。我們想做的，是去得出這一欄的次數分配表  
+* 那我就可以這樣做：  
+  * 寫回圈，每次讀進1000行的table進來，統計出次數分配表，然後刪掉這個table  
+  * 依序讀入並更新，直到最後一批資料進來  
+* 直接來看code吧：  
+
+```{python}
+import pandas as pd
+# Initialize an empty dictionary: counts_dict
+counts_dict = {}
+
+# Iterate over the file chunk by chunk
+for chunk in pd.read_csv("./data/tweets.csv", chunksize=10):
+
+    # Iterate over the column in DataFrame
+    for entry in chunk['lang']:
+        if entry in counts_dict.keys():
+            counts_dict[entry] += 1
+        else:
+            counts_dict[entry] = 1
+
+# Print the populated dictionary
+print(counts_dict)
+```
+
+* nice，我們更進一步，寫一個function來做：  
+
+```{python}
+# Define count_entries()
+def count_entries(csv_file, c_size, colname):
+    """Return a dictionary with counts of
+    occurrences as value for each key."""
+    
+    # Initialize an empty dictionary: counts_dict
+    counts_dict = {}
+
+    # Iterate over the file chunk by chunk
+    for chunk in pd.read_csv(csv_file, chunksize=c_size):
+
+        # Iterate over the column in DataFrame
+        for entry in chunk[colname]:
+            if entry in counts_dict.keys():
+                counts_dict[entry] += 1
+            else:
+                counts_dict[entry] = 1
+
+    # Return counts_dict
+    return counts_dict
+```
+
+
+```{python}
+# Call count_entries(): result_counts
+result_counts = count_entries('./data/tweets.csv',10,'lang')
+
+# Print result_counts
+print(result_counts)
+```
+
+## playing with iterators  
+
+* 我們之前學過，對iterable可以使用for迴圈，那，從現在開始，要多教兩個可以對iterable使用的大招：`enumerate()`和`zip()`  
+
+### enumerate  
+
+* `enumerate()`是一個function，從字義來看，e-就是"使"的意思，後面的"numerate"就是number的動詞，所以整個就是：給number！  
+所以可以想像，如果我對一個iterable(例如，list)做enumerate，那他會保留原本的list，但同時，這個list的每一個element，都被標記上所屬的number！  
+* 更精確的說， `enumerate(iterable_obj)`，可以將iterable object轉成enumerate object，此object會是一組tuple的序列，每個tuple都是index-value pair。看一下例子：  
+
+```{python}
+mutants = ['charles xavier', 
+            'bobby drake', 
+            'kurt wagner', 
+            'max eisenhardt', 
+            'kitty pryde']
+enum_mutants = enumerate(mutants)
+print(enum_mutants)
+```
+
+* 對mutant這個iterable做完enumerate後，他現在是一個enumerate object。但他很傲嬌的不給你看裡面有什麼。所以，用老招，把他改成list，看看裡面有什麼：  
+
+```{python}
+print(list(enum_mutants))
+```
+
+* 果然是個index-value的pair，"charles xavier"現在就和他所屬的index=0綁在一起  
+
+* 那...，做enumerate有啥好處？看到tuple，就想到他可以被輕易拆分並assign到兩個variable，那就可以增加for迴圈的靈活性，例如：  
+
+```{python}
+for index1, value1 in enumerate(mutants): 
+    print(index1, value1)
+```
+
+* enumerate也可以指定index要從幾開始編，例如：  
+```{python}
+for index2, value2 in enumerate(mutants, start=1): #改從index=1開始編號
+    print(index2, value2)
+```
+
+* 最後，回到剛剛傲嬌的討論上，我們在iterator那邊有討論到，iterator都很傲嬌，你要用`next()`他才會給你看裡面，且一次看一個。那...剛剛發現enumerate object那麼傲嬌，他會不會是iterator？  
+* sure...他就是iterator，所以現在學到了，對一個iterable做`iter()`，他會變iterator，對一個iterable做`enumerate()`，他也會變成iterator：  
+
+```{python}
+enum_mutants = enumerate(mutants)
+next(enum_mutants)
+next(enum_mutants)
+next(enum_mutants)
+next(enum_mutants)
+next(enum_mutants)
+```
+
+### zip  
+
+* 講到zip就想到壓縮時的打包，而壓縮時，就是要放一堆東西進去，所以...zip就字面上的意思，就是要幫你打包一堆iterable!!  
+* 所以zip的用法，是放進任意數量的iterable進去，例如以下這樣：  
+
+```{python}
+#先列出三個list，每個list都有五個element
+mutant  = ['charles xavier', 'bobby drake'  , 'kurt wagner'  , 'max eisenhardt', 'kitty pryde']
+aliases = ['prof x'        , 'iceman'       , 'nightcrawler' , 'magneto'       , 'shadowcat']
+powers  = ['telepathy'     , 'thermokinesis', 'teleportation', 'magnetokinesis', 'intangibility']
+
+mutant_zip = zip(mutants, aliases, powers)
+```
+
+* ok，我打包好了，他現在變成一個zip object  
+
+```{python}
+print(mutant_zip)
+```
+
+* 很傲嬌，不給看，那一樣用老招，把他轉成list後print出來  
+
+```{python}
+print(list(mutant_zip))
+```
+
+* 發現什麼？發現zip在做的，就是把大家的element i 湊成一個tuple， for i 從第一個element到最後一個element  
+* 同時，也知道對一個iterable做`zip()`後，他也變成iterator，所以可用`next()`把他叫出來  
+
+```{python}
+mutant_zip = zip(mutants, aliases, powers)
+print(next(mutant_zip))
+print(next(mutant_zip))
+print(next(mutant_zip))
+print(next(mutant_zip))
+print(next(mutant_zip))
+```
+
+* 那...這樣做有啥好處？一樣咩，他是tuple，所以可以任意拆分並assign給任意variable，所以剛剛`enumerate()`是幫你吐原來的element + 他所屬的index，那現在`zip()`就等於可以同時幫你吐任意個你輸進去的iterable:  
+
+```{python}
+for value1, value2, value3 in zip(mutants, aliases, powers):
+    print(value1, value2, value3)
+```
+
+# List comprehension  
+
+* 我們先從之前學過的for回圈講起：  
+
+```{python}
+doctor = ['house', 'cuddy', 'chase', 'thirteen', 'wilson']
+
+# 目標：抓出每個element中的第一個字  
+first = []
+for doc in doctor:
+    first.append(doc[0])
+print(first)
+```
+
+* 從以上的例子可以看到，如果今天我想output出一個list，那我要先建立一個空的list，然後，用for回圈一步一步去做事，每做完一件事，就塞到剛剛的list裡面  
+* 那list comprehension在幹麻呢？list comprehension是說，如果你最後要用for loop來生出list，那我就用一種特殊寫法，幫你一行解決掉：  
+
+```{python}
+list_comp = [doc[0] for doc in doctor]
+print(list_comp)
+```
+
+* 帥...還真的一行幹掉，我們首先來教要怎麼閱讀這種code。  
+* 在閱讀上，我們要先辨認出三個結構：  
+  * 要output出來的data structure，寫在最外面，也就是我們看到的中括號，告訴我們他要output成一個list  
+  * for loop要iterate的part，也就是在最後面看到的`for doc in doctor`。其中doctor叫做iterable，doc叫iterator variable(代表iterable中的member)   
+  * 每iterate完一個，要output出什麼，也就是最前面看到的`doc[0]`，這部分我們叫"output expression"  
+* 了解一個list comprehension是由這三個組成後，閱讀的順序就會變成：  
+  * 先讀要for loop的地方，所以知道他要做的是`for doc in doctor`  
+  * 再讀每iterate完一次，要output什麼東西出來，所以從`doc[0]`可知，要丟第一個字母出來  
+  * 最後，看到最外面是中括號，就知道要把這些結果，搜集成list  
+* 所以，總結起來，list comprehension是由以下的pattern組合而成：`["output expression"  for "iterator variable" in "iterable" ]`  
+* 有了這個概念後，就可以開始練習把傳統的for loop轉成list comprehension了  
+
+## simple for loop  
+
+```{python}
+# 再來個練習，把以下的for loop，寫成list comprehension
+squares =[]
+for i in range(10):
+    squares.append(i**2)
+print(squares)
+```
+
+* 要把上面的for回圈轉成list comprehension，可以這樣寫：  
+
+```{python}
+squares2 = [i**2 for i in range(10)]
+print(squares2)
+```
+## nested for loop  
+
+```{python}
+pairs_1 = []
+for num1 in range(0, 2):
+    for num2 in range(6, 8):
+        pairs_1.append((num1, num2))
+print(pairs_1)
+```
+
+* 像這種兩個for回圈，寫成list comprehension時，可以這樣寫：  
+
+```{python}
+pairs_2 = [(num1,num2) for num1 in range(0,2) for num2 in range(6,8)]
+print(pairs_2)
+```
+
+## conditional for loop  
+
+* 如果for回圈裡面，有if, if-else, if-elif-else的話，可以寫成list comprehension嗎？  
+* 答案是，if和if-else可以，但if-elif-else不行。而且if和if-else的寫法有特定pattern，兩者寫法不同，吞下去就對了  
+
+### if  
+
+```{python}
+fellowship = ['frodo', 'samwise', 'merry', 'aragorn', 'legolas', 'boromir', 'gimli']
+
+#我現在想重新建立一個list，裡面的element，都要是字數>=7的我才收進來，那就用for loop 加上 if吧！  
+
+fellowship_for_if = []
+for member in fellowship:
+    if len(member) >= 7:
+        fellowship_for_if.append(member)
+
+print(fellowship_for_if)
+```
+
+* 那同樣的結構，當然可以用list comprehension來寫了，就是先for，再if
+
+```{python}
+fellowship_list_comprehension = [member for member in fellowship if len(member)>=7]
+#                          2. output expression為member      1.iteration part        
+
+# Print the new list
+print(fellowship_list_comprehension)
+```
+
+* 之前有說過第一塊要放output expression，所以，比較正確的做法，應該是寫`member if len(member)>=7 for member in fellowship`才對，但...就不能這樣寫。反而，在if-else時，一定要這樣寫。  
+
+### if-else  
+
+```{python}
+new_fellowship = [member if len(member) >= 7 else '' for member in fellowship]
+#               |----expression part想呈現成這樣----| |---iteration part-------|
+
+# Print the new list
+print(new_fellowship)
+```
+
+## Practice  
+
+* 現在來做個簡單的練習，在`tweets.csv`中，有一個欄位是created_at，是說這個訊息在幾點幾分建立的，我們看一下：  
+
+```{python}
+import pandas as pd
+df = pd.read_csv("./data/tweets.csv")
+tweet_time = df["created_at"]
+```
+
+```{r include = FALSE}
+py$tweet_time
+```
+
+
+* 現在，假如我想抓出"時間"的資訊就好，也就是第12~19個element，我可以怎麼做呢？  
+* 先建一個空list，然後用for回圈，對每個element都抓12~19的字元，append回這個空list？  
+* sure，當然可以，但好遜，我們用list comprehension不就好了？  
+
+```{python}
+result = [entry[11:19] for entry in tweet_time]
+print(result[0:10])
+```
+
+* nice，那如果我現在龜毛一點，我想抓hh:mm:ss中的ss=17的就好，怎麼做？  
+
+```{python}
+result2 = [entry[11:19] for entry in tweet_time if entry[17:19]=='17']
+print(result2)
+```
+
+# Dictionary comprehension  
+
+* dictionary comprehension和剛剛的list comprehension一模一樣，只是因為你要ouptut的type是dictionay，所以最外面要從中括號變大括號就好。而裡面的output expression，則要寫成key-value的形式：  
+
+```{python}
+# Create a list of strings: fellowship
+fellowship = ['frodo', 'samwise', 'merry', 'aragorn', 'legolas', 'boromir', 'gimli']
+
+# Create dict comprehension: new_fellowship
+new_fellowship = {member: len(member) for member in fellowship}
+
+# Print the new dictionary
+print(new_fellowship)
+```
+
+# Generator  
+
+## Generator expression and generator object    
+
+* 剛剛學過list comprehension:  
+
+```{python}
+[2*num for num in range(10)]
+```
+
+* 現在把中括號[ ]，換成小括號( )的寫法，就叫generator expression，我們把它存成一個變數後，這個變數就叫generator，他的type是generator  
+
+```{python}
+a                  = (2*num for num in range(10))
+#generator object       generator expression
+
+print(a)
+```
+
+* 所以我們現在知道：  
+  * `list comprehension` return a list  
+  * `generator expression` return a generator object  
+* 那這個generator object到底是什麼？我們發現他傲嬌的不讓我們看結果，所以我猜他是一個iterator，我就先把他轉成list再看看內容：  
+
+```{python}
+print(list(a))
+```
+
+* 嗯嗯，所以他就還是像list的東西，只是因為他是iterator，所以都要一直`next()`他才能看到結果  
+
+```{python}
+a = (2*num for num in range(10))
+print(next(a))
+print(next(a))
+print(next(a))
+print(next(a))
+print(next(a))
+```
+
+## 學generator要幹麻？  
+
+* 從剛剛的結果可以知道，list comprehension和generator expression，其實都是做出一個序列來，但差別就在，你對list做print，他直接給你看結果，表示這個list object已經佔好佔滿記憶體空間，但對generator object做print，他跟你對`range()`object做print一樣，都傲嬌的不給你看結果，表示他現在沒有真的佔據記憶體空間，而是在你每`next()`他一次，他吐一個值，才多佔這一個值的記憶體空間  
+* 這種差距，在超大型list時，就可以看出generator有多重要：  
+
+```{python eval = FALSE}
+[num for num in range(10**100000)]
+```
+
+* 上面的做法，會真的做出一個size = 1000000的list出來，塞爆你的記憶體空間，電腦瞬間就當機了。但如果你不要存這個list，改成存generator:  
+
+```{python}
+aa = (num for num in range(10**100000))
+```
+
+* 會發現電腦頭好壯壯，根本沒佔到記憶體空間，因為現在的size其實是0，你`next()`他n次，才佔size = n 的記憶體空間  
+* 講到這裡，突然覺得，幹，那時候在介紹`range()`時，不是也說`range(100000)`的好處，就是不會真的做出size=100000的list來塞爆記憶體空間，怎麼覺得似曾相似？that's right，其實generator你就把它理解成很flexible的range()就好，你不再只能做出等差型態的sequence，你現在可用generator expression做出任何你想做出的sequence，且，他得用`next()`來逐步佔據記憶體空間，而不會一次就塞爆。  
+* 那太棒了，之前的`range()`會被拿來寫到for回圈裡，那現在的generator是不是也可以？sure!!  
+
+```{python}
+aa = (num*2 for num in range(10))
+for element in aa:
+  print(element)
+```
+
+## Generator function  
+
+* 剛剛講完可以用generator expression來製造出generator object，而generator object就想像成flexible的range()，可以製造出一個sequence來供for回圈使用，且不會塞爆記憶體空間  
+* 那現在要介紹另一種造出generator object的方式，叫generator function。所以先放在心裡面，generator function的目的和generator expression一樣，都是想製造出一個generator object，只是現在我們要用function的形式來造  
+* 至於怎麼造呢？  
+  * 跟之前一樣，我們define一個function  
+  * 但有別於之前的function都是`return`一個value，現在是`yield`一個sequence  
+
+```{python}
+def num_sequence(n):
+    """Generate values from 0 to n."""
+    i = 0
+    while i < n:
+        yield i
+        i += 1
+```
+
+* 上面的`yield`就是之前function中的`return`，所以如果你用return來理解的話，這個function如果你input n = 5，他應該就return出0。然後就結束了。但因為現在你把`return`改成`yield`，那這個function就會做出一個generator，所以你就把它想成return出一個range()來，這個range()的sequence，會是0,1,2,3,4  
+
+```{python}
+just_like_range = num_sequence(5)
+print(just_like_range)
+```
+
+```{python}
+for i in just_like_range:
+  print(i)
+```
+
+
+```{python}
+def num_sequence(n):
+    """Generate values from 0 to n."""
+    i = 0
+    while i < n:
+        return i
+        i += 1
+```
+
+```{python}
+num_sequence(3)
+```
+
+# 綜合練習  
+
+## pandas case 
+
+* 接下來要用pandas讀 & process 一個超大的csv檔，叫"world_ind_pop_data.csv"  
+* 這個檔的primary key由country name + Year組成，表示該國家在那一年的狀況。啥狀況？Total Population(總人數)與Urban population(% of total)(城市人口佔總人口的百分比)的狀況  
+* 那因為我們不想一次讀進來整的csv檔，所以我們打算分批讀進來，分批處理這樣 
+
+### Writing an iterator to load data in chunks (1)  
+
+* 現在，我們想一次讀10筆就好，用`pd.read_csv(df, chunksize= 10)`來製造出iterator。這個iterator你可以想像就是一個sequence，每個element都是一個只有10筆資料的dataframe，但他不是先10筆10筆的都讀好了然後存在這個list裡面，而是你`next()`他一下，他才讀，才佔記憶體空間。來看例子：  
+
+```{python}
+# Import the pandas package
+import pandas as pd
+
+# Initialize reader object: df_reader
+df_reader = pd.read_csv('./data/world_ind_pop_data.csv', chunksize = 10)
+
+# Print first chunks
+df1 = next(df_reader)
+```
+
+```{r}
+py$df1
+```
+
+### Writing an iterator to load data in chunks (2)  
+
+* 接下來，玩大一點，複雜一點。  
+  * 現在我想一次讀1000筆  
+  * 然後filter出countryCode為'CEB'的國家就好  
+  * 做出(Total Population, Urban population (% of total))的tuple，for每一年  
+
+```{python}
+# Initialize reader object: urb_pop_reader
+urb_pop_reader = pd.read_csv('./data/world_ind_pop_data.csv', chunksize=1000)
+
+# Get the first DataFrame chunk: df_urb_pop
+df_urb_pop = next(urb_pop_reader)
+
+# Check out specific country: df_pop_ceb
+df_pop_ceb = df_urb_pop[df_urb_pop['CountryCode']=='CEB']
+```
+
+```{r}
+py$df_pop_ceb
+```
+
+### Writing an iterator to load data in chunks (3)  
+
+* 接下來，針對這個dataframe，我想新增一個column，放的是城市人口數(Urban population)，所以他要用到前面兩個欄位相乘：Total population * Urban population (% of total)  
+* 怎麼做呢？  
+  * 用zip把Total population和Urban population (% of total)打包起來  
+  * 用list comprehension，把這兩個相乘，將得到的數字取整數  
+  * 把計算結果，存到此dataframe，命名為Urban population  
+
+```{python}
+# Zip DataFrame columns of interest: pops
+pops = zip(df_pop_ceb['Total Population'],
+df_pop_ceb['Urban population (% of total)'])
+
+df_pop_ceb['Total Urban Population'] = [int(x*y*0.01) for x, y in pops]
+```
+
+```{python}
+df_pop_ceb['Total Urban Population']
+```
+
+* (os. R用tidyverse做這些事超簡單，就是filter和mutate兩行而已，不像python做得累得像狗一樣。Python的這種寫法，就像Rita他們拿R的base functions在那邊硬幹資料處理一樣，又醜又低效)  
+
+#  
+
+* 剛剛的練習，都是只針對第一個chunk做處理，那現在，我們就把所有chunk都處理完  
+* 所以，先initialize一個空的dataframe，然後把每一個chunk處理完的dataframe append上去就好  
+
+```{python}
+# Initialize reader object: urb_pop_reader
+urb_pop_reader = pd.read_csv('./data/world_ind_pop_data.csv', chunksize=1000)
+
+# Initialize empty DataFrame: data
+data = pd.DataFrame()
+
+# Iterate over each DataFrame chunk
+for df_urb_pop in urb_pop_reader:
+
+    # Check out specific country: df_pop_ceb
+    df_pop_ceb = df_urb_pop[df_urb_pop['CountryCode'] == 'CEB']
+
+    # Zip DataFrame columns of interest: pops
+    pops = zip(df_pop_ceb['Total Population'],
+                df_pop_ceb['Urban population (% of total)'])
+
+    # Use list comprehension to create new DataFrame column 'Total Urban Population'
+    df_pop_ceb['Total Urban Population'] = [int(tup[0] * tup[1] * 0.01) for tup in pops]
+    
+    # Append DataFrame chunk to data: data
+    data = data.append(df_pop_ceb)
+```
+
+* 看一下結果：  
+
+```{r}
+py$data
+```
+
+* 畫個圖吧：  
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Plot urban population data
+data.plot(kind='scatter', x='Year', y='Total Urban Population')
+plt.show()
+```
+
+
+

@@ -1,0 +1,839 @@
+# Matplotlib  
+
+## line plot  
+
+```{python}
+import matplotlib.pyplot as plt
+year = [1950, 1970, 1990, 2010]
+pop = [2.519, 3.692, 5.263, 6.972] #pop = population, 單位: billion
+plt.plot(year, pop) #只寫到這邊，不會畫圖，因為他還不知道你要不要加title那些
+plt.show() #寫show的話，他才知道你指令都輸入完了，才會畫圖
+```
+
+# scatter plot  
+
+```{python}
+plt.scatter(year, pop)
+plt.show()
+```
+
+* 如果想把`pop`換成log scale，那就加上`plt.yscale('log')`  
+
+```{python}
+plt.scatter(year, pop)
+plt.yscale('log')
+plt.show()
+```
+
+## Histogram  
+
+```{python}
+import numpy as np
+data = np.random.normal(5, 1, 10)
+plt.hist(data, bins = 5)
+plt.show()
+```
+
+# Customization  
+
+## x,y labels and title   
+
+```{python}
+plt.plot(year, pop)
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.title('World Population Projections')
+plt.show()
+```
+
+## Ticks  
+
+* 可以把x or y軸，調成你要顯示的尺度+你要的label  
+
+```{python}
+plt.plot(year, pop)
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.title('World Population Projections')
+
+# Definition of tick_val and tick_lab
+tick_val = [0, 2, 4, 6, 8, 10]
+tick_lab = ['0k', '2k', '4k', '6k', '8k', '10k']
+
+# Adapt the ticks on the x-axis
+plt.yticks(tick_val, tick_lab)
+
+# After customizing, display the plot
+plt.show()
+```
+
+## 加入第三軸： s (size)  
+
+```{python}
+age = [50, 80, 25, 66]
+plt.scatter(year, pop, s = age)
+plt.show()
+```
+
+# 資料結構： dictionary  
+
+* dictionary和list的差別在於：  
+  1. dictionary用 {}表示，list用[]表示  
+  2. dictionary沒有順序性，list有  
+  3. dictionary一定是key-value的pair，他是index by key(所以你要select他的element，是輸入key); list是index by number(所以你要select他的element，是輸入index number)    
+  4. dictionary的key是immutable，value是mutable，而list全都是mutable   
+  
+```{python}
+d1 = {'apple':1, 'pear':2, 'orange':3}
+d1
+```
+
+## select element 用 dictionary['key']    
+
+```{python}
+d1['apple']
+```
+## 刪除用del diction['key']  
+
+```{python}
+print(d1)
+del d1['pear']
+print(d1)
+```
+## 添加一個element進去用 dictionary['new key'] = new_value  
+
+```{python}
+d1['b'] = 20
+d1
+```
+
+## 更新key的value用 dictionary['key'] = new_value  
+
+```{python}
+d1['b'] = 300
+d1
+```
+## dictionary中的key一定是字串，但value可以是任何東西  
+
+```{python}
+def func():
+    return 0
+
+d4 = {'apple':[1,2,3], #value是list
+      'pear':{'gg':3, 'yy':'aa'}, #value是dictionary
+      'orange':func} #value是function  
+d4
+```
+## select這種複雜dictionary就一層一層剝下去  
+
+```{python}
+print(d4['pear']['gg'])
+```
+
+# Pandas  
+
+## 創建pd.DataFrame  
+
+### 將dictionary轉成data.frame  
+
+#### 法一： 像R那樣做  
+
+* 回憶一下，在R裡面，怎麼自己建立data.frame? 通常都是這樣做： data = data.frame(a = c(), b = c(), c = c())  
+* 當我們這樣做的時候，其實對應到dictionary，不就是一個一個的key value嗎？ 所以概念完全一樣：  
+
+```{python}
+import pandas as pd
+data_dic = {
+     'Country': ['Belgium', 'India', 'Brazil'],
+     'Capital': ['Brussels', 'New Delhi', 'Brasília'],
+     'Population': [11190846, 1303171035, 207847528]
+}
+data_df = pd.DataFrame(data_dic)
+data_df
+```
+#### 法二： 對付API request下來的那種JSON  
+
+### 將2d-array轉成data.fream
+
+* 在R裡面，我們有時也會先有一個matrix，然後把他轉成data.frame，做法是：as.data.frame(matrix)  
+* 那既然pandas是建立在numpy上，那也可將2-dim array轉成dataframe，做法也雷同： pd.DataFrame(matrix)  
+
+```{python}
+import numpy as np
+matrix = np.array([[1,2],[3,4]])
+print(matrix)
+```
+
+```{python}
+data_pd2 = pd.DataFrame(matrix)
+print(data_pd2)
+```
+
+* 不過，把matrix轉成data.frame後，我們還缺少column name，所以，在R裡，都還會做colnames(data) = c()  
+* 那在pd裡，我們該如何把現有的dataframe加上欄位名稱呢？這個後面再講  
+
+### 讀csv檔  
+
+```{python}
+cars = pd.read_csv("./data/cars.csv")
+print(cars)
+```
+
+* 看起來，第一個column比較像row_name，所以可以把它指定為index_col:  
+```{python}
+cars = pd.read_csv("./data/cars.csv", index_col=0)
+print(cars)
+```
+
+## Select  
+
+### [] & [[]]  
+
+* 如果今天用`[]`來select出一個columm，那做出來的type會是series，不是data.frame  
+
+```{python}
+one_bracket = cars["country"]
+print(one_bracket)
+print(type(one_bracket))
+```
+
+* 但如果用兩個brackets `[[]]`，就會select出一個data.frame  
+
+```{python}
+two_bracket = cars[["country"]]
+print(two_bracket)
+print(type(two_bracket))
+```
+
+* 而且，兩個bracket，恰好用在你要select多個column  
+
+```{python}
+two_bracket2 = cars[["country", "drives_right"]]
+print(two_bracket2)
+```
+
+* 最後，如果要切row出來，那因為row代表的是index，所以會用數字切    ，例如，切最開始到第三個index:  
+
+```{python}
+print(cars[:3])
+```
+
+### loc and iloc  
+
+* loc and iloc是pandas的method，所以是用`data.loc[列名,行名]`, `data.iloc[列index,行index]`來運作  
+* loc是吃key的(i.e. column name, row name)，iloc是吃index(i.e. number)  
+
+```{python}
+cars
+```
+* 抓出列名是JAP, 行名是drives_right的資料  
+
+```{python}
+print(cars.loc["JAP","drives_right"])
+```
+
+```{python}
+print(cars.iloc[2,2])
+```
+
+* 抓出列名是RU, MOR，行名是drives_right的資料  
+
+```{python}
+print(cars.loc[["RU", "MOR"],"drives_right"])
+```
+```{python}
+print(cars.iloc[[4,5],2])
+```
+
+* 以series的type，抓出drives_right這個column  
+
+```{python}
+print(cars.loc[:,"drives_right"])
+```
+```{python}
+print(cars.iloc[:,2])
+```
+
+* 以DataFrame的type，抓出drives_right這個column  
+
+```{python}
+print(cars.loc[:, ["drives_right"]])
+```
+
+```{python}
+print(cars.iloc[:,[2]])
+```
+
+# Logic, Control Flow and Filtering  
+
+## Comparison operators  
+
+* >, <, >=, <=, ==, !=  
+* 用在字串的比較時，我比較不熟，所以整理一下：  
+
+```{python}
+"Chars" > "Chloe"
+```
+
+* 他會每一個字逐一比較，照字母順序比  
+
+```{python}
+# Comparison of booleans
+True == False
+
+# Comparison of integers
+-5*15 != 75
+
+# Comparison of strings
+"pyscript" == "PyScript"
+
+# Compare a boolean with an integer
+True == 1
+```
+
+```{python}
+# Create arrays
+import numpy as np
+my_house = np.array([18.0, 20.0, 10.75, 9.50])
+your_house = np.array([14.0, 24.0, 14.25, 9.0])
+
+# my_house greater than or equal to 18
+print(my_house >= 18)
+
+# my_house less than your_house
+print(my_house < your_house)
+```
+
+## Boolean Operators  
+
+* True "and" False  
+* True "or" False  
+* "not" True (R的寫法是!TRUE)  
+* "not" False (R的寫法是!FALSE)  
+
+```{python}
+# Define variables
+my_kitchen = 18.0
+your_kitchen = 14.0
+
+# my_kitchen bigger than 10 and smaller than 18?
+print(my_kitchen > 10 and my_kitchen < 18)
+
+# my_kitchen smaller than 14 or bigger than 17?
+print(my_kitchen < 14 or my_kitchen > 17)
+
+# Double my_kitchen smaller than triple your_kitchen?
+print(my_kitchen *2 < your_kitchen *3)
+```
+
+
+## Numpy np.logical_and()/np.logical_or()/np.logical_not()  
+
+* 如果a是一個numpy array，我們不能寫出`a >7 or a<10`這種寫法，必須寫成 `np.logical_or(a>7, a<10)`  
+
+```{python}
+# Create arrays
+import numpy as np
+my_house = np.array([18.0, 20.0, 10.75, 9.50])
+your_house = np.array([14.0, 24.0, 14.25, 9.0])
+
+# my_house greater than 18.5 or smaller than 10
+print(np.logical_or(my_house > 18.5, my_house < 10))
+
+# Both my_house and your_house smaller than 11
+print(np.logical_and(my_house <11, your_house<11))
+```
+
+## if, elif, else  
+
+```{python}
+z = 4
+if z%2 == 0:
+  print("checking " + str(z))
+  print("z is even")
+else:
+  print("z is odd")
+```
+
+```{python}
+z = 6
+if z % 2 == 0:
+  print("z is divisible by 2")
+elif z % 3 == 0:
+  print("z is divisible by 3")
+else:
+  print("z is neither divisible by 2 nor by 3")
+```
+
+## Filtering pandas DataFrame  
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Extract drives_right column as Series: dr
+dr = cars['drives_right']
+type(dr)
+# Use dr to subset cars: sel
+sel = cars[dr]
+
+# Print sel
+print(sel)
+```
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Convert code to a one-liner
+sel = cars[cars['drives_right']]
+
+# Print sel
+print(sel)
+```
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Create car_maniac: observations that have a cars_per_cap over 500
+cpc = cars['cars_per_cap']
+many_cars = cpc>500
+
+
+# Print car_maniac
+car_maniac = cars[many_cars]
+print(car_maniac)
+```
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Import numpy, you'll need this
+import numpy as np
+
+# Create medium: observations with cars_per_cap between 100 and 500
+cpc = cars['cars_per_cap']
+between = np.logical_and(cpc>100, cpc<500)
+medium = cars[between]
+
+# Print medium
+print(medium)
+```
+
+# Loops  
+
+## while loop  
+
+```{python}
+error = 50
+while error >1:
+  error = error/4
+  print(error)
+```
+
+## for loop  
+
+### loop over a list  
+
+```{python}
+fam = [1.73, 1.68, 1.71, 1.89]
+for height in fam:
+  print(height)
+```
+
+```{python}
+# house list of lists
+house = [["hallway", 11.25], 
+         ["kitchen", 18.0], 
+         ["living room", 20.0], 
+         ["bedroom", 10.75], 
+         ["bathroom", 9.50]]
+         
+# Build a for loop from scratch
+for i in house:
+    print("the "+i[0]+" is "+str(i[1])+" sqm")
+```
+
+```{python}
+fam = [1.73, 1.68, 1.71, 1.89]
+for index, height in enumerate(fam):
+  print("index" + str(index) + ":" + str(height))
+```
+
+### loop over string  
+
+```{python}
+for c in "family":
+  print(c)
+```
+
+### loop over dictionary  
+
+```{python}
+world = {
+  "afghanistan": 30.55,
+  "albania": 2.77,
+  "algeria": 39.21
+}
+
+for key, value in world.items():
+  print(key + " -- " + str(value))
+```
+
+### loop over Numpy array  
+
+```{python}
+import numpy as np
+np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
+np_weight = np.array([65.4, 59.2, 63.6, 88.4, 68.7])
+bmi = np_weight / np_height ** 2
+
+for val in bmi:
+  print(val)
+```
+
+```{python}
+meas = np.array([np_height, np_weight])
+meas
+```
+
+```{python}
+for val in meas:
+  print(val)
+```
+
+```{python}
+for val in np.nditer(meas):
+  print(val)
+```
+
+### loop over DataFrame  
+
+* 去loop一個DataFrame，在Ｒ裡面是很少這樣做的。但python得這樣做，所以得學  
+* 先讀一下資料  
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+cars
+```
+* for loop要下兩個參數，一個是loop每個row的label，另一個是此row下的raw data  
+* 另外，因為你是要loop每個row，所以要加上`.iterrows()`這個語法  
+
+```{python}
+for lab, row in cars.iterrows():
+  print(lab)
+```
+
+```{python}
+for lab, row in cars.iterrows():
+  print(row)
+```
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Adapt for loop
+for lab, row in cars.iterrows() :
+    print(lab+": "+str(row['cars_per_cap']))
+```
+
+### add column by for loops    
+
+* 如果我今天想加入新的一個column，他是原本的column全改成大寫，哪怎麼做？  
+* 我可以for loop那個column的每個row，轉大寫後，才存到對應的新column  
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Code for loop that adds COUNTRY column
+for lab, row in cars.iterrows():
+    cars.loc[lab, "COUNTRY"] = row['country'].upper()
+
+# Print cars
+print(cars)
+```
+
+* 但...這樣的效率實在太差。如果是想對整個column做事的話，建議用.apply method!  
+
+### add column by apply method  
+
+```{python}
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('./data/cars.csv', index_col = 0)
+
+# Use .apply(str.upper)
+cars["COUNTRY"] = cars["country"].apply(str.upper)
+cars
+```
+
+# Case Study: Hacker Statistics  
+
+* 現在我們想來進行一個遊戲：擲骰子爬帝國大廈，遊戲規則如下：    
+  * 如果擲出1,2點，那要往下走一層樓  
+  * 如果擲出3,4,5點，那可以往上走一層樓  
+  * 如果擲出6點，那可以再擲一次骰子，骰到幾點就往上爬幾樓  
+  * 最低只能往下爬到0樓，超過都不算了  
+  * 每爬完一次樓層，都有0.1%的機會，會失足摔回第0層  
+* 現在準備擲100次骰子，請問可以爬到60層樓的機率為何？  
+* 要回答這個問題，可以用：  
+  * 解析解：就直接照理論推導去計算  
+  * 模擬解：直接做隨機實驗看結果(aka: Hack Statistics)  
+* 這一個章節，就打算用模擬解，來回答這個題目  
+
+## 產出random number  
+
+* 我們會用numpy中的一個sub-package，叫`random`，來進行亂數產生  
+* 所以，如果numpy被你縮寫成`np`，那接下來的function都會寫成`np.random.xxx()`，意思就是用到random這個sub-package  
+* 常見的function整理如下：  
+  * `np.random.seed()`: 設random seed  
+  * `np.random.rand()`: 產出0~1的隨機亂數，看起來就是連續型U(0,1)  
+  * `np.random.randint(start, stop)`: 就是離散型U(start, stop-1)。所以如果以擲銅板為例，就會寫`np.random.randint(0,2)`，那亂數就是0 or 1; 以擲骰子為例，就會是`np.random.randint(1,7)`，亂數就是1,2,3,4,5,6。  
+  * 來練習一下  
+
+```{python}
+import numpy as np
+np.random.rand()
+```
+
+```{python}
+import numpy as np
+np.random.seed(123)
+np.random.randint(0,7) # result is 6
+```  
+
+## 擲骰子1次的實驗  
+
+* 現在，假設我們在50樓，然後要做一次擲骰子遊戲，我想看，我直到多少，以及，擲完後，我會變成在幾樓  
+
+```{python}
+import numpy as np
+np.random.seed(12)
+# Starting step
+step = 0
+
+# Roll the dice
+dice = np.random.randint(1,7)
+
+# Finish the control construct
+if dice <= 2 :
+    step = step - 1
+elif dice > 2 and dice <6 :
+    step = step + 1
+else :
+    step = step + np.random.randint(1,7)
+
+# Print out dice and step
+print(dice)
+print(step)
+```
+
+* 我們可以看到，擲到4點，要往上爬一層，所以結果是從0 floor爬到1 floor (step現在是1)  
+
+## 擲骰子100次的實驗  
+
+* 那如果我現在想玩十次，那我會想記錄這10次的骰子結果，以及每次執行完我會爬到哪一層。那就可以善用list這個資料結構，和.append這個method  
+
+```{python}
+np.random.seed(17)
+
+random_walk = [0] # 一開始在0樓，他是list的data structure
+dice_history = [0]
+
+for i in range(100): #執行10次  
+  dice = np.random.randint(1, 7)
+  dice_history.append(dice)   
+  
+  step = random_walk[-1] #現在所屬樓層，是random walk這個list的最後一個element
+  
+  if dice <= 2:
+    step = step-1
+  elif dice <= 5:
+    step = step+1
+  else:
+    step = step + np.random.randint(1,7)
+  
+  random_walk.append(step)
+
+print(random_walk)
+print(dice_history)
+```
+* 看起來應該是做對了，因為一開始擲到2，要往下一層樓，從0樓往下一層樓，就會是-1樓，所以沒做錯  
+* 但是，剛剛有個規定是說，如果樓層往下走，走到最低只能是0，不能是負的  
+* 所以，接下來我們要用`max()`這個function來幫我們把關，例如： `step = max(step-1, 0)`
+
+## 修正樓層不能<0  
+
+```{python}
+np.random.seed(17)
+
+random_walk = [0] # 一開始在0樓，他是list的data structure
+dice_history = [0]
+
+for i in range(100): #執行100次  
+  dice = np.random.randint(1, 7)
+  dice_history.append(dice)   
+  
+  step = random_walk[-1] #現在所屬樓層，是random walk這個list的最後一個element
+  
+  if dice <= 2:
+    # 確保往下走，最低只會走到0
+    step = max(step-1, 0)
+  elif dice <= 5:
+    step = step+1
+  else:
+    step = step + np.random.randint(1,7)
+  
+  random_walk.append(step)
+
+print(random_walk)
+print(dice_history)
+```
+
+* good，好多了，現在沒有走到負數樓層了  
+* 但還有一個規則沒用到，就是每走完一層樓，他有0.1%的機會，會回到原點(step重設為0)  
+* 那很簡單，我就用`np.random.rand() < 0.001`當條件就好，如果條件滿足，那就把step重設為0  
+
+## 修正有0.1%的機會，會回到原點  
+
+```{python}
+np.random.seed(17)
+
+random_walk = [0] # 一開始在0樓，他是list的data structure
+dice_history = [0]
+
+for i in range(100): #執行100次  
+  dice = np.random.randint(1, 7)
+  dice_history.append(dice)   
+  
+  step = random_walk[-1] #現在所屬樓層，是random walk這個list的最後一個element
+  
+  if dice <= 2:
+    # 確保往下走，最低只會走到0
+    step = max(step-1, 0)
+  elif dice <= 5:
+    step = step+1
+  else:
+    step = step + np.random.randint(1,7)
+  
+  if np.random.rand() < 0.001:
+    step = 0
+  
+  random_walk.append(step)
+
+print(random_walk)
+```
+
+## 做1000個run，每個run都做100次擲骰子的實驗
+
+* 現在，我想先新增一個空list，然後每run完一次擲骰子100次的遊戲後，我就把這次的結果list塞進來，那我做完1000個run，就會得到一個list，此list裡面有1000個element，每個element都是100*1的list!!  
+
+```{python}
+np.random.seed(17)
+
+all_walks = []
+
+for run in range(1000):
+  # 之前的code塞進來  
+  random_walk = [0]
+  for i in range(100): #執行100次  
+    dice = np.random.randint(1, 7)
+    step = random_walk[-1] 
+    if dice <= 2:
+      # 確保往下走，最低只會走到0
+      step = max(step-1, 0)
+    elif dice <= 5:
+      step = step+1
+    else:
+      step = step + np.random.randint(1,7)
+    
+    if np.random.rand() < 0.001:
+      step = 0
+    
+    random_walk.append(step)
+  
+  all_walks.append(random_walk)
+
+# print(all_walks)
+```
+
+## 擷取每個run的最後一筆資訊  
+
+* 現在`all_walks[]`這個list，是個1000*100的list，而我們要取的是每個sub-list中的最後一個。所以，可以這樣做：    
+
+```{python}
+end_points = []
+for i in range(1000):
+  end = all_walks[i][-1]
+  end_points.append(end)
+print(end_points[:10])
+```
+
+* 這邊，也可以用另一個小技巧，先把list轉成np.array，就可以直接抓出一整排結果 
+
+```{python}
+np_aw = np.array(all_walks)
+np_end_points = np_aw[:,-1]
+print(np_end_points[:10])
+```
+
+## 計算可以爬到60層樓以上的機率  
+
+* 既然已經有1000筆的模擬結果，那我們就看這些結果>60的比例有多高就好：  
+
+```{python}
+np.mean(np_end_points >= 60)
+```
+
+* 實驗結果： 有77%的機率，可以爬到60樓以上！！  
+
+## Appendix  
+
+* 接下來，我們可以用剛剛的data，做一點視覺化的練習  
+
+### 畫一下endpoint的distribution  
+
+```{python}
+import matplotlib.pyplot as plt
+plt.hist(np_end_points)
+plt.show()
+```
+
+### 第一個run，我的爬樓梯過程長怎樣？  
+
+```{python}
+import matplotlib.pyplot as plt
+
+first_run = np_aw[1,:]
+plt.plot(first_run)
+plt.show()
+```
+
+### Visualize所有run的爬樓梯過程  
+
+```{python}
+plt.plot(np_aw)
+plt.show()
+```
+* hmm...看起來很怪異，那是因為，`plt.plot()`是一個column畫一個line，但我們現在是希望他一個row畫一個line  
+* 那很簡單，就做轉置就好  
+
+```{python}
+np_aw_t = np.transpose(np_aw)
+plt.plot(np_aw_t)
+plt.show()
+```
+
+

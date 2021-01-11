@@ -1,0 +1,499 @@
+# Python Basics  
+
+* 這份檔案以DataCamp的第一章：Introduction to Python為主軸做整理，並補充一些後續看到的內容  
+
+## Variable and Types  
+
+* python有以下幾種types:  
+  * int: 整數  
+  * float: 就numeric  
+  * str: string  
+  * bool: boolean (True, False)  
+* 檢查變數的type，就用  
+
+```{python}
+desc = "compound interest"
+print(type(desc))
+```
+* 轉換型別：  
+  * 轉成字串用`str()`： 通常是把數字轉成字串，用於製造出包含數字的字串句子    
+  * 轉成整數用`int()`, 轉成數字用`float()`: 通常都是把文字轉成數字  
+  
+```{python}
+str1 = str(1000)
+print(str1)
+print(type(str1))
+```
+
+```{python}
+str2 = "5566"
+int2 = int(str2)
+print(int2)
+print(type(int2))
+```
+## Operations  
+
+* 數字的型別，當然可以做加減乘除  
+* 那文字的呢？  
+* 那Boolean的呢？  
+
+### 字串的operations  
+
+#### 想paste字串，直接用+  
+
+```{python}
+"Let me" + " see see"
+```
+
+## Methods  
+
+* 在python裡，所有東西都是object  
+* 每個object都有所屬的method，可以想成此object的專屬技能(Methods: Functions that belong to objects)  
+* 至於是什麼method呢？depend on type!  
+* 舉例來說，`a = "hahaha"`，那a是一個object，哪種type的object? string這種type的object，所以他有string的專屬技能。例如`a.upper()`可以把字串轉成全大寫  
+
+### 字串的methods  
+
+* 試試看改這個就好
+
+#### .upper() 把字串全轉成大寫  
+
+```{python}
+a = "hahaha"
+new = a.upper()
+print(new)
+print(a)
+```
+
+#### .capitalize() 把字首改大寫  
+
+```{python}
+a = "hahaha"
+new = a.capitalize()
+print(new)
+print(a)
+```
+
+#### .count() 可以算某個字母出現幾次  
+
+```{python}
+a = "hahaha"
+new = a.count("a")
+print(new)
+print(a)
+```
+
+## packages:  
+
+* python的package就和R的package一樣，他就是一個資料夾，裡面放滿一個又一個的 .py script  
+* 每個script，就是一個module，裡面specify functions, methods, types  
+* 現在有成千上萬個python的package，例如numpy, scikit-learn...  
+
+### Install package  
+
+* 在terminal裡打`pip install numpy`
+
+### Import package  
+
+* `import numpy`  
+* `import numpy as np`  
+* `from numpy import array`: 只import numpy裡面的array這個function  
+* `from numpy import *`: 這是最爛的寫法，他的意思是，我把numpy裡面所有的屬性和方法都load到我現在的environment裡面。爛的地方在於，他可以覆蓋掉你之前定義過的東西。例如，你之前定義過一個function叫`demo`，而numpy裡面也有一個function叫`demo`，那你一用`from numpy import *`，那現在的local environment就只剩numpy的demo了。   
+* 整體來說，建議多用第二點，因為這樣當你用`array()`這個function時，會寫成`np.array()`，就會非常清楚這個function來自哪個package，而不會搞亂  
+* 而對於引用自己寫好的local package，則較常使用from...import...這種寫法。詳情等module & package那個章節就知道  
+
+
+# List基本介紹  
+
+## 建立list  
+
+### 單維list  
+
+* list是一連串有順序的物件，不見得要是同一種type  
+
+```{python}
+a_list = [12, 3, 67, 7, 82] #同一種type的list
+another_list = ["happy", 3, True, 7] #不同type的list
+```
+
+* 但習慣上，我們還是會把list裡的element，都寫成同一種type  
+
+### 多維list  
+
+* list 裡面還有list，就叫多維list  
+
+```{python}
+a = [1,2,3,4,5] # 1*5 list  
+multi_dim_a = [[1,2,3],
+               [2,3,4],
+               [3,4,5]]
+print(multi_dim_a)
+```
+
+## Selecting List Elements  
+
+### Subset  
+
+* list因為只有element，沒有name(簡單來講，就是只有value，沒有key)，所以subset時，都是用index來取  
+* index就擬人化為座號，而python的編號由左至右是從0開始，由右至左是從-1開始    
+* 所以我要取list中左邊數來第n個人，他的座號是n-1，那就要取n-1的index  
+* 如果我要取list中右邊數來第n個人，他的座號是-n，那就要取-n的index  
+* 看例子：  
+
+```{python}
+my_list = ["my", "list", "is", "nice"]
+my_list[3] # 取index=3, 那就是取element = 4
+```
+```{python}
+my_list[-2] # 取index -2, 即又邊數來第二個
+```
+
+* 學會單維list的subset了，那多維list的subset邏輯一模一樣  
+
+```{python}
+multi_dim_a = [[1,2,3], [2,3,4],[3,4,5]] 
+multi_dim_a[1] # 取index = 1，即左邊數來第2個
+```
+
+```{python}
+multi_dim_a[1][0] # 先取左邊數來第2個element，再取裡面的第1個element
+```
+
+### Slice  
+
+* 剛剛是取"某一個"element，那如果我想取"某一串"element呢？那就是指slice  
+* 語法是[start_index:stop_index]，所以[1:5]是指從index=1取到index=4，那就是取第2個element到第5個  
+* 所以為了方便記憶，就把stop_index當作stop_element來看，然後start_index還是start_index  
+* 簡單練習，[5:9]，就是指取element = 6 ~ 9  
+* 然後，如果你跳過start_index不寫，就是從頭開始；跳過stop_index不寫，就是取到最後；兩個都不寫，就是全取  
+* 例如： [:9]，那就是從第一個element一路取到第9個element  
+* 例如: [3:]，那就是第4個element一路取到最後一個element  
+* 例如: [:]，那就是整串全取(等於複製一個)  
+
+```{python}
+my_list = ["my", "list", "is", "nice"]
+my_list[1:3] # 取 element = 2~3
+```
+
+```{python}
+my_list[:3] # 取element = 1~3
+```
+
+```{python}
+my_list[1:] # 取element = 2~最後
+```
+
+* slice一律只能由左至右取，但編號系統可以用正的編號(由左至右的編號系統)或負的編號(由右至左的編號系統)  
+* [1:3]是指由左至右，取element= 2~3  
+* [-2:-3]是指由右至左，取element = 右邊數來第2個 ~ 第3個? 
+* NO! 他只能由左至右取，所以應該寫成[-3:-2]?  
+* NO! 這樣他指會取右邊數來的第3個element，到右邊數來的第2個element的"前1個"!  
+* 所以如果要取右邊數來第3個element到右邊數來第2個element，那要寫成[-3:-1]  
+
+```{python}
+my_list
+```
+
+```{python}
+my_list[-3:-1]
+```
+
+## Replace  
+
+* 剛剛已經學會如何取出list中的特定一個element，或是一串element，那我們就可以利用這個技巧，把新值assign到指定位置：  
+
+```{python}
+my_list
+```
+
+```{python}
+my_list[3] = "bad"
+my_list
+```
+
+```{python}
+my_list[1:] = ["lists", "are", "awsome"]
+my_list
+```
+
+## Operation  
+
+* 對各種資料類型，我們都會討論他的運算  
+* 例如之前教float這種type，我們就很熟悉他的運算有 +, -, \*, /, \*\*, //, %  
+* 例如之前教str這種type，也學過他有 * (就是repeat幾次) 和 + (就是paste()的概念)  
+* 那現在講list這種type，他的運算就和字串有點像，包含 * 和 +  
+
+### list1 + list2 = c(list1, list2)  
+
+```{python}
+list1 = ["Hello!", "How"]
+list2 = ["are", "you"]
+list1 + list2
+```
+
+### list1 * 2 = rep(list1, 2)  
+
+```{python}
+list1 * 2
+```
+
+## Methods  
+
+* 別忘了，每種type他其實都是一種class，所以除了你定義好的資料外，他還有專屬技能(method)  
+* 當我們把list的資料part，用上面教過的方法定義好後，接下來就可以用他的method，來對這個list工作  
+* methods很容易讓人搞混的地方，是他做完事後會分成兩種狀況：1. 直接改變原object, 不吐新東西出來(吐None) 2. 不改變原object，但會吐新東西出來  
+* 直接看例子：  
+
+### list.append(x) = R的c(list, x)  
+
+```{python}
+fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+new = fruits.append("grape")
+print(new)
+print(fruits)
+```
+
+* 從上例可以清楚的看到，當你用list.append時，他吐出來的值是None，而原list已經被改變了，這就是上面提過的狀況1  
+* 要判斷一個method，他會是狀況1 or 狀況，有幾種方法：  
+  1. 先猜: 做這個method，本質上就是要去改原物件的，那通常Python就會直接幫你改，例如這邊的.append就是    
+  2. 做實驗驗證：總是先把結果存到一個新變數(如這邊的new)，然後看看new會不會是None，來做確認  
+  3. 乖乖牌：不做實驗，直接去看操作手冊如何定義，像.append的定義就是：only modify the list have no return value printed – they return the default None  
+* 接下來會介紹各種list的method，就去猜測 & 實戰看看  
+* 再介紹其他list之前，想想功能性：如果我今天想要append東西到list的最後面，我有沒有別的作法？ 用R的邏輯，我就會寫c(list,x)，但在Python，我就會寫 list = list + [x]  
+
+```{python}
+fruits + ["new_fruit"]
+```
+
+* 所以可以想像，我的append，應該可以加多個element在後面，只要我加的類型也是list就好  
+
+```{python}
+fruits + ["new_fruit1, new_fruit2"]
+```
+
+```{python}
+fruits.append(["new_fruit1", "new_fruit2"])
+fruits
+```
+
+* 實驗結果發現：不行! 他會變成多維list  
+* 所以如果要加多個element，就直接用 + 的方式來做吧  
+
+### list.pop() = 移除最後一個element  
+
+```{python}
+print(fruits)
+new = fruits.pop()
+print(new)
+print(fruits)
+```
+
+### list.remove(a) = R的 list[which(list == a)[1]]  
+
+```{python}
+print(fruits)
+new = fruits.remove("grape")
+print(new)
+print(fruits)
+```
+
+* 可以發現，remove也是直接改，return None的類型  
+
+### list.sort() = R的sort(list)  
+
+```{python}
+print(fruits)
+new = fruits.sort() # 預設是由小排到大，若要由大排到寫，改寫成 fruits.sort(reverse=True) # 由大排到小
+print(new)
+print(fruits)
+```
+
+### list.reverse()  
+
+```{python}
+print(fruits)
+new = fruits.reverse()
+print(new)
+print(fruits)
+```
+
+### list.insert(index, x) = 我要把x插入到index的前面  
+
+```{python}
+print(fruits)
+new = fruits.insert(0, "haha")
+print(new)
+print(fruits)
+```
+
+### list.index(a) = R的which(list1 == a)[1] 
+
+```{python}
+print(fruits)
+new = fruits.index('banana')
+print(new)
+print(fruits)
+```
+
+* 終於看到一個method是不改舊值，吐新值了  
+* 這完全猜的到吧!?  
+
+### list.count(x) = 計算x在list中出現幾次  
+
+```{python}
+print(fruits)
+new = fruits.count("banana")
+print(new)
+print(fruits)
+```
+
+## List 是 mutable  
+
+* 在討論mutable或inmuatable的問題時，都是在討論當你把原物件copy一次後，對新copy的物件做事，會不會影響到舊物件  
+* 而對list來說，就是會，因為variable name只是一個reference，指到記憶體位置，所以原物建和copy後的物件，其實都指到同一個位置，那你一改他，兩個variable就都會跟著動  
+* 以下舉例：  
+
+```{python}
+areas = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# Create areas_copy
+areas_copy = areas
+
+# Change areas_copy
+areas_copy[0] = 5.0
+
+# Print areas
+print(areas)
+```
+
+* 那這樣豪可怕，我如果想只針對copy的做事，但不要影響到原物件，該怎麼做？  
+* 在copy的時候，使用list()的語法，那就會新開一個記憶體位置給他，就不會同步影響到了：  
+
+```{python}
+areas = [11.25, 18.0, 20.0]
+areas_copy = list(areas)
+areas_copy[0] = 5.0
+print(areas)
+```
+
+## List的功能（最常用來做for loop)  
+
+* R的觀點來做迭代，習慣取index，那就會寫成下面這樣：  
+
+```{python eval = FALSE}
+for index in range(len(a_list)): 
+    print("index = ", index, ", number in list = ", a_list[index])
+```
+
+* len(a_list)得到他的長度=5，而range(5)表示由0開始stop在5，所以就得到0,1,2,3,4這五個index  
+* 但python的觀點，都是直接取裡面的element做迭代，那就會寫成這樣：  
+
+```{python eval = FALSE}
+for element in a_list:
+    print("number in list = ", element)
+```
+
+* 最後，python才有的，又取index，又取element，語法是： enumerate  
+
+```{python eval = FALSE}
+for index, element in enumerate(a_list):
+    print("index = ", index, ", number in list = ", element)
+```
+
+# NumPy  
+
+## Why NumPy  
+
+* 為啥要用NumPy呢? 其實簡單的理由就是，list無法做數學運算，他只能拿來存東西...  
+
+```{python error = TRUE}
+height = [1.73, 1.68, 1.71, 1.89, 1.79]
+weight = [65.4, 59.2, 63.6, 88.4, 68.7]
+weight/(height**2)
+```
+
+
+* 因為list原本就是設計來存取資料的，它允許每個element可以是不同的type  
+* 所以，即使你每個element都放float這種type，list還是list，不會變成numerical list  
+* 所以你要叫list做數學運算時，他就不知道怎麼算了，畢竟他也不知道這個list是不是全都numerical的資訊  
+* 而NumPy，就是numerical python的縮寫，他的np.array，就是numerical list，所以只要啟用numpy，就可以做計算了  
+
+
+```{python}
+import numpy as np
+height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
+weight = np.array([65.4, 59.2, 63.6, 88.4, 68.7])
+weight/(height**2)
+```
+
+* 我們可以把np.array想成R的vector，如果你的array裡面放了不同type的東西，他會全部轉成string  
+
+```{python}
+np.array([1.0, "is", True])
+```
+
+* 所以，我們可以把對np.array所做的行為，想成在R裡面對vector所做的行為，而list的行為，都要往"儲存資料"的角度去想：  
+
+```{python}
+python_list = [1,2,3]
+python_list + python_list
+```
+
+```{python}
+numpy_array = np.array([1,2,3])
+numpy_array + numpy_array
+```
+
+## Subset np.array  
+
+* 也因為numpy可以做運算，所以在subset上，比list又更好用了  
+
+```{python}
+height_list = [1.73, 1.68, 1.71, 1.89, 1.79]
+height_array = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
+
+height_list[1]
+height_array[1]
+```
+
+```{python error = TRUE}
+height_list[height_list>1.71]
+```
+
+```{python}
+height_array[height_array>1.71]
+```
+
+## Statistics functions  
+
+### Generate data  
+
+```{python}
+height = np.round(np.random.normal(1.75, 0.20, 5000), 2)
+weight = np.round(np.random.normal(60.32, 15, 5000), 2)
+np_city = np.column_stack((height, weight))
+np_city
+```
+
+### Summary statistics  
+
+```{python}
+# Print mean height (first column)
+avg = np.mean(np_city[:,0])
+print("Average: " + str(avg))
+
+# Print median height. Replace 'None'
+med = np.median(np_city[:,0])
+print("Median: " + str(med))
+
+# Print out the standard deviation on height. Replace 'None'
+stddev = np.std(np_city[:,0])
+print("Standard Deviation: " + str(stddev))
+
+# Print out correlation between first and second column. Replace 'None'
+corr = np.corrcoef(np_city[:,0], np_city[:,1])
+print("Correlation: " + str(corr))
+```
+
+
+

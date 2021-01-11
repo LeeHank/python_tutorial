@@ -1,0 +1,27 @@
+h1:function-fundamentals Function fundamentals
+h2:single-function-parameters Single function parameters
+h2:multiple-function-parameters Multiple function parameters
+h1:tuple簡介與其在funtion上的應用 Tuple簡介與其在funtion上的應用
+h2:tuple-vs-list tuple vs list
+h3:tuple用-來建立而list用 tuple用 (,,,)來建立，而list用[,,,]
+h3:tuple裡也可放任意type的物件就像list依樣 tuple裡也可放任意type的物件，就像list依樣
+h3:tuple不可以更改裡面的element但list可以這種特性叫immutable tuple不可以更改裡面的element，但list可以。這種特性叫immutable
+h2:tuple最大的用處可以unpack-a-tuple-into-several-variables tuple最大的用處：可以unpack a tuple into several variables!
+h1:first-practice First practice
+h1:variable-scope Variable scope
+h2:local-scope中定義的object無法在global-scope中提取 local scope中定義的object，無法在global scope中提取
+h2:用global這個keyword把local-scope的object給推到global-scope 用global這個keyword，把local scope的object給推到global scope
+h2:綜合練習 綜合練習
+h1:nested-function Nested function
+h1:closure Closure
+h1:default-argument Default argument
+h1:flexible-argument-args Flexible argument (*args)
+h1:flexible-keyword-argument-kwargs Flexible keyword argument (**kwargs)
+h1:mapfilterreduce-with-lambda-function map/filter/reduce with lambda function
+h2:map-with-lambda map with lambda
+h2:filter-with-lambda filter with lambda
+h2:reduce-with-lambda reduce with lambda
+h1:error-handling Error handling
+h2:try-except try-except
+h2:raise raise
+

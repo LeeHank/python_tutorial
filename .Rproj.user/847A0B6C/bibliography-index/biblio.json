@@ -1,29 +1,6 @@
 {
     "sources": [
         {
-            "URL": "http://yihui.org/knitr/",
-            "author": [
-                {
-                    "family": "Xie",
-                    "given": "Yihui"
-                }
-            ],
-            "edition": "2nd",
-            "id": "xie2015",
-            "issued": {
-                "date-parts": [
-                    [
-                        2015
-                    ]
-                ]
-            },
-            "note": "ISBN 978-1498716963",
-            "publisher": "Chapman; Hall/CRC",
-            "publisher-place": "Boca Raton, Florida",
-            "title": "Dynamic Documents with R and knitr",
-            "type": "book"
-        },
-        {
             "URL": "https://www.R-project.org/",
             "author": [
                 {

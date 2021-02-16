@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 21 Exception Handling | Python Tutorial</title>
+  <meta name="description" content="Chapter 21 Exception Handling | Python Tutorial" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 21 Exception Handling | Python Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 21 Exception Handling | Python Tutorial" />
+  
+  
+  
+
+<meta name="author" content="Hank Lee" />
+
+
+<meta name="date" content="2021-02-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="function101.html"/>
+<link rel="next" href="flexible-arguments.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>環境設置與執行</b></span></li>
+<li class="chapter" data-level="1" data-path="python-environmental-setting.html"><a href="python-environmental-setting.html"><i class="fa fa-check"></i><b>1</b> Python Environmental Setting</a></li>
+<li class="chapter" data-level="2" data-path="-python-code.html"><a href="-python-code.html"><i class="fa fa-check"></i><b>2</b> 執行Python的code</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="-python-code.html"><a href="-python-code.html#在command-line執行"><i class="fa fa-check"></i><b>2.1</b> 在command line執行</a></li>
+<li class="chapter" data-level="2.2" data-path="-python-code.html"><a href="-python-code.html#寫成.py檔後執行"><i class="fa fa-check"></i><b>2.2</b> 寫成.py檔後執行</a></li>
+<li class="chapter" data-level="2.3" data-path="-python-code.html"><a href="-python-code.html#在vs-code中執行"><i class="fa fa-check"></i><b>2.3</b> 在VS code中執行</a></li>
+<li class="chapter" data-level="2.4" data-path="-python-code.html"><a href="-python-code.html#在-rstudio-中執行"><i class="fa fa-check"></i><b>2.4</b> 在 RStudio 中執行</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="-python-code.html"><a href="-python-code.html#新增檔案python-script"><i class="fa fa-check"></i><b>2.4.1</b> 新增檔案/python script</a></li>
+<li class="chapter" data-level="2.4.2" data-path="-python-code.html"><a href="-python-code.html#用rmarkdown"><i class="fa fa-check"></i><b>2.4.2</b> 用RMarkdown</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="-indention.html"><a href="-indention.html"><i class="fa fa-check"></i><b>3</b> 註解與indention</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="-indention.html"><a href="-indention.html#插入註解"><i class="fa fa-check"></i><b>3.1</b> 插入註解</a></li>
+<li class="chapter" data-level="3.2" data-path="-indention.html"><a href="-indention.html#indention"><i class="fa fa-check"></i><b>3.2</b> indention</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="print.html"><a href="print.html"><i class="fa fa-check"></i><b>4</b> print</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="print.html"><a href="print.html#print可以放多個element進去"><i class="fa fa-check"></i><b>4.1</b> print可以放多個element進去</a></li>
+<li class="chapter" data-level="4.2" data-path="print.html"><a href="print.html#用sep來改間隔"><i class="fa fa-check"></i><b>4.2</b> 用<code>sep=</code>來改間隔</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="variables.html"><a href="variables.html#overview"><i class="fa fa-check"></i><b>5.1</b> overview</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="variables.html"><a href="variables.html#建立variable"><i class="fa fa-check"></i><b>5.1.1</b> 建立variable</a></li>
+<li class="chapter" data-level="5.1.2" data-path="variables.html"><a href="variables.html#用type來確認variable資料類型"><i class="fa fa-check"></i><b>5.1.2</b> 用<code>type()</code>來確認variable資料類型</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="variables.html"><a href="variables.html#variable-names"><i class="fa fa-check"></i><b>5.2</b> variable names</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="variables.html"><a href="variables.html#規則"><i class="fa fa-check"></i><b>5.2.1</b> 規則</a></li>
+<li class="chapter" data-level="5.2.2" data-path="variables.html"><a href="variables.html#多個字的variable-name"><i class="fa fa-check"></i><b>5.2.2</b> 多個字的variable name</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="variables.html"><a href="variables.html#一次assign多個variables"><i class="fa fa-check"></i><b>5.3</b> 一次assign多個variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="variables.html"><a href="variables.html#多個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.1</b> 多個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.2" data-path="variables.html"><a href="variables.html#同一個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.2</b> 同一個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.3" data-path="variables.html"><a href="variables.html#unpack-a-collection"><i class="fa fa-check"></i><b>5.3.3</b> unpack a collection</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="variables.html"><a href="variables.html#assignment-operators"><i class="fa fa-check"></i><b>5.4</b> Assignment Operators</a></li>
+<li class="chapter" data-level="5.5" data-path="variables.html"><a href="variables.html#variable-scope"><i class="fa fa-check"></i><b>5.5</b> variable scope</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="variables.html"><a href="variables.html#global-variables"><i class="fa fa-check"></i><b>5.5.1</b> Global Variables</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Python Basic Data Types</b></span></li>
+<li class="chapter" data-level="6" data-path="python-data-types.html"><a href="python-data-types.html"><i class="fa fa-check"></i><b>6</b> Python Data Types</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="python-data-types.html"><a href="python-data-types.html#built-in-data-types"><i class="fa fa-check"></i><b>6.1</b> Built-in Data Types</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="python-data-types.html"><a href="python-data-types.html#基本款"><i class="fa fa-check"></i><b>6.1.1</b> 基本款</a></li>
+<li class="chapter" data-level="6.1.2" data-path="python-data-types.html"><a href="python-data-types.html#collections"><i class="fa fa-check"></i><b>6.1.2</b> collections</a></li>
+<li class="chapter" data-level="6.1.3" data-path="python-data-types.html"><a href="python-data-types.html#binary"><i class="fa fa-check"></i><b>6.1.3</b> binary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="python-data-types.html"><a href="python-data-types.html#getting-the-data-type"><i class="fa fa-check"></i><b>6.2</b> Getting the data type</a></li>
+<li class="chapter" data-level="6.3" data-path="python-data-types.html"><a href="python-data-types.html#setting-the-specific-data-type"><i class="fa fa-check"></i><b>6.3</b> Setting the specific data type</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="int-float-.html"><a href="int-float-.html"><i class="fa fa-check"></i><b>7</b> int &amp; float 整理與實戰</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="int-float-.html"><a href="int-float-.html#建立intfloat變數"><i class="fa fa-check"></i><b>7.1</b> 建立int/float變數</a></li>
+<li class="chapter" data-level="7.2" data-path="int-float-.html"><a href="int-float-.html#宣告intfloat變數"><i class="fa fa-check"></i><b>7.2</b> 宣告int/float變數</a></li>
+<li class="chapter" data-level="7.3" data-path="int-float-.html"><a href="int-float-.html#型別轉換"><i class="fa fa-check"></i><b>7.3</b> 型別轉換</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="string-.html"><a href="string-.html"><i class="fa fa-check"></i><b>8</b> string整理與實戰</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="string-.html"><a href="string-.html#字串的定義"><i class="fa fa-check"></i><b>8.1</b> 字串的定義</a></li>
+<li class="chapter" data-level="8.2" data-path="string-.html"><a href="string-.html#字串的基本操作"><i class="fa fa-check"></i><b>8.2</b> 字串的基本操作</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="string-.html"><a href="string-.html#利用來定義逃脫字元"><i class="fa fa-check"></i><b>8.2.1</b> 利用""來定義逃脫字元</a></li>
+<li class="chapter" data-level="8.2.2" data-path="string-.html"><a href="string-.html#把字串看成listindex時從0開始"><i class="fa fa-check"></i><b>8.2.2</b> 把字串看成list，index時從0開始</a></li>
+<li class="chapter" data-level="8.2.3" data-path="string-.html"><a href="string-.html#字串常用功能去空白改小寫取代"><i class="fa fa-check"></i><b>8.2.3</b> 字串常用功能：去空白、改小寫、取代</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="string-.html"><a href="string-.html#字串的format-i.e.-r的paste功能"><i class="fa fa-check"></i><b>8.3</b> 字串的format (i.e. R的paste()功能)</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="string-.html"><a href="string-.html#直接一路加號到底"><i class="fa fa-check"></i><b>8.3.1</b> 直接一路加號到底</a></li>
+<li class="chapter" data-level="8.3.2" data-path="string-.html"><a href="string-.html#用s-d-來做"><i class="fa fa-check"></i><b>8.3.2</b> 用%s, %d 來做</a></li>
+<li class="chapter" data-level="8.3.3" data-path="string-.html"><a href="string-.html#用和.format"><i class="fa fa-check"></i><b>8.3.3</b> 用{}和.format</a></li>
+<li class="chapter" data-level="8.3.4" data-path="string-.html"><a href="string-.html#用f吧"><i class="fa fa-check"></i><b>8.3.4</b> 用f吧!</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="string-.html"><a href="string-.html#字串的join-i.e.-r的collapse"><i class="fa fa-check"></i><b>8.4</b> 字串的join (i.e. R的collapse)</a></li>
+</ul></li>
+<li class="part"><span><b>Python Collections</b></span></li>
+<li class="chapter" data-level="9" data-path="collections-overview.html"><a href="collections-overview.html"><i class="fa fa-check"></i><b>9</b> collections overview</a></li>
+<li class="chapter" data-level="10" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>10</b> list整理與實戰</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="list-.html"><a href="list-.html#list定義"><i class="fa fa-check"></i><b>10.1</b> list定義</a></li>
+<li class="chapter" data-level="10.2" data-path="list-.html"><a href="list-.html#建-建立list"><i class="fa fa-check"></i><b>10.2</b> [建] 建立list</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="list-.html"><a href="list-.html#建立單維list"><i class="fa fa-check"></i><b>10.2.1</b> 建立單維list</a></li>
+<li class="chapter" data-level="10.2.2" data-path="list-.html"><a href="list-.html#建立多維list"><i class="fa fa-check"></i><b>10.2.2</b> 建立多維list</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="list-.html"><a href="list-.html#查-取用list裡面的item"><i class="fa fa-check"></i><b>10.3</b> [查] 取用list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="list-.html"><a href="list-.html#用index-0取第一個item"><i class="fa fa-check"></i><b>10.3.1</b> 用index = 0取第一個item</a></li>
+<li class="chapter" data-level="10.3.2" data-path="list-.html"><a href="list-.html#用index--2取由右數來第2個"><i class="fa fa-check"></i><b>10.3.2</b> 用index = -2取由右數來第2個</a></li>
+<li class="chapter" data-level="10.3.3" data-path="list-.html"><a href="list-.html#表示從index3取到index7"><i class="fa fa-check"></i><b>10.3.3</b> 3:8表示從index3取到index7</a></li>
+<li class="chapter" data-level="10.3.4" data-path="list-.html"><a href="list-.html#用.indexa找出a所屬的index"><i class="fa fa-check"></i><b>10.3.4</b> 用<code>.index('a')</code>找出’a’所屬的index</a></li>
+<li class="chapter" data-level="10.3.5" data-path="list-.html"><a href="list-.html#用in來確認item在不在list裡"><i class="fa fa-check"></i><b>10.3.5</b> 用<code>in</code>來確認item在不在list裡</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="list-.html"><a href="list-.html#改-修改list裡面的item"><i class="fa fa-check"></i><b>10.4</b> [改] 修改list裡面的item</a></li>
+<li class="chapter" data-level="10.5" data-path="list-.html"><a href="list-.html#增-增加list裡面的item"><i class="fa fa-check"></i><b>10.5</b> [增] 增加list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="list-.html"><a href="list-.html#加到最後面用.append"><i class="fa fa-check"></i><b>10.5.1</b> 加到最後面，用<code>.append()</code></a></li>
+<li class="chapter" data-level="10.5.2" data-path="list-.html"><a href="list-.html#加到指定的位置用.insert"><i class="fa fa-check"></i><b>10.5.2</b> 加到指定的位置，用<code>.insert()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="list-.html"><a href="list-.html#增-join兩個list"><i class="fa fa-check"></i><b>10.6</b> [增] join兩個list</a></li>
+<li class="chapter" data-level="10.7" data-path="list-.html"><a href="list-.html#刪-刪除list裡面的item"><i class="fa fa-check"></i><b>10.7</b> [刪] 刪除list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="list-.html"><a href="list-.html#removeitem-刪除該item"><i class="fa fa-check"></i><b>10.7.1</b> <code>.remove(item)</code> 刪除該item</a></li>
+<li class="chapter" data-level="10.7.2" data-path="list-.html"><a href="list-.html#pop-刪除最後一筆"><i class="fa fa-check"></i><b>10.7.2</b> <code>.pop()</code> 刪除最後一筆</a></li>
+<li class="chapter" data-level="10.7.3" data-path="list-.html"><a href="list-.html#popindex-刪除該index"><i class="fa fa-check"></i><b>10.7.3</b> <code>.pop(index)</code> 刪除該index</a></li>
+<li class="chapter" data-level="10.7.4" data-path="list-.html"><a href="list-.html#del-listindex-刪除該list中的此index"><i class="fa fa-check"></i><b>10.7.4</b> <code>del list[index]</code> 刪除該list中的此index</a></li>
+<li class="chapter" data-level="10.7.5" data-path="list-.html"><a href="list-.html#clear-清空此list內所有item"><i class="fa fa-check"></i><b>10.7.5</b> <code>.clear()</code> 清空此list內所有item</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="list-.html"><a href="list-.html#mutable-copy-list"><i class="fa fa-check"></i><b>10.8</b> [mutable] copy list</a></li>
+<li class="chapter" data-level="10.9" data-path="list-.html"><a href="list-.html#loop-for"><i class="fa fa-check"></i><b>10.9</b> [loop] for</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="list-.html"><a href="list-.html#loop-index"><i class="fa fa-check"></i><b>10.9.1</b> loop index</a></li>
+<li class="chapter" data-level="10.9.2" data-path="list-.html"><a href="list-.html#loop-items"><i class="fa fa-check"></i><b>10.9.2</b> loop items</a></li>
+<li class="chapter" data-level="10.9.3" data-path="list-.html"><a href="list-.html#enumerate"><i class="fa fa-check"></i><b>10.9.3</b> <code>enumerate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="list-.html"><a href="list-.html#loop-list-comprehension"><i class="fa fa-check"></i><b>10.10</b> [loop] list comprehension</a>
+<ul>
+<li class="chapter" data-level="10.10.1" data-path="list-.html"><a href="list-.html#simple-example"><i class="fa fa-check"></i><b>10.10.1</b> simple example</a></li>
+<li class="chapter" data-level="10.10.2" data-path="list-.html"><a href="list-.html#nested-for-loop"><i class="fa fa-check"></i><b>10.10.2</b> nested for loop</a></li>
+<li class="chapter" data-level="10.10.3" data-path="list-.html"><a href="list-.html#conditional-for-loop"><i class="fa fa-check"></i><b>10.10.3</b> conditional for loop</a></li>
+</ul></li>
+<li class="chapter" data-level="10.11" data-path="list-.html"><a href="list-.html#排序.sort"><i class="fa fa-check"></i><b>10.11</b> 排序(<code>.sort()</code>)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="list-.html"><a href="list-.html#sort"><i class="fa fa-check"></i><b>10.11.1</b> <code>.sort()</code></a></li>
+<li class="chapter" data-level="10.11.2" data-path="list-.html"><a href="list-.html#sortreverse-true"><i class="fa fa-check"></i><b>10.11.2</b> <code>.sort(reverse = True)</code></a></li>
+<li class="chapter" data-level="10.11.3" data-path="list-.html"><a href="list-.html#sortkey-my_func"><i class="fa fa-check"></i><b>10.11.3</b> <code>.sort(key = my_func)</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="list-.html"><a href="list-.html#順序倒過來.reverse"><i class="fa fa-check"></i><b>10.12</b> 順序倒過來(<code>.reverse()</code>)</a></li>
+<li class="chapter" data-level="10.13" data-path="list-.html"><a href="list-.html#list.counta-計算a在list中出現幾次"><i class="fa fa-check"></i><b>10.13</b> list.count(‘a’) = 計算’a’在list中出現幾次</a></li>
+<li class="chapter" data-level="10.14" data-path="list-.html"><a href="list-.html#practice"><i class="fa fa-check"></i><b>10.14</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="tuple-.html"><a href="tuple-.html"><i class="fa fa-check"></i><b>11</b> tuple整理與實戰</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="tuple-.html"><a href="tuple-.html#建-tuple定義與創建"><i class="fa fa-check"></i><b>11.1</b> [建] tuple定義與創建</a></li>
+<li class="chapter" data-level="11.2" data-path="tuple-.html"><a href="tuple-.html#主要用在保護數據和unpack"><i class="fa fa-check"></i><b>11.2</b> 主要用在保護數據和unpack</a></li>
+<li class="chapter" data-level="11.3" data-path="tuple-.html"><a href="tuple-.html#查-取用tuple中的item"><i class="fa fa-check"></i><b>11.3</b> [查] 取用tuple中的item</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="tuple-.html"><a href="tuple-.html#用list1index取數據"><i class="fa fa-check"></i><b>11.3.1</b> 用<code>list1[index]</code>取數據</a></li>
+<li class="chapter" data-level="11.3.2" data-path="tuple-.html"><a href="tuple-.html#用負號往回取"><i class="fa fa-check"></i><b>11.3.2</b> 用負號往回取</a></li>
+<li class="chapter" data-level="11.3.3" data-path="tuple-.html"><a href="tuple-.html#是指取index2到index4"><i class="fa fa-check"></i><b>11.3.3</b> 2:5是指取index=2到index=4</a></li>
+<li class="chapter" data-level="11.3.4" data-path="tuple-.html"><a href="tuple-.html#找index用.indexa"><i class="fa fa-check"></i><b>11.3.4</b> 找index用<code>.index('a')</code></a></li>
+<li class="chapter" data-level="11.3.5" data-path="tuple-.html"><a href="tuple-.html#確認每個item有沒有在tuple內也是用in"><i class="fa fa-check"></i><b>11.3.5</b> 確認每個item有沒有在tuple內也是用<code>in</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="tuple-.html"><a href="tuple-.html#改-增-刪-tuple不可修改"><i class="fa fa-check"></i><b>11.4</b> [改, 增, 刪] tuple不可修改</a></li>
+<li class="chapter" data-level="11.5" data-path="tuple-.html"><a href="tuple-.html#immutable"><i class="fa fa-check"></i><b>11.5</b> immutable</a></li>
+<li class="chapter" data-level="11.6" data-path="tuple-.html"><a href="tuple-.html#loop-for回圈"><i class="fa fa-check"></i><b>11.6</b> [loop] for回圈</a></li>
+<li class="chapter" data-level="11.7" data-path="tuple-.html"><a href="tuple-.html#loop-comprehension"><i class="fa fa-check"></i><b>11.7</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="11.8" data-path="tuple-.html"><a href="tuple-.html#join兩個tuple用加號"><i class="fa fa-check"></i><b>11.8</b> join兩個tuple用加號</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="dictionary-.html"><a href="dictionary-.html"><i class="fa fa-check"></i><b>12</b> dictionary整理與實戰</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="dictionary-.html"><a href="dictionary-.html#dict的定義"><i class="fa fa-check"></i><b>12.1</b> dict的定義</a></li>
+<li class="chapter" data-level="12.2" data-path="dictionary-.html"><a href="dictionary-.html#建-dict的創建"><i class="fa fa-check"></i><b>12.2</b> [建] dict的創建</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="dictionary-.html"><a href="dictionary-.html#直接用"><i class="fa fa-check"></i><b>12.2.1</b> 直接用</a></li>
+<li class="chapter" data-level="12.2.2" data-path="dictionary-.html"><a href="dictionary-.html#用dicta2-bhaha來建立"><i class="fa fa-check"></i><b>12.2.2</b> 用<code>dict(a=2, b="haha")</code>來建立</a></li>
+<li class="chapter" data-level="12.2.3" data-path="dictionary-.html"><a href="dictionary-.html#用dictiterable_pair來創建"><i class="fa fa-check"></i><b>12.2.3</b> 用<code>dict(iterable_pair)</code>來創建</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.keys-d.values-d.items查詢"><i class="fa fa-check"></i><b>12.3</b> [查] 用<code>d.keys()</code>, <code>d.values()</code>, <code>d.items()</code>查詢</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="dictionary-.html"><a href="dictionary-.html#keys可以得到最外層的所有key值"><i class="fa fa-check"></i><b>12.3.1</b> <code>.keys()</code>可以得到最外層的所有key值</a></li>
+<li class="chapter" data-level="12.3.2" data-path="dictionary-.html"><a href="dictionary-.html#values可以得到所有value"><i class="fa fa-check"></i><b>12.3.2</b> <code>.values()</code>可以得到所有value</a></li>
+<li class="chapter" data-level="12.3.3" data-path="dictionary-.html"><a href="dictionary-.html#items可以得到keyvalue的tupple"><i class="fa fa-check"></i><b>12.3.3</b> <code>.items()</code>可以得到(key,value)的tupple</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.getkey來取用dict裡面的item"><i class="fa fa-check"></i><b>12.4</b> [查] 用<code>d.get("key")</code>來取用dict裡面的item</a></li>
+<li class="chapter" data-level="12.5" data-path="dictionary-.html"><a href="dictionary-.html#改-修改dict裡面的item"><i class="fa fa-check"></i><b>12.5</b> [改] 修改dict裡面的item</a></li>
+<li class="chapter" data-level="12.6" data-path="dictionary-.html"><a href="dictionary-.html#增-增加dict的item"><i class="fa fa-check"></i><b>12.6</b> [增] 增加dict的item</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="dictionary-.html"><a href="dictionary-.html#dnew_key-new_value"><i class="fa fa-check"></i><b>12.6.1</b> <code>d["new_key"] = new_value</code></a></li>
+<li class="chapter" data-level="12.6.2" data-path="dictionary-.html"><a href="dictionary-.html#update可以合併2個字典"><i class="fa fa-check"></i><b>12.6.2</b> <code>.update()</code>可以合併2個字典</a></li>
+<li class="chapter" data-level="12.6.3" data-path="dictionary-.html"><a href="dictionary-.html#d1-d2-d3合併多個字典"><i class="fa fa-check"></i><b>12.6.3</b> <code>{**d1, **d2, **d3}</code>合併多個字典</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="dictionary-.html"><a href="dictionary-.html#刪-刪除dict的item"><i class="fa fa-check"></i><b>12.7</b> [刪] 刪除dict的item</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="dictionary-.html"><a href="dictionary-.html#popkey會把選定的key整個砍掉並把對應的value丟出來"><i class="fa fa-check"></i><b>12.7.1</b> <code>.pop('key')</code>會把選定的key整個砍掉，並把對應的value丟出來</a></li>
+<li class="chapter" data-level="12.7.2" data-path="dictionary-.html"><a href="dictionary-.html#del-dkey會刪到這組item"><i class="fa fa-check"></i><b>12.7.2</b> <code>del d['key']</code>會刪到這組item</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="dictionary-.html"><a href="dictionary-.html#mutable-copy"><i class="fa fa-check"></i><b>12.8</b> [mutable] copy</a></li>
+<li class="chapter" data-level="12.9" data-path="dictionary-.html"><a href="dictionary-.html#loop-for迴圈"><i class="fa fa-check"></i><b>12.9</b> [loop] for迴圈</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-keys"><i class="fa fa-check"></i><b>12.9.1</b> loop over keys</a></li>
+<li class="chapter" data-level="12.9.2" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-values"><i class="fa fa-check"></i><b>12.9.2</b> loop over values</a></li>
+<li class="chapter" data-level="12.9.3" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-key-value"><i class="fa fa-check"></i><b>12.9.3</b> loop over (key, value)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.10" data-path="dictionary-.html"><a href="dictionary-.html#loop-dictionary-comprehension"><i class="fa fa-check"></i><b>12.10</b> [loop] dictionary comprehension</a></li>
+<li class="chapter" data-level="12.11" data-path="dictionary-.html"><a href="dictionary-.html#如何安全的訪問字典"><i class="fa fa-check"></i><b>12.11</b> 如何安全的訪問字典</a>
+<ul>
+<li class="chapter" data-level="12.11.1" data-path="dictionary-.html"><a href="dictionary-.html#自己寫條件判斷"><i class="fa fa-check"></i><b>12.11.1</b> 自己寫條件判斷</a></li>
+<li class="chapter" data-level="12.11.2" data-path="dictionary-.html"><a href="dictionary-.html#愛用.get"><i class="fa fa-check"></i><b>12.11.2</b> 愛用<code>.get()</code></a></li>
+<li class="chapter" data-level="12.11.3" data-path="dictionary-.html"><a href="dictionary-.html#改用defaultdict這種type"><i class="fa fa-check"></i><b>12.11.3</b> 改用<code>defaultdict</code>這種type</a></li>
+</ul></li>
+<li class="chapter" data-level="12.12" data-path="dictionary-.html"><a href="dictionary-.html#how-to"><i class="fa fa-check"></i><b>12.12</b> How to…</a>
+<ul>
+<li class="chapter" data-level="12.12.1" data-path="dictionary-.html"><a href="dictionary-.html#如何將字典按照keyvalue大小排序"><i class="fa fa-check"></i><b>12.12.1</b> 如何將字典按照key/value大小排序</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="set-.html"><a href="set-.html"><i class="fa fa-check"></i><b>13</b> set應用實戰</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="set-.html"><a href="set-.html#定義set"><i class="fa fa-check"></i><b>13.1</b> 定義set</a></li>
+<li class="chapter" data-level="13.2" data-path="set-.html"><a href="set-.html#查-只能用for-loop與in"><i class="fa fa-check"></i><b>13.2</b> [查] 只能用<code>for loop</code>與<code>in</code></a></li>
+<li class="chapter" data-level="13.3" data-path="set-.html"><a href="set-.html#改-set無法做修改"><i class="fa fa-check"></i><b>13.3</b> [改] set無法做修改</a></li>
+<li class="chapter" data-level="13.4" data-path="set-.html"><a href="set-.html#刪-.remove與.discard"><i class="fa fa-check"></i><b>13.4</b> [刪] <code>.remove()</code>與<code>.discard()</code></a></li>
+<li class="chapter" data-level="13.5" data-path="set-.html"><a href="set-.html#增-.add與.update"><i class="fa fa-check"></i><b>13.5</b> [增] <code>.add()</code>與<code>.update()</code></a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="set-.html"><a href="set-.html#增加一個item用.add"><i class="fa fa-check"></i><b>13.5.1</b> 增加一個item用<code>.add()</code></a></li>
+<li class="chapter" data-level="13.5.2" data-path="set-.html"><a href="set-.html#增加多個item用.update"><i class="fa fa-check"></i><b>13.5.2</b> 增加多個item用<code>.update()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="set-.html"><a href="set-.html#mutable-請愛用.copy"><i class="fa fa-check"></i><b>13.6</b> [mutable] 請愛用<code>.copy()</code></a></li>
+<li class="chapter" data-level="13.7" data-path="set-.html"><a href="set-.html#loop-for-1"><i class="fa fa-check"></i><b>13.7</b> [loop] for</a></li>
+<li class="chapter" data-level="13.8" data-path="set-.html"><a href="set-.html#loop-comprehension-1"><i class="fa fa-check"></i><b>13.8</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="13.9" data-path="set-.html"><a href="set-.html#特殊技-集合運算"><i class="fa fa-check"></i><b>13.9</b> [特殊技] 集合運算</a></li>
+<li class="chapter" data-level="13.10" data-path="set-.html"><a href="set-.html#特殊技-對list取unique"><i class="fa fa-check"></i><b>13.10</b> [特殊技] 對list取unique</a></li>
+<li class="chapter" data-level="13.11" data-path="set-.html"><a href="set-.html#特殊技-將字串中unique-character轉成list"><i class="fa fa-check"></i><b>13.11</b> [特殊技] 將字串中unique character轉成list</a></li>
+</ul></li>
+<li class="part"><span><b>條件判斷</b></span></li>
+<li class="chapter" data-level="14" data-path="none.html"><a href="none.html"><i class="fa fa-check"></i><b>14</b> None</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="none.html"><a href="none.html#定義"><i class="fa fa-check"></i><b>14.1</b> 定義</a></li>
+<li class="chapter" data-level="14.2" data-path="none.html"><a href="none.html#is-none"><i class="fa fa-check"></i><b>14.2</b> <code>is None</code></a></li>
+<li class="chapter" data-level="14.3" data-path="none.html"><a href="none.html#使用時機"><i class="fa fa-check"></i><b>14.3</b> 使用時機</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="none.html"><a href="none.html#與資料庫互動"><i class="fa fa-check"></i><b>14.3.1</b> 與資料庫互動</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="boolean-.html"><a href="boolean-.html"><i class="fa fa-check"></i><b>15</b> boolean整理與實戰</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boolean-.html"><a href="boolean-.html#大部分的value轉成boolean都是true"><i class="fa fa-check"></i><b>15.1</b> 大部分的value，轉成boolean都是True</a></li>
+<li class="chapter" data-level="15.2" data-path="boolean-.html"><a href="boolean-.html#少部分value轉成boolean會是false"><i class="fa fa-check"></i><b>15.2</b> 少部分value，轉成boolean會是False</a></li>
+<li class="chapter" data-level="15.3" data-path="boolean-.html"><a href="boolean-.html#搭配if-statement"><i class="fa fa-check"></i><b>15.3</b> 搭配if statement</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="conditional-operators.html"><a href="conditional-operators.html"><i class="fa fa-check"></i><b>16</b> Conditional Operators</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="conditional-operators.html"><a href="conditional-operators.html#section"><i class="fa fa-check"></i><b>16.0.1</b> <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code></a></li>
+<li class="chapter" data-level="16.0.2" data-path="conditional-operators.html"><a href="conditional-operators.html#and-or-not"><i class="fa fa-check"></i><b>16.0.2</b> <code>and</code>, <code>or</code>, <code>not</code></a></li>
+<li class="chapter" data-level="16.0.3" data-path="conditional-operators.html"><a href="conditional-operators.html#in-not-in"><i class="fa fa-check"></i><b>16.0.3</b> <code>in</code>, <code>not in</code></a></li>
+<li class="chapter" data-level="16.0.4" data-path="conditional-operators.html"><a href="conditional-operators.html#is-is-not"><i class="fa fa-check"></i><b>16.0.4</b> <code>is</code>, <code>is not</code></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="if-statement.html"><a href="if-statement.html"><i class="fa fa-check"></i><b>17</b> If statement</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="if-statement.html"><a href="if-statement.html#if-1"><i class="fa fa-check"></i><b>17.1</b> if…</a></li>
+<li class="chapter" data-level="17.2" data-path="if-statement.html"><a href="if-statement.html#ifelse"><i class="fa fa-check"></i><b>17.2</b> if…else…</a></li>
+<li class="chapter" data-level="17.3" data-path="if-statement.html"><a href="if-statement.html#ifelifelse"><i class="fa fa-check"></i><b>17.3</b> if…elif…else…</a></li>
+<li class="chapter" data-level="17.4" data-path="if-statement.html"><a href="if-statement.html#一行的if"><i class="fa fa-check"></i><b>17.4</b> 一行的if</a></li>
+<li class="chapter" data-level="17.5" data-path="if-statement.html"><a href="if-statement.html#一行的ifelse"><i class="fa fa-check"></i><b>17.5</b> 一行的if…else…</a></li>
+<li class="chapter" data-level="17.6" data-path="if-statement.html"><a href="if-statement.html#善用pass"><i class="fa fa-check"></i><b>17.6</b> 善用pass</a></li>
+<li class="chapter" data-level="17.7" data-path="if-statement.html"><a href="if-statement.html#if-條件太多時怎麼優化"><i class="fa fa-check"></i><b>17.7</b> if 條件太多時，怎麼優化</a></li>
+</ul></li>
+<li class="part"><span><b>Loops</b></span></li>
+<li class="chapter" data-level="18" data-path="for-loop.html"><a href="for-loop.html"><i class="fa fa-check"></i><b>18</b> for loop</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="for-loop.html"><a href="for-loop.html#寫法"><i class="fa fa-check"></i><b>18.1</b> 寫法</a></li>
+<li class="chapter" data-level="18.2" data-path="for-loop.html"><a href="for-loop.html#善用break終止迴圈"><i class="fa fa-check"></i><b>18.2</b> 善用break終止迴圈</a></li>
+<li class="chapter" data-level="18.3" data-path="for-loop.html"><a href="for-loop.html#善用continue跳入下一個迴圈"><i class="fa fa-check"></i><b>18.3</b> 善用continue跳入下一個迴圈</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="while-loop.html"><a href="while-loop.html"><i class="fa fa-check"></i><b>19</b> while loop</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="while-loop.html"><a href="while-loop.html#while-寫法"><i class="fa fa-check"></i><b>19.1</b> while 寫法</a></li>
+<li class="chapter" data-level="19.2" data-path="while-loop.html"><a href="while-loop.html#確認每次都有更新內容"><i class="fa fa-check"></i><b>19.2</b> 確認每次都有更新內容</a></li>
+<li class="chapter" data-level="19.3" data-path="while-loop.html"><a href="while-loop.html#善用break"><i class="fa fa-check"></i><b>19.3</b> 善用<code>break</code></a></li>
+</ul></li>
+<li class="part"><span><b>Functions</b></span></li>
+<li class="chapter" data-level="20" data-path="function101.html"><a href="function101.html"><i class="fa fa-check"></i><b>20</b> function101</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="function101.html"><a href="function101.html#function的結構"><i class="fa fa-check"></i><b>20.1</b> function的結構</a></li>
+<li class="chapter" data-level="20.2" data-path="function101.html"><a href="function101.html#docstring的標準格式"><i class="fa fa-check"></i><b>20.2</b> Docstring的標準格式</a></li>
+<li class="chapter" data-level="20.3" data-path="function101.html"><a href="function101.html#先檢驗argument的合法性"><i class="fa fa-check"></i><b>20.3</b> 先檢驗argument的合法性</a></li>
+<li class="chapter" data-level="20.4" data-path="function101.html"><a href="function101.html#記得return"><i class="fa fa-check"></i><b>20.4</b> 記得<code>return</code></a></li>
+<li class="chapter" data-level="20.5" data-path="function101.html"><a href="function101.html#default-argument"><i class="fa fa-check"></i><b>20.5</b> default argument</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="exception-handling.html"><a href="exception-handling.html"><i class="fa fa-check"></i><b>21</b> Exception Handling</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="exception-handling.html"><a href="exception-handling.html#各種異常介紹"><i class="fa fa-check"></i><b>21.1</b> 各種異常介紹</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="exception-handling.html"><a href="exception-handling.html#attributeerror"><i class="fa fa-check"></i><b>21.1.1</b> AttributeError</a></li>
+<li class="chapter" data-level="21.1.2" data-path="exception-handling.html"><a href="exception-handling.html#modulenotfounderror"><i class="fa fa-check"></i><b>21.1.2</b> ModuleNotFoundError</a></li>
+<li class="chapter" data-level="21.1.3" data-path="exception-handling.html"><a href="exception-handling.html#indexerror"><i class="fa fa-check"></i><b>21.1.3</b> IndexError</a></li>
+<li class="chapter" data-level="21.1.4" data-path="exception-handling.html"><a href="exception-handling.html#keyerror"><i class="fa fa-check"></i><b>21.1.4</b> KeyError</a></li>
+<li class="chapter" data-level="21.1.5" data-path="exception-handling.html"><a href="exception-handling.html#nameerror"><i class="fa fa-check"></i><b>21.1.5</b> NameError</a></li>
+<li class="chapter" data-level="21.1.6" data-path="exception-handling.html"><a href="exception-handling.html#zerodivisionerror"><i class="fa fa-check"></i><b>21.1.6</b> ZeroDivisionError</a></li>
+<li class="chapter" data-level="21.1.7" data-path="exception-handling.html"><a href="exception-handling.html#自定義的error"><i class="fa fa-check"></i><b>21.1.7</b> 自定義的error</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="exception-handling.html"><a href="exception-handling.html#raise-xxxerrorerror-message-herer"><i class="fa fa-check"></i><b>21.2</b> <code>raise XXXError("error message herer")</code></a></li>
+<li class="chapter" data-level="21.3" data-path="exception-handling.html"><a href="exception-handling.html#try...except..."><i class="fa fa-check"></i><b>21.3</b> <code>try...except...</code></a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="exception-handling.html"><a href="exception-handling.html#基本款只寫except"><i class="fa fa-check"></i><b>21.3.1</b> 基本款：只寫<code>except</code></a></li>
+<li class="chapter" data-level="21.3.2" data-path="exception-handling.html"><a href="exception-handling.html#進階款-except-xxerror"><i class="fa fa-check"></i><b>21.3.2</b> 進階款： <code>except XXerror</code></a></li>
+<li class="chapter" data-level="21.3.3" data-path="exception-handling.html"><a href="exception-handling.html#懶人款-except-exception-as-e"><i class="fa fa-check"></i><b>21.3.3</b> 懶人款: <code>except Exception as e</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="flexible-arguments.html"><a href="flexible-arguments.html"><i class="fa fa-check"></i><b>22</b> flexible arguments</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#args"><i class="fa fa-check"></i><b>22.1</b> <code>*args</code></a></li>
+<li class="chapter" data-level="22.2" data-path="flexible-arguments.html"><a href="flexible-arguments.html#kwargs"><i class="fa fa-check"></i><b>22.2</b> <code>**kwargs</code></a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#使用時機-1"><i class="fa fa-check"></i><b>22.2.1</b> 使用時機</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="recursion.html"><a href="recursion.html"><i class="fa fa-check"></i><b>23</b> recursion</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="recursion.html"><a href="recursion.html#n-計算"><i class="fa fa-check"></i><b>23.1</b> n! 計算</a></li>
+<li class="chapter" data-level="23.2" data-path="recursion.html"><a href="recursion.html#費氏數列"><i class="fa fa-check"></i><b>23.2</b> 費氏數列</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html"><i class="fa fa-check"></i><b>24</b> Nested Function and closure</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#nested-function"><i class="fa fa-check"></i><b>24.1</b> Nested function</a></li>
+<li class="chapter" data-level="24.2" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#closure"><i class="fa fa-check"></i><b>24.2</b> Closure</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="variable-scope-1.html"><a href="variable-scope-1.html"><i class="fa fa-check"></i><b>25</b> Variable Scope</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="variable-scope-1.html"><a href="variable-scope-1.html#intro"><i class="fa fa-check"></i><b>25.1</b> Intro</a></li>
+<li class="chapter" data-level="25.2" data-path="variable-scope-1.html"><a href="variable-scope-1.html#legb-scope"><i class="fa fa-check"></i><b>25.2</b> LEGB scope</a></li>
+<li class="chapter" data-level="25.3" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用global這個keyword把local-scope的object給推到global-scope"><i class="fa fa-check"></i><b>25.3</b> 用<code>global</code>這個keyword，把local scope的object給推到global scope</a></li>
+<li class="chapter" data-level="25.4" data-path="variable-scope-1.html"><a href="variable-scope-1.html#enclosing-function-scope的例子"><i class="fa fa-check"></i><b>25.4</b> Enclosing function scope的例子</a></li>
+<li class="chapter" data-level="25.5" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用nonlocal這個keyword"><i class="fa fa-check"></i><b>25.5</b> 用<code>nonlocal</code>這個keyword…</a></li>
+</ul></li>
+<li class="part"><span><b>Object Oriented Programming</b></span></li>
+<li class="chapter" data-level="26" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html"><i class="fa fa-check"></i><b>26</b> OOP Fundamentals</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#what-is-oop"><i class="fa fa-check"></i><b>26.1</b> What is OOP?</a></li>
+<li class="chapter" data-level="26.2" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#oop-in-python"><i class="fa fa-check"></i><b>26.2</b> OOP in Python</a></li>
+<li class="chapter" data-level="26.3" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#my-first-class"><i class="fa fa-check"></i><b>26.3</b> My first class</a></li>
+<li class="chapter" data-level="26.4" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#the-__init__-constructor"><i class="fa fa-check"></i><b>26.4</b> the <code>__init__</code> constructor</a></li>
+<li class="chapter" data-level="26.5" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#寫class的sop"><i class="fa fa-check"></i><b>26.5</b> 寫Class的SOP</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html"><i class="fa fa-check"></i><b>27</b> Class-level vs Instance-level</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-attribute-vs-class-level-attribute"><i class="fa fa-check"></i><b>27.1</b> Instance-level attribute vs Class-level attribute</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介實例屬性與類屬性"><i class="fa fa-check"></i><b>27.1.1</b> 簡介<code>實例屬性</code>與<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性可以繼承類屬性"><i class="fa fa-check"></i><b>27.1.2</b> <code>實例屬性</code>可以繼承<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性與類屬性的修改"><i class="fa fa-check"></i><b>27.1.3</b> <code>實例屬性</code>與<code>類屬性</code>的修改</a></li>
+<li class="chapter" data-level="27.1.4" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#類屬性用在哪"><i class="fa fa-check"></i><b>27.1.4</b> <code>類屬性</code>用在哪</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-method-vs-class-level-method"><i class="fa fa-check"></i><b>27.2</b> Instance-level method vs Class-level method</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介類方法和實例方法"><i class="fa fa-check"></i><b>27.2.1</b> 簡介<code>類方法</code>和<code>實例方法</code></a></li>
+<li class="chapter" data-level="27.2.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性的使用時機"><i class="fa fa-check"></i><b>27.2.2</b> 實例屬性的使用時機</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#小結"><i class="fa fa-check"></i><b>27.3</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="attribute-protection.html"><a href="attribute-protection.html"><i class="fa fa-check"></i><b>28</b> Attribute Protection</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="attribute-protection.html"><a href="attribute-protection.html#naming-convention"><i class="fa fa-check"></i><b>28.1</b> Naming Convention</a></li>
+<li class="chapter" data-level="28.2" data-path="attribute-protection.html"><a href="attribute-protection.html#放任型-不保護"><i class="fa fa-check"></i><b>28.2</b> [放任型] 不保護</a></li>
+<li class="chapter" data-level="28.3" data-path="attribute-protection.html"><a href="attribute-protection.html#信任型-用單底線提醒"><i class="fa fa-check"></i><b>28.3</b> [信任型] 用單底線提醒</a></li>
+<li class="chapter" data-level="28.4" data-path="attribute-protection.html"><a href="attribute-protection.html#嚴父型-用雙底線不給動"><i class="fa fa-check"></i><b>28.4</b> [嚴父型] 用雙底線不給動</a></li>
+<li class="chapter" data-level="28.5" data-path="attribute-protection.html"><a href="attribute-protection.html#中庸型-雙底線-property-.setter"><i class="fa fa-check"></i><b>28.5</b> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code></a>
+<ul>
+<li class="chapter" data-level="28.5.1" data-path="attribute-protection.html"><a href="attribute-protection.html#old-school-作法"><i class="fa fa-check"></i><b>28.5.1</b> old-school 作法</a></li>
+<li class="chapter" data-level="28.5.2" data-path="attribute-protection.html"><a href="attribute-protection.html#正規作法"><i class="fa fa-check"></i><b>28.5.2</b> 正規作法</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html"><i class="fa fa-check"></i><b>29</b> isinstance, equality, 與 string representation</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#type-與-isinstance"><i class="fa fa-check"></i><b>29.1</b> <code>type</code> 與 <code>isinstance</code></a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#繼承與isinstance"><i class="fa fa-check"></i><b>29.1.1</b> 繼承與isinstance</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#eq__-object-equality"><i class="fa fa-check"></i><b>29.2</b> <code>__eq__</code> (object equality)</a></li>
+<li class="chapter" data-level="29.3" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#str__與__repr__"><i class="fa fa-check"></i><b>29.3</b> <code>__str__</code>與<code>__repr__</code></a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html"><i class="fa fa-check"></i><b>30</b> Encapsulation, Inheritacne, and Polymorphism</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#封裝"><i class="fa fa-check"></i><b>30.1</b> 封裝</a></li>
+<li class="chapter" data-level="30.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#繼承inheritance"><i class="fa fa-check"></i><b>30.2</b> 繼承(inheritance)</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#simple-inheritance"><i class="fa fa-check"></i><b>30.2.1</b> simple inheritance</a></li>
+<li class="chapter" data-level="30.2.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加instance-level-attribute-method"><i class="fa fa-check"></i><b>30.2.2</b> 增加instance-level attribute &amp; method</a></li>
+<li class="chapter" data-level="30.2.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加class-level-attribute"><i class="fa fa-check"></i><b>30.2.3</b> 增加class-level attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形"><i class="fa fa-check"></i><b>30.3</b> 多形</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形的使用時機"><i class="fa fa-check"></i><b>30.3.1</b> 多形的使用時機</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exception-handling" class="section level1" number="21">
+<h1><span class="header-section-number">Chapter 21</span> Exception Handling</h1>
+<ul>
+<li>在python中，我們看到的<code>Error</code>，就叫異常(exception)<br />
+</li>
+<li>異常分兩種：
+<ul>
+<li>系統內建的異常： 例如<code>ValueError()</code>, <code>TypeError()</code>,…</li>
+<li>自己定義的異常<br />
+</li>
+</ul></li>
+<li>那總結一下這章要講的重點：
+<ul>
+<li>[異常] 先介紹各種異常<br />
+</li>
+<li>[處理] function在運行時，我想主動卡控東西，若違反我的規則，我要主動丟error出去 -&gt; <code>raise XXXError("error message here")</code><br />
+</li>
+<li>[處理] function在運行時，若出現不可預知的error，我們該怎麼處理？ -&gt; <code>try: ..., except: ...</code></li>
+</ul></li>
+</ul>
+<div id="各種異常介紹" class="section level2" number="21.1">
+<h2><span class="header-section-number">21.1</span> 各種異常介紹</h2>
+<div id="attributeerror" class="section level3" number="21.1.1">
+<h3><span class="header-section-number">21.1.1</span> AttributeError</h3>
+<ul>
+<li>在python中，所有東西都是object，都有自己的屬性(attribute)。<br />
+</li>
+<li>那如果你今天call某個object一個不屬於他的屬性，那就會丟<code>AttributeError</code><br />
+</li>
+<li>例如下例，os裡面沒有<code>.test</code>這個屬性，所以你call他就會報錯：</li>
+</ul>
+<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="exception-handling.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb203-2"><a href="exception-handling.html#cb203-2" aria-hidden="true" tabindex="-1"></a>os.test</span>
+<span id="cb203-3"><a href="exception-handling.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: module &#39;os&#39; has no attribute &#39;test&#39;</span></span>
+<span id="cb203-4"><a href="exception-handling.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb203-5"><a href="exception-handling.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb203-6"><a href="exception-handling.html#cb203-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="modulenotfounderror" class="section level3" number="21.1.2">
+<h3><span class="header-section-number">21.1.2</span> ModuleNotFoundError</h3>
+<ul>
+<li>如果我們在import一個module時，沒有這個module，那就會報<code>ModuleNotFoundError</code></li>
+</ul>
+<div class="sourceCode" id="cb204"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb204-1"><a href="exception-handling.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hank_module</span>
+<span id="cb204-2"><a href="exception-handling.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ModuleNotFoundError: No module named &#39;hank_module&#39;</span></span>
+<span id="cb204-3"><a href="exception-handling.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb204-4"><a href="exception-handling.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb204-5"><a href="exception-handling.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb204-6"><a href="exception-handling.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;/Users/hanklee/Library/Application Support/renv/cache/v5/R-4.0/x86_64-apple-darwin17.0/reticulate/1.18/fbd35cac6ae7554d0e4f440bca1adf3a/reticulate/python/rpytools/loader.py&quot;, line 19, in _import_hook</span></span>
+<span id="cb204-7"><a href="exception-handling.html#cb204-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     module = _import(</span></span></code></pre></div>
+</div>
+<div id="indexerror" class="section level3" number="21.1.3">
+<h3><span class="header-section-number">21.1.3</span> IndexError</h3>
+<ul>
+<li>如果某個list的長度只有1，你卻要取用他index=2，那就會報IndexError</li>
+</ul>
+<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="exception-handling.html#cb205-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">&quot;hank&quot;</span>]</span>
+<span id="cb205-2"><a href="exception-handling.html#cb205-2" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>]</span>
+<span id="cb205-3"><a href="exception-handling.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): IndexError: list index out of range</span></span>
+<span id="cb205-4"><a href="exception-handling.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb205-5"><a href="exception-handling.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb205-6"><a href="exception-handling.html#cb205-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="keyerror" class="section level3" number="21.1.4">
+<h3><span class="header-section-number">21.1.4</span> KeyError</h3>
+<ul>
+<li>訪問字典時，key寫錯了，沒有這個key</li>
+</ul>
+<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="exception-handling.html#cb206-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {<span class="st">&quot;name&quot;</span>: <span class="st">&quot;hank&quot;</span>}</span>
+<span id="cb206-2"><a href="exception-handling.html#cb206-2" aria-hidden="true" tabindex="-1"></a>a[<span class="st">&#39;salary&#39;</span>]</span>
+<span id="cb206-3"><a href="exception-handling.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: &#39;salary&#39;</span></span>
+<span id="cb206-4"><a href="exception-handling.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb206-5"><a href="exception-handling.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb206-6"><a href="exception-handling.html#cb206-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="nameerror" class="section level3" number="21.1.5">
+<h3><span class="header-section-number">21.1.5</span> NameError</h3>
+<ul>
+<li>call一個沒有被定義過的變數</li>
+</ul>
+<div class="sourceCode" id="cb207"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a href="exception-handling.html#cb207-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> hank <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb207-2"><a href="exception-handling.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name &#39;hank&#39; is not defined</span></span>
+<span id="cb207-3"><a href="exception-handling.html#cb207-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb207-4"><a href="exception-handling.html#cb207-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb207-5"><a href="exception-handling.html#cb207-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="zerodivisionerror" class="section level3" number="21.1.6">
+<h3><span class="header-section-number">21.1.6</span> ZeroDivisionError</h3>
+<ul>
+<li>把0當除數時，會報的error</li>
+</ul>
+<div class="sourceCode" id="cb208"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb208-1"><a href="exception-handling.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="op">/</span><span class="dv">0</span></span>
+<span id="cb208-2"><a href="exception-handling.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ZeroDivisionError: division by zero</span></span>
+<span id="cb208-3"><a href="exception-handling.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb208-4"><a href="exception-handling.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb208-5"><a href="exception-handling.html#cb208-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="自定義的error" class="section level3" number="21.1.7">
+<h3><span class="header-section-number">21.1.7</span> 自定義的error</h3>
+<ul>
+<li>其實剛剛介紹的各種Error，都是繼承自<code>Exception</code>這個class，簡單驗證一下：</li>
+</ul>
+<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb209-1"><a href="exception-handling.html#cb209-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="pp">TypeError</span>(<span class="st">&quot;type is wrong&quot;</span>)</span>
+<span id="cb209-2"><a href="exception-handling.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, <span class="pp">TypeError</span>))</span>
+<span id="cb209-3"><a href="exception-handling.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span>
+<span id="cb209-4"><a href="exception-handling.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, <span class="pp">Exception</span>))</span>
+<span id="cb209-5"><a href="exception-handling.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<ul>
+<li>如果我們在pycharm裡，按ctrl/command，再把滑鼠點到程式碼中的<code>TypeError</code>，他會開啟TypeError的source code，就可以看到第一行他就在做繼承</li>
+</ul>
+<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="exception-handling.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="pp">TypeError</span>(<span class="pp">Exception</span>):</span>
+<span id="cb210-2"><a href="exception-handling.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span></code></pre></div>
+<ul>
+<li>所以，要寫我自己定義的error，就依樣畫葫蘆就好：</li>
+</ul>
+<div class="sourceCode" id="cb211"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="exception-handling.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyException(<span class="pp">Exception</span>):</span>
+<span id="cb211-2"><a href="exception-handling.html#cb211-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb211-3"><a href="exception-handling.html#cb211-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="exception-handling.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="cf">raise</span> MyException(<span class="st">&quot;這是我定義的異常&quot;</span>)</span>
+<span id="cb211-5"><a href="exception-handling.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): MyException: 這是我定義的異常</span></span>
+<span id="cb211-6"><a href="exception-handling.html#cb211-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb211-7"><a href="exception-handling.html#cb211-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb211-8"><a href="exception-handling.html#cb211-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+</div>
+<div id="raise-xxxerrorerror-message-herer" class="section level2" number="21.2">
+<h2><span class="header-section-number">21.2</span> <code>raise XXXError("error message herer")</code></h2>
+<ul>
+<li>上一章講function時，有建議養成習慣，在function的一開始，都先確認input argument是否合法，若不合法，直接報error，不用再繼續做下去<br />
+</li>
+<li>那這在R裡面，就是寫個條件判斷，若不合法，就做<code>stop("error message")</code><br />
+</li>
+<li>而在Python裡面，我們已經知道Error都要加上error type才完整，所以大概會寫成這樣： <code>raise XXXError("error message")</code><br />
+</li>
+<li>可以看到，和R的差別，就是多個<code>raise</code>，以及<code>XXX</code><br />
+</li>
+<li>來看例子：</li>
+</ul>
+<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="exception-handling.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> square(value): </span>
+<span id="cb212-2"><a href="exception-handling.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb212-3"><a href="exception-handling.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">not</span> <span class="bu">type</span>(value) <span class="kw">is</span> <span class="bu">int</span>) <span class="kw">and</span> (<span class="kw">not</span> <span class="bu">type</span>(value) <span class="kw">is</span> <span class="bu">float</span>):</span>
+<span id="cb212-4"><a href="exception-handling.html#cb212-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">&quot;`value` must be the type of int/float&quot;</span>)</span>
+<span id="cb212-5"><a href="exception-handling.html#cb212-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb212-6"><a href="exception-handling.html#cb212-6" aria-hidden="true" tabindex="-1"></a>  new_value <span class="op">=</span> value<span class="op">**</span><span class="dv">2</span> </span>
+<span id="cb212-7"><a href="exception-handling.html#cb212-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb212-8"><a href="exception-handling.html#cb212-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># output</span></span>
+<span id="cb212-9"><a href="exception-handling.html#cb212-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> new_value</span></code></pre></div>
+<ul>
+<li>可以看到上例，如果輸入的value，不是數值型資料(i.e. int/float)，那就報錯<br />
+</li>
+<li>這邊可以注意，你要報什麼類型的錯，其實隨你高興，你要寫<code>raise ValueError("error message")</code>，python也不會管你，這只是你要寫給user看得東西而已。<br />
+</li>
+<li>來試試看管不管用：</li>
+</ul>
+<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="exception-handling.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="dv">3</span>))</span>
+<span id="cb213-2"><a href="exception-handling.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9</span></span>
+<span id="cb213-3"><a href="exception-handling.html#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="fl">1.4</span>))</span>
+<span id="cb213-4"><a href="exception-handling.html#cb213-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1.9599999999999997</span></span>
+<span id="cb213-5"><a href="exception-handling.html#cb213-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="st">&#39;haha&#39;</span>))</span>
+<span id="cb213-6"><a href="exception-handling.html#cb213-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: `value` must be the type of int/float</span></span>
+<span id="cb213-7"><a href="exception-handling.html#cb213-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb213-8"><a href="exception-handling.html#cb213-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb213-9"><a href="exception-handling.html#cb213-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb213-10"><a href="exception-handling.html#cb213-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 4, in square</span></span></code></pre></div>
+</div>
+<div id="try...except..." class="section level2" number="21.3">
+<h2><span class="header-section-number">21.3</span> <code>try...except...</code></h2>
+<ul>
+<li>就像if…else…有多種寫法一樣，try…except也是，以下寫出最複雜的例子，記得除了try和except一定要以外，其他都是可有可無</li>
+</ul>
+<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="exception-handling.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb214-2"><a href="exception-handling.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 執行一段可能報error的code</span></span>
+<span id="cb214-3"><a href="exception-handling.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span>:</span>
+<span id="cb214-4"><a href="exception-handling.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 如果發生error，執行此處的code</span></span>
+<span id="cb214-5"><a href="exception-handling.html#cb214-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb214-6"><a href="exception-handling.html#cb214-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 如果沒發生error，執行此處的code</span></span>
+<span id="cb214-7"><a href="exception-handling.html#cb214-7" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb214-8"><a href="exception-handling.html#cb214-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 不管有沒有發生error，最後都得執行此處的code</span></span></code></pre></div>
+<div id="基本款只寫except" class="section level3" number="21.3.1">
+<h3><span class="header-section-number">21.3.1</span> 基本款：只寫<code>except</code></h3>
+<ul>
+<li><code>try...except...</code>其實就是R裡面的tryCatch，通常是碰到我們<code>不想停下來的錯誤</code>時，而做的處理(如果是嚴重錯誤，必須直接跳出的話，就會用<code>raise XXError("error message")</code>)<br />
+</li>
+<li>舉個例子，我如果沿用剛剛<code>square</code> function，去算大量的數據時：</li>
+</ul>
+<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="exception-handling.html#cb215-1" aria-hidden="true" tabindex="-1"></a>input_list <span class="op">=</span> [<span class="dv">2</span>, <span class="fl">3.5</span>, <span class="dv">7</span>, <span class="st">&#39;4&#39;</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb215-2"><a href="exception-handling.html#cb215-2" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> []</span>
+<span id="cb215-3"><a href="exception-handling.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> input_list:</span>
+<span id="cb215-4"><a href="exception-handling.html#cb215-4" aria-hidden="true" tabindex="-1"></a>  temp_res <span class="op">=</span> square(item)</span>
+<span id="cb215-5"><a href="exception-handling.html#cb215-5" aria-hidden="true" tabindex="-1"></a>  res.append(temp_res)</span>
+<span id="cb215-6"><a href="exception-handling.html#cb215-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: `value` must be the type of int/float</span></span>
+<span id="cb215-7"><a href="exception-handling.html#cb215-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb215-8"><a href="exception-handling.html#cb215-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb215-9"><a href="exception-handling.html#cb215-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 2, in &lt;module&gt;</span></span>
+<span id="cb215-10"><a href="exception-handling.html#cb215-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 4, in square</span></span></code></pre></div>
+<ul>
+<li>會發現報了error之後，後面的東西全都停掉了<br />
+</li>
+<li>但我更傾向，不要報error，而是隨便塞個東西進去，然後print個message讓我知道哪裡出錯就好，那我就可以改成這樣寫：</li>
+</ul>
+<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="exception-handling.html#cb216-1" aria-hidden="true" tabindex="-1"></a>input_list <span class="op">=</span> [<span class="dv">2</span>, <span class="fl">3.5</span>, <span class="dv">7</span>, <span class="st">&#39;4&#39;</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb216-2"><a href="exception-handling.html#cb216-2" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> []</span>
+<span id="cb216-3"><a href="exception-handling.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> input_list:</span>
+<span id="cb216-4"><a href="exception-handling.html#cb216-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span>:</span>
+<span id="cb216-5"><a href="exception-handling.html#cb216-5" aria-hidden="true" tabindex="-1"></a>    temp_res <span class="op">=</span> square(item)</span>
+<span id="cb216-6"><a href="exception-handling.html#cb216-6" aria-hidden="true" tabindex="-1"></a>    res.append(temp_res)</span>
+<span id="cb216-7"><a href="exception-handling.html#cb216-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">except</span>:</span>
+<span id="cb216-8"><a href="exception-handling.html#cb216-8" aria-hidden="true" tabindex="-1"></a>    res.append(<span class="va">None</span>)</span>
+<span id="cb216-9"><a href="exception-handling.html#cb216-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;input = </span><span class="sc">{</span>item<span class="sc">}</span><span class="ss"> occurs error!!&quot;</span>)</span>
+<span id="cb216-10"><a href="exception-handling.html#cb216-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; input = 4 occurs error!!</span></span>
+<span id="cb216-11"><a href="exception-handling.html#cb216-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;The result is: &quot;</span>, res)</span>
+<span id="cb216-12"><a href="exception-handling.html#cb216-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The result is:  [4, 12.25, 49, None, 64, 100]</span></span></code></pre></div>
+<ul>
+<li><p>那我的程序就可以順利跑完，得到result，並把發生錯誤的項目print在log裡讓我們知道。</p></li>
+<li><p>再舉個例子，我有個function，想要input一串數字，然後output出哪些數是100的因數：</p></li>
+</ul>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="exception-handling.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factor_100(my_list):</span>
+<span id="cb217-2"><a href="exception-handling.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb217-3"><a href="exception-handling.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> item <span class="kw">in</span> my_list:</span>
+<span id="cb217-4"><a href="exception-handling.html#cb217-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">100</span> <span class="op">%</span> item <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb217-5"><a href="exception-handling.html#cb217-5" aria-hidden="true" tabindex="-1"></a>      res.append(item)</span>
+<span id="cb217-6"><a href="exception-handling.html#cb217-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(res)</span>
+<span id="cb217-7"><a href="exception-handling.html#cb217-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-8"><a href="exception-handling.html#cb217-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-9"><a href="exception-handling.html#cb217-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>]))</span>
+<span id="cb217-10"><a href="exception-handling.html#cb217-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb217-11"><a href="exception-handling.html#cb217-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]))</span>
+<span id="cb217-12"><a href="exception-handling.html#cb217-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ZeroDivisionError: integer division or modulo by zero</span></span>
+<span id="cb217-13"><a href="exception-handling.html#cb217-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb217-14"><a href="exception-handling.html#cb217-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb217-15"><a href="exception-handling.html#cb217-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb217-16"><a href="exception-handling.html#cb217-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 4, in factor_100</span></span></code></pre></div>
+<ul>
+<li>從上面的例子可以看到，第二次嘗試時，因為丟了0進去，所以誘發了<code>ZeroDivisionError</code>，表示0不可以放分母。<br />
+</li>
+<li>但…，我們其實不希望丟這個error出來，因為對於0這種數，他就不會是因數，所以我希望碰到error就跳過</li>
+</ul>
+<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="exception-handling.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factor_100(my_list):</span>
+<span id="cb218-2"><a href="exception-handling.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb218-3"><a href="exception-handling.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> item <span class="kw">in</span> my_list:</span>
+<span id="cb218-4"><a href="exception-handling.html#cb218-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb218-5"><a href="exception-handling.html#cb218-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 可能發生error的那句statement放這</span></span>
+<span id="cb218-6"><a href="exception-handling.html#cb218-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="dv">100</span> <span class="op">%</span> item <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb218-7"><a href="exception-handling.html#cb218-7" aria-hidden="true" tabindex="-1"></a>        res.append(item)</span>
+<span id="cb218-8"><a href="exception-handling.html#cb218-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb218-9"><a href="exception-handling.html#cb218-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 碰到error時，run這裡</span></span>
+<span id="cb218-10"><a href="exception-handling.html#cb218-10" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;0不能當除數拉！！&quot;</span>)</span>
+<span id="cb218-11"><a href="exception-handling.html#cb218-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(res)</span>
+<span id="cb218-12"><a href="exception-handling.html#cb218-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-13"><a href="exception-handling.html#cb218-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-14"><a href="exception-handling.html#cb218-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>]))</span>
+<span id="cb218-15"><a href="exception-handling.html#cb218-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb218-16"><a href="exception-handling.html#cb218-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]))</span>
+<span id="cb218-17"><a href="exception-handling.html#cb218-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0不能當除數拉！！</span></span>
+<span id="cb218-18"><a href="exception-handling.html#cb218-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span></code></pre></div>
+</div>
+<div id="進階款-except-xxerror" class="section level3" number="21.3.2">
+<h3><span class="header-section-number">21.3.2</span> 進階款： <code>except XXerror</code></h3>
+<ul>
+<li>剛剛這樣寫好像很棒了，但如果你試試run以下的code:</li>
+</ul>
+<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="exception-handling.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&#39;hank&#39;</span>]))</span>
+<span id="cb219-2"><a href="exception-handling.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0不能當除數拉！！</span></span>
+<span id="cb219-3"><a href="exception-handling.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span></code></pre></div>
+<ul>
+<li>會發現…wtf，我input的東西哪裡有0？問題是出在我丟一個字串(“hank”)進去了<br />
+</li>
+<li>所以，except後面其實還可以接：碰到哪種error時，執行我。那我就可以寫“碰到<code>ZeroDivisionError</code>時，怎樣怎樣”; “碰到<code>TypeError</code>時，怎樣怎樣”</li>
+</ul>
+<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="exception-handling.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factor_100(my_list):</span>
+<span id="cb220-2"><a href="exception-handling.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb220-3"><a href="exception-handling.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> item <span class="kw">in</span> my_list:</span>
+<span id="cb220-4"><a href="exception-handling.html#cb220-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb220-5"><a href="exception-handling.html#cb220-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 可能發生error的那句statement放這</span></span>
+<span id="cb220-6"><a href="exception-handling.html#cb220-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="dv">100</span> <span class="op">%</span> item <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb220-7"><a href="exception-handling.html#cb220-7" aria-hidden="true" tabindex="-1"></a>        res.append(item)</span>
+<span id="cb220-8"><a href="exception-handling.html#cb220-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ZeroDivisionError</span>:</span>
+<span id="cb220-9"><a href="exception-handling.html#cb220-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 碰到error時，run這裡</span></span>
+<span id="cb220-10"><a href="exception-handling.html#cb220-10" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;0不能當除數拉！！&quot;</span>)</span>
+<span id="cb220-11"><a href="exception-handling.html#cb220-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">TypeError</span>:</span>
+<span id="cb220-12"><a href="exception-handling.html#cb220-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 碰到error時，run這裡</span></span>
+<span id="cb220-13"><a href="exception-handling.html#cb220-13" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;請你輸入int/float的資料類型&quot;</span>)</span>
+<span id="cb220-14"><a href="exception-handling.html#cb220-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb220-15"><a href="exception-handling.html#cb220-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;我實在不知道哪裡出錯了，但反正跳過&quot;</span>)</span>
+<span id="cb220-16"><a href="exception-handling.html#cb220-16" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb220-17"><a href="exception-handling.html#cb220-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(res)</span>
+<span id="cb220-18"><a href="exception-handling.html#cb220-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-19"><a href="exception-handling.html#cb220-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-20"><a href="exception-handling.html#cb220-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>]))</span>
+<span id="cb220-21"><a href="exception-handling.html#cb220-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb220-22"><a href="exception-handling.html#cb220-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]))</span>
+<span id="cb220-23"><a href="exception-handling.html#cb220-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0不能當除數拉！！</span></span>
+<span id="cb220-24"><a href="exception-handling.html#cb220-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb220-25"><a href="exception-handling.html#cb220-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&quot;hank&quot;</span>]))</span>
+<span id="cb220-26"><a href="exception-handling.html#cb220-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 請你輸入int/float的資料類型</span></span>
+<span id="cb220-27"><a href="exception-handling.html#cb220-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span></code></pre></div>
+</div>
+<div id="懶人款-except-exception-as-e" class="section level3" number="21.3.3">
+<h3><span class="header-section-number">21.3.3</span> 懶人款: <code>except Exception as e</code></h3>
+<ul>
+<li>剛剛的except，把各種type的error都考慮進去了，很棒棒沒錯，但實務上，我們常常也不知道會碰到什麼error<br />
+</li>
+<li>所以，我們可以改成這樣寫：<code>except Exception as e</code>，意思是，我要except掉所有的<code>Exception</code> object，也就是所有type的Error，並且，<code>as e</code>表示我還把這個object給存起來，那我後續搭配<code>print(e)</code>，就可以看到所屬的type和所屬的error message了：</li>
+</ul>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="exception-handling.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factor_100(my_list):</span>
+<span id="cb221-2"><a href="exception-handling.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb221-3"><a href="exception-handling.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> item <span class="kw">in</span> my_list:</span>
+<span id="cb221-4"><a href="exception-handling.html#cb221-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb221-5"><a href="exception-handling.html#cb221-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 可能發生error的那句statement放這</span></span>
+<span id="cb221-6"><a href="exception-handling.html#cb221-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="dv">100</span> <span class="op">%</span> item <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb221-7"><a href="exception-handling.html#cb221-7" aria-hidden="true" tabindex="-1"></a>        res.append(item)</span>
+<span id="cb221-8"><a href="exception-handling.html#cb221-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb221-9"><a href="exception-handling.html#cb221-9" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(e)</span>
+<span id="cb221-10"><a href="exception-handling.html#cb221-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb221-11"><a href="exception-handling.html#cb221-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(res)</span>
+<span id="cb221-12"><a href="exception-handling.html#cb221-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-13"><a href="exception-handling.html#cb221-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-14"><a href="exception-handling.html#cb221-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>]))</span>
+<span id="cb221-15"><a href="exception-handling.html#cb221-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb221-16"><a href="exception-handling.html#cb221-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]))</span>
+<span id="cb221-17"><a href="exception-handling.html#cb221-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; integer division or modulo by zero</span></span>
+<span id="cb221-18"><a href="exception-handling.html#cb221-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span>
+<span id="cb221-19"><a href="exception-handling.html#cb221-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factor_100([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&quot;hank&quot;</span>]))</span>
+<span id="cb221-20"><a href="exception-handling.html#cb221-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unsupported operand type(s) for %: &#39;int&#39; and &#39;str&#39;</span></span>
+<span id="cb221-21"><a href="exception-handling.html#cb221-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 5]</span></span></code></pre></div>
+<ul>
+<li>但我現在想要給user更多資訊，讓user知道，到底我遇到哪種type的error</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="function101.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="flexible-arguments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["python tutorial.pdf", "python tutorial.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

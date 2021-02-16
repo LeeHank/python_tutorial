@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 26 OOP Fundamentals | Python Tutorial</title>
+  <meta name="description" content="Chapter 26 OOP Fundamentals | Python Tutorial" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 26 OOP Fundamentals | Python Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 26 OOP Fundamentals | Python Tutorial" />
+  
+  
+  
+
+<meta name="author" content="Hank Lee" />
+
+
+<meta name="date" content="2021-02-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="variable-scope-1.html"/>
+<link rel="next" href="class-level-vs-instance-level.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>環境設置與執行</b></span></li>
+<li class="chapter" data-level="1" data-path="python-environmental-setting.html"><a href="python-environmental-setting.html"><i class="fa fa-check"></i><b>1</b> Python Environmental Setting</a></li>
+<li class="chapter" data-level="2" data-path="-python-code.html"><a href="-python-code.html"><i class="fa fa-check"></i><b>2</b> 執行Python的code</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="-python-code.html"><a href="-python-code.html#在command-line執行"><i class="fa fa-check"></i><b>2.1</b> 在command line執行</a></li>
+<li class="chapter" data-level="2.2" data-path="-python-code.html"><a href="-python-code.html#寫成.py檔後執行"><i class="fa fa-check"></i><b>2.2</b> 寫成.py檔後執行</a></li>
+<li class="chapter" data-level="2.3" data-path="-python-code.html"><a href="-python-code.html#在vs-code中執行"><i class="fa fa-check"></i><b>2.3</b> 在VS code中執行</a></li>
+<li class="chapter" data-level="2.4" data-path="-python-code.html"><a href="-python-code.html#在-rstudio-中執行"><i class="fa fa-check"></i><b>2.4</b> 在 RStudio 中執行</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="-python-code.html"><a href="-python-code.html#新增檔案python-script"><i class="fa fa-check"></i><b>2.4.1</b> 新增檔案/python script</a></li>
+<li class="chapter" data-level="2.4.2" data-path="-python-code.html"><a href="-python-code.html#用rmarkdown"><i class="fa fa-check"></i><b>2.4.2</b> 用RMarkdown</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="-indention.html"><a href="-indention.html"><i class="fa fa-check"></i><b>3</b> 註解與indention</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="-indention.html"><a href="-indention.html#插入註解"><i class="fa fa-check"></i><b>3.1</b> 插入註解</a></li>
+<li class="chapter" data-level="3.2" data-path="-indention.html"><a href="-indention.html#indention"><i class="fa fa-check"></i><b>3.2</b> indention</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="print.html"><a href="print.html"><i class="fa fa-check"></i><b>4</b> print</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="print.html"><a href="print.html#print可以放多個element進去"><i class="fa fa-check"></i><b>4.1</b> print可以放多個element進去</a></li>
+<li class="chapter" data-level="4.2" data-path="print.html"><a href="print.html#用sep來改間隔"><i class="fa fa-check"></i><b>4.2</b> 用<code>sep=</code>來改間隔</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="variables.html"><a href="variables.html#overview"><i class="fa fa-check"></i><b>5.1</b> overview</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="variables.html"><a href="variables.html#建立variable"><i class="fa fa-check"></i><b>5.1.1</b> 建立variable</a></li>
+<li class="chapter" data-level="5.1.2" data-path="variables.html"><a href="variables.html#用type來確認variable資料類型"><i class="fa fa-check"></i><b>5.1.2</b> 用<code>type()</code>來確認variable資料類型</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="variables.html"><a href="variables.html#variable-names"><i class="fa fa-check"></i><b>5.2</b> variable names</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="variables.html"><a href="variables.html#規則"><i class="fa fa-check"></i><b>5.2.1</b> 規則</a></li>
+<li class="chapter" data-level="5.2.2" data-path="variables.html"><a href="variables.html#多個字的variable-name"><i class="fa fa-check"></i><b>5.2.2</b> 多個字的variable name</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="variables.html"><a href="variables.html#一次assign多個variables"><i class="fa fa-check"></i><b>5.3</b> 一次assign多個variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="variables.html"><a href="variables.html#多個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.1</b> 多個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.2" data-path="variables.html"><a href="variables.html#同一個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.2</b> 同一個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.3" data-path="variables.html"><a href="variables.html#unpack-a-collection"><i class="fa fa-check"></i><b>5.3.3</b> unpack a collection</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="variables.html"><a href="variables.html#assignment-operators"><i class="fa fa-check"></i><b>5.4</b> Assignment Operators</a></li>
+<li class="chapter" data-level="5.5" data-path="variables.html"><a href="variables.html#variable-scope"><i class="fa fa-check"></i><b>5.5</b> variable scope</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="variables.html"><a href="variables.html#global-variables"><i class="fa fa-check"></i><b>5.5.1</b> Global Variables</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Python Basic Data Types</b></span></li>
+<li class="chapter" data-level="6" data-path="python-data-types.html"><a href="python-data-types.html"><i class="fa fa-check"></i><b>6</b> Python Data Types</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="python-data-types.html"><a href="python-data-types.html#built-in-data-types"><i class="fa fa-check"></i><b>6.1</b> Built-in Data Types</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="python-data-types.html"><a href="python-data-types.html#基本款"><i class="fa fa-check"></i><b>6.1.1</b> 基本款</a></li>
+<li class="chapter" data-level="6.1.2" data-path="python-data-types.html"><a href="python-data-types.html#collections"><i class="fa fa-check"></i><b>6.1.2</b> collections</a></li>
+<li class="chapter" data-level="6.1.3" data-path="python-data-types.html"><a href="python-data-types.html#binary"><i class="fa fa-check"></i><b>6.1.3</b> binary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="python-data-types.html"><a href="python-data-types.html#getting-the-data-type"><i class="fa fa-check"></i><b>6.2</b> Getting the data type</a></li>
+<li class="chapter" data-level="6.3" data-path="python-data-types.html"><a href="python-data-types.html#setting-the-specific-data-type"><i class="fa fa-check"></i><b>6.3</b> Setting the specific data type</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="int-float-.html"><a href="int-float-.html"><i class="fa fa-check"></i><b>7</b> int &amp; float 整理與實戰</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="int-float-.html"><a href="int-float-.html#建立intfloat變數"><i class="fa fa-check"></i><b>7.1</b> 建立int/float變數</a></li>
+<li class="chapter" data-level="7.2" data-path="int-float-.html"><a href="int-float-.html#宣告intfloat變數"><i class="fa fa-check"></i><b>7.2</b> 宣告int/float變數</a></li>
+<li class="chapter" data-level="7.3" data-path="int-float-.html"><a href="int-float-.html#型別轉換"><i class="fa fa-check"></i><b>7.3</b> 型別轉換</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="string-.html"><a href="string-.html"><i class="fa fa-check"></i><b>8</b> string整理與實戰</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="string-.html"><a href="string-.html#字串的定義"><i class="fa fa-check"></i><b>8.1</b> 字串的定義</a></li>
+<li class="chapter" data-level="8.2" data-path="string-.html"><a href="string-.html#字串的基本操作"><i class="fa fa-check"></i><b>8.2</b> 字串的基本操作</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="string-.html"><a href="string-.html#利用來定義逃脫字元"><i class="fa fa-check"></i><b>8.2.1</b> 利用""來定義逃脫字元</a></li>
+<li class="chapter" data-level="8.2.2" data-path="string-.html"><a href="string-.html#把字串看成listindex時從0開始"><i class="fa fa-check"></i><b>8.2.2</b> 把字串看成list，index時從0開始</a></li>
+<li class="chapter" data-level="8.2.3" data-path="string-.html"><a href="string-.html#字串常用功能去空白改小寫取代"><i class="fa fa-check"></i><b>8.2.3</b> 字串常用功能：去空白、改小寫、取代</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="string-.html"><a href="string-.html#字串的format-i.e.-r的paste功能"><i class="fa fa-check"></i><b>8.3</b> 字串的format (i.e. R的paste()功能)</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="string-.html"><a href="string-.html#直接一路加號到底"><i class="fa fa-check"></i><b>8.3.1</b> 直接一路加號到底</a></li>
+<li class="chapter" data-level="8.3.2" data-path="string-.html"><a href="string-.html#用s-d-來做"><i class="fa fa-check"></i><b>8.3.2</b> 用%s, %d 來做</a></li>
+<li class="chapter" data-level="8.3.3" data-path="string-.html"><a href="string-.html#用和.format"><i class="fa fa-check"></i><b>8.3.3</b> 用{}和.format</a></li>
+<li class="chapter" data-level="8.3.4" data-path="string-.html"><a href="string-.html#用f吧"><i class="fa fa-check"></i><b>8.3.4</b> 用f吧!</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="string-.html"><a href="string-.html#字串的join-i.e.-r的collapse"><i class="fa fa-check"></i><b>8.4</b> 字串的join (i.e. R的collapse)</a></li>
+</ul></li>
+<li class="part"><span><b>Python Collections</b></span></li>
+<li class="chapter" data-level="9" data-path="collections-overview.html"><a href="collections-overview.html"><i class="fa fa-check"></i><b>9</b> collections overview</a></li>
+<li class="chapter" data-level="10" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>10</b> list整理與實戰</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="list-.html"><a href="list-.html#list定義"><i class="fa fa-check"></i><b>10.1</b> list定義</a></li>
+<li class="chapter" data-level="10.2" data-path="list-.html"><a href="list-.html#建-建立list"><i class="fa fa-check"></i><b>10.2</b> [建] 建立list</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="list-.html"><a href="list-.html#建立單維list"><i class="fa fa-check"></i><b>10.2.1</b> 建立單維list</a></li>
+<li class="chapter" data-level="10.2.2" data-path="list-.html"><a href="list-.html#建立多維list"><i class="fa fa-check"></i><b>10.2.2</b> 建立多維list</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="list-.html"><a href="list-.html#查-取用list裡面的item"><i class="fa fa-check"></i><b>10.3</b> [查] 取用list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="list-.html"><a href="list-.html#用index-0取第一個item"><i class="fa fa-check"></i><b>10.3.1</b> 用index = 0取第一個item</a></li>
+<li class="chapter" data-level="10.3.2" data-path="list-.html"><a href="list-.html#用index--2取由右數來第2個"><i class="fa fa-check"></i><b>10.3.2</b> 用index = -2取由右數來第2個</a></li>
+<li class="chapter" data-level="10.3.3" data-path="list-.html"><a href="list-.html#表示從index3取到index7"><i class="fa fa-check"></i><b>10.3.3</b> 3:8表示從index3取到index7</a></li>
+<li class="chapter" data-level="10.3.4" data-path="list-.html"><a href="list-.html#用.indexa找出a所屬的index"><i class="fa fa-check"></i><b>10.3.4</b> 用<code>.index('a')</code>找出’a’所屬的index</a></li>
+<li class="chapter" data-level="10.3.5" data-path="list-.html"><a href="list-.html#用in來確認item在不在list裡"><i class="fa fa-check"></i><b>10.3.5</b> 用<code>in</code>來確認item在不在list裡</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="list-.html"><a href="list-.html#改-修改list裡面的item"><i class="fa fa-check"></i><b>10.4</b> [改] 修改list裡面的item</a></li>
+<li class="chapter" data-level="10.5" data-path="list-.html"><a href="list-.html#增-增加list裡面的item"><i class="fa fa-check"></i><b>10.5</b> [增] 增加list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="list-.html"><a href="list-.html#加到最後面用.append"><i class="fa fa-check"></i><b>10.5.1</b> 加到最後面，用<code>.append()</code></a></li>
+<li class="chapter" data-level="10.5.2" data-path="list-.html"><a href="list-.html#加到指定的位置用.insert"><i class="fa fa-check"></i><b>10.5.2</b> 加到指定的位置，用<code>.insert()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="list-.html"><a href="list-.html#增-join兩個list"><i class="fa fa-check"></i><b>10.6</b> [增] join兩個list</a></li>
+<li class="chapter" data-level="10.7" data-path="list-.html"><a href="list-.html#刪-刪除list裡面的item"><i class="fa fa-check"></i><b>10.7</b> [刪] 刪除list裡面的item</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="list-.html"><a href="list-.html#removeitem-刪除該item"><i class="fa fa-check"></i><b>10.7.1</b> <code>.remove(item)</code> 刪除該item</a></li>
+<li class="chapter" data-level="10.7.2" data-path="list-.html"><a href="list-.html#pop-刪除最後一筆"><i class="fa fa-check"></i><b>10.7.2</b> <code>.pop()</code> 刪除最後一筆</a></li>
+<li class="chapter" data-level="10.7.3" data-path="list-.html"><a href="list-.html#popindex-刪除該index"><i class="fa fa-check"></i><b>10.7.3</b> <code>.pop(index)</code> 刪除該index</a></li>
+<li class="chapter" data-level="10.7.4" data-path="list-.html"><a href="list-.html#del-listindex-刪除該list中的此index"><i class="fa fa-check"></i><b>10.7.4</b> <code>del list[index]</code> 刪除該list中的此index</a></li>
+<li class="chapter" data-level="10.7.5" data-path="list-.html"><a href="list-.html#clear-清空此list內所有item"><i class="fa fa-check"></i><b>10.7.5</b> <code>.clear()</code> 清空此list內所有item</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="list-.html"><a href="list-.html#mutable-copy-list"><i class="fa fa-check"></i><b>10.8</b> [mutable] copy list</a></li>
+<li class="chapter" data-level="10.9" data-path="list-.html"><a href="list-.html#loop-for"><i class="fa fa-check"></i><b>10.9</b> [loop] for</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="list-.html"><a href="list-.html#loop-index"><i class="fa fa-check"></i><b>10.9.1</b> loop index</a></li>
+<li class="chapter" data-level="10.9.2" data-path="list-.html"><a href="list-.html#loop-items"><i class="fa fa-check"></i><b>10.9.2</b> loop items</a></li>
+<li class="chapter" data-level="10.9.3" data-path="list-.html"><a href="list-.html#enumerate"><i class="fa fa-check"></i><b>10.9.3</b> <code>enumerate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="list-.html"><a href="list-.html#loop-list-comprehension"><i class="fa fa-check"></i><b>10.10</b> [loop] list comprehension</a>
+<ul>
+<li class="chapter" data-level="10.10.1" data-path="list-.html"><a href="list-.html#simple-example"><i class="fa fa-check"></i><b>10.10.1</b> simple example</a></li>
+<li class="chapter" data-level="10.10.2" data-path="list-.html"><a href="list-.html#nested-for-loop"><i class="fa fa-check"></i><b>10.10.2</b> nested for loop</a></li>
+<li class="chapter" data-level="10.10.3" data-path="list-.html"><a href="list-.html#conditional-for-loop"><i class="fa fa-check"></i><b>10.10.3</b> conditional for loop</a></li>
+</ul></li>
+<li class="chapter" data-level="10.11" data-path="list-.html"><a href="list-.html#排序.sort"><i class="fa fa-check"></i><b>10.11</b> 排序(<code>.sort()</code>)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="list-.html"><a href="list-.html#sort"><i class="fa fa-check"></i><b>10.11.1</b> <code>.sort()</code></a></li>
+<li class="chapter" data-level="10.11.2" data-path="list-.html"><a href="list-.html#sortreverse-true"><i class="fa fa-check"></i><b>10.11.2</b> <code>.sort(reverse = True)</code></a></li>
+<li class="chapter" data-level="10.11.3" data-path="list-.html"><a href="list-.html#sortkey-my_func"><i class="fa fa-check"></i><b>10.11.3</b> <code>.sort(key = my_func)</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="list-.html"><a href="list-.html#順序倒過來.reverse"><i class="fa fa-check"></i><b>10.12</b> 順序倒過來(<code>.reverse()</code>)</a></li>
+<li class="chapter" data-level="10.13" data-path="list-.html"><a href="list-.html#list.counta-計算a在list中出現幾次"><i class="fa fa-check"></i><b>10.13</b> list.count(‘a’) = 計算’a’在list中出現幾次</a></li>
+<li class="chapter" data-level="10.14" data-path="list-.html"><a href="list-.html#practice"><i class="fa fa-check"></i><b>10.14</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="tuple-.html"><a href="tuple-.html"><i class="fa fa-check"></i><b>11</b> tuple整理與實戰</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="tuple-.html"><a href="tuple-.html#建-tuple定義與創建"><i class="fa fa-check"></i><b>11.1</b> [建] tuple定義與創建</a></li>
+<li class="chapter" data-level="11.2" data-path="tuple-.html"><a href="tuple-.html#主要用在保護數據和unpack"><i class="fa fa-check"></i><b>11.2</b> 主要用在保護數據和unpack</a></li>
+<li class="chapter" data-level="11.3" data-path="tuple-.html"><a href="tuple-.html#查-取用tuple中的item"><i class="fa fa-check"></i><b>11.3</b> [查] 取用tuple中的item</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="tuple-.html"><a href="tuple-.html#用list1index取數據"><i class="fa fa-check"></i><b>11.3.1</b> 用<code>list1[index]</code>取數據</a></li>
+<li class="chapter" data-level="11.3.2" data-path="tuple-.html"><a href="tuple-.html#用負號往回取"><i class="fa fa-check"></i><b>11.3.2</b> 用負號往回取</a></li>
+<li class="chapter" data-level="11.3.3" data-path="tuple-.html"><a href="tuple-.html#是指取index2到index4"><i class="fa fa-check"></i><b>11.3.3</b> 2:5是指取index=2到index=4</a></li>
+<li class="chapter" data-level="11.3.4" data-path="tuple-.html"><a href="tuple-.html#找index用.indexa"><i class="fa fa-check"></i><b>11.3.4</b> 找index用<code>.index('a')</code></a></li>
+<li class="chapter" data-level="11.3.5" data-path="tuple-.html"><a href="tuple-.html#確認每個item有沒有在tuple內也是用in"><i class="fa fa-check"></i><b>11.3.5</b> 確認每個item有沒有在tuple內也是用<code>in</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="tuple-.html"><a href="tuple-.html#改-增-刪-tuple不可修改"><i class="fa fa-check"></i><b>11.4</b> [改, 增, 刪] tuple不可修改</a></li>
+<li class="chapter" data-level="11.5" data-path="tuple-.html"><a href="tuple-.html#immutable"><i class="fa fa-check"></i><b>11.5</b> immutable</a></li>
+<li class="chapter" data-level="11.6" data-path="tuple-.html"><a href="tuple-.html#loop-for回圈"><i class="fa fa-check"></i><b>11.6</b> [loop] for回圈</a></li>
+<li class="chapter" data-level="11.7" data-path="tuple-.html"><a href="tuple-.html#loop-comprehension"><i class="fa fa-check"></i><b>11.7</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="11.8" data-path="tuple-.html"><a href="tuple-.html#join兩個tuple用加號"><i class="fa fa-check"></i><b>11.8</b> join兩個tuple用加號</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="dictionary-.html"><a href="dictionary-.html"><i class="fa fa-check"></i><b>12</b> dictionary整理與實戰</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="dictionary-.html"><a href="dictionary-.html#dict的定義"><i class="fa fa-check"></i><b>12.1</b> dict的定義</a></li>
+<li class="chapter" data-level="12.2" data-path="dictionary-.html"><a href="dictionary-.html#建-dict的創建"><i class="fa fa-check"></i><b>12.2</b> [建] dict的創建</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="dictionary-.html"><a href="dictionary-.html#直接用"><i class="fa fa-check"></i><b>12.2.1</b> 直接用</a></li>
+<li class="chapter" data-level="12.2.2" data-path="dictionary-.html"><a href="dictionary-.html#用dicta2-bhaha來建立"><i class="fa fa-check"></i><b>12.2.2</b> 用<code>dict(a=2, b="haha")</code>來建立</a></li>
+<li class="chapter" data-level="12.2.3" data-path="dictionary-.html"><a href="dictionary-.html#用dictiterable_pair來創建"><i class="fa fa-check"></i><b>12.2.3</b> 用<code>dict(iterable_pair)</code>來創建</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.keys-d.values-d.items查詢"><i class="fa fa-check"></i><b>12.3</b> [查] 用<code>d.keys()</code>, <code>d.values()</code>, <code>d.items()</code>查詢</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="dictionary-.html"><a href="dictionary-.html#keys可以得到最外層的所有key值"><i class="fa fa-check"></i><b>12.3.1</b> <code>.keys()</code>可以得到最外層的所有key值</a></li>
+<li class="chapter" data-level="12.3.2" data-path="dictionary-.html"><a href="dictionary-.html#values可以得到所有value"><i class="fa fa-check"></i><b>12.3.2</b> <code>.values()</code>可以得到所有value</a></li>
+<li class="chapter" data-level="12.3.3" data-path="dictionary-.html"><a href="dictionary-.html#items可以得到keyvalue的tupple"><i class="fa fa-check"></i><b>12.3.3</b> <code>.items()</code>可以得到(key,value)的tupple</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.getkey來取用dict裡面的item"><i class="fa fa-check"></i><b>12.4</b> [查] 用<code>d.get("key")</code>來取用dict裡面的item</a></li>
+<li class="chapter" data-level="12.5" data-path="dictionary-.html"><a href="dictionary-.html#改-修改dict裡面的item"><i class="fa fa-check"></i><b>12.5</b> [改] 修改dict裡面的item</a></li>
+<li class="chapter" data-level="12.6" data-path="dictionary-.html"><a href="dictionary-.html#增-增加dict的item"><i class="fa fa-check"></i><b>12.6</b> [增] 增加dict的item</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="dictionary-.html"><a href="dictionary-.html#dnew_key-new_value"><i class="fa fa-check"></i><b>12.6.1</b> <code>d["new_key"] = new_value</code></a></li>
+<li class="chapter" data-level="12.6.2" data-path="dictionary-.html"><a href="dictionary-.html#update可以合併2個字典"><i class="fa fa-check"></i><b>12.6.2</b> <code>.update()</code>可以合併2個字典</a></li>
+<li class="chapter" data-level="12.6.3" data-path="dictionary-.html"><a href="dictionary-.html#d1-d2-d3合併多個字典"><i class="fa fa-check"></i><b>12.6.3</b> <code>{**d1, **d2, **d3}</code>合併多個字典</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="dictionary-.html"><a href="dictionary-.html#刪-刪除dict的item"><i class="fa fa-check"></i><b>12.7</b> [刪] 刪除dict的item</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="dictionary-.html"><a href="dictionary-.html#popkey會把選定的key整個砍掉並把對應的value丟出來"><i class="fa fa-check"></i><b>12.7.1</b> <code>.pop('key')</code>會把選定的key整個砍掉，並把對應的value丟出來</a></li>
+<li class="chapter" data-level="12.7.2" data-path="dictionary-.html"><a href="dictionary-.html#del-dkey會刪到這組item"><i class="fa fa-check"></i><b>12.7.2</b> <code>del d['key']</code>會刪到這組item</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="dictionary-.html"><a href="dictionary-.html#mutable-copy"><i class="fa fa-check"></i><b>12.8</b> [mutable] copy</a></li>
+<li class="chapter" data-level="12.9" data-path="dictionary-.html"><a href="dictionary-.html#loop-for迴圈"><i class="fa fa-check"></i><b>12.9</b> [loop] for迴圈</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-keys"><i class="fa fa-check"></i><b>12.9.1</b> loop over keys</a></li>
+<li class="chapter" data-level="12.9.2" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-values"><i class="fa fa-check"></i><b>12.9.2</b> loop over values</a></li>
+<li class="chapter" data-level="12.9.3" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-key-value"><i class="fa fa-check"></i><b>12.9.3</b> loop over (key, value)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.10" data-path="dictionary-.html"><a href="dictionary-.html#loop-dictionary-comprehension"><i class="fa fa-check"></i><b>12.10</b> [loop] dictionary comprehension</a></li>
+<li class="chapter" data-level="12.11" data-path="dictionary-.html"><a href="dictionary-.html#如何安全的訪問字典"><i class="fa fa-check"></i><b>12.11</b> 如何安全的訪問字典</a>
+<ul>
+<li class="chapter" data-level="12.11.1" data-path="dictionary-.html"><a href="dictionary-.html#自己寫條件判斷"><i class="fa fa-check"></i><b>12.11.1</b> 自己寫條件判斷</a></li>
+<li class="chapter" data-level="12.11.2" data-path="dictionary-.html"><a href="dictionary-.html#愛用.get"><i class="fa fa-check"></i><b>12.11.2</b> 愛用<code>.get()</code></a></li>
+<li class="chapter" data-level="12.11.3" data-path="dictionary-.html"><a href="dictionary-.html#改用defaultdict這種type"><i class="fa fa-check"></i><b>12.11.3</b> 改用<code>defaultdict</code>這種type</a></li>
+</ul></li>
+<li class="chapter" data-level="12.12" data-path="dictionary-.html"><a href="dictionary-.html#how-to"><i class="fa fa-check"></i><b>12.12</b> How to…</a>
+<ul>
+<li class="chapter" data-level="12.12.1" data-path="dictionary-.html"><a href="dictionary-.html#如何將字典按照keyvalue大小排序"><i class="fa fa-check"></i><b>12.12.1</b> 如何將字典按照key/value大小排序</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="set-.html"><a href="set-.html"><i class="fa fa-check"></i><b>13</b> set應用實戰</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="set-.html"><a href="set-.html#定義set"><i class="fa fa-check"></i><b>13.1</b> 定義set</a></li>
+<li class="chapter" data-level="13.2" data-path="set-.html"><a href="set-.html#查-只能用for-loop與in"><i class="fa fa-check"></i><b>13.2</b> [查] 只能用<code>for loop</code>與<code>in</code></a></li>
+<li class="chapter" data-level="13.3" data-path="set-.html"><a href="set-.html#改-set無法做修改"><i class="fa fa-check"></i><b>13.3</b> [改] set無法做修改</a></li>
+<li class="chapter" data-level="13.4" data-path="set-.html"><a href="set-.html#刪-.remove與.discard"><i class="fa fa-check"></i><b>13.4</b> [刪] <code>.remove()</code>與<code>.discard()</code></a></li>
+<li class="chapter" data-level="13.5" data-path="set-.html"><a href="set-.html#增-.add與.update"><i class="fa fa-check"></i><b>13.5</b> [增] <code>.add()</code>與<code>.update()</code></a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="set-.html"><a href="set-.html#增加一個item用.add"><i class="fa fa-check"></i><b>13.5.1</b> 增加一個item用<code>.add()</code></a></li>
+<li class="chapter" data-level="13.5.2" data-path="set-.html"><a href="set-.html#增加多個item用.update"><i class="fa fa-check"></i><b>13.5.2</b> 增加多個item用<code>.update()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="set-.html"><a href="set-.html#mutable-請愛用.copy"><i class="fa fa-check"></i><b>13.6</b> [mutable] 請愛用<code>.copy()</code></a></li>
+<li class="chapter" data-level="13.7" data-path="set-.html"><a href="set-.html#loop-for-1"><i class="fa fa-check"></i><b>13.7</b> [loop] for</a></li>
+<li class="chapter" data-level="13.8" data-path="set-.html"><a href="set-.html#loop-comprehension-1"><i class="fa fa-check"></i><b>13.8</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="13.9" data-path="set-.html"><a href="set-.html#特殊技-集合運算"><i class="fa fa-check"></i><b>13.9</b> [特殊技] 集合運算</a></li>
+<li class="chapter" data-level="13.10" data-path="set-.html"><a href="set-.html#特殊技-對list取unique"><i class="fa fa-check"></i><b>13.10</b> [特殊技] 對list取unique</a></li>
+<li class="chapter" data-level="13.11" data-path="set-.html"><a href="set-.html#特殊技-將字串中unique-character轉成list"><i class="fa fa-check"></i><b>13.11</b> [特殊技] 將字串中unique character轉成list</a></li>
+</ul></li>
+<li class="part"><span><b>條件判斷</b></span></li>
+<li class="chapter" data-level="14" data-path="none.html"><a href="none.html"><i class="fa fa-check"></i><b>14</b> None</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="none.html"><a href="none.html#定義"><i class="fa fa-check"></i><b>14.1</b> 定義</a></li>
+<li class="chapter" data-level="14.2" data-path="none.html"><a href="none.html#is-none"><i class="fa fa-check"></i><b>14.2</b> <code>is None</code></a></li>
+<li class="chapter" data-level="14.3" data-path="none.html"><a href="none.html#使用時機"><i class="fa fa-check"></i><b>14.3</b> 使用時機</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="none.html"><a href="none.html#與資料庫互動"><i class="fa fa-check"></i><b>14.3.1</b> 與資料庫互動</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="boolean-.html"><a href="boolean-.html"><i class="fa fa-check"></i><b>15</b> boolean整理與實戰</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boolean-.html"><a href="boolean-.html#大部分的value轉成boolean都是true"><i class="fa fa-check"></i><b>15.1</b> 大部分的value，轉成boolean都是True</a></li>
+<li class="chapter" data-level="15.2" data-path="boolean-.html"><a href="boolean-.html#少部分value轉成boolean會是false"><i class="fa fa-check"></i><b>15.2</b> 少部分value，轉成boolean會是False</a></li>
+<li class="chapter" data-level="15.3" data-path="boolean-.html"><a href="boolean-.html#搭配if-statement"><i class="fa fa-check"></i><b>15.3</b> 搭配if statement</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="conditional-operators.html"><a href="conditional-operators.html"><i class="fa fa-check"></i><b>16</b> Conditional Operators</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="conditional-operators.html"><a href="conditional-operators.html#section"><i class="fa fa-check"></i><b>16.0.1</b> <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code></a></li>
+<li class="chapter" data-level="16.0.2" data-path="conditional-operators.html"><a href="conditional-operators.html#and-or-not"><i class="fa fa-check"></i><b>16.0.2</b> <code>and</code>, <code>or</code>, <code>not</code></a></li>
+<li class="chapter" data-level="16.0.3" data-path="conditional-operators.html"><a href="conditional-operators.html#in-not-in"><i class="fa fa-check"></i><b>16.0.3</b> <code>in</code>, <code>not in</code></a></li>
+<li class="chapter" data-level="16.0.4" data-path="conditional-operators.html"><a href="conditional-operators.html#is-is-not"><i class="fa fa-check"></i><b>16.0.4</b> <code>is</code>, <code>is not</code></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="if-statement.html"><a href="if-statement.html"><i class="fa fa-check"></i><b>17</b> If statement</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="if-statement.html"><a href="if-statement.html#if-1"><i class="fa fa-check"></i><b>17.1</b> if…</a></li>
+<li class="chapter" data-level="17.2" data-path="if-statement.html"><a href="if-statement.html#ifelse"><i class="fa fa-check"></i><b>17.2</b> if…else…</a></li>
+<li class="chapter" data-level="17.3" data-path="if-statement.html"><a href="if-statement.html#ifelifelse"><i class="fa fa-check"></i><b>17.3</b> if…elif…else…</a></li>
+<li class="chapter" data-level="17.4" data-path="if-statement.html"><a href="if-statement.html#一行的if"><i class="fa fa-check"></i><b>17.4</b> 一行的if</a></li>
+<li class="chapter" data-level="17.5" data-path="if-statement.html"><a href="if-statement.html#一行的ifelse"><i class="fa fa-check"></i><b>17.5</b> 一行的if…else…</a></li>
+<li class="chapter" data-level="17.6" data-path="if-statement.html"><a href="if-statement.html#善用pass"><i class="fa fa-check"></i><b>17.6</b> 善用pass</a></li>
+<li class="chapter" data-level="17.7" data-path="if-statement.html"><a href="if-statement.html#if-條件太多時怎麼優化"><i class="fa fa-check"></i><b>17.7</b> if 條件太多時，怎麼優化</a></li>
+</ul></li>
+<li class="part"><span><b>Loops</b></span></li>
+<li class="chapter" data-level="18" data-path="for-loop.html"><a href="for-loop.html"><i class="fa fa-check"></i><b>18</b> for loop</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="for-loop.html"><a href="for-loop.html#寫法"><i class="fa fa-check"></i><b>18.1</b> 寫法</a></li>
+<li class="chapter" data-level="18.2" data-path="for-loop.html"><a href="for-loop.html#善用break終止迴圈"><i class="fa fa-check"></i><b>18.2</b> 善用break終止迴圈</a></li>
+<li class="chapter" data-level="18.3" data-path="for-loop.html"><a href="for-loop.html#善用continue跳入下一個迴圈"><i class="fa fa-check"></i><b>18.3</b> 善用continue跳入下一個迴圈</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="while-loop.html"><a href="while-loop.html"><i class="fa fa-check"></i><b>19</b> while loop</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="while-loop.html"><a href="while-loop.html#while-寫法"><i class="fa fa-check"></i><b>19.1</b> while 寫法</a></li>
+<li class="chapter" data-level="19.2" data-path="while-loop.html"><a href="while-loop.html#確認每次都有更新內容"><i class="fa fa-check"></i><b>19.2</b> 確認每次都有更新內容</a></li>
+<li class="chapter" data-level="19.3" data-path="while-loop.html"><a href="while-loop.html#善用break"><i class="fa fa-check"></i><b>19.3</b> 善用<code>break</code></a></li>
+</ul></li>
+<li class="part"><span><b>Functions</b></span></li>
+<li class="chapter" data-level="20" data-path="function101.html"><a href="function101.html"><i class="fa fa-check"></i><b>20</b> function101</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="function101.html"><a href="function101.html#function的結構"><i class="fa fa-check"></i><b>20.1</b> function的結構</a></li>
+<li class="chapter" data-level="20.2" data-path="function101.html"><a href="function101.html#docstring的標準格式"><i class="fa fa-check"></i><b>20.2</b> Docstring的標準格式</a></li>
+<li class="chapter" data-level="20.3" data-path="function101.html"><a href="function101.html#先檢驗argument的合法性"><i class="fa fa-check"></i><b>20.3</b> 先檢驗argument的合法性</a></li>
+<li class="chapter" data-level="20.4" data-path="function101.html"><a href="function101.html#記得return"><i class="fa fa-check"></i><b>20.4</b> 記得<code>return</code></a></li>
+<li class="chapter" data-level="20.5" data-path="function101.html"><a href="function101.html#default-argument"><i class="fa fa-check"></i><b>20.5</b> default argument</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="exception-handling.html"><a href="exception-handling.html"><i class="fa fa-check"></i><b>21</b> Exception Handling</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="exception-handling.html"><a href="exception-handling.html#各種異常介紹"><i class="fa fa-check"></i><b>21.1</b> 各種異常介紹</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="exception-handling.html"><a href="exception-handling.html#attributeerror"><i class="fa fa-check"></i><b>21.1.1</b> AttributeError</a></li>
+<li class="chapter" data-level="21.1.2" data-path="exception-handling.html"><a href="exception-handling.html#modulenotfounderror"><i class="fa fa-check"></i><b>21.1.2</b> ModuleNotFoundError</a></li>
+<li class="chapter" data-level="21.1.3" data-path="exception-handling.html"><a href="exception-handling.html#indexerror"><i class="fa fa-check"></i><b>21.1.3</b> IndexError</a></li>
+<li class="chapter" data-level="21.1.4" data-path="exception-handling.html"><a href="exception-handling.html#keyerror"><i class="fa fa-check"></i><b>21.1.4</b> KeyError</a></li>
+<li class="chapter" data-level="21.1.5" data-path="exception-handling.html"><a href="exception-handling.html#nameerror"><i class="fa fa-check"></i><b>21.1.5</b> NameError</a></li>
+<li class="chapter" data-level="21.1.6" data-path="exception-handling.html"><a href="exception-handling.html#zerodivisionerror"><i class="fa fa-check"></i><b>21.1.6</b> ZeroDivisionError</a></li>
+<li class="chapter" data-level="21.1.7" data-path="exception-handling.html"><a href="exception-handling.html#自定義的error"><i class="fa fa-check"></i><b>21.1.7</b> 自定義的error</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="exception-handling.html"><a href="exception-handling.html#raise-xxxerrorerror-message-herer"><i class="fa fa-check"></i><b>21.2</b> <code>raise XXXError("error message herer")</code></a></li>
+<li class="chapter" data-level="21.3" data-path="exception-handling.html"><a href="exception-handling.html#try...except..."><i class="fa fa-check"></i><b>21.3</b> <code>try...except...</code></a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="exception-handling.html"><a href="exception-handling.html#基本款只寫except"><i class="fa fa-check"></i><b>21.3.1</b> 基本款：只寫<code>except</code></a></li>
+<li class="chapter" data-level="21.3.2" data-path="exception-handling.html"><a href="exception-handling.html#進階款-except-xxerror"><i class="fa fa-check"></i><b>21.3.2</b> 進階款： <code>except XXerror</code></a></li>
+<li class="chapter" data-level="21.3.3" data-path="exception-handling.html"><a href="exception-handling.html#懶人款-except-exception-as-e"><i class="fa fa-check"></i><b>21.3.3</b> 懶人款: <code>except Exception as e</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="flexible-arguments.html"><a href="flexible-arguments.html"><i class="fa fa-check"></i><b>22</b> flexible arguments</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#args"><i class="fa fa-check"></i><b>22.1</b> <code>*args</code></a></li>
+<li class="chapter" data-level="22.2" data-path="flexible-arguments.html"><a href="flexible-arguments.html#kwargs"><i class="fa fa-check"></i><b>22.2</b> <code>**kwargs</code></a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#使用時機-1"><i class="fa fa-check"></i><b>22.2.1</b> 使用時機</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="recursion.html"><a href="recursion.html"><i class="fa fa-check"></i><b>23</b> recursion</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="recursion.html"><a href="recursion.html#n-計算"><i class="fa fa-check"></i><b>23.1</b> n! 計算</a></li>
+<li class="chapter" data-level="23.2" data-path="recursion.html"><a href="recursion.html#費氏數列"><i class="fa fa-check"></i><b>23.2</b> 費氏數列</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html"><i class="fa fa-check"></i><b>24</b> Nested Function and closure</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#nested-function"><i class="fa fa-check"></i><b>24.1</b> Nested function</a></li>
+<li class="chapter" data-level="24.2" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#closure"><i class="fa fa-check"></i><b>24.2</b> Closure</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="variable-scope-1.html"><a href="variable-scope-1.html"><i class="fa fa-check"></i><b>25</b> Variable Scope</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="variable-scope-1.html"><a href="variable-scope-1.html#intro"><i class="fa fa-check"></i><b>25.1</b> Intro</a></li>
+<li class="chapter" data-level="25.2" data-path="variable-scope-1.html"><a href="variable-scope-1.html#legb-scope"><i class="fa fa-check"></i><b>25.2</b> LEGB scope</a></li>
+<li class="chapter" data-level="25.3" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用global這個keyword把local-scope的object給推到global-scope"><i class="fa fa-check"></i><b>25.3</b> 用<code>global</code>這個keyword，把local scope的object給推到global scope</a></li>
+<li class="chapter" data-level="25.4" data-path="variable-scope-1.html"><a href="variable-scope-1.html#enclosing-function-scope的例子"><i class="fa fa-check"></i><b>25.4</b> Enclosing function scope的例子</a></li>
+<li class="chapter" data-level="25.5" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用nonlocal這個keyword"><i class="fa fa-check"></i><b>25.5</b> 用<code>nonlocal</code>這個keyword…</a></li>
+</ul></li>
+<li class="part"><span><b>Object Oriented Programming</b></span></li>
+<li class="chapter" data-level="26" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html"><i class="fa fa-check"></i><b>26</b> OOP Fundamentals</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#what-is-oop"><i class="fa fa-check"></i><b>26.1</b> What is OOP?</a></li>
+<li class="chapter" data-level="26.2" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#oop-in-python"><i class="fa fa-check"></i><b>26.2</b> OOP in Python</a></li>
+<li class="chapter" data-level="26.3" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#my-first-class"><i class="fa fa-check"></i><b>26.3</b> My first class</a></li>
+<li class="chapter" data-level="26.4" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#the-__init__-constructor"><i class="fa fa-check"></i><b>26.4</b> the <code>__init__</code> constructor</a></li>
+<li class="chapter" data-level="26.5" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#寫class的sop"><i class="fa fa-check"></i><b>26.5</b> 寫Class的SOP</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html"><i class="fa fa-check"></i><b>27</b> Class-level vs Instance-level</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-attribute-vs-class-level-attribute"><i class="fa fa-check"></i><b>27.1</b> Instance-level attribute vs Class-level attribute</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介實例屬性與類屬性"><i class="fa fa-check"></i><b>27.1.1</b> 簡介<code>實例屬性</code>與<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性可以繼承類屬性"><i class="fa fa-check"></i><b>27.1.2</b> <code>實例屬性</code>可以繼承<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性與類屬性的修改"><i class="fa fa-check"></i><b>27.1.3</b> <code>實例屬性</code>與<code>類屬性</code>的修改</a></li>
+<li class="chapter" data-level="27.1.4" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#類屬性用在哪"><i class="fa fa-check"></i><b>27.1.4</b> <code>類屬性</code>用在哪</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-method-vs-class-level-method"><i class="fa fa-check"></i><b>27.2</b> Instance-level method vs Class-level method</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介類方法和實例方法"><i class="fa fa-check"></i><b>27.2.1</b> 簡介<code>類方法</code>和<code>實例方法</code></a></li>
+<li class="chapter" data-level="27.2.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性的使用時機"><i class="fa fa-check"></i><b>27.2.2</b> 實例屬性的使用時機</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#小結"><i class="fa fa-check"></i><b>27.3</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="attribute-protection.html"><a href="attribute-protection.html"><i class="fa fa-check"></i><b>28</b> Attribute Protection</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="attribute-protection.html"><a href="attribute-protection.html#naming-convention"><i class="fa fa-check"></i><b>28.1</b> Naming Convention</a></li>
+<li class="chapter" data-level="28.2" data-path="attribute-protection.html"><a href="attribute-protection.html#放任型-不保護"><i class="fa fa-check"></i><b>28.2</b> [放任型] 不保護</a></li>
+<li class="chapter" data-level="28.3" data-path="attribute-protection.html"><a href="attribute-protection.html#信任型-用單底線提醒"><i class="fa fa-check"></i><b>28.3</b> [信任型] 用單底線提醒</a></li>
+<li class="chapter" data-level="28.4" data-path="attribute-protection.html"><a href="attribute-protection.html#嚴父型-用雙底線不給動"><i class="fa fa-check"></i><b>28.4</b> [嚴父型] 用雙底線不給動</a></li>
+<li class="chapter" data-level="28.5" data-path="attribute-protection.html"><a href="attribute-protection.html#中庸型-雙底線-property-.setter"><i class="fa fa-check"></i><b>28.5</b> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code></a>
+<ul>
+<li class="chapter" data-level="28.5.1" data-path="attribute-protection.html"><a href="attribute-protection.html#old-school-作法"><i class="fa fa-check"></i><b>28.5.1</b> old-school 作法</a></li>
+<li class="chapter" data-level="28.5.2" data-path="attribute-protection.html"><a href="attribute-protection.html#正規作法"><i class="fa fa-check"></i><b>28.5.2</b> 正規作法</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html"><i class="fa fa-check"></i><b>29</b> isinstance, equality, 與 string representation</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#type-與-isinstance"><i class="fa fa-check"></i><b>29.1</b> <code>type</code> 與 <code>isinstance</code></a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#繼承與isinstance"><i class="fa fa-check"></i><b>29.1.1</b> 繼承與isinstance</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#eq__-object-equality"><i class="fa fa-check"></i><b>29.2</b> <code>__eq__</code> (object equality)</a></li>
+<li class="chapter" data-level="29.3" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#str__與__repr__"><i class="fa fa-check"></i><b>29.3</b> <code>__str__</code>與<code>__repr__</code></a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html"><i class="fa fa-check"></i><b>30</b> Encapsulation, Inheritacne, and Polymorphism</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#封裝"><i class="fa fa-check"></i><b>30.1</b> 封裝</a></li>
+<li class="chapter" data-level="30.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#繼承inheritance"><i class="fa fa-check"></i><b>30.2</b> 繼承(inheritance)</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#simple-inheritance"><i class="fa fa-check"></i><b>30.2.1</b> simple inheritance</a></li>
+<li class="chapter" data-level="30.2.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加instance-level-attribute-method"><i class="fa fa-check"></i><b>30.2.2</b> 增加instance-level attribute &amp; method</a></li>
+<li class="chapter" data-level="30.2.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加class-level-attribute"><i class="fa fa-check"></i><b>30.2.3</b> 增加class-level attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形"><i class="fa fa-check"></i><b>30.3</b> 多形</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形的使用時機"><i class="fa fa-check"></i><b>30.3.1</b> 多形的使用時機</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="oop-fundamentals" class="section level1" number="26">
+<h1><span class="header-section-number">Chapter 26</span> OOP Fundamentals</h1>
+<div id="what-is-oop" class="section level2" number="26.1">
+<h2><span class="header-section-number">26.1</span> What is OOP?</h2>
+<ul>
+<li><p>OOP是一種programming的設計思維，他以object為coding的最小單位。<br />
+</p></li>
+<li><p>那到底什麼是object？要回答這個問題，我們要先學會什麼是class。<br />
+</p></li>
+<li><p>之前在寫code的時候，我們都會命名出很多variable，那現在，我們用分類問題的角度去想，是不是某一群variable，可以一起被歸為一類？如果可以的話，那我要要定義的，就不會是一個variable，而是要定義出一種類別(class)！</p></li>
+<li><p>舉例來說，今天我想定義出顧客(Customer)這個class，那我該怎麼定義呢？我們會用state和behavior這兩個方向來定義一個class。</p></li>
+<li><p>state指的是這個class所具備的特徵，behavior是指這個class所能施展的行為。<br />
+</p></li>
+<li><p>所以，回到顧客這個class的例子，state我就可以定義成email和phone這兩個特徵(因為每個顧客，應該都具備這兩個特徵)，behavior我就定義成“跟我下單”和“跟我取消訂單”這兩種行為。那做到這邊，我就算完成了Customer class的定義。</p></li>
+<li><p>接下來，我只要填入state特定的value，就可以realize出各式各樣的客戶。例如我想realize出A客戶，那我就把A客戶的email和phone填入就好。而這樣realize完後，我們就稱這個A客戶是一個object。此時，我們知道他的states(email和phone都有)，也知道他有可能對我們施展的behavior(下訂單 &amp; 取消訂單)</p></li>
+<li><p>所以，我可以realize各式各樣的object with specific state value(在此例，就是realize各式各樣的客戶)</p></li>
+<li><p>以圖來描述，可以畫成下面這張圖：
+<img src="images/class&amp;object.png" width="477" /></p></li>
+<li><p>所以總結一下，Class和Object可以這樣定義：</p>
+<ul>
+<li><strong>Class</strong> 就是一個object製造機，他是一個抽象的概念。這個製造機像個藍圖一樣，告訴我們怎麼具體化一個實例(instance)出來。而藍圖裡面寫的東西，就是有關這個class該有的<em>states</em>以及<em>behavior</em>.<br />
+</li>
+<li><strong>Object</strong> 就是instance，他是該class所建造出來的一個具體實例。</li>
+</ul></li>
+<li><p>與OOP對比的另一種設計思維，是R的procedural programming。R code的寫法，就像一步又一步的步驟，把結果給做出來。</p></li>
+<li><p>但OOP不是這樣，OOP的寫法強調的不是步驟，而是object間的互動(e.g. 繼承/多形)。兩者的比較如下表：</p></li>
+</ul>
+<table>
+<colgroup>
+<col width="47%" />
+<col width="52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Procedural programming</th>
+<th>Object-oriented programming</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Code as a sequence of steps</td>
+<td><strong>Code as interactions of objects</strong></td>
+</tr>
+<tr class="even">
+<td>Great for data analysis and scripts</td>
+<td>Great for building frameworks and tools</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><em>Maintainable and reusable code</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="oop-in-python" class="section level2" number="26.2">
+<h2><span class="header-section-number">26.2</span> OOP in Python</h2>
+<ul>
+<li>在python裡面，所有東西，都是object!!<br />
+</li>
+<li>例如，你隨便key個6，6就是一個object，你只要把它存成變數，就可以看到他所屬的class</li>
+</ul>
+<div class="sourceCode" id="cb241"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="oop-fundamentals.html#cb241-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb241-2"><a href="oop-fundamentals.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a)) <span class="co">#class</span></span>
+<span id="cb241-3"><a href="oop-fundamentals.html#cb241-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class &#39;int&#39;&gt;</span></span></code></pre></div>
+<ul>
+<li><p>隨便整理python裡面的各式各樣object，以及他所屬的class:</p>
+<table style="width:97%;">
+<colgroup>
+<col width="33%" />
+<col width="30%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Object</th>
+<th>Class</th>
+<th>remark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>“Hello”</td>
+<td>str</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>pd.DataFrame()</td>
+<td>DataFrame</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>np.mean</td>
+<td>function</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>既然所有東西都是object，那我應該有他的state和behavior訊息吧？在python中，state的訊息，被存在attribute中，behavior的訊息，被存在method中。</p>
+<ul>
+<li><strong>Attributes</strong> encode the state of an object and are represented by variables. 例如，<code>.shape</code>就是numpy.ndarray object的一個attribute，注意到他是用variable的形式存在的，所以shape後面沒有括號。</li>
+<li><strong>Methods</strong> encode behavior of an object and are represented by functions. 例如，<code>.reshape()</code>就是numpy.ndarray的method。注意到他是用function的形式存在的，所以會看到括號，括號內也可能要輸入argument</li>
+</ul></li>
+<li><p>來看個numpy object例子：</p></li>
+</ul>
+<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="oop-fundamentals.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb242-2"><a href="oop-fundamentals.html#cb242-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
+<span id="cb242-3"><a href="oop-fundamentals.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 看a是哪種class</span></span>
+<span id="cb242-4"><a href="oop-fundamentals.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb242-5"><a href="oop-fundamentals.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class &#39;numpy.ndarray&#39;&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="oop-fundamentals.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape attribute</span></span>
+<span id="cb243-2"><a href="oop-fundamentals.html#cb243-2" aria-hidden="true" tabindex="-1"></a>a.shape</span>
+<span id="cb243-3"><a href="oop-fundamentals.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (4,)</span></span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb244-1"><a href="oop-fundamentals.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reshape method</span></span>
+<span id="cb244-2"><a href="oop-fundamentals.html#cb244-2" aria-hidden="true" tabindex="-1"></a>a.reshape(<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb244-3"><a href="oop-fundamentals.html#cb244-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([[1, 2],</span></span>
+<span id="cb244-4"><a href="oop-fundamentals.html#cb244-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [3, 4]])</span></span></code></pre></div>
+<ul>
+<li>最後，提醒一下，一個程式語言可以是OOP，或是procedural，或是both。例如Python就是both，我們可以用procedural的寫法，一步一步的做完data analysis，但也可以用OOP的寫法來做。R也是如此，只是R的OOP要借助第三方套件<code>R6</code></li>
+</ul>
+</div>
+<div id="my-first-class" class="section level2" number="26.3">
+<h2><span class="header-section-number">26.3</span> My first class</h2>
+<ul>
+<li>開始來寫我的第一個class，就用剛剛customer的例子</li>
+</ul>
+<div class="sourceCode" id="cb245"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb245-1"><a href="oop-fundamentals.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer_old:</span>
+<span id="cb245-2"><a href="oop-fundamentals.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb245-3"><a href="oop-fundamentals.html#cb245-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb245-4"><a href="oop-fundamentals.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mehod: function definition within class</span></span>
+<span id="cb245-5"><a href="oop-fundamentals.html#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#        use &#39;self&#39; as the first argument</span></span>
+<span id="cb245-6"><a href="oop-fundamentals.html#cb245-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> identify(<span class="va">self</span>, name):</span>
+<span id="cb245-7"><a href="oop-fundamentals.html#cb245-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;I am Customer &quot;</span> <span class="op">+</span> name)</span></code></pre></div>
+<ul>
+<li>上面這個例子，我們最一開始就宣告他是個class</li>
+<li>接著，分別定義attribute和method</li>
+<li>我們先看method的部分就好。這個method，其實就是我們寫過的function，只是第一個參數要幫他寫`self`，這是規定的，原因等等會談。</li>
+<li>這樣就算定義完Customer這個class了。我要realize他的話，我就直接call他，並assign到一個variable上，也就是<code>cust1 = Customer()</code>。此時，cust1被我們稱為<em>instance</em>。然後，我就可以使用他的method了。例如：</li>
+</ul>
+<div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a href="oop-fundamentals.html#cb246-1" aria-hidden="true" tabindex="-1"></a>cust1 <span class="op">=</span> Customer_old()</span>
+<span id="cb246-2"><a href="oop-fundamentals.html#cb246-2" aria-hidden="true" tabindex="-1"></a>cust1.identify(<span class="st">&quot;Laura&quot;</span>)</span>
+<span id="cb246-3"><a href="oop-fundamentals.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; I am Customer Laura</span></span></code></pre></div>
+<ul>
+<li><p>那現在回過頭來看，<code>self</code>到底是啥<br />
+</p></li>
+<li><p>我們知道class只是一個template，他需要refer data of a particular object。而這個self，就是這個particular object的代名詞。<br />
+</p></li>
+<li><p>以剛剛的例子來說，這個particular object就是我的cust1，而self就會是cust1的代名詞，所以當我們寫<code>cust1.identify("Laura")</code>的時候，其實python在內部的翻譯是<code>Customer.identify(cust1, "Laura")</code>，也就是說，我要用Customer這個class裡的identify method，然後第一個argument是指我要refer to cust1這個particular object。</p></li>
+<li><p>nice，現在我們把attribute捕進去，並且稍微改寫method的地方，變成以下這樣：</p></li>
+</ul>
+<div class="sourceCode" id="cb247"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb247-1"><a href="oop-fundamentals.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer_new:</span>
+<span id="cb247-2"><a href="oop-fundamentals.html#cb247-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb247-3"><a href="oop-fundamentals.html#cb247-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set the name attribute of an object to new_name</span></span>
+<span id="cb247-4"><a href="oop-fundamentals.html#cb247-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
+<span id="cb247-5"><a href="oop-fundamentals.html#cb247-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create an attribute by assigning a value</span></span>
+<span id="cb247-6"><a href="oop-fundamentals.html#cb247-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> new_name <span class="co"># &lt;- will create .name when set_name is called</span></span>
+<span id="cb247-7"><a href="oop-fundamentals.html#cb247-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb247-8"><a href="oop-fundamentals.html#cb247-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mehod: function definition within class</span></span>
+<span id="cb247-9"><a href="oop-fundamentals.html#cb247-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#        use &#39;self&#39; as the first argument</span></span>
+<span id="cb247-10"><a href="oop-fundamentals.html#cb247-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> identify(<span class="va">self</span>):</span>
+<span id="cb247-11"><a href="oop-fundamentals.html#cb247-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;I am Customer &quot;</span> <span class="op">+</span> <span class="va">self</span>.name)</span></code></pre></div>
+<ul>
+<li>可以看到在attribute的地方，也是用定義funciton的方式去寫，但function body是直接用assign變數的方式，把他assign到self下面。實際使用時，變成以下這樣：</li>
+</ul>
+<div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb248-1"><a href="oop-fundamentals.html#cb248-1" aria-hidden="true" tabindex="-1"></a>cust2 <span class="op">=</span> Customer_new() <span class="co"># &lt;- .name doesn&#39;t exist here yet</span></span>
+<span id="cb248-2"><a href="oop-fundamentals.html#cb248-2" aria-hidden="true" tabindex="-1"></a>cust2.set_name(<span class="st">&quot;Lara de Silva&quot;</span>) <span class="co"># &lt;- .name is created and set to &quot;Lara de Silva&quot;</span></span>
+<span id="cb248-3"><a href="oop-fundamentals.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust2.name)</span>
+<span id="cb248-4"><a href="oop-fundamentals.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Lara de Silva</span></span>
+<span id="cb248-5"><a href="oop-fundamentals.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust2.identify())</span>
+<span id="cb248-6"><a href="oop-fundamentals.html#cb248-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; I am Customer Lara de Silva</span></span>
+<span id="cb248-7"><a href="oop-fundamentals.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; None</span></span></code></pre></div>
+<ul>
+<li><p>快速的來個類似的練習，我現在想定義Employee這個class，然後這個class的state包括name和salary(合理嘛，描述一個employee的狀態，就用名字和薪水這樣)。接著，我要realize出第一位員工，他的名字叫“Korel Rossi”，他的薪水是50000</p></li>
+<li><p>第一步，定義出此class，以及所屬attribute</p></li>
+</ul>
+<div class="sourceCode" id="cb249"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb249-1"><a href="oop-fundamentals.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb249-2"><a href="oop-fundamentals.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb249-3"><a href="oop-fundamentals.html#cb249-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb249-4"><a href="oop-fundamentals.html#cb249-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
+<span id="cb249-5"><a href="oop-fundamentals.html#cb249-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> new_name</span>
+<span id="cb249-6"><a href="oop-fundamentals.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb249-7"><a href="oop-fundamentals.html#cb249-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_salary(<span class="va">self</span>, new_salary):</span>
+<span id="cb249-8"><a href="oop-fundamentals.html#cb249-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.salary <span class="op">=</span> new_salary</span></code></pre></div>
+<ul>
+<li>第二步，realize出這位員工</li>
+</ul>
+<div class="sourceCode" id="cb250"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb250-1"><a href="oop-fundamentals.html#cb250-1" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee()</span>
+<span id="cb250-2"><a href="oop-fundamentals.html#cb250-2" aria-hidden="true" tabindex="-1"></a>emp.set_name(<span class="st">&#39;Korel Rossi&#39;</span>)</span>
+<span id="cb250-3"><a href="oop-fundamentals.html#cb250-3" aria-hidden="true" tabindex="-1"></a>emp.set_salary(<span class="dv">50000</span>)</span></code></pre></div>
+<ul>
+<li>第三步，看看這員工的attribute是不是設對了</li>
+</ul>
+<div class="sourceCode" id="cb251"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb251-1"><a href="oop-fundamentals.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.name)</span>
+<span id="cb251-2"><a href="oop-fundamentals.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Korel Rossi</span></span>
+<span id="cb251-3"><a href="oop-fundamentals.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.salary)</span>
+<span id="cb251-4"><a href="oop-fundamentals.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50000</span></span></code></pre></div>
+<ul>
+<li>so far so good. 對現在這個Employee來說，state已經有了，但behavior還沒。一個員工可能可以做哪些行為？我先幫他定義一個：被加薪！所以，現在我們來寫一個method叫<code>get_raise(amount)</code>，然後他的結果可以去更新原本state中的salary</li>
+</ul>
+<div class="sourceCode" id="cb252"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb252-1"><a href="oop-fundamentals.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb252-2"><a href="oop-fundamentals.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb252-3"><a href="oop-fundamentals.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb252-4"><a href="oop-fundamentals.html#cb252-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
+<span id="cb252-5"><a href="oop-fundamentals.html#cb252-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> new_name</span>
+<span id="cb252-6"><a href="oop-fundamentals.html#cb252-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb252-7"><a href="oop-fundamentals.html#cb252-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_salary(<span class="va">self</span>, new_salary):</span>
+<span id="cb252-8"><a href="oop-fundamentals.html#cb252-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.salary <span class="op">=</span> new_salary</span>
+<span id="cb252-9"><a href="oop-fundamentals.html#cb252-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb252-10"><a href="oop-fundamentals.html#cb252-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># method</span></span>
+<span id="cb252-11"><a href="oop-fundamentals.html#cb252-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> give_raise(<span class="va">self</span>, amount):</span>
+<span id="cb252-12"><a href="oop-fundamentals.html#cb252-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.salary <span class="op">=</span> <span class="va">self</span>.salary <span class="op">+</span> amount</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb253-1"><a href="oop-fundamentals.html#cb253-1" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee()</span>
+<span id="cb253-2"><a href="oop-fundamentals.html#cb253-2" aria-hidden="true" tabindex="-1"></a>emp.set_name(<span class="st">&#39;Korel Rossi&#39;</span>)</span>
+<span id="cb253-3"><a href="oop-fundamentals.html#cb253-3" aria-hidden="true" tabindex="-1"></a>emp.set_salary(<span class="dv">50000</span>)</span>
+<span id="cb253-4"><a href="oop-fundamentals.html#cb253-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-5"><a href="oop-fundamentals.html#cb253-5" aria-hidden="true" tabindex="-1"></a>emp.give_raise(<span class="dv">10000</span>)</span>
+<span id="cb253-6"><a href="oop-fundamentals.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.salary)</span>
+<span id="cb253-7"><a href="oop-fundamentals.html#cb253-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 60000</span></span></code></pre></div>
+<ul>
+<li>good，現在多寫一個method，是幫我們算他的月薪是多少</li>
+</ul>
+<div class="sourceCode" id="cb254"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="oop-fundamentals.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb254-2"><a href="oop-fundamentals.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb254-3"><a href="oop-fundamentals.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb254-4"><a href="oop-fundamentals.html#cb254-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
+<span id="cb254-5"><a href="oop-fundamentals.html#cb254-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> new_name</span>
+<span id="cb254-6"><a href="oop-fundamentals.html#cb254-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb254-7"><a href="oop-fundamentals.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_salary(<span class="va">self</span>, new_salary):</span>
+<span id="cb254-8"><a href="oop-fundamentals.html#cb254-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.salary <span class="op">=</span> new_salary</span>
+<span id="cb254-9"><a href="oop-fundamentals.html#cb254-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb254-10"><a href="oop-fundamentals.html#cb254-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># method</span></span>
+<span id="cb254-11"><a href="oop-fundamentals.html#cb254-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> give_raise(<span class="va">self</span>, amount):</span>
+<span id="cb254-12"><a href="oop-fundamentals.html#cb254-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.salary <span class="op">=</span> <span class="va">self</span>.salary <span class="op">+</span> amount</span>
+<span id="cb254-13"><a href="oop-fundamentals.html#cb254-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb254-14"><a href="oop-fundamentals.html#cb254-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> monthly_salary(<span class="va">self</span>):</span>
+<span id="cb254-15"><a href="oop-fundamentals.html#cb254-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.salary<span class="op">/</span><span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb255-1"><a href="oop-fundamentals.html#cb255-1" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee()</span>
+<span id="cb255-2"><a href="oop-fundamentals.html#cb255-2" aria-hidden="true" tabindex="-1"></a>emp.set_name(<span class="st">&#39;Korel Rossi&#39;</span>)</span>
+<span id="cb255-3"><a href="oop-fundamentals.html#cb255-3" aria-hidden="true" tabindex="-1"></a>emp.set_salary(<span class="dv">50000</span>)</span>
+<span id="cb255-4"><a href="oop-fundamentals.html#cb255-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-5"><a href="oop-fundamentals.html#cb255-5" aria-hidden="true" tabindex="-1"></a>emp.give_raise(<span class="dv">22000</span>)</span>
+<span id="cb255-6"><a href="oop-fundamentals.html#cb255-6" aria-hidden="true" tabindex="-1"></a>mon_sal <span class="op">=</span> emp.monthly_salary()</span>
+<span id="cb255-7"><a href="oop-fundamentals.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mon_sal)</span>
+<span id="cb255-8"><a href="oop-fundamentals.html#cb255-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6000.0</span></span></code></pre></div>
+<ul>
+<li>You might be wondering: why did we write these methods when all the same operations could have been performed on object attributes directly? Our code was very simple, but methods that deal only with attribute values often have pre-processing and checks built in: for example, maybe the company has a maximal allowable raise amount. Then it would be prudent to add a clause to the give_raise() method that checks whether the raise amount is within limits.</li>
+</ul>
+</div>
+<div id="the-__init__-constructor" class="section level2" number="26.4">
+<h2><span class="header-section-number">26.4</span> the <code>__init__</code> constructor</h2>
+<ul>
+<li><p>剛剛學了這幾招：</p>
+<ul>
+<li>在class內定義function，就叫method，且第一個argument要設self</li>
+<li>attribute也是用define function的方式做定義，只是最終都是assignment的方式，塞到<code>self.___</code>的變數中<br />
+</li>
+<li>在class內，要用到attribute時，都是用<code>self.___</code>的方式來call<br />
+</li>
+<li>realize一個object時，先call class name，再用attribute的function來做設定(例如設定Employee的name和salary)</li>
+</ul></li>
+<li><p>關於最後一點，其實有更好的作法，就是我們幹麻先realize完，又再用attribute的function去設定？何不在realize一個object的時候，就直接把這些attribute設定進去呢？這其實是可以的，就是使用__init__這個constructor，看個例子就懂了：</p></li>
+</ul>
+<div class="sourceCode" id="cb256"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb256-1"><a href="oop-fundamentals.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer:</span>
+<span id="cb256-2"><a href="oop-fundamentals.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># attribute</span></span>
+<span id="cb256-3"><a href="oop-fundamentals.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name):</span>
+<span id="cb256-4"><a href="oop-fundamentals.html#cb256-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name <span class="co"># &lt;- Create the .name attribute and set it to name parameter</span></span>
+<span id="cb256-5"><a href="oop-fundamentals.html#cb256-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;The __init__ method was called&quot;</span>)</span></code></pre></div>
+<ul>
+<li>現在，只要我用這個class去create一個object時，他就會自動啟動<code>__init__()</code>這個function，而這個function要用的argument，也是在你create object時就要傳入了：</li>
+</ul>
+<div class="sourceCode" id="cb257"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb257-1"><a href="oop-fundamentals.html#cb257-1" aria-hidden="true" tabindex="-1"></a>cust_lara <span class="op">=</span> Customer(name <span class="op">=</span> <span class="st">&quot;Lara de Silvia&quot;</span>)</span>
+<span id="cb257-2"><a href="oop-fundamentals.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The __init__ method was called</span></span>
+<span id="cb257-3"><a href="oop-fundamentals.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust_lara.name)</span>
+<span id="cb257-4"><a href="oop-fundamentals.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Lara de Silvia</span></span></code></pre></div>
+<ul>
+<li>nice! 這其實才是最常用的作法。之前的作法，被稱為“Attributes in methods”，也就是我在class裡面，用定義method的方式(也就是定義function的方式)，來定義一個設定attribute的function。然後create object後，再去call這些function來一一設定attribute。而現在的方式，叫做“Attribute in the constructor”，就是我直接寫一個initialize的function在最前面：<code>__init__(self, all_attribute_list_here)</code>，然後逼迫我們在create object的時候，就要把這些設定值填進去，那你其實就是在一一create出各個獨特的object。這種作法更可讀(在class內，找init，就可以一次全覽所有attribute), 更快速(create object時同步搞定), 也更容維護。<br />
+</li>
+</ul>
+</div>
+<div id="寫class的sop" class="section level2" number="26.5">
+<h2><span class="header-section-number">26.5</span> 寫Class的SOP</h2>
+<ul>
+<li><p>最後，講一下寫class的best practices:</p>
+<ul>
+<li>Initialize attributes in <code>__init__()</code></li>
+<li>命名時，class的命名都用<code>CamelCase</code>，就是單字在組合時，都是字首大寫，例如<code>class EmployeeWistron:</code>，class內定義function時，function name都是全小寫用底線串，例如<code>def employee_wistron():</code><br />
+</li>
+<li>Keep <code>self</code> as <code>self</code>。在class內定義function時，第一個argument都是留給self用的，如果你不寫self，要寫別的，例如kitty，也是可以work，你在class內要call這些attribute時，就記得用<code>kitty.___</code>就ok，但這樣別人看你的code時會很容易亂，所以還是建議，你就乖乖寫self就好。<br />
+</li>
+<li>最後，就像寫function一樣，寫class的時候，第一行也都會寫docstrings(功能註解)，幫助自己也幫助別人了解這個class的主要功能在幹麻</li>
+</ul></li>
+<li><p>接下來，我們就用學到的這些技巧，來重寫Employee的class。我們要用<code>__init__()</code>來設定name和salary這兩個attribute，而且，因為<code>__init__</code>就是寫function，所以，我們也可以給salary一個default值，例如GG的45000：</p></li>
+</ul>
+<div class="sourceCode" id="cb258"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="oop-fundamentals.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb258-2"><a href="oop-fundamentals.html#cb258-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create __init__() method</span></span>
+<span id="cb258-3"><a href="oop-fundamentals.html#cb258-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, salary<span class="op">=</span><span class="dv">45000</span>):</span>
+<span id="cb258-4"><a href="oop-fundamentals.html#cb258-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create the name and salary attributes</span></span>
+<span id="cb258-5"><a href="oop-fundamentals.html#cb258-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb258-6"><a href="oop-fundamentals.html#cb258-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.salary <span class="op">=</span> salary</span>
+<span id="cb258-7"><a href="oop-fundamentals.html#cb258-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb258-8"><a href="oop-fundamentals.html#cb258-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># From the previous lesson</span></span>
+<span id="cb258-9"><a href="oop-fundamentals.html#cb258-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> give_raise(<span class="va">self</span>, amount):</span>
+<span id="cb258-10"><a href="oop-fundamentals.html#cb258-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.salary <span class="op">+=</span> amount</span>
+<span id="cb258-11"><a href="oop-fundamentals.html#cb258-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-12"><a href="oop-fundamentals.html#cb258-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> monthly_salary(<span class="va">self</span>):</span>
+<span id="cb258-13"><a href="oop-fundamentals.html#cb258-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.salary<span class="op">/</span><span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb259-1"><a href="oop-fundamentals.html#cb259-1" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee(<span class="st">&quot;Korel Rossi&quot;</span>)</span>
+<span id="cb259-2"><a href="oop-fundamentals.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.name)</span>
+<span id="cb259-3"><a href="oop-fundamentals.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Korel Rossi</span></span>
+<span id="cb259-4"><a href="oop-fundamentals.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.salary)</span>
+<span id="cb259-5"><a href="oop-fundamentals.html#cb259-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45000</span></span></code></pre></div>
+<ul>
+<li>nice，這邊又提醒，<code>__init__()</code>很適合拿來做data preprocessing。例如，這邊的薪水一定要&gt;=0，所以，如果在create object的時候，輸入負的薪水，我想要print出你key錯了，薪水要正的，並主動先幫他把薪水設成0</li>
+</ul>
+<div class="sourceCode" id="cb260"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="oop-fundamentals.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb260-2"><a href="oop-fundamentals.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb260-3"><a href="oop-fundamentals.html#cb260-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, salary<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb260-4"><a href="oop-fundamentals.html#cb260-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb260-5"><a href="oop-fundamentals.html#cb260-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Modify code below to check if salary is positive</span></span>
+<span id="cb260-6"><a href="oop-fundamentals.html#cb260-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> salary<span class="op">&gt;=</span><span class="dv">0</span>:</span>
+<span id="cb260-7"><a href="oop-fundamentals.html#cb260-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.salary <span class="op">=</span> salary</span>
+<span id="cb260-8"><a href="oop-fundamentals.html#cb260-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb260-9"><a href="oop-fundamentals.html#cb260-9" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.salary <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb260-10"><a href="oop-fundamentals.html#cb260-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">&quot;Invalid salary&quot;</span>)</span>
+<span id="cb260-11"><a href="oop-fundamentals.html#cb260-11" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb260-12"><a href="oop-fundamentals.html#cb260-12" aria-hidden="true" tabindex="-1"></a>   <span class="co"># From the previous lesson</span></span>
+<span id="cb260-13"><a href="oop-fundamentals.html#cb260-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> give_raise(<span class="va">self</span>, amount):</span>
+<span id="cb260-14"><a href="oop-fundamentals.html#cb260-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.salary <span class="op">+=</span> amount</span>
+<span id="cb260-15"><a href="oop-fundamentals.html#cb260-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-16"><a href="oop-fundamentals.html#cb260-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> monthly_salary(<span class="va">self</span>):</span>
+<span id="cb260-17"><a href="oop-fundamentals.html#cb260-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.salary<span class="op">/</span><span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb261-1"><a href="oop-fundamentals.html#cb261-1" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee(<span class="st">&quot;Korel Rossi&quot;</span>, <span class="op">-</span><span class="dv">1000</span>)</span>
+<span id="cb261-2"><a href="oop-fundamentals.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Invalid salary</span></span>
+<span id="cb261-3"><a href="oop-fundamentals.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.name)</span>
+<span id="cb261-4"><a href="oop-fundamentals.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Korel Rossi</span></span>
+<span id="cb261-5"><a href="oop-fundamentals.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.salary)</span>
+<span id="cb261-6"><a href="oop-fundamentals.html#cb261-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0</span></span></code></pre></div>
+<ul>
+<li>最後，如果我想使用其他package的function時怎麼辦？我要import在class外面還是裡面？答案是：外面！！以下舉個例子，我想要多加一個attribute叫hire_date，他可以在我建立這個employee的object時，直接assign當天日期進去。所以，我需要用到<code>datetime</code>這個package裡面的function，叫<code>today()</code>。請見以下範例：</li>
+</ul>
+<div class="sourceCode" id="cb262"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="oop-fundamentals.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import datetime from datetime</span></span>
+<span id="cb262-2"><a href="oop-fundamentals.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb262-3"><a href="oop-fundamentals.html#cb262-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-4"><a href="oop-fundamentals.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
+<span id="cb262-5"><a href="oop-fundamentals.html#cb262-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb262-6"><a href="oop-fundamentals.html#cb262-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, salary<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb262-7"><a href="oop-fundamentals.html#cb262-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb262-8"><a href="oop-fundamentals.html#cb262-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> salary <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb262-9"><a href="oop-fundamentals.html#cb262-9" aria-hidden="true" tabindex="-1"></a>          <span class="va">self</span>.salary <span class="op">=</span> salary</span>
+<span id="cb262-10"><a href="oop-fundamentals.html#cb262-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb262-11"><a href="oop-fundamentals.html#cb262-11" aria-hidden="true" tabindex="-1"></a>          <span class="va">self</span>.salary <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb262-12"><a href="oop-fundamentals.html#cb262-12" aria-hidden="true" tabindex="-1"></a>          <span class="bu">print</span>(<span class="st">&quot;Invalid salary!&quot;</span>)</span>
+<span id="cb262-13"><a href="oop-fundamentals.html#cb262-13" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb262-14"><a href="oop-fundamentals.html#cb262-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add the hire_date attribute and set it to today&#39;s date</span></span>
+<span id="cb262-15"><a href="oop-fundamentals.html#cb262-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.hire_date <span class="op">=</span> datetime.today()</span>
+<span id="cb262-16"><a href="oop-fundamentals.html#cb262-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb262-17"><a href="oop-fundamentals.html#cb262-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># From the previous lesson</span></span>
+<span id="cb262-18"><a href="oop-fundamentals.html#cb262-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> give_raise(<span class="va">self</span>, amount):</span>
+<span id="cb262-19"><a href="oop-fundamentals.html#cb262-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.salary <span class="op">+=</span> amount</span>
+<span id="cb262-20"><a href="oop-fundamentals.html#cb262-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-21"><a href="oop-fundamentals.html#cb262-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> monthly_salary(<span class="va">self</span>):</span>
+<span id="cb262-22"><a href="oop-fundamentals.html#cb262-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.salary<span class="op">/</span><span class="dv">12</span></span>
+<span id="cb262-23"><a href="oop-fundamentals.html#cb262-23" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb262-24"><a href="oop-fundamentals.html#cb262-24" aria-hidden="true" tabindex="-1"></a>emp <span class="op">=</span> Employee(<span class="st">&quot;Korel Rossi&quot;</span>, <span class="op">-</span><span class="dv">1000</span>)</span>
+<span id="cb262-25"><a href="oop-fundamentals.html#cb262-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Invalid salary!</span></span>
+<span id="cb262-26"><a href="oop-fundamentals.html#cb262-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.name)</span>
+<span id="cb262-27"><a href="oop-fundamentals.html#cb262-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Korel Rossi</span></span>
+<span id="cb262-28"><a href="oop-fundamentals.html#cb262-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.salary)</span>
+<span id="cb262-29"><a href="oop-fundamentals.html#cb262-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0</span></span>
+<span id="cb262-30"><a href="oop-fundamentals.html#cb262-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(emp.hire_date)</span>
+<span id="cb262-31"><a href="oop-fundamentals.html#cb262-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2021-02-17 01:58:16.631733</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="variable-scope-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="class-level-vs-instance-level.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["python tutorial.pdf", "python tutorial.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

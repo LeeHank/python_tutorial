@@ -1,0 +1,3 @@
+# Python Environmental Setting  
+
+* 這邊應該要整理一下，怎麼安裝python，怎麼控制不同版本的python，怎麼確定自己正在用哪個版本的python等等  

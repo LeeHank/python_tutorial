@@ -4,35 +4,35 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 List基本介紹 | Python Tutorial</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <title>Chapter 10 list整理與實戰 | Python Tutorial</title>
+  <meta name="description" content="Chapter 10 list整理與實戰 | Python Tutorial" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 List基本介紹 | Python Tutorial" />
+  <meta property="og:title" content="Chapter 10 list整理與實戰 | Python Tutorial" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 List基本介紹 | Python Tutorial" />
+  <meta name="twitter:title" content="Chapter 10 list整理與實戰 | Python Tutorial" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
   
 
 <meta name="author" content="Hank Lee" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="python-basics.html"/>
-<link rel="next" href="numpy.html"/>
+<link rel="prev" href="collections-overview.html"/>
+<link rel="next" href="tuple-.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -131,238 +130,390 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Python Tutorial</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this book</a></li>
-<li class="chapter" data-level="2" data-path="python-basics.html"><a href="python-basics.html"><i class="fa fa-check"></i><b>2</b> Python Basics</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>環境設置與執行</b></span></li>
+<li class="chapter" data-level="1" data-path="python-environmental-setting.html"><a href="python-environmental-setting.html"><i class="fa fa-check"></i><b>1</b> Python Environmental Setting</a></li>
+<li class="chapter" data-level="2" data-path="-python-code.html"><a href="-python-code.html"><i class="fa fa-check"></i><b>2</b> 執行Python的code</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="python-basics.html"><a href="python-basics.html#variable-and-types"><i class="fa fa-check"></i><b>2.1</b> Variable and Types</a></li>
-<li class="chapter" data-level="2.2" data-path="python-basics.html"><a href="python-basics.html#operations"><i class="fa fa-check"></i><b>2.2</b> Operations</a>
+<li class="chapter" data-level="2.1" data-path="-python-code.html"><a href="-python-code.html#在command-line執行"><i class="fa fa-check"></i><b>2.1</b> 在command line執行</a></li>
+<li class="chapter" data-level="2.2" data-path="-python-code.html"><a href="-python-code.html#寫成.py檔後執行"><i class="fa fa-check"></i><b>2.2</b> 寫成.py檔後執行</a></li>
+<li class="chapter" data-level="2.3" data-path="-python-code.html"><a href="-python-code.html#在vs-code中執行"><i class="fa fa-check"></i><b>2.3</b> 在VS code中執行</a></li>
+<li class="chapter" data-level="2.4" data-path="-python-code.html"><a href="-python-code.html#在-rstudio-中執行"><i class="fa fa-check"></i><b>2.4</b> 在 RStudio 中執行</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="python-basics.html"><a href="python-basics.html#字串的operations"><i class="fa fa-check"></i><b>2.2.1</b> 字串的operations</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="python-basics.html"><a href="python-basics.html#methods"><i class="fa fa-check"></i><b>2.3</b> Methods</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="python-basics.html"><a href="python-basics.html#字串的methods"><i class="fa fa-check"></i><b>2.3.1</b> 字串的methods</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="python-basics.html"><a href="python-basics.html#packages"><i class="fa fa-check"></i><b>2.4</b> packages:</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="python-basics.html"><a href="python-basics.html#install-package"><i class="fa fa-check"></i><b>2.4.1</b> Install package</a></li>
-<li class="chapter" data-level="2.4.2" data-path="python-basics.html"><a href="python-basics.html#import-package"><i class="fa fa-check"></i><b>2.4.2</b> Import package</a></li>
+<li class="chapter" data-level="2.4.1" data-path="-python-code.html"><a href="-python-code.html#新增檔案python-script"><i class="fa fa-check"></i><b>2.4.1</b> 新增檔案/python script</a></li>
+<li class="chapter" data-level="2.4.2" data-path="-python-code.html"><a href="-python-code.html#用rmarkdown"><i class="fa fa-check"></i><b>2.4.2</b> 用RMarkdown</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>3</b> List基本介紹</a>
+<li class="chapter" data-level="3" data-path="-indention.html"><a href="-indention.html"><i class="fa fa-check"></i><b>3</b> 註解與indention</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="list-.html"><a href="list-.html#建立list"><i class="fa fa-check"></i><b>3.1</b> 建立list</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="list-.html"><a href="list-.html#單維list"><i class="fa fa-check"></i><b>3.1.1</b> 單維list</a></li>
-<li class="chapter" data-level="3.1.2" data-path="list-.html"><a href="list-.html#多維list"><i class="fa fa-check"></i><b>3.1.2</b> 多維list</a></li>
+<li class="chapter" data-level="3.1" data-path="-indention.html"><a href="-indention.html#插入註解"><i class="fa fa-check"></i><b>3.1</b> 插入註解</a></li>
+<li class="chapter" data-level="3.2" data-path="-indention.html"><a href="-indention.html#indention"><i class="fa fa-check"></i><b>3.2</b> indention</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="list-.html"><a href="list-.html#selecting-list-elements"><i class="fa fa-check"></i><b>3.2</b> Selecting List Elements</a>
+<li class="chapter" data-level="4" data-path="print.html"><a href="print.html"><i class="fa fa-check"></i><b>4</b> print</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="list-.html"><a href="list-.html#subset"><i class="fa fa-check"></i><b>3.2.1</b> Subset</a></li>
-<li class="chapter" data-level="3.2.2" data-path="list-.html"><a href="list-.html#slice"><i class="fa fa-check"></i><b>3.2.2</b> Slice</a></li>
+<li class="chapter" data-level="4.1" data-path="print.html"><a href="print.html#print可以放多個element進去"><i class="fa fa-check"></i><b>4.1</b> print可以放多個element進去</a></li>
+<li class="chapter" data-level="4.2" data-path="print.html"><a href="print.html#用sep來改間隔"><i class="fa fa-check"></i><b>4.2</b> 用<code>sep=</code>來改間隔</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="list-.html"><a href="list-.html#replace"><i class="fa fa-check"></i><b>3.3</b> Replace</a></li>
-<li class="chapter" data-level="3.4" data-path="list-.html"><a href="list-.html#operation"><i class="fa fa-check"></i><b>3.4</b> Operation</a>
+<li class="chapter" data-level="5" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>5</b> Variables</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="list-.html"><a href="list-.html#list1-list2-clist1-list2"><i class="fa fa-check"></i><b>3.4.1</b> list1 + list2 = c(list1, list2)</a></li>
-<li class="chapter" data-level="3.4.2" data-path="list-.html"><a href="list-.html#list1-2-replist1-2"><i class="fa fa-check"></i><b>3.4.2</b> list1 * 2 = rep(list1, 2)</a></li>
+<li class="chapter" data-level="5.1" data-path="variables.html"><a href="variables.html#overview"><i class="fa fa-check"></i><b>5.1</b> overview</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="variables.html"><a href="variables.html#建立variable"><i class="fa fa-check"></i><b>5.1.1</b> 建立variable</a></li>
+<li class="chapter" data-level="5.1.2" data-path="variables.html"><a href="variables.html#用type來確認variable資料類型"><i class="fa fa-check"></i><b>5.1.2</b> 用<code>type()</code>來確認variable資料類型</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="list-.html"><a href="list-.html#methods-1"><i class="fa fa-check"></i><b>3.5</b> Methods</a>
+<li class="chapter" data-level="5.2" data-path="variables.html"><a href="variables.html#variable-names"><i class="fa fa-check"></i><b>5.2</b> variable names</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="list-.html"><a href="list-.html#list.appendx-r的clist-x"><i class="fa fa-check"></i><b>3.5.1</b> list.append(x) = R的c(list, x)</a></li>
-<li class="chapter" data-level="3.5.2" data-path="list-.html"><a href="list-.html#list.pop-移除最後一個element"><i class="fa fa-check"></i><b>3.5.2</b> list.pop() = 移除最後一個element</a></li>
-<li class="chapter" data-level="3.5.3" data-path="list-.html"><a href="list-.html#list.removea-r的-listwhichlist-a1"><i class="fa fa-check"></i><b>3.5.3</b> list.remove(a) = R的 list[which(list == a)[1]]</a></li>
-<li class="chapter" data-level="3.5.4" data-path="list-.html"><a href="list-.html#list.sort-r的sortlist"><i class="fa fa-check"></i><b>3.5.4</b> list.sort() = R的sort(list)</a></li>
-<li class="chapter" data-level="3.5.5" data-path="list-.html"><a href="list-.html#list.reverse"><i class="fa fa-check"></i><b>3.5.5</b> list.reverse()</a></li>
-<li class="chapter" data-level="3.5.6" data-path="list-.html"><a href="list-.html#list.insertindex-x-我要把x插入到index的前面"><i class="fa fa-check"></i><b>3.5.6</b> list.insert(index, x) = 我要把x插入到index的前面</a></li>
-<li class="chapter" data-level="3.5.7" data-path="list-.html"><a href="list-.html#list.indexa-r的whichlist1-a1"><i class="fa fa-check"></i><b>3.5.7</b> list.index(a) = R的which(list1 == a)[1]</a></li>
-<li class="chapter" data-level="3.5.8" data-path="list-.html"><a href="list-.html#list.countx-計算x在list中出現幾次"><i class="fa fa-check"></i><b>3.5.8</b> list.count(x) = 計算x在list中出現幾次</a></li>
+<li class="chapter" data-level="5.2.1" data-path="variables.html"><a href="variables.html#規則"><i class="fa fa-check"></i><b>5.2.1</b> 規則</a></li>
+<li class="chapter" data-level="5.2.2" data-path="variables.html"><a href="variables.html#多個字的variable-name"><i class="fa fa-check"></i><b>5.2.2</b> 多個字的variable name</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="list-.html"><a href="list-.html#list-是-mutable"><i class="fa fa-check"></i><b>3.6</b> List 是 mutable</a></li>
-<li class="chapter" data-level="3.7" data-path="list-.html"><a href="list-.html#list的功能最常用來做for-loop"><i class="fa fa-check"></i><b>3.7</b> List的功能（最常用來做for loop)</a></li>
+<li class="chapter" data-level="5.3" data-path="variables.html"><a href="variables.html#一次assign多個variables"><i class="fa fa-check"></i><b>5.3</b> 一次assign多個variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="variables.html"><a href="variables.html#多個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.1</b> 多個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.2" data-path="variables.html"><a href="variables.html#同一個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.2</b> 同一個value，assign給多個variable</a></li>
+<li class="chapter" data-level="5.3.3" data-path="variables.html"><a href="variables.html#unpack-a-collection"><i class="fa fa-check"></i><b>5.3.3</b> unpack a collection</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> NumPy</a>
+<li class="chapter" data-level="5.4" data-path="variables.html"><a href="variables.html#assignment-operators"><i class="fa fa-check"></i><b>5.4</b> Assignment Operators</a></li>
+<li class="chapter" data-level="5.5" data-path="variables.html"><a href="variables.html#variable-scope"><i class="fa fa-check"></i><b>5.5</b> variable scope</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#why-numpy"><i class="fa fa-check"></i><b>4.1</b> Why NumPy</a></li>
-<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#subset-np.array"><i class="fa fa-check"></i><b>4.2</b> Subset np.array</a></li>
-<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#statistics-functions"><i class="fa fa-check"></i><b>4.3</b> Statistics functions</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="numpy.html"><a href="numpy.html#generate-data"><i class="fa fa-check"></i><b>4.3.1</b> Generate data</a></li>
-<li class="chapter" data-level="4.3.2" data-path="numpy.html"><a href="numpy.html#summary-statistics"><i class="fa fa-check"></i><b>4.3.2</b> Summary statistics</a></li>
+<li class="chapter" data-level="5.5.1" data-path="variables.html"><a href="variables.html#global-variables"><i class="fa fa-check"></i><b>5.5.1</b> Global Variables</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="matplotlib.html"><a href="matplotlib.html"><i class="fa fa-check"></i><b>5</b> Matplotlib</a>
+<li class="part"><span><b>Python Basic Data Types</b></span></li>
+<li class="chapter" data-level="6" data-path="python-data-types.html"><a href="python-data-types.html"><i class="fa fa-check"></i><b>6</b> Python Data Types</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="matplotlib.html"><a href="matplotlib.html#line-plot"><i class="fa fa-check"></i><b>5.1</b> line plot</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="scatter-plot.html"><a href="scatter-plot.html"><i class="fa fa-check"></i><b>6</b> scatter plot</a>
+<li class="chapter" data-level="6.1" data-path="python-data-types.html"><a href="python-data-types.html#built-in-data-types"><i class="fa fa-check"></i><b>6.1</b> Built-in Data Types</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="scatter-plot.html"><a href="scatter-plot.html#histogram"><i class="fa fa-check"></i><b>6.1</b> Histogram</a></li>
+<li class="chapter" data-level="6.1.1" data-path="python-data-types.html"><a href="python-data-types.html#基本款"><i class="fa fa-check"></i><b>6.1.1</b> 基本款</a></li>
+<li class="chapter" data-level="6.1.2" data-path="python-data-types.html"><a href="python-data-types.html#collections"><i class="fa fa-check"></i><b>6.1.2</b> collections</a></li>
+<li class="chapter" data-level="6.1.3" data-path="python-data-types.html"><a href="python-data-types.html#binary"><i class="fa fa-check"></i><b>6.1.3</b> binary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="customization.html"><a href="customization.html"><i class="fa fa-check"></i><b>7</b> Customization</a>
+<li class="chapter" data-level="6.2" data-path="python-data-types.html"><a href="python-data-types.html#getting-the-data-type"><i class="fa fa-check"></i><b>6.2</b> Getting the data type</a></li>
+<li class="chapter" data-level="6.3" data-path="python-data-types.html"><a href="python-data-types.html#setting-the-specific-data-type"><i class="fa fa-check"></i><b>6.3</b> Setting the specific data type</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="int-float-.html"><a href="int-float-.html"><i class="fa fa-check"></i><b>7</b> int &amp; float 整理與實戰</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="customization.html"><a href="customization.html#xy-labels-and-title"><i class="fa fa-check"></i><b>7.1</b> x,y labels and title</a></li>
-<li class="chapter" data-level="7.2" data-path="customization.html"><a href="customization.html#ticks"><i class="fa fa-check"></i><b>7.2</b> Ticks</a></li>
-<li class="chapter" data-level="7.3" data-path="customization.html"><a href="customization.html#加入第三軸-s-size"><i class="fa fa-check"></i><b>7.3</b> 加入第三軸： s (size)</a></li>
+<li class="chapter" data-level="7.1" data-path="int-float-.html"><a href="int-float-.html#建立intfloat變數"><i class="fa fa-check"></i><b>7.1</b> 建立int/float變數</a></li>
+<li class="chapter" data-level="7.2" data-path="int-float-.html"><a href="int-float-.html#宣告intfloat變數"><i class="fa fa-check"></i><b>7.2</b> 宣告int/float變數</a></li>
+<li class="chapter" data-level="7.3" data-path="int-float-.html"><a href="int-float-.html#型別轉換"><i class="fa fa-check"></i><b>7.3</b> 型別轉換</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="-dictionary.html"><a href="-dictionary.html"><i class="fa fa-check"></i><b>8</b> 資料結構： dictionary</a>
+<li class="chapter" data-level="8" data-path="string-.html"><a href="string-.html"><i class="fa fa-check"></i><b>8</b> string整理與實戰</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="-dictionary.html"><a href="-dictionary.html#select-element-用-dictionarykey"><i class="fa fa-check"></i><b>8.1</b> select element 用 dictionary[‘key’]</a></li>
-<li class="chapter" data-level="8.2" data-path="-dictionary.html"><a href="-dictionary.html#刪除用del-dictionkey"><i class="fa fa-check"></i><b>8.2</b> 刪除用del diction[‘key’]</a></li>
-<li class="chapter" data-level="8.3" data-path="-dictionary.html"><a href="-dictionary.html#添加一個element進去用-dictionarynew-key-new_value"><i class="fa fa-check"></i><b>8.3</b> 添加一個element進去用 dictionary[‘new key’] = new_value</a></li>
-<li class="chapter" data-level="8.4" data-path="-dictionary.html"><a href="-dictionary.html#更新key的value用-dictionarykey-new_value"><i class="fa fa-check"></i><b>8.4</b> 更新key的value用 dictionary[‘key’] = new_value</a></li>
-<li class="chapter" data-level="8.5" data-path="-dictionary.html"><a href="-dictionary.html#dictionary中的key一定是字串但value可以是任何東西"><i class="fa fa-check"></i><b>8.5</b> dictionary中的key一定是字串，但value可以是任何東西</a></li>
-<li class="chapter" data-level="8.6" data-path="-dictionary.html"><a href="-dictionary.html#select這種複雜dictionary就一層一層剝下去"><i class="fa fa-check"></i><b>8.6</b> select這種複雜dictionary就一層一層剝下去</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>9</b> Pandas</a>
+<li class="chapter" data-level="8.1" data-path="string-.html"><a href="string-.html#字串的定義"><i class="fa fa-check"></i><b>8.1</b> 字串的定義</a></li>
+<li class="chapter" data-level="8.2" data-path="string-.html"><a href="string-.html#字串的基本操作"><i class="fa fa-check"></i><b>8.2</b> 字串的基本操作</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="pandas.html"><a href="pandas.html#創建pd.dataframe"><i class="fa fa-check"></i><b>9.1</b> 創建pd.DataFrame</a>
+<li class="chapter" data-level="8.2.1" data-path="string-.html"><a href="string-.html#利用來定義逃脫字元"><i class="fa fa-check"></i><b>8.2.1</b> 利用""來定義逃脫字元</a></li>
+<li class="chapter" data-level="8.2.2" data-path="string-.html"><a href="string-.html#把字串看成listindex時從0開始"><i class="fa fa-check"></i><b>8.2.2</b> 把字串看成list，index時從0開始</a></li>
+<li class="chapter" data-level="8.2.3" data-path="string-.html"><a href="string-.html#字串常用功能去空白改小寫取代"><i class="fa fa-check"></i><b>8.2.3</b> 字串常用功能：去空白、改小寫、取代</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="string-.html"><a href="string-.html#字串的format-i.e.-r的paste功能"><i class="fa fa-check"></i><b>8.3</b> 字串的format (i.e. R的paste()功能)</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="pandas.html"><a href="pandas.html#將dictionary轉成data.frame"><i class="fa fa-check"></i><b>9.1.1</b> 將dictionary轉成data.frame</a></li>
-<li class="chapter" data-level="9.1.2" data-path="pandas.html"><a href="pandas.html#將2d-array轉成data.fream"><i class="fa fa-check"></i><b>9.1.2</b> 將2d-array轉成data.fream</a></li>
-<li class="chapter" data-level="9.1.3" data-path="pandas.html"><a href="pandas.html#讀csv檔"><i class="fa fa-check"></i><b>9.1.3</b> 讀csv檔</a></li>
+<li class="chapter" data-level="8.3.1" data-path="string-.html"><a href="string-.html#直接一路加號到底"><i class="fa fa-check"></i><b>8.3.1</b> 直接一路加號到底</a></li>
+<li class="chapter" data-level="8.3.2" data-path="string-.html"><a href="string-.html#用s-d-來做"><i class="fa fa-check"></i><b>8.3.2</b> 用%s, %d 來做</a></li>
+<li class="chapter" data-level="8.3.3" data-path="string-.html"><a href="string-.html#用和.format"><i class="fa fa-check"></i><b>8.3.3</b> 用{}和.format</a></li>
+<li class="chapter" data-level="8.3.4" data-path="string-.html"><a href="string-.html#用f吧"><i class="fa fa-check"></i><b>8.3.4</b> 用f吧!</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="pandas.html"><a href="pandas.html#select"><i class="fa fa-check"></i><b>9.2</b> Select</a>
+<li class="chapter" data-level="8.4" data-path="string-.html"><a href="string-.html#字串的join-i.e.-r的collapse"><i class="fa fa-check"></i><b>8.4</b> 字串的join (i.e. R的collapse)</a></li>
+</ul></li>
+<li class="part"><span><b>Python Collections</b></span></li>
+<li class="chapter" data-level="9" data-path="collections-overview.html"><a href="collections-overview.html"><i class="fa fa-check"></i><b>9</b> collections overview</a></li>
+<li class="chapter" data-level="10" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>10</b> list整理與實戰</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="pandas.html"><a href="pandas.html#section"><i class="fa fa-check"></i><b>9.2.1</b> [] &amp; [[]]</a></li>
-<li class="chapter" data-level="9.2.2" data-path="pandas.html"><a href="pandas.html#loc-and-iloc"><i class="fa fa-check"></i><b>9.2.2</b> loc and iloc</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html"><i class="fa fa-check"></i><b>10</b> Logic, Control Flow and Filtering</a>
+<li class="chapter" data-level="10.1" data-path="list-.html"><a href="list-.html#list定義"><i class="fa fa-check"></i><b>10.1</b> list定義</a></li>
+<li class="chapter" data-level="10.2" data-path="list-.html"><a href="list-.html#建-建立list"><i class="fa fa-check"></i><b>10.2</b> [建] 建立list</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#comparison-operators"><i class="fa fa-check"></i><b>10.1</b> Comparison operators</a></li>
-<li class="chapter" data-level="10.2" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#boolean-operators"><i class="fa fa-check"></i><b>10.2</b> Boolean Operators</a></li>
-<li class="chapter" data-level="10.3" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#numpy-np.logical_andnp.logical_ornp.logical_not"><i class="fa fa-check"></i><b>10.3</b> Numpy np.logical_and()/np.logical_or()/np.logical_not()</a></li>
-<li class="chapter" data-level="10.4" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#if-elif-else"><i class="fa fa-check"></i><b>10.4</b> if, elif, else</a></li>
-<li class="chapter" data-level="10.5" data-path="logic-control-flow-and-filtering.html"><a href="logic-control-flow-and-filtering.html#filtering-pandas-dataframe"><i class="fa fa-check"></i><b>10.5</b> Filtering pandas DataFrame</a></li>
+<li class="chapter" data-level="10.2.1" data-path="list-.html"><a href="list-.html#建立單維list"><i class="fa fa-check"></i><b>10.2.1</b> 建立單維list</a></li>
+<li class="chapter" data-level="10.2.2" data-path="list-.html"><a href="list-.html#建立多維list"><i class="fa fa-check"></i><b>10.2.2</b> 建立多維list</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>11</b> Loops</a>
+<li class="chapter" data-level="10.3" data-path="list-.html"><a href="list-.html#查-取用list裡面的item"><i class="fa fa-check"></i><b>10.3</b> [查] 取用list裡面的item</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="loops.html"><a href="loops.html#while-loop"><i class="fa fa-check"></i><b>11.1</b> while loop</a></li>
-<li class="chapter" data-level="11.2" data-path="loops.html"><a href="loops.html#for-loop"><i class="fa fa-check"></i><b>11.2</b> for loop</a>
+<li class="chapter" data-level="10.3.1" data-path="list-.html"><a href="list-.html#用index-0取第一個item"><i class="fa fa-check"></i><b>10.3.1</b> 用index = 0取第一個item</a></li>
+<li class="chapter" data-level="10.3.2" data-path="list-.html"><a href="list-.html#用index--2取由右數來第2個"><i class="fa fa-check"></i><b>10.3.2</b> 用index = -2取由右數來第2個</a></li>
+<li class="chapter" data-level="10.3.3" data-path="list-.html"><a href="list-.html#表示從index3取到index7"><i class="fa fa-check"></i><b>10.3.3</b> 3:8表示從index3取到index7</a></li>
+<li class="chapter" data-level="10.3.4" data-path="list-.html"><a href="list-.html#用.indexa找出a所屬的index"><i class="fa fa-check"></i><b>10.3.4</b> 用<code>.index('a')</code>找出’a’所屬的index</a></li>
+<li class="chapter" data-level="10.3.5" data-path="list-.html"><a href="list-.html#用in來確認item在不在list裡"><i class="fa fa-check"></i><b>10.3.5</b> 用<code>in</code>來確認item在不在list裡</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="list-.html"><a href="list-.html#改-修改list裡面的item"><i class="fa fa-check"></i><b>10.4</b> [改] 修改list裡面的item</a></li>
+<li class="chapter" data-level="10.5" data-path="list-.html"><a href="list-.html#增-增加list裡面的item"><i class="fa fa-check"></i><b>10.5</b> [增] 增加list裡面的item</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="loops.html"><a href="loops.html#loop-over-a-list"><i class="fa fa-check"></i><b>11.2.1</b> loop over a list</a></li>
-<li class="chapter" data-level="11.2.2" data-path="loops.html"><a href="loops.html#loop-over-string"><i class="fa fa-check"></i><b>11.2.2</b> loop over string</a></li>
-<li class="chapter" data-level="11.2.3" data-path="loops.html"><a href="loops.html#loop-over-dictionary"><i class="fa fa-check"></i><b>11.2.3</b> loop over dictionary</a></li>
-<li class="chapter" data-level="11.2.4" data-path="loops.html"><a href="loops.html#loop-over-numpy-array"><i class="fa fa-check"></i><b>11.2.4</b> loop over Numpy array</a></li>
-<li class="chapter" data-level="11.2.5" data-path="loops.html"><a href="loops.html#loop-over-dataframe"><i class="fa fa-check"></i><b>11.2.5</b> loop over DataFrame</a></li>
-<li class="chapter" data-level="11.2.6" data-path="loops.html"><a href="loops.html#add-column-by-for-loops"><i class="fa fa-check"></i><b>11.2.6</b> add column by for loops</a></li>
-<li class="chapter" data-level="11.2.7" data-path="loops.html"><a href="loops.html#add-column-by-apply-method"><i class="fa fa-check"></i><b>11.2.7</b> add column by apply method</a></li>
+<li class="chapter" data-level="10.5.1" data-path="list-.html"><a href="list-.html#加到最後面用.append"><i class="fa fa-check"></i><b>10.5.1</b> 加到最後面，用<code>.append()</code></a></li>
+<li class="chapter" data-level="10.5.2" data-path="list-.html"><a href="list-.html#加到指定的位置用.insert"><i class="fa fa-check"></i><b>10.5.2</b> 加到指定的位置，用<code>.insert()</code></a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html"><i class="fa fa-check"></i><b>12</b> Case Study: Hacker Statistics</a>
+<li class="chapter" data-level="10.6" data-path="list-.html"><a href="list-.html#增-join兩個list"><i class="fa fa-check"></i><b>10.6</b> [增] join兩個list</a></li>
+<li class="chapter" data-level="10.7" data-path="list-.html"><a href="list-.html#刪-刪除list裡面的item"><i class="fa fa-check"></i><b>10.7</b> [刪] 刪除list裡面的item</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#產出random-number"><i class="fa fa-check"></i><b>12.1</b> 產出random number</a></li>
-<li class="chapter" data-level="12.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子1次的實驗"><i class="fa fa-check"></i><b>12.2</b> 擲骰子1次的實驗</a></li>
-<li class="chapter" data-level="12.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擲骰子100次的實驗"><i class="fa fa-check"></i><b>12.3</b> 擲骰子100次的實驗</a></li>
-<li class="chapter" data-level="12.4" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正樓層不能0"><i class="fa fa-check"></i><b>12.4</b> 修正樓層不能&lt;0</a></li>
-<li class="chapter" data-level="12.5" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#修正有0.1的機會會回到原點"><i class="fa fa-check"></i><b>12.5</b> 修正有0.1%的機會，會回到原點</a></li>
-<li class="chapter" data-level="12.6" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#做1000個run每個run都做100次擲骰子的實驗"><i class="fa fa-check"></i><b>12.6</b> 做1000個run，每個run都做100次擲骰子的實驗</a></li>
-<li class="chapter" data-level="12.7" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#擷取每個run的最後一筆資訊"><i class="fa fa-check"></i><b>12.7</b> 擷取每個run的最後一筆資訊</a></li>
-<li class="chapter" data-level="12.8" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#計算可以爬到60層樓以上的機率"><i class="fa fa-check"></i><b>12.8</b> 計算可以爬到60層樓以上的機率</a></li>
-<li class="chapter" data-level="12.9" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#appendix"><i class="fa fa-check"></i><b>12.9</b> Appendix</a>
+<li class="chapter" data-level="10.7.1" data-path="list-.html"><a href="list-.html#removeitem-刪除該item"><i class="fa fa-check"></i><b>10.7.1</b> <code>.remove(item)</code> 刪除該item</a></li>
+<li class="chapter" data-level="10.7.2" data-path="list-.html"><a href="list-.html#pop-刪除最後一筆"><i class="fa fa-check"></i><b>10.7.2</b> <code>.pop()</code> 刪除最後一筆</a></li>
+<li class="chapter" data-level="10.7.3" data-path="list-.html"><a href="list-.html#popindex-刪除該index"><i class="fa fa-check"></i><b>10.7.3</b> <code>.pop(index)</code> 刪除該index</a></li>
+<li class="chapter" data-level="10.7.4" data-path="list-.html"><a href="list-.html#del-listindex-刪除該list中的此index"><i class="fa fa-check"></i><b>10.7.4</b> <code>del list[index]</code> 刪除該list中的此index</a></li>
+<li class="chapter" data-level="10.7.5" data-path="list-.html"><a href="list-.html#clear-清空此list內所有item"><i class="fa fa-check"></i><b>10.7.5</b> <code>.clear()</code> 清空此list內所有item</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="list-.html"><a href="list-.html#mutable-copy-list"><i class="fa fa-check"></i><b>10.8</b> [mutable] copy list</a></li>
+<li class="chapter" data-level="10.9" data-path="list-.html"><a href="list-.html#loop-for"><i class="fa fa-check"></i><b>10.9</b> [loop] for</a>
 <ul>
-<li class="chapter" data-level="12.9.1" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#畫一下endpoint的distribution"><i class="fa fa-check"></i><b>12.9.1</b> 畫一下endpoint的distribution</a></li>
-<li class="chapter" data-level="12.9.2" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#第一個run我的爬樓梯過程長怎樣"><i class="fa fa-check"></i><b>12.9.2</b> 第一個run，我的爬樓梯過程長怎樣？</a></li>
-<li class="chapter" data-level="12.9.3" data-path="case-study-hacker-statistics.html"><a href="case-study-hacker-statistics.html#visualize所有run的爬樓梯過程"><i class="fa fa-check"></i><b>12.9.3</b> Visualize所有run的爬樓梯過程</a></li>
+<li class="chapter" data-level="10.9.1" data-path="list-.html"><a href="list-.html#loop-index"><i class="fa fa-check"></i><b>10.9.1</b> loop index</a></li>
+<li class="chapter" data-level="10.9.2" data-path="list-.html"><a href="list-.html#loop-items"><i class="fa fa-check"></i><b>10.9.2</b> loop items</a></li>
+<li class="chapter" data-level="10.9.3" data-path="list-.html"><a href="list-.html#enumerate"><i class="fa fa-check"></i><b>10.9.3</b> <code>enumerate()</code></a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="function-fundamentals.html"><a href="function-fundamentals.html"><i class="fa fa-check"></i><b>13</b> Function fundamentals</a>
+<li class="chapter" data-level="10.10" data-path="list-.html"><a href="list-.html#loop-list-comprehension"><i class="fa fa-check"></i><b>10.10</b> [loop] list comprehension</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="function-fundamentals.html"><a href="function-fundamentals.html#single-function-parameters"><i class="fa fa-check"></i><b>13.1</b> Single function parameters</a></li>
-<li class="chapter" data-level="13.2" data-path="function-fundamentals.html"><a href="function-fundamentals.html#multiple-function-parameters"><i class="fa fa-check"></i><b>13.2</b> Multiple function parameters</a></li>
+<li class="chapter" data-level="10.10.1" data-path="list-.html"><a href="list-.html#simple-example"><i class="fa fa-check"></i><b>10.10.1</b> simple example</a></li>
+<li class="chapter" data-level="10.10.2" data-path="list-.html"><a href="list-.html#nested-for-loop"><i class="fa fa-check"></i><b>10.10.2</b> nested for loop</a></li>
+<li class="chapter" data-level="10.10.3" data-path="list-.html"><a href="list-.html#conditional-for-loop"><i class="fa fa-check"></i><b>10.10.3</b> conditional for loop</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html"><i class="fa fa-check"></i><b>14</b> Tuple簡介與其在funtion上的應用</a>
+<li class="chapter" data-level="10.11" data-path="list-.html"><a href="list-.html#排序.sort"><i class="fa fa-check"></i><b>10.11</b> 排序(<code>.sort()</code>)</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html#tuple-vs-list"><i class="fa fa-check"></i><b>14.1</b> tuple vs list</a>
+<li class="chapter" data-level="10.11.1" data-path="list-.html"><a href="list-.html#sort"><i class="fa fa-check"></i><b>10.11.1</b> <code>.sort()</code></a></li>
+<li class="chapter" data-level="10.11.2" data-path="list-.html"><a href="list-.html#sortreverse-true"><i class="fa fa-check"></i><b>10.11.2</b> <code>.sort(reverse = True)</code></a></li>
+<li class="chapter" data-level="10.11.3" data-path="list-.html"><a href="list-.html#sortkey-my_func"><i class="fa fa-check"></i><b>10.11.3</b> <code>.sort(key = my_func)</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="list-.html"><a href="list-.html#順序倒過來.reverse"><i class="fa fa-check"></i><b>10.12</b> 順序倒過來(<code>.reverse()</code>)</a></li>
+<li class="chapter" data-level="10.13" data-path="list-.html"><a href="list-.html#list.counta-計算a在list中出現幾次"><i class="fa fa-check"></i><b>10.13</b> list.count(‘a’) = 計算’a’在list中出現幾次</a></li>
+<li class="chapter" data-level="10.14" data-path="list-.html"><a href="list-.html#practice"><i class="fa fa-check"></i><b>10.14</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="tuple-.html"><a href="tuple-.html"><i class="fa fa-check"></i><b>11</b> tuple整理與實戰</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html#tuple用-來建立而list用"><i class="fa fa-check"></i><b>14.1.1</b> tuple用 (,,,)來建立，而list用[,,,]</a></li>
-<li class="chapter" data-level="14.1.2" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html#tuple裡也可放任意type的物件就像list依樣"><i class="fa fa-check"></i><b>14.1.2</b> tuple裡也可放任意type的物件，就像list依樣</a></li>
-<li class="chapter" data-level="14.1.3" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html#tuple不可以更改裡面的element但list可以這種特性叫immutable"><i class="fa fa-check"></i><b>14.1.3</b> tuple不可以更改裡面的element，但list可以。這種特性叫immutable</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="tuple-funtion-.html"><a href="tuple-funtion-.html#tuple最大的用處可以unpack-a-tuple-into-several-variables"><i class="fa fa-check"></i><b>14.2</b> tuple最大的用處：可以unpack a tuple into several variables!</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="first-practice.html"><a href="first-practice.html"><i class="fa fa-check"></i><b>15</b> First practice</a></li>
-<li class="chapter" data-level="16" data-path="variable-scope.html"><a href="variable-scope.html"><i class="fa fa-check"></i><b>16</b> Variable scope</a>
+<li class="chapter" data-level="11.1" data-path="tuple-.html"><a href="tuple-.html#建-tuple定義與創建"><i class="fa fa-check"></i><b>11.1</b> [建] tuple定義與創建</a></li>
+<li class="chapter" data-level="11.2" data-path="tuple-.html"><a href="tuple-.html#主要用在保護數據和unpack"><i class="fa fa-check"></i><b>11.2</b> 主要用在保護數據和unpack</a></li>
+<li class="chapter" data-level="11.3" data-path="tuple-.html"><a href="tuple-.html#查-取用tuple中的item"><i class="fa fa-check"></i><b>11.3</b> [查] 取用tuple中的item</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="variable-scope.html"><a href="variable-scope.html#local-scope中定義的object無法在global-scope中提取"><i class="fa fa-check"></i><b>16.1</b> local scope中定義的object，無法在global scope中提取</a></li>
-<li class="chapter" data-level="16.2" data-path="variable-scope.html"><a href="variable-scope.html#用global這個keyword把local-scope的object給推到global-scope"><i class="fa fa-check"></i><b>16.2</b> 用global這個keyword，把local scope的object給推到global scope</a></li>
-<li class="chapter" data-level="16.3" data-path="variable-scope.html"><a href="variable-scope.html#綜合練習"><i class="fa fa-check"></i><b>16.3</b> 綜合練習</a></li>
+<li class="chapter" data-level="11.3.1" data-path="tuple-.html"><a href="tuple-.html#用list1index取數據"><i class="fa fa-check"></i><b>11.3.1</b> 用<code>list1[index]</code>取數據</a></li>
+<li class="chapter" data-level="11.3.2" data-path="tuple-.html"><a href="tuple-.html#用負號往回取"><i class="fa fa-check"></i><b>11.3.2</b> 用負號往回取</a></li>
+<li class="chapter" data-level="11.3.3" data-path="tuple-.html"><a href="tuple-.html#是指取index2到index4"><i class="fa fa-check"></i><b>11.3.3</b> 2:5是指取index=2到index=4</a></li>
+<li class="chapter" data-level="11.3.4" data-path="tuple-.html"><a href="tuple-.html#找index用.indexa"><i class="fa fa-check"></i><b>11.3.4</b> 找index用<code>.index('a')</code></a></li>
+<li class="chapter" data-level="11.3.5" data-path="tuple-.html"><a href="tuple-.html#確認每個item有沒有在tuple內也是用in"><i class="fa fa-check"></i><b>11.3.5</b> 確認每個item有沒有在tuple內也是用<code>in</code></a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="nested-function.html"><a href="nested-function.html"><i class="fa fa-check"></i><b>17</b> Nested function</a></li>
-<li class="chapter" data-level="18" data-path="closure.html"><a href="closure.html"><i class="fa fa-check"></i><b>18</b> Closure</a></li>
-<li class="chapter" data-level="19" data-path="default-argument.html"><a href="default-argument.html"><i class="fa fa-check"></i><b>19</b> Default argument</a></li>
-<li class="chapter" data-level="20" data-path="flexible-argument-args.html"><a href="flexible-argument-args.html"><i class="fa fa-check"></i><b>20</b> Flexible argument (*args)</a></li>
-<li class="chapter" data-level="21" data-path="flexible-keyword-argument-kwargs.html"><a href="flexible-keyword-argument-kwargs.html"><i class="fa fa-check"></i><b>21</b> Flexible keyword argument (**kwargs)</a></li>
-<li class="chapter" data-level="22" data-path="mapfilterreduce-with-lambda-function.html"><a href="mapfilterreduce-with-lambda-function.html"><i class="fa fa-check"></i><b>22</b> map/filter/reduce with lambda function</a>
+<li class="chapter" data-level="11.4" data-path="tuple-.html"><a href="tuple-.html#改-增-刪-tuple不可修改"><i class="fa fa-check"></i><b>11.4</b> [改, 增, 刪] tuple不可修改</a></li>
+<li class="chapter" data-level="11.5" data-path="tuple-.html"><a href="tuple-.html#immutable"><i class="fa fa-check"></i><b>11.5</b> immutable</a></li>
+<li class="chapter" data-level="11.6" data-path="tuple-.html"><a href="tuple-.html#loop-for回圈"><i class="fa fa-check"></i><b>11.6</b> [loop] for回圈</a></li>
+<li class="chapter" data-level="11.7" data-path="tuple-.html"><a href="tuple-.html#loop-comprehension"><i class="fa fa-check"></i><b>11.7</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="11.8" data-path="tuple-.html"><a href="tuple-.html#join兩個tuple用加號"><i class="fa fa-check"></i><b>11.8</b> join兩個tuple用加號</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="dictionary-.html"><a href="dictionary-.html"><i class="fa fa-check"></i><b>12</b> dictionary整理與實戰</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="mapfilterreduce-with-lambda-function.html"><a href="mapfilterreduce-with-lambda-function.html#map-with-lambda"><i class="fa fa-check"></i><b>22.1</b> map with lambda</a></li>
-<li class="chapter" data-level="22.2" data-path="mapfilterreduce-with-lambda-function.html"><a href="mapfilterreduce-with-lambda-function.html#filter-with-lambda"><i class="fa fa-check"></i><b>22.2</b> filter with lambda</a></li>
-<li class="chapter" data-level="22.3" data-path="mapfilterreduce-with-lambda-function.html"><a href="mapfilterreduce-with-lambda-function.html#reduce-with-lambda"><i class="fa fa-check"></i><b>22.3</b> reduce with lambda</a></li>
-</ul></li>
-<li class="chapter" data-level="23" data-path="error-handling.html"><a href="error-handling.html"><i class="fa fa-check"></i><b>23</b> Error handling</a>
+<li class="chapter" data-level="12.1" data-path="dictionary-.html"><a href="dictionary-.html#dict的定義"><i class="fa fa-check"></i><b>12.1</b> dict的定義</a></li>
+<li class="chapter" data-level="12.2" data-path="dictionary-.html"><a href="dictionary-.html#建-dict的創建"><i class="fa fa-check"></i><b>12.2</b> [建] dict的創建</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="error-handling.html"><a href="error-handling.html#try-except"><i class="fa fa-check"></i><b>23.1</b> try-except</a></li>
-<li class="chapter" data-level="23.2" data-path="error-handling.html"><a href="error-handling.html#raise"><i class="fa fa-check"></i><b>23.2</b> raise</a></li>
+<li class="chapter" data-level="12.2.1" data-path="dictionary-.html"><a href="dictionary-.html#直接用"><i class="fa fa-check"></i><b>12.2.1</b> 直接用</a></li>
+<li class="chapter" data-level="12.2.2" data-path="dictionary-.html"><a href="dictionary-.html#用dicta2-bhaha來建立"><i class="fa fa-check"></i><b>12.2.2</b> 用<code>dict(a=2, b="haha")</code>來建立</a></li>
+<li class="chapter" data-level="12.2.3" data-path="dictionary-.html"><a href="dictionary-.html#用dictiterable_pair來創建"><i class="fa fa-check"></i><b>12.2.3</b> 用<code>dict(iterable_pair)</code>來創建</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html"><i class="fa fa-check"></i><b>24</b> Using iterators in PythonLand</a>
+<li class="chapter" data-level="12.3" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.keys-d.values-d.items查詢"><i class="fa fa-check"></i><b>12.3</b> [查] 用<code>d.keys()</code>, <code>d.values()</code>, <code>d.items()</code>查詢</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#枯燥但必須知道的一些理論"><i class="fa fa-check"></i><b>24.1</b> 枯燥但必須知道的一些理論</a>
+<li class="chapter" data-level="12.3.1" data-path="dictionary-.html"><a href="dictionary-.html#keys可以得到最外層的所有key值"><i class="fa fa-check"></i><b>12.3.1</b> <code>.keys()</code>可以得到最外層的所有key值</a></li>
+<li class="chapter" data-level="12.3.2" data-path="dictionary-.html"><a href="dictionary-.html#values可以得到所有value"><i class="fa fa-check"></i><b>12.3.2</b> <code>.values()</code>可以得到所有value</a></li>
+<li class="chapter" data-level="12.3.3" data-path="dictionary-.html"><a href="dictionary-.html#items可以得到keyvalue的tupple"><i class="fa fa-check"></i><b>12.3.3</b> <code>.items()</code>可以得到(key,value)的tupple</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.getkey來取用dict裡面的item"><i class="fa fa-check"></i><b>12.4</b> [查] 用<code>d.get("key")</code>來取用dict裡面的item</a></li>
+<li class="chapter" data-level="12.5" data-path="dictionary-.html"><a href="dictionary-.html#改-修改dict裡面的item"><i class="fa fa-check"></i><b>12.5</b> [改] 修改dict裡面的item</a></li>
+<li class="chapter" data-level="12.6" data-path="dictionary-.html"><a href="dictionary-.html#增-增加dict的item"><i class="fa fa-check"></i><b>12.6</b> [增] 增加dict的item</a>
 <ul>
-<li class="chapter" data-level="24.1.1" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#定義iterable-iterator"><i class="fa fa-check"></i><b>24.1.1</b> 定義：Iterable, Iterator</a></li>
-<li class="chapter" data-level="24.1.2" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#練習分辨iterable和iterator"><i class="fa fa-check"></i><b>24.1.2</b> 練習分辨iterable和iterator</a></li>
-<li class="chapter" data-level="24.1.3" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#用range做出來的object是iterable"><i class="fa fa-check"></i><b>24.1.3</b> 用<code>range()</code>做出來的object，是iterable</a></li>
-<li class="chapter" data-level="24.1.4" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#傲嬌的iterable可用list或加星號來揭開面紗"><i class="fa fa-check"></i><b>24.1.4</b> 傲嬌的iterable，可用list()或加星號來揭開面紗</a></li>
-<li class="chapter" data-level="24.1.5" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#我到底為什麼要學iterators"><i class="fa fa-check"></i><b>24.1.5</b> 我到底為什麼要學iterators…</a></li>
+<li class="chapter" data-level="12.6.1" data-path="dictionary-.html"><a href="dictionary-.html#dnew_key-new_value"><i class="fa fa-check"></i><b>12.6.1</b> <code>d["new_key"] = new_value</code></a></li>
+<li class="chapter" data-level="12.6.2" data-path="dictionary-.html"><a href="dictionary-.html#update可以合併2個字典"><i class="fa fa-check"></i><b>12.6.2</b> <code>.update()</code>可以合併2個字典</a></li>
+<li class="chapter" data-level="12.6.3" data-path="dictionary-.html"><a href="dictionary-.html#d1-d2-d3合併多個字典"><i class="fa fa-check"></i><b>12.6.3</b> <code>{**d1, **d2, **d3}</code>合併多個字典</a></li>
 </ul></li>
-<li class="chapter" data-level="24.2" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#playing-with-iterators"><i class="fa fa-check"></i><b>24.2</b> playing with iterators</a>
+<li class="chapter" data-level="12.7" data-path="dictionary-.html"><a href="dictionary-.html#刪-刪除dict的item"><i class="fa fa-check"></i><b>12.7</b> [刪] 刪除dict的item</a>
 <ul>
-<li class="chapter" data-level="24.2.1" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#enumerate"><i class="fa fa-check"></i><b>24.2.1</b> enumerate</a></li>
-<li class="chapter" data-level="24.2.2" data-path="using-iterators-in-pythonland.html"><a href="using-iterators-in-pythonland.html#zip"><i class="fa fa-check"></i><b>24.2.2</b> zip</a></li>
+<li class="chapter" data-level="12.7.1" data-path="dictionary-.html"><a href="dictionary-.html#popkey會把選定的key整個砍掉並把對應的value丟出來"><i class="fa fa-check"></i><b>12.7.1</b> <code>.pop('key')</code>會把選定的key整個砍掉，並把對應的value丟出來</a></li>
+<li class="chapter" data-level="12.7.2" data-path="dictionary-.html"><a href="dictionary-.html#del-dkey會刪到這組item"><i class="fa fa-check"></i><b>12.7.2</b> <code>del d['key']</code>會刪到這組item</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="list-comprehension.html"><a href="list-comprehension.html"><i class="fa fa-check"></i><b>25</b> List comprehension</a>
+<li class="chapter" data-level="12.8" data-path="dictionary-.html"><a href="dictionary-.html#mutable-copy"><i class="fa fa-check"></i><b>12.8</b> [mutable] copy</a></li>
+<li class="chapter" data-level="12.9" data-path="dictionary-.html"><a href="dictionary-.html#loop-for迴圈"><i class="fa fa-check"></i><b>12.9</b> [loop] for迴圈</a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="list-comprehension.html"><a href="list-comprehension.html#simple-for-loop"><i class="fa fa-check"></i><b>25.1</b> simple for loop</a></li>
-<li class="chapter" data-level="25.2" data-path="list-comprehension.html"><a href="list-comprehension.html#nested-for-loop"><i class="fa fa-check"></i><b>25.2</b> nested for loop</a></li>
-<li class="chapter" data-level="25.3" data-path="list-comprehension.html"><a href="list-comprehension.html#conditional-for-loop"><i class="fa fa-check"></i><b>25.3</b> conditional for loop</a>
+<li class="chapter" data-level="12.9.1" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-keys"><i class="fa fa-check"></i><b>12.9.1</b> loop over keys</a></li>
+<li class="chapter" data-level="12.9.2" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-values"><i class="fa fa-check"></i><b>12.9.2</b> loop over values</a></li>
+<li class="chapter" data-level="12.9.3" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-key-value"><i class="fa fa-check"></i><b>12.9.3</b> loop over (key, value)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.10" data-path="dictionary-.html"><a href="dictionary-.html#loop-dictionary-comprehension"><i class="fa fa-check"></i><b>12.10</b> [loop] dictionary comprehension</a></li>
+<li class="chapter" data-level="12.11" data-path="dictionary-.html"><a href="dictionary-.html#如何安全的訪問字典"><i class="fa fa-check"></i><b>12.11</b> 如何安全的訪問字典</a>
 <ul>
-<li class="chapter" data-level="25.3.1" data-path="list-comprehension.html"><a href="list-comprehension.html#if"><i class="fa fa-check"></i><b>25.3.1</b> if</a></li>
-<li class="chapter" data-level="25.3.2" data-path="list-comprehension.html"><a href="list-comprehension.html#if-else"><i class="fa fa-check"></i><b>25.3.2</b> if-else</a></li>
+<li class="chapter" data-level="12.11.1" data-path="dictionary-.html"><a href="dictionary-.html#自己寫條件判斷"><i class="fa fa-check"></i><b>12.11.1</b> 自己寫條件判斷</a></li>
+<li class="chapter" data-level="12.11.2" data-path="dictionary-.html"><a href="dictionary-.html#愛用.get"><i class="fa fa-check"></i><b>12.11.2</b> 愛用<code>.get()</code></a></li>
+<li class="chapter" data-level="12.11.3" data-path="dictionary-.html"><a href="dictionary-.html#改用defaultdict這種type"><i class="fa fa-check"></i><b>12.11.3</b> 改用<code>defaultdict</code>這種type</a></li>
 </ul></li>
-<li class="chapter" data-level="25.4" data-path="list-comprehension.html"><a href="list-comprehension.html#practice"><i class="fa fa-check"></i><b>25.4</b> Practice</a></li>
-</ul></li>
-<li class="chapter" data-level="26" data-path="dictionary-comprehension.html"><a href="dictionary-comprehension.html"><i class="fa fa-check"></i><b>26</b> Dictionary comprehension</a></li>
-<li class="chapter" data-level="27" data-path="generator.html"><a href="generator.html"><i class="fa fa-check"></i><b>27</b> Generator</a>
+<li class="chapter" data-level="12.12" data-path="dictionary-.html"><a href="dictionary-.html#how-to"><i class="fa fa-check"></i><b>12.12</b> How to…</a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="generator.html"><a href="generator.html#generator-expression-and-generator-object"><i class="fa fa-check"></i><b>27.1</b> Generator expression and generator object</a></li>
-<li class="chapter" data-level="27.2" data-path="generator.html"><a href="generator.html#學generator要幹麻"><i class="fa fa-check"></i><b>27.2</b> 學generator要幹麻？</a></li>
-<li class="chapter" data-level="27.3" data-path="generator.html"><a href="generator.html#generator-function"><i class="fa fa-check"></i><b>27.3</b> Generator function</a></li>
+<li class="chapter" data-level="12.12.1" data-path="dictionary-.html"><a href="dictionary-.html#如何將字典按照keyvalue大小排序"><i class="fa fa-check"></i><b>12.12.1</b> 如何將字典按照key/value大小排序</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="-1.html"><a href="-1.html"><i class="fa fa-check"></i><b>28</b> 綜合練習</a>
+</ul></li>
+<li class="chapter" data-level="13" data-path="set-.html"><a href="set-.html"><i class="fa fa-check"></i><b>13</b> set應用實戰</a>
 <ul>
-<li class="chapter" data-level="28.1" data-path="-1.html"><a href="-1.html#pandas-case"><i class="fa fa-check"></i><b>28.1</b> pandas case</a>
+<li class="chapter" data-level="13.1" data-path="set-.html"><a href="set-.html#定義set"><i class="fa fa-check"></i><b>13.1</b> 定義set</a></li>
+<li class="chapter" data-level="13.2" data-path="set-.html"><a href="set-.html#查-只能用for-loop與in"><i class="fa fa-check"></i><b>13.2</b> [查] 只能用<code>for loop</code>與<code>in</code></a></li>
+<li class="chapter" data-level="13.3" data-path="set-.html"><a href="set-.html#改-set無法做修改"><i class="fa fa-check"></i><b>13.3</b> [改] set無法做修改</a></li>
+<li class="chapter" data-level="13.4" data-path="set-.html"><a href="set-.html#刪-.remove與.discard"><i class="fa fa-check"></i><b>13.4</b> [刪] <code>.remove()</code>與<code>.discard()</code></a></li>
+<li class="chapter" data-level="13.5" data-path="set-.html"><a href="set-.html#增-.add與.update"><i class="fa fa-check"></i><b>13.5</b> [增] <code>.add()</code>與<code>.update()</code></a>
 <ul>
-<li class="chapter" data-level="28.1.1" data-path="-1.html"><a href="-1.html#writing-an-iterator-to-load-data-in-chunks-1"><i class="fa fa-check"></i><b>28.1.1</b> Writing an iterator to load data in chunks (1)</a></li>
-<li class="chapter" data-level="28.1.2" data-path="-1.html"><a href="-1.html#writing-an-iterator-to-load-data-in-chunks-2"><i class="fa fa-check"></i><b>28.1.2</b> Writing an iterator to load data in chunks (2)</a></li>
-<li class="chapter" data-level="28.1.3" data-path="-1.html"><a href="-1.html#writing-an-iterator-to-load-data-in-chunks-3"><i class="fa fa-check"></i><b>28.1.3</b> Writing an iterator to load data in chunks (3)</a></li>
+<li class="chapter" data-level="13.5.1" data-path="set-.html"><a href="set-.html#增加一個item用.add"><i class="fa fa-check"></i><b>13.5.1</b> 增加一個item用<code>.add()</code></a></li>
+<li class="chapter" data-level="13.5.2" data-path="set-.html"><a href="set-.html#增加多個item用.update"><i class="fa fa-check"></i><b>13.5.2</b> 增加多個item用<code>.update()</code></a></li>
 </ul></li>
+<li class="chapter" data-level="13.6" data-path="set-.html"><a href="set-.html#mutable-請愛用.copy"><i class="fa fa-check"></i><b>13.6</b> [mutable] 請愛用<code>.copy()</code></a></li>
+<li class="chapter" data-level="13.7" data-path="set-.html"><a href="set-.html#loop-for-1"><i class="fa fa-check"></i><b>13.7</b> [loop] for</a></li>
+<li class="chapter" data-level="13.8" data-path="set-.html"><a href="set-.html#loop-comprehension-1"><i class="fa fa-check"></i><b>13.8</b> [loop] comprehension</a></li>
+<li class="chapter" data-level="13.9" data-path="set-.html"><a href="set-.html#特殊技-集合運算"><i class="fa fa-check"></i><b>13.9</b> [特殊技] 集合運算</a></li>
+<li class="chapter" data-level="13.10" data-path="set-.html"><a href="set-.html#特殊技-對list取unique"><i class="fa fa-check"></i><b>13.10</b> [特殊技] 對list取unique</a></li>
+<li class="chapter" data-level="13.11" data-path="set-.html"><a href="set-.html#特殊技-將字串中unique-character轉成list"><i class="fa fa-check"></i><b>13.11</b> [特殊技] 將字串中unique character轉成list</a></li>
 </ul></li>
-<li class="chapter" data-level="29" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>29</b> </a></li>
-<li class="chapter" data-level="30" data-path="module-and-package.html"><a href="module-and-package.html"><i class="fa fa-check"></i><b>30</b> Module and Package</a>
+<li class="part"><span><b>條件判斷</b></span></li>
+<li class="chapter" data-level="14" data-path="none.html"><a href="none.html"><i class="fa fa-check"></i><b>14</b> None</a>
 <ul>
-<li class="chapter" data-level="30.1" data-path="module-and-package.html"><a href="module-and-package.html#什麼是module"><i class="fa fa-check"></i><b>30.1</b> 什麼是module？</a></li>
-<li class="chapter" data-level="30.2" data-path="module-and-package.html"><a href="module-and-package.html#什麼是package"><i class="fa fa-check"></i><b>30.2</b> 什麼是package？</a></li>
-<li class="chapter" data-level="30.3" data-path="module-and-package.html"><a href="module-and-package.html#python的內建module"><i class="fa fa-check"></i><b>30.3</b> Python的內建module</a></li>
-<li class="chapter" data-level="30.4" data-path="module-and-package.html"><a href="module-and-package.html#第三方module和package"><i class="fa fa-check"></i><b>30.4</b> 第三方module和package</a></li>
-<li class="chapter" data-level="30.5" data-path="module-and-package.html"><a href="module-and-package.html#關於import語句"><i class="fa fa-check"></i><b>30.5</b> 關於import語句</a></li>
+<li class="chapter" data-level="14.1" data-path="none.html"><a href="none.html#定義"><i class="fa fa-check"></i><b>14.1</b> 定義</a></li>
+<li class="chapter" data-level="14.2" data-path="none.html"><a href="none.html#is-none"><i class="fa fa-check"></i><b>14.2</b> <code>is None</code></a></li>
+<li class="chapter" data-level="14.3" data-path="none.html"><a href="none.html#使用時機"><i class="fa fa-check"></i><b>14.3</b> 使用時機</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="none.html"><a href="none.html#與資料庫互動"><i class="fa fa-check"></i><b>14.3.1</b> 與資料庫互動</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
+</ul></li>
+<li class="chapter" data-level="15" data-path="boolean-.html"><a href="boolean-.html"><i class="fa fa-check"></i><b>15</b> boolean整理與實戰</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boolean-.html"><a href="boolean-.html#大部分的value轉成boolean都是true"><i class="fa fa-check"></i><b>15.1</b> 大部分的value，轉成boolean都是True</a></li>
+<li class="chapter" data-level="15.2" data-path="boolean-.html"><a href="boolean-.html#少部分value轉成boolean會是false"><i class="fa fa-check"></i><b>15.2</b> 少部分value，轉成boolean會是False</a></li>
+<li class="chapter" data-level="15.3" data-path="boolean-.html"><a href="boolean-.html#搭配if-statement"><i class="fa fa-check"></i><b>15.3</b> 搭配if statement</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="conditional-operators.html"><a href="conditional-operators.html"><i class="fa fa-check"></i><b>16</b> Conditional Operators</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="conditional-operators.html"><a href="conditional-operators.html#section"><i class="fa fa-check"></i><b>16.0.1</b> <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code></a></li>
+<li class="chapter" data-level="16.0.2" data-path="conditional-operators.html"><a href="conditional-operators.html#and-or-not"><i class="fa fa-check"></i><b>16.0.2</b> <code>and</code>, <code>or</code>, <code>not</code></a></li>
+<li class="chapter" data-level="16.0.3" data-path="conditional-operators.html"><a href="conditional-operators.html#in-not-in"><i class="fa fa-check"></i><b>16.0.3</b> <code>in</code>, <code>not in</code></a></li>
+<li class="chapter" data-level="16.0.4" data-path="conditional-operators.html"><a href="conditional-operators.html#is-is-not"><i class="fa fa-check"></i><b>16.0.4</b> <code>is</code>, <code>is not</code></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="if-statement.html"><a href="if-statement.html"><i class="fa fa-check"></i><b>17</b> If statement</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="if-statement.html"><a href="if-statement.html#if-1"><i class="fa fa-check"></i><b>17.1</b> if…</a></li>
+<li class="chapter" data-level="17.2" data-path="if-statement.html"><a href="if-statement.html#ifelse"><i class="fa fa-check"></i><b>17.2</b> if…else…</a></li>
+<li class="chapter" data-level="17.3" data-path="if-statement.html"><a href="if-statement.html#ifelifelse"><i class="fa fa-check"></i><b>17.3</b> if…elif…else…</a></li>
+<li class="chapter" data-level="17.4" data-path="if-statement.html"><a href="if-statement.html#一行的if"><i class="fa fa-check"></i><b>17.4</b> 一行的if</a></li>
+<li class="chapter" data-level="17.5" data-path="if-statement.html"><a href="if-statement.html#一行的ifelse"><i class="fa fa-check"></i><b>17.5</b> 一行的if…else…</a></li>
+<li class="chapter" data-level="17.6" data-path="if-statement.html"><a href="if-statement.html#善用pass"><i class="fa fa-check"></i><b>17.6</b> 善用pass</a></li>
+<li class="chapter" data-level="17.7" data-path="if-statement.html"><a href="if-statement.html#if-條件太多時怎麼優化"><i class="fa fa-check"></i><b>17.7</b> if 條件太多時，怎麼優化</a></li>
+</ul></li>
+<li class="part"><span><b>Loops</b></span></li>
+<li class="chapter" data-level="18" data-path="for-loop.html"><a href="for-loop.html"><i class="fa fa-check"></i><b>18</b> for loop</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="for-loop.html"><a href="for-loop.html#寫法"><i class="fa fa-check"></i><b>18.1</b> 寫法</a></li>
+<li class="chapter" data-level="18.2" data-path="for-loop.html"><a href="for-loop.html#善用break終止迴圈"><i class="fa fa-check"></i><b>18.2</b> 善用break終止迴圈</a></li>
+<li class="chapter" data-level="18.3" data-path="for-loop.html"><a href="for-loop.html#善用continue跳入下一個迴圈"><i class="fa fa-check"></i><b>18.3</b> 善用continue跳入下一個迴圈</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="while-loop.html"><a href="while-loop.html"><i class="fa fa-check"></i><b>19</b> while loop</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="while-loop.html"><a href="while-loop.html#while-寫法"><i class="fa fa-check"></i><b>19.1</b> while 寫法</a></li>
+<li class="chapter" data-level="19.2" data-path="while-loop.html"><a href="while-loop.html#確認每次都有更新內容"><i class="fa fa-check"></i><b>19.2</b> 確認每次都有更新內容</a></li>
+<li class="chapter" data-level="19.3" data-path="while-loop.html"><a href="while-loop.html#善用break"><i class="fa fa-check"></i><b>19.3</b> 善用<code>break</code></a></li>
+</ul></li>
+<li class="part"><span><b>Functions</b></span></li>
+<li class="chapter" data-level="20" data-path="function101.html"><a href="function101.html"><i class="fa fa-check"></i><b>20</b> function101</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="function101.html"><a href="function101.html#function的結構"><i class="fa fa-check"></i><b>20.1</b> function的結構</a></li>
+<li class="chapter" data-level="20.2" data-path="function101.html"><a href="function101.html#docstring的標準格式"><i class="fa fa-check"></i><b>20.2</b> Docstring的標準格式</a></li>
+<li class="chapter" data-level="20.3" data-path="function101.html"><a href="function101.html#先檢驗argument的合法性"><i class="fa fa-check"></i><b>20.3</b> 先檢驗argument的合法性</a></li>
+<li class="chapter" data-level="20.4" data-path="function101.html"><a href="function101.html#記得return"><i class="fa fa-check"></i><b>20.4</b> 記得<code>return</code></a></li>
+<li class="chapter" data-level="20.5" data-path="function101.html"><a href="function101.html#default-argument"><i class="fa fa-check"></i><b>20.5</b> default argument</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="exception-handling.html"><a href="exception-handling.html"><i class="fa fa-check"></i><b>21</b> Exception Handling</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="exception-handling.html"><a href="exception-handling.html#各種異常介紹"><i class="fa fa-check"></i><b>21.1</b> 各種異常介紹</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="exception-handling.html"><a href="exception-handling.html#attributeerror"><i class="fa fa-check"></i><b>21.1.1</b> AttributeError</a></li>
+<li class="chapter" data-level="21.1.2" data-path="exception-handling.html"><a href="exception-handling.html#modulenotfounderror"><i class="fa fa-check"></i><b>21.1.2</b> ModuleNotFoundError</a></li>
+<li class="chapter" data-level="21.1.3" data-path="exception-handling.html"><a href="exception-handling.html#indexerror"><i class="fa fa-check"></i><b>21.1.3</b> IndexError</a></li>
+<li class="chapter" data-level="21.1.4" data-path="exception-handling.html"><a href="exception-handling.html#keyerror"><i class="fa fa-check"></i><b>21.1.4</b> KeyError</a></li>
+<li class="chapter" data-level="21.1.5" data-path="exception-handling.html"><a href="exception-handling.html#nameerror"><i class="fa fa-check"></i><b>21.1.5</b> NameError</a></li>
+<li class="chapter" data-level="21.1.6" data-path="exception-handling.html"><a href="exception-handling.html#zerodivisionerror"><i class="fa fa-check"></i><b>21.1.6</b> ZeroDivisionError</a></li>
+<li class="chapter" data-level="21.1.7" data-path="exception-handling.html"><a href="exception-handling.html#自定義的error"><i class="fa fa-check"></i><b>21.1.7</b> 自定義的error</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="exception-handling.html"><a href="exception-handling.html#raise-xxxerrorerror-message-herer"><i class="fa fa-check"></i><b>21.2</b> <code>raise XXXError("error message herer")</code></a></li>
+<li class="chapter" data-level="21.3" data-path="exception-handling.html"><a href="exception-handling.html#try...except..."><i class="fa fa-check"></i><b>21.3</b> <code>try...except...</code></a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="exception-handling.html"><a href="exception-handling.html#基本款只寫except"><i class="fa fa-check"></i><b>21.3.1</b> 基本款：只寫<code>except</code></a></li>
+<li class="chapter" data-level="21.3.2" data-path="exception-handling.html"><a href="exception-handling.html#進階款-except-xxerror"><i class="fa fa-check"></i><b>21.3.2</b> 進階款： <code>except XXerror</code></a></li>
+<li class="chapter" data-level="21.3.3" data-path="exception-handling.html"><a href="exception-handling.html#懶人款-except-exception-as-e"><i class="fa fa-check"></i><b>21.3.3</b> 懶人款: <code>except Exception as e</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="flexible-arguments.html"><a href="flexible-arguments.html"><i class="fa fa-check"></i><b>22</b> flexible arguments</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#args"><i class="fa fa-check"></i><b>22.1</b> <code>*args</code></a></li>
+<li class="chapter" data-level="22.2" data-path="flexible-arguments.html"><a href="flexible-arguments.html#kwargs"><i class="fa fa-check"></i><b>22.2</b> <code>**kwargs</code></a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#使用時機-1"><i class="fa fa-check"></i><b>22.2.1</b> 使用時機</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="recursion.html"><a href="recursion.html"><i class="fa fa-check"></i><b>23</b> recursion</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="recursion.html"><a href="recursion.html#n-計算"><i class="fa fa-check"></i><b>23.1</b> n! 計算</a></li>
+<li class="chapter" data-level="23.2" data-path="recursion.html"><a href="recursion.html#費氏數列"><i class="fa fa-check"></i><b>23.2</b> 費氏數列</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html"><i class="fa fa-check"></i><b>24</b> Nested Function and closure</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#nested-function"><i class="fa fa-check"></i><b>24.1</b> Nested function</a></li>
+<li class="chapter" data-level="24.2" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#closure"><i class="fa fa-check"></i><b>24.2</b> Closure</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="variable-scope-1.html"><a href="variable-scope-1.html"><i class="fa fa-check"></i><b>25</b> Variable Scope</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="variable-scope-1.html"><a href="variable-scope-1.html#intro"><i class="fa fa-check"></i><b>25.1</b> Intro</a></li>
+<li class="chapter" data-level="25.2" data-path="variable-scope-1.html"><a href="variable-scope-1.html#legb-scope"><i class="fa fa-check"></i><b>25.2</b> LEGB scope</a></li>
+<li class="chapter" data-level="25.3" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用global這個keyword把local-scope的object給推到global-scope"><i class="fa fa-check"></i><b>25.3</b> 用<code>global</code>這個keyword，把local scope的object給推到global scope</a></li>
+<li class="chapter" data-level="25.4" data-path="variable-scope-1.html"><a href="variable-scope-1.html#enclosing-function-scope的例子"><i class="fa fa-check"></i><b>25.4</b> Enclosing function scope的例子</a></li>
+<li class="chapter" data-level="25.5" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用nonlocal這個keyword"><i class="fa fa-check"></i><b>25.5</b> 用<code>nonlocal</code>這個keyword…</a></li>
+</ul></li>
+<li class="part"><span><b>Object Oriented Programming</b></span></li>
+<li class="chapter" data-level="26" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html"><i class="fa fa-check"></i><b>26</b> OOP Fundamentals</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#what-is-oop"><i class="fa fa-check"></i><b>26.1</b> What is OOP?</a></li>
+<li class="chapter" data-level="26.2" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#oop-in-python"><i class="fa fa-check"></i><b>26.2</b> OOP in Python</a></li>
+<li class="chapter" data-level="26.3" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#my-first-class"><i class="fa fa-check"></i><b>26.3</b> My first class</a></li>
+<li class="chapter" data-level="26.4" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#the-__init__-constructor"><i class="fa fa-check"></i><b>26.4</b> the <code>__init__</code> constructor</a></li>
+<li class="chapter" data-level="26.5" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#寫class的sop"><i class="fa fa-check"></i><b>26.5</b> 寫Class的SOP</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html"><i class="fa fa-check"></i><b>27</b> Class-level vs Instance-level</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-attribute-vs-class-level-attribute"><i class="fa fa-check"></i><b>27.1</b> Instance-level attribute vs Class-level attribute</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介實例屬性與類屬性"><i class="fa fa-check"></i><b>27.1.1</b> 簡介<code>實例屬性</code>與<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性可以繼承類屬性"><i class="fa fa-check"></i><b>27.1.2</b> <code>實例屬性</code>可以繼承<code>類屬性</code></a></li>
+<li class="chapter" data-level="27.1.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性與類屬性的修改"><i class="fa fa-check"></i><b>27.1.3</b> <code>實例屬性</code>與<code>類屬性</code>的修改</a></li>
+<li class="chapter" data-level="27.1.4" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#類屬性用在哪"><i class="fa fa-check"></i><b>27.1.4</b> <code>類屬性</code>用在哪</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-method-vs-class-level-method"><i class="fa fa-check"></i><b>27.2</b> Instance-level method vs Class-level method</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介類方法和實例方法"><i class="fa fa-check"></i><b>27.2.1</b> 簡介<code>類方法</code>和<code>實例方法</code></a></li>
+<li class="chapter" data-level="27.2.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性的使用時機"><i class="fa fa-check"></i><b>27.2.2</b> 實例屬性的使用時機</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#小結"><i class="fa fa-check"></i><b>27.3</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="attribute-protection.html"><a href="attribute-protection.html"><i class="fa fa-check"></i><b>28</b> Attribute Protection</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="attribute-protection.html"><a href="attribute-protection.html#naming-convention"><i class="fa fa-check"></i><b>28.1</b> Naming Convention</a></li>
+<li class="chapter" data-level="28.2" data-path="attribute-protection.html"><a href="attribute-protection.html#放任型-不保護"><i class="fa fa-check"></i><b>28.2</b> [放任型] 不保護</a></li>
+<li class="chapter" data-level="28.3" data-path="attribute-protection.html"><a href="attribute-protection.html#信任型-用單底線提醒"><i class="fa fa-check"></i><b>28.3</b> [信任型] 用單底線提醒</a></li>
+<li class="chapter" data-level="28.4" data-path="attribute-protection.html"><a href="attribute-protection.html#嚴父型-用雙底線不給動"><i class="fa fa-check"></i><b>28.4</b> [嚴父型] 用雙底線不給動</a></li>
+<li class="chapter" data-level="28.5" data-path="attribute-protection.html"><a href="attribute-protection.html#中庸型-雙底線-property-.setter"><i class="fa fa-check"></i><b>28.5</b> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code></a>
+<ul>
+<li class="chapter" data-level="28.5.1" data-path="attribute-protection.html"><a href="attribute-protection.html#old-school-作法"><i class="fa fa-check"></i><b>28.5.1</b> old-school 作法</a></li>
+<li class="chapter" data-level="28.5.2" data-path="attribute-protection.html"><a href="attribute-protection.html#正規作法"><i class="fa fa-check"></i><b>28.5.2</b> 正規作法</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html"><i class="fa fa-check"></i><b>29</b> isinstance, equality, 與 string representation</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#type-與-isinstance"><i class="fa fa-check"></i><b>29.1</b> <code>type</code> 與 <code>isinstance</code></a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#繼承與isinstance"><i class="fa fa-check"></i><b>29.1.1</b> 繼承與isinstance</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#eq__-object-equality"><i class="fa fa-check"></i><b>29.2</b> <code>__eq__</code> (object equality)</a></li>
+<li class="chapter" data-level="29.3" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#str__與__repr__"><i class="fa fa-check"></i><b>29.3</b> <code>__str__</code>與<code>__repr__</code></a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html"><i class="fa fa-check"></i><b>30</b> Encapsulation, Inheritacne, and Polymorphism</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#封裝"><i class="fa fa-check"></i><b>30.1</b> 封裝</a></li>
+<li class="chapter" data-level="30.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#繼承inheritance"><i class="fa fa-check"></i><b>30.2</b> 繼承(inheritance)</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#simple-inheritance"><i class="fa fa-check"></i><b>30.2.1</b> simple inheritance</a></li>
+<li class="chapter" data-level="30.2.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加instance-level-attribute-method"><i class="fa fa-check"></i><b>30.2.2</b> 增加instance-level attribute &amp; method</a></li>
+<li class="chapter" data-level="30.2.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加class-level-attribute"><i class="fa fa-check"></i><b>30.2.3</b> 增加class-level attribute</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形"><i class="fa fa-check"></i><b>30.3</b> 多形</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形的使用時機"><i class="fa fa-check"></i><b>30.3.1</b> 多形的使用時機</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -380,65 +531,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="list基本介紹" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> List基本介紹</h1>
-<div id="建立list" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> 建立list</h2>
-<div id="單維list" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> 單維list</h3>
+<div id="list整理與實戰" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> list整理與實戰</h1>
 <ul>
-<li>list是一連串有順序的物件，不見得要是同一種type</li>
+<li>list是python內建的一種collection<br />
+</li>
+<li>既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part：
+<ul>
+<li>如何建立？<br />
+</li>
+<li>如何增、刪、查、改？<br />
+</li>
+</ul></li>
+<li>這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy<br />
+</li>
+<li>接著就開始介紹如何loop他(用for, comprehension)<br />
+</li>
+<li>最後就是補齊這個object還沒介紹到的methods<br />
+</li>
+<li>實戰的部分，就會以“How to…”的方式整理常見的需求</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="list-.html#cb8-1"></a>a_list <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">67</span>, <span class="dv">7</span>, <span class="dv">82</span>] <span class="co">#同一種type的list</span></span>
-<span id="cb8-2"><a href="list-.html#cb8-2"></a>another_list <span class="op">=</span> [<span class="st">&quot;happy&quot;</span>, <span class="dv">3</span>, <span class="va">True</span>, <span class="dv">7</span>] <span class="co">#不同type的list</span></span></code></pre></div>
+<div id="list定義" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> list定義</h2>
 <ul>
-<li>但習慣上，我們還是會把list裡的element，都寫成同一種type</li>
+<li>list用中括號來建立，裡面的每個元素我們叫item，item可以是不同的type，例如：</li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="list-.html#cb45-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">67</span>, <span class="dv">7</span>, <span class="dv">82</span>] <span class="co">#同一種type的list</span></span>
+<span id="cb45-2"><a href="list-.html#cb45-2" aria-hidden="true" tabindex="-1"></a>another_list <span class="op">=</span> [<span class="st">&quot;happy&quot;</span>, <span class="dv">3</span>, <span class="va">True</span>, <span class="dv">7</span>] <span class="co">#不同type的list</span></span>
+<span id="cb45-3"><a href="list-.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="list-.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a_list))</span>
+<span id="cb45-5"><a href="list-.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class &#39;list&#39;&gt;</span></span>
+<span id="cb45-6"><a href="list-.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(another_list))</span>
+<span id="cb45-7"><a href="list-.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class &#39;list&#39;&gt;</span></span></code></pre></div>
+<ul>
+<li>list的特性有三個，ordered, changeable, allow duplicate values：
+<ul>
+<li>ordered: 他是有順序的，裡面的items就像排隊取號碼牌一樣，都有自己的序號(index)，此序號由0開始排起。所以如果有新成員要加入list，只能排到隊伍的最後面，用append的方式加入。要取用某個item時，也是用叫號碼牌的方式取用<br />
+</li>
+<li>changeable: list裡面的item是可改變的，意思是，當我建立好一個list後，我可以改變號碼牌為x的那個item的值，我也可以新增或刪除item<br />
+</li>
+<li>allow duplicates: item是可以重複的</li>
+</ul></li>
 </ul>
 </div>
-<div id="多維list" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> 多維list</h3>
+<div id="建-建立list" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> [建] 建立list</h2>
+<div id="建立單維list" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> 建立單維list</h3>
 <ul>
-<li>list 裡面還有list，就叫多維list</li>
+<li>剛剛講過了，就用個中括號包起來就好</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="list-.html#cb9-1"></a>a <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># 1*5 list  </span></span>
-<span id="cb9-2"><a href="list-.html#cb9-2"></a>multi_dim_a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb9-3"><a href="list-.html#cb9-3"></a>               [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
-<span id="cb9-4"><a href="list-.html#cb9-4"></a>               [<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]]</span>
-<span id="cb9-5"><a href="list-.html#cb9-5"></a><span class="bu">print</span>(multi_dim_a)</span>
-<span id="cb9-6"><a href="list-.html#cb9-6"></a><span class="co">#&gt; [[1, 2, 3], [2, 3, 4], [3, 4, 5]]</span></span></code></pre></div>
 </div>
-</div>
-<div id="selecting-list-elements" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Selecting List Elements</h2>
-<div id="subset" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Subset</h3>
+<div id="建立多維list" class="section level3" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> 建立多維list</h3>
 <ul>
-<li>list因為只有element，沒有name(簡單來講，就是只有value，沒有key)，所以subset時，都是用index來取<br />
+<li>list裡面還有list，就叫多維list</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="list-.html#cb46-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># 1*5 list  </span></span>
+<span id="cb46-2"><a href="list-.html#cb46-2" aria-hidden="true" tabindex="-1"></a>multi_dim_a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
+<span id="cb46-3"><a href="list-.html#cb46-3" aria-hidden="true" tabindex="-1"></a>               [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb46-4"><a href="list-.html#cb46-4" aria-hidden="true" tabindex="-1"></a>               [<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]]</span>
+<span id="cb46-5"><a href="list-.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(multi_dim_a)</span>
+<span id="cb46-6"><a href="list-.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1, 2, 3], [2, 3, 4], [3, 4, 5]]</span></span></code></pre></div>
+</div>
+</div>
+<div id="查-取用list裡面的item" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> [查] 取用list裡面的item</h2>
+<ul>
+<li>list因為只有item，沒有name(簡單來講，就是只有value，沒有key)，所以subset時，都是用index來取<br />
 </li>
 <li>index就擬人化為座號，而python的編號由左至右是從0開始，由右至左是從-1開始<br />
 </li>
 <li>所以我要取list中左邊數來第n個人，他的座號是n-1，那就要取n-1的index<br />
 </li>
-<li>如果我要取list中右邊數來第n個人，他的座號是-n，那就要取-n的index<br />
-</li>
-<li>看例子：</li>
+<li>如果我要取list中右邊數來第n個人，他的座號是-n，那就要取-n的index</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="list-.html#cb10-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
-<span id="cb10-2"><a href="list-.html#cb10-2"></a>my_list[<span class="dv">3</span>] <span class="co"># 取index=3, 那就是取element = 4</span></span>
-<span id="cb10-3"><a href="list-.html#cb10-3"></a><span class="co">#&gt; &#39;nice&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="list-.html#cb11-1"></a>my_list[<span class="op">-</span><span class="dv">2</span>] <span class="co"># 取index -2, 即又邊數來第二個</span></span>
-<span id="cb11-2"><a href="list-.html#cb11-2"></a><span class="co">#&gt; &#39;is&#39;</span></span></code></pre></div>
+<div id="用index-0取第一個item" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> 用index = 0取第一個item</h3>
+<ul>
+<li>單維list的例子：</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="list-.html#cb47-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb47-2"><a href="list-.html#cb47-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">3</span>] <span class="co"># 取index=3, 那就是取element = 4</span></span>
+<span id="cb47-3"><a href="list-.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;nice&#39;</span></span></code></pre></div>
 <ul>
 <li>學會單維list的subset了，那多維list的subset邏輯一模一樣</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="list-.html#cb12-1"></a>multi_dim_a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]] </span>
-<span id="cb12-2"><a href="list-.html#cb12-2"></a>multi_dim_a[<span class="dv">1</span>] <span class="co"># 取index = 1，即左邊數來第2個</span></span>
-<span id="cb12-3"><a href="list-.html#cb12-3"></a><span class="co">#&gt; [2, 3, 4]</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="list-.html#cb13-1"></a>multi_dim_a[<span class="dv">1</span>][<span class="dv">0</span>] <span class="co"># 先取左邊數來第2個element，再取裡面的第1個element</span></span>
-<span id="cb13-2"><a href="list-.html#cb13-2"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="list-.html#cb48-1" aria-hidden="true" tabindex="-1"></a>multi_dim_a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]] </span>
+<span id="cb48-2"><a href="list-.html#cb48-2" aria-hidden="true" tabindex="-1"></a>multi_dim_a[<span class="dv">1</span>] <span class="co"># 取index = 1，即左邊數來第2個</span></span>
+<span id="cb48-3"><a href="list-.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 3, 4]</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="list-.html#cb49-1" aria-hidden="true" tabindex="-1"></a>multi_dim_a[<span class="dv">1</span>][<span class="dv">0</span>] <span class="co"># 先取左邊數來第2個element，再取裡面的第1個element</span></span>
+<span id="cb49-2"><a href="list-.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
 </div>
-<div id="slice" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Slice</h3>
+<div id="用index--2取由右數來第2個" class="section level3" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> 用index = -2取由右數來第2個</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="list-.html#cb50-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb50-2"><a href="list-.html#cb50-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="op">-</span><span class="dv">2</span>] <span class="co"># 取index -2, 即又邊數來第二個</span></span>
+<span id="cb50-3"><a href="list-.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;is&#39;</span></span></code></pre></div>
+</div>
+<div id="表示從index3取到index7" class="section level3" number="10.3.3">
+<h3><span class="header-section-number">10.3.3</span> 3:8表示從index3取到index7</h3>
 <ul>
 <li>剛剛是取“某一個”element，那如果我想取“某一串”element呢？那就是指slice<br />
 </li>
@@ -456,13 +648,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>例如: [:]，那就是整串全取(等於複製一個)</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="list-.html#cb14-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
-<span id="cb14-2"><a href="list-.html#cb14-2"></a>my_list[<span class="dv">1</span>:<span class="dv">3</span>] <span class="co"># 取 element = 2~3</span></span>
-<span id="cb14-3"><a href="list-.html#cb14-3"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="list-.html#cb15-1"></a>my_list[:<span class="dv">3</span>] <span class="co"># 取element = 1~3</span></span>
-<span id="cb15-2"><a href="list-.html#cb15-2"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="list-.html#cb16-1"></a>my_list[<span class="dv">1</span>:] <span class="co"># 取element = 2~最後</span></span>
-<span id="cb16-2"><a href="list-.html#cb16-2"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;, &#39;nice&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="list-.html#cb51-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb51-2"><a href="list-.html#cb51-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">1</span>:<span class="dv">3</span>] <span class="co"># 取 element = 2~3</span></span>
+<span id="cb51-3"><a href="list-.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="list-.html#cb52-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb52-2"><a href="list-.html#cb52-2" aria-hidden="true" tabindex="-1"></a>my_list[:<span class="dv">3</span>] <span class="co"># 取element = 1~3</span></span>
+<span id="cb52-3"><a href="list-.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="list-.html#cb53-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb53-2"><a href="list-.html#cb53-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">1</span>:] <span class="co"># 取element = 2~最後</span></span>
+<span id="cb53-3"><a href="list-.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;, &#39;nice&#39;]</span></span></code></pre></div>
 <ul>
 <li>slice一律只能由左至右取，但編號系統可以用正的編號(由左至右的編號系統)或負的編號(由右至左的編號系統)<br />
 </li>
@@ -475,230 +669,416 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>所以如果要取右邊數來第3個element到右邊數來第2個element，那要寫成[-3:-1]</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="list-.html#cb17-1"></a>my_list</span>
-<span id="cb17-2"><a href="list-.html#cb17-2"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;, &#39;nice&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="list-.html#cb18-1"></a>my_list[<span class="op">-</span><span class="dv">3</span>:<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb18-2"><a href="list-.html#cb18-2"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="list-.html#cb54-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb54-2"><a href="list-.html#cb54-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="op">-</span><span class="dv">3</span>:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb54-3"><a href="list-.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;list&#39;, &#39;is&#39;]</span></span></code></pre></div>
+</div>
+<div id="用.indexa找出a所屬的index" class="section level3" number="10.3.4">
+<h3><span class="header-section-number">10.3.4</span> 用<code>.index('a')</code>找出’a’所屬的index</h3>
+<ul>
+<li>在R中，我們用 <code>which(list1 == 'a')</code>來找index，那在python就是用<code>list1.index("a")</code><br />
+</li>
+<li>看例子：</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="list-.html#cb55-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
+<span id="cb55-2"><a href="list-.html#cb55-2" aria-hidden="true" tabindex="-1"></a>my_index <span class="op">=</span> a_list.index(<span class="st">&quot;banana&quot;</span>)</span>
+<span id="cb55-3"><a href="list-.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_index)</span>
+<span id="cb55-4"><a href="list-.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+</div>
+<div id="用in來確認item在不在list裡" class="section level3" number="10.3.5">
+<h3><span class="header-section-number">10.3.5</span> 用<code>in</code>來確認item在不在list裡</h3>
+<ul>
+<li>這邊的<code>in</code>，就是R的<code>%in%</code></li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="list-.html#cb56-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb56-2"><a href="list-.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;apple&quot;</span> <span class="kw">in</span> thislist:</span>
+<span id="cb56-3"><a href="list-.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;Yes, &#39;apple&#39; is in the fruits list&quot;</span>)</span>
+<span id="cb56-4"><a href="list-.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Yes, &#39;apple&#39; is in the fruits list</span></span></code></pre></div>
 </div>
 </div>
-<div id="replace" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Replace</h2>
+<div id="改-修改list裡面的item" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> [改] 修改list裡面的item</h2>
 <ul>
 <li>剛剛已經學會如何取出list中的特定一個element，或是一串element，那我們就可以利用這個技巧，把新值assign到指定位置：</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="list-.html#cb19-1"></a>my_list</span>
-<span id="cb19-2"><a href="list-.html#cb19-2"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;, &#39;nice&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="list-.html#cb20-1"></a>my_list[<span class="dv">3</span>] <span class="op">=</span> <span class="st">&quot;bad&quot;</span></span>
-<span id="cb20-2"><a href="list-.html#cb20-2"></a>my_list</span>
-<span id="cb20-3"><a href="list-.html#cb20-3"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;, &#39;bad&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="list-.html#cb21-1"></a>my_list[<span class="dv">1</span>:] <span class="op">=</span> [<span class="st">&quot;lists&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;awsome&quot;</span>]</span>
-<span id="cb21-2"><a href="list-.html#cb21-2"></a>my_list</span>
-<span id="cb21-3"><a href="list-.html#cb21-3"></a><span class="co">#&gt; [&#39;my&#39;, &#39;lists&#39;, &#39;are&#39;, &#39;awsome&#39;]</span></span></code></pre></div>
-</div>
-<div id="operation" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Operation</h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="list-.html#cb57-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">&quot;my&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;nice&quot;</span>]</span>
+<span id="cb57-2"><a href="list-.html#cb57-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">3</span>] <span class="op">=</span> <span class="st">&quot;bad&quot;</span></span>
+<span id="cb57-3"><a href="list-.html#cb57-3" aria-hidden="true" tabindex="-1"></a>my_list</span>
+<span id="cb57-4"><a href="list-.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;my&#39;, &#39;list&#39;, &#39;is&#39;, &#39;bad&#39;]</span></span></code></pre></div>
 <ul>
-<li>對各種資料類型，我們都會討論他的運算<br />
-</li>
-<li>例如之前教float這種type，我們就很熟悉他的運算有 +, -, *, /, **, //, %<br />
-</li>
-<li>例如之前教str這種type，也學過他有 * (就是repeat幾次) 和 + (就是paste()的概念)<br />
-</li>
-<li>那現在講list這種type，他的運算就和字串有點像，包含 * 和 +</li>
+<li>同樣的，可以一次改動多個位子的值</li>
 </ul>
-<div id="list1-list2-clist1-list2" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> list1 + list2 = c(list1, list2)</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="list-.html#cb22-1"></a>list1 <span class="op">=</span> [<span class="st">&quot;Hello!&quot;</span>, <span class="st">&quot;How&quot;</span>]</span>
-<span id="cb22-2"><a href="list-.html#cb22-2"></a>list2 <span class="op">=</span> [<span class="st">&quot;are&quot;</span>, <span class="st">&quot;you&quot;</span>]</span>
-<span id="cb22-3"><a href="list-.html#cb22-3"></a>list1 <span class="op">+</span> list2</span>
-<span id="cb22-4"><a href="list-.html#cb22-4"></a><span class="co">#&gt; [&#39;Hello!&#39;, &#39;How&#39;, &#39;are&#39;, &#39;you&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="list-.html#cb58-1" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">1</span>:] <span class="op">=</span> [<span class="st">&quot;lists&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;awsome&quot;</span>]</span>
+<span id="cb58-2"><a href="list-.html#cb58-2" aria-hidden="true" tabindex="-1"></a>my_list</span>
+<span id="cb58-3"><a href="list-.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;my&#39;, &#39;lists&#39;, &#39;are&#39;, &#39;awsome&#39;]</span></span></code></pre></div>
 </div>
-<div id="list1-2-replist1-2" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> list1 * 2 = rep(list1, 2)</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="list-.html#cb23-1"></a>list1 <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb23-2"><a href="list-.html#cb23-2"></a><span class="co">#&gt; [&#39;Hello!&#39;, &#39;How&#39;, &#39;Hello!&#39;, &#39;How&#39;]</span></span></code></pre></div>
-</div>
-</div>
-<div id="methods-1" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Methods</h2>
+<div id="增-增加list裡面的item" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> [增] 增加list裡面的item</h2>
+<div id="加到最後面用.append" class="section level3" number="10.5.1">
+<h3><span class="header-section-number">10.5.1</span> 加到最後面，用<code>.append()</code></h3>
 <ul>
-<li>別忘了，每種type他其實都是一種class，所以除了你定義好的資料外，他還有專屬技能(method)<br />
-</li>
-<li>當我們把list的資料part，用上面教過的方法定義好後，接下來就可以用他的method，來對這個list工作<br />
-</li>
-<li>methods很容易讓人搞混的地方，是他做完事後會分成兩種狀況：1. 直接改變原object, 不吐新東西出來(吐None) 2. 不改變原object，但會吐新東西出來<br />
-</li>
-<li>直接看例子：</li>
+<li>例如下例：</li>
 </ul>
-<div id="list.appendx-r的clist-x" class="section level3" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> list.append(x) = R的c(list, x)</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="list-.html#cb24-1"></a>fruits <span class="op">=</span> [<span class="st">&#39;orange&#39;</span>, <span class="st">&#39;apple&#39;</span>, <span class="st">&#39;pear&#39;</span>, <span class="st">&#39;banana&#39;</span>, <span class="st">&#39;kiwi&#39;</span>, <span class="st">&#39;apple&#39;</span>, <span class="st">&#39;banana&#39;</span>]</span>
-<span id="cb24-2"><a href="list-.html#cb24-2"></a>new <span class="op">=</span> fruits.append(<span class="st">&quot;grape&quot;</span>)</span>
-<span id="cb24-3"><a href="list-.html#cb24-3"></a><span class="bu">print</span>(new)</span>
-<span id="cb24-4"><a href="list-.html#cb24-4"></a><span class="co">#&gt; None</span></span>
-<span id="cb24-5"><a href="list-.html#cb24-5"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb24-6"><a href="list-.html#cb24-6"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="list-.html#cb59-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb59-2"><a href="list-.html#cb59-2" aria-hidden="true" tabindex="-1"></a>thislist.append(<span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb59-3"><a href="list-.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb59-4"><a href="list-.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;banana&#39;, &#39;cherry&#39;, &#39;orange&#39;]</span></span></code></pre></div>
 <ul>
-<li>從上例可以清楚的看到，當你用list.append時，他吐出來的值是None，而原list已經被改變了，這就是上面提過的狀況1<br />
-</li>
-<li>要判斷一個method，他會是狀況1 or 狀況，有幾種方法：
-<ol style="list-style-type: decimal">
-<li>先猜: 做這個method，本質上就是要去改原物件的，那通常Python就會直接幫你改，例如這邊的.append就是<br />
-</li>
-<li>做實驗驗證：總是先把結果存到一個新變數(如這邊的new)，然後看看new會不會是None，來做確認<br />
-</li>
-<li>乖乖牌：不做實驗，直接去看操作手冊如何定義，像.append的定義就是：only modify the list have no return value printed – they return the default None<br />
-</li>
-</ol></li>
-<li>接下來會介紹各種list的method，就去猜測 &amp; 實戰看看<br />
-</li>
-<li>再介紹其他list之前，想想功能性：如果我今天想要append東西到list的最後面，我有沒有別的作法？ 用R的邏輯，我就會寫c(list,x)，但在Python，我就會寫 list = list + [x]</li>
+<li>不要傻傻的，用<code>[old_list, "new_item"]</code>，這樣會變多維list</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="list-.html#cb25-1"></a>fruits <span class="op">+</span> [<span class="st">&quot;new_fruit&quot;</span>]</span>
-<span id="cb25-2"><a href="list-.html#cb25-2"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;, &#39;new_fruit&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="list-.html#cb60-1" aria-hidden="true" tabindex="-1"></a>old_list <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb60-2"><a href="list-.html#cb60-2" aria-hidden="true" tabindex="-1"></a>new_list <span class="op">=</span> [old_list, <span class="st">&quot;orange&quot;</span>]</span>
+<span id="cb60-3"><a href="list-.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_list)</span>
+<span id="cb60-4"><a href="list-.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[&#39;apple&#39;, &#39;banana&#39;, &#39;cherry&#39;], &#39;orange&#39;]</span></span></code></pre></div>
+</div>
+<div id="加到指定的位置用.insert" class="section level3" number="10.5.2">
+<h3><span class="header-section-number">10.5.2</span> 加到指定的位置，用<code>.insert()</code></h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="list-.html#cb61-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb61-2"><a href="list-.html#cb61-2" aria-hidden="true" tabindex="-1"></a>thislist.insert(<span class="dv">1</span>, <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb61-3"><a href="list-.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb61-4"><a href="list-.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;orange&#39;, &#39;banana&#39;, &#39;cherry&#39;]</span></span></code></pre></div>
+</div>
+</div>
+<div id="增-join兩個list" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> [增] join兩個list</h2>
 <ul>
-<li>所以可以想像，我的append，應該可以加多個element在後面，只要我加的類型也是list就好</li>
+<li>拜託，不要用<code>[list1, list2]</code>，這不是R(用c(vec1, vec2))，這樣寫會造出多維list</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="list-.html#cb26-1"></a>fruits <span class="op">+</span> [<span class="st">&quot;new_fruit1, new_fruit2&quot;</span>]</span>
-<span id="cb26-2"><a href="list-.html#cb26-2"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;, &#39;new_fruit1, new_fruit2&#39;]</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="list-.html#cb27-1"></a>fruits.append([<span class="st">&quot;new_fruit1&quot;</span>, <span class="st">&quot;new_fruit2&quot;</span>])</span>
-<span id="cb27-2"><a href="list-.html#cb27-2"></a>fruits</span>
-<span id="cb27-3"><a href="list-.html#cb27-3"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;, [&#39;new_fruit1&#39;, &#39;new_fruit2&#39;]]</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="list-.html#cb62-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>]</span>
+<span id="cb62-2"><a href="list-.html#cb62-2" aria-hidden="true" tabindex="-1"></a>list2 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb62-3"><a href="list-.html#cb62-3" aria-hidden="true" tabindex="-1"></a>[list1, list2]</span>
+<span id="cb62-4"><a href="list-.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], [1, 2, 3]]</span></span></code></pre></div>
 <ul>
-<li>實驗結果發現：不行! 他會變成多維list<br />
-</li>
-<li>所以如果要加多個element，就直接用 + 的方式來做吧</li>
+<li>用<code>+</code>是最簡單的做法：</li>
 </ul>
-</div>
-<div id="list.pop-移除最後一個element" class="section level3" number="3.5.2">
-<h3><span class="header-section-number">3.5.2</span> list.pop() = 移除最後一個element</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="list-.html#cb28-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb28-2"><a href="list-.html#cb28-2"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;, [&#39;new_fruit1&#39;, &#39;new_fruit2&#39;]]</span></span>
-<span id="cb28-3"><a href="list-.html#cb28-3"></a>new <span class="op">=</span> fruits.pop()</span>
-<span id="cb28-4"><a href="list-.html#cb28-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb28-5"><a href="list-.html#cb28-5"></a><span class="co">#&gt; [&#39;new_fruit1&#39;, &#39;new_fruit2&#39;]</span></span>
-<span id="cb28-6"><a href="list-.html#cb28-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb28-7"><a href="list-.html#cb28-7"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]</span></span></code></pre></div>
-</div>
-<div id="list.removea-r的-listwhichlist-a1" class="section level3" number="3.5.3">
-<h3><span class="header-section-number">3.5.3</span> list.remove(a) = R的 list[which(list == a)[1]]</h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="list-.html#cb29-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb29-2"><a href="list-.html#cb29-2"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]</span></span>
-<span id="cb29-3"><a href="list-.html#cb29-3"></a>new <span class="op">=</span> fruits.remove(<span class="st">&quot;grape&quot;</span>)</span>
-<span id="cb29-4"><a href="list-.html#cb29-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb29-5"><a href="list-.html#cb29-5"></a><span class="co">#&gt; None</span></span>
-<span id="cb29-6"><a href="list-.html#cb29-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb29-7"><a href="list-.html#cb29-7"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="list-.html#cb63-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>]</span>
+<span id="cb63-2"><a href="list-.html#cb63-2" aria-hidden="true" tabindex="-1"></a>list2 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb63-3"><a href="list-.html#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="list-.html#cb63-4" aria-hidden="true" tabindex="-1"></a>list3 <span class="op">=</span> list1 <span class="op">+</span> list2</span>
+<span id="cb63-5"><a href="list-.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list3)</span>
+<span id="cb63-6"><a href="list-.html#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]</span></span></code></pre></div>
 <ul>
-<li>可以發現，remove也是直接改，return None的類型</li>
+<li>用<code>.extend</code>也ok</li>
 </ul>
-</div>
-<div id="list.sort-r的sortlist" class="section level3" number="3.5.4">
-<h3><span class="header-section-number">3.5.4</span> list.sort() = R的sort(list)</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="list-.html#cb30-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb30-2"><a href="list-.html#cb30-2"></a><span class="co">#&gt; [&#39;orange&#39;, &#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;apple&#39;, &#39;banana&#39;]</span></span>
-<span id="cb30-3"><a href="list-.html#cb30-3"></a>new <span class="op">=</span> fruits.sort() <span class="co"># 預設是由小排到大，若要由大排到寫，改寫成 fruits.sort(reverse=True) # 由大排到小</span></span>
-<span id="cb30-4"><a href="list-.html#cb30-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb30-5"><a href="list-.html#cb30-5"></a><span class="co">#&gt; None</span></span>
-<span id="cb30-6"><a href="list-.html#cb30-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb30-7"><a href="list-.html#cb30-7"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;orange&#39;, &#39;pear&#39;]</span></span></code></pre></div>
-</div>
-<div id="list.reverse" class="section level3" number="3.5.5">
-<h3><span class="header-section-number">3.5.5</span> list.reverse()</h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="list-.html#cb31-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb31-2"><a href="list-.html#cb31-2"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;apple&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;kiwi&#39;, &#39;orange&#39;, &#39;pear&#39;]</span></span>
-<span id="cb31-3"><a href="list-.html#cb31-3"></a>new <span class="op">=</span> fruits.reverse()</span>
-<span id="cb31-4"><a href="list-.html#cb31-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb31-5"><a href="list-.html#cb31-5"></a><span class="co">#&gt; None</span></span>
-<span id="cb31-6"><a href="list-.html#cb31-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb31-7"><a href="list-.html#cb31-7"></a><span class="co">#&gt; [&#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span></code></pre></div>
-</div>
-<div id="list.insertindex-x-我要把x插入到index的前面" class="section level3" number="3.5.6">
-<h3><span class="header-section-number">3.5.6</span> list.insert(index, x) = 我要把x插入到index的前面</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="list-.html#cb32-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb32-2"><a href="list-.html#cb32-2"></a><span class="co">#&gt; [&#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span>
-<span id="cb32-3"><a href="list-.html#cb32-3"></a>new <span class="op">=</span> fruits.insert(<span class="dv">0</span>, <span class="st">&quot;haha&quot;</span>)</span>
-<span id="cb32-4"><a href="list-.html#cb32-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb32-5"><a href="list-.html#cb32-5"></a><span class="co">#&gt; None</span></span>
-<span id="cb32-6"><a href="list-.html#cb32-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb32-7"><a href="list-.html#cb32-7"></a><span class="co">#&gt; [&#39;haha&#39;, &#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span></code></pre></div>
-</div>
-<div id="list.indexa-r的whichlist1-a1" class="section level3" number="3.5.7">
-<h3><span class="header-section-number">3.5.7</span> list.index(a) = R的which(list1 == a)[1]</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="list-.html#cb33-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb33-2"><a href="list-.html#cb33-2"></a><span class="co">#&gt; [&#39;haha&#39;, &#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span>
-<span id="cb33-3"><a href="list-.html#cb33-3"></a>new <span class="op">=</span> fruits.index(<span class="st">&#39;banana&#39;</span>)</span>
-<span id="cb33-4"><a href="list-.html#cb33-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb33-5"><a href="list-.html#cb33-5"></a><span class="co">#&gt; 4</span></span>
-<span id="cb33-6"><a href="list-.html#cb33-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb33-7"><a href="list-.html#cb33-7"></a><span class="co">#&gt; [&#39;haha&#39;, &#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="list-.html#cb64-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>]</span>
+<span id="cb64-2"><a href="list-.html#cb64-2" aria-hidden="true" tabindex="-1"></a>list2 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb64-3"><a href="list-.html#cb64-3" aria-hidden="true" tabindex="-1"></a>list1.extend(list2)</span>
+<span id="cb64-4"><a href="list-.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list1)</span>
+<span id="cb64-5"><a href="list-.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]</span></span></code></pre></div>
 <ul>
-<li>終於看到一個method是不改舊值，吐新值了<br />
-</li>
-<li>這完全猜的到吧!?</li>
+<li>而<code>.extend</code>其實是去loop後面的iterable，依序將後面的每個element加入到前面的list中，所以後面只要放iterable即可，不一定要放list。舉例來說，我放tuple也ok:</li>
 </ul>
-</div>
-<div id="list.countx-計算x在list中出現幾次" class="section level3" number="3.5.8">
-<h3><span class="header-section-number">3.5.8</span> list.count(x) = 計算x在list中出現幾次</h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="list-.html#cb34-1"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb34-2"><a href="list-.html#cb34-2"></a><span class="co">#&gt; [&#39;haha&#39;, &#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span>
-<span id="cb34-3"><a href="list-.html#cb34-3"></a>new <span class="op">=</span> fruits.count(<span class="st">&quot;banana&quot;</span>)</span>
-<span id="cb34-4"><a href="list-.html#cb34-4"></a><span class="bu">print</span>(new)</span>
-<span id="cb34-5"><a href="list-.html#cb34-5"></a><span class="co">#&gt; 2</span></span>
-<span id="cb34-6"><a href="list-.html#cb34-6"></a><span class="bu">print</span>(fruits)</span>
-<span id="cb34-7"><a href="list-.html#cb34-7"></a><span class="co">#&gt; [&#39;haha&#39;, &#39;pear&#39;, &#39;orange&#39;, &#39;kiwi&#39;, &#39;banana&#39;, &#39;banana&#39;, &#39;apple&#39;, &#39;apple&#39;]</span></span></code></pre></div>
-</div>
-</div>
-<div id="list-是-mutable" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> List 是 mutable</h2>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="list-.html#cb65-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb65-2"><a href="list-.html#cb65-2" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb65-3"><a href="list-.html#cb65-3" aria-hidden="true" tabindex="-1"></a>thislist.extend(thistuple)</span>
+<span id="cb65-4"><a href="list-.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb65-5"><a href="list-.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;banana&#39;, &#39;cherry&#39;, &#39;kiwi&#39;, &#39;orange&#39;]</span></span></code></pre></div>
 <ul>
-<li>在討論mutable或inmuatable的問題時，都是在討論當你把原物件copy一次後，對新copy的物件做事，會不會影響到舊物件<br />
-</li>
-<li>而對list來說，就是會，因為variable name只是一個reference，指到記憶體位置，所以原物建和copy後的物件，其實都指到同一個位置，那你一改他，兩個variable就都會跟著動<br />
-</li>
-<li>以下舉例：</li>
+<li>如果你要用<code>.append</code>，那就得自己寫回圈：</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="list-.html#cb35-1"></a>areas <span class="op">=</span> [<span class="fl">11.25</span>, <span class="fl">18.0</span>, <span class="fl">20.0</span>, <span class="fl">10.75</span>, <span class="fl">9.50</span>]</span>
-<span id="cb35-2"><a href="list-.html#cb35-2"></a></span>
-<span id="cb35-3"><a href="list-.html#cb35-3"></a><span class="co"># Create areas_copy</span></span>
-<span id="cb35-4"><a href="list-.html#cb35-4"></a>areas_copy <span class="op">=</span> areas</span>
-<span id="cb35-5"><a href="list-.html#cb35-5"></a></span>
-<span id="cb35-6"><a href="list-.html#cb35-6"></a><span class="co"># Change areas_copy</span></span>
-<span id="cb35-7"><a href="list-.html#cb35-7"></a>areas_copy[<span class="dv">0</span>] <span class="op">=</span> <span class="fl">5.0</span></span>
-<span id="cb35-8"><a href="list-.html#cb35-8"></a></span>
-<span id="cb35-9"><a href="list-.html#cb35-9"></a><span class="co"># Print areas</span></span>
-<span id="cb35-10"><a href="list-.html#cb35-10"></a><span class="bu">print</span>(areas)</span>
-<span id="cb35-11"><a href="list-.html#cb35-11"></a><span class="co">#&gt; [5.0, 18.0, 20.0, 10.75, 9.5]</span></span></code></pre></div>
-<ul>
-<li>那這樣豪可怕，我如果想只針對copy的做事，但不要影響到原物件，該怎麼做？<br />
-</li>
-<li>在copy的時候，使用list()的語法，那就會新開一個記憶體位置給他，就不會同步影響到了：</li>
-</ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="list-.html#cb36-1"></a>areas <span class="op">=</span> [<span class="fl">11.25</span>, <span class="fl">18.0</span>, <span class="fl">20.0</span>]</span>
-<span id="cb36-2"><a href="list-.html#cb36-2"></a>areas_copy <span class="op">=</span> <span class="bu">list</span>(areas)</span>
-<span id="cb36-3"><a href="list-.html#cb36-3"></a>areas_copy[<span class="dv">0</span>] <span class="op">=</span> <span class="fl">5.0</span></span>
-<span id="cb36-4"><a href="list-.html#cb36-4"></a><span class="bu">print</span>(areas)</span>
-<span id="cb36-5"><a href="list-.html#cb36-5"></a><span class="co">#&gt; [11.25, 18.0, 20.0]</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="list-.html#cb66-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span> , <span class="st">&quot;c&quot;</span>]</span>
+<span id="cb66-2"><a href="list-.html#cb66-2" aria-hidden="true" tabindex="-1"></a>list2 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb66-3"><a href="list-.html#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="list-.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> list2:</span>
+<span id="cb66-5"><a href="list-.html#cb66-5" aria-hidden="true" tabindex="-1"></a>  list1.append(x)</span>
+<span id="cb66-6"><a href="list-.html#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="list-.html#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list1)</span>
+<span id="cb66-8"><a href="list-.html#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]</span></span></code></pre></div>
 </div>
-<div id="list的功能最常用來做for-loop" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> List的功能（最常用來做for loop)</h2>
+<div id="刪-刪除list裡面的item" class="section level2" number="10.7">
+<h2><span class="header-section-number">10.7</span> [刪] 刪除list裡面的item</h2>
+<div id="removeitem-刪除該item" class="section level3" number="10.7.1">
+<h3><span class="header-section-number">10.7.1</span> <code>.remove(item)</code> 刪除該item</h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="list-.html#cb67-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb67-2"><a href="list-.html#cb67-2" aria-hidden="true" tabindex="-1"></a>thislist.remove(<span class="st">&quot;banana&quot;</span>)</span>
+<span id="cb67-3"><a href="list-.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb67-4"><a href="list-.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;cherry&#39;]</span></span></code></pre></div>
+</div>
+<div id="pop-刪除最後一筆" class="section level3" number="10.7.2">
+<h3><span class="header-section-number">10.7.2</span> <code>.pop()</code> 刪除最後一筆</h3>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="list-.html#cb68-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb68-2"><a href="list-.html#cb68-2" aria-hidden="true" tabindex="-1"></a>thislist.pop()</span>
+<span id="cb68-3"><a href="list-.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;cherry&#39;</span></span>
+<span id="cb68-4"><a href="list-.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb68-5"><a href="list-.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;banana&#39;]</span></span></code></pre></div>
+</div>
+<div id="popindex-刪除該index" class="section level3" number="10.7.3">
+<h3><span class="header-section-number">10.7.3</span> <code>.pop(index)</code> 刪除該index</h3>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="list-.html#cb69-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb69-2"><a href="list-.html#cb69-2" aria-hidden="true" tabindex="-1"></a>thislist.pop(<span class="dv">1</span>)</span>
+<span id="cb69-3"><a href="list-.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;banana&#39;</span></span>
+<span id="cb69-4"><a href="list-.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb69-5"><a href="list-.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;cherry&#39;]</span></span></code></pre></div>
+</div>
+<div id="del-listindex-刪除該list中的此index" class="section level3" number="10.7.4">
+<h3><span class="header-section-number">10.7.4</span> <code>del list[index]</code> 刪除該list中的此index</h3>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="list-.html#cb70-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb70-2"><a href="list-.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> thislist[<span class="dv">0</span>]</span>
+<span id="cb70-3"><a href="list-.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb70-4"><a href="list-.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;banana&#39;, &#39;cherry&#39;]</span></span></code></pre></div>
+</div>
+<div id="clear-清空此list內所有item" class="section level3" number="10.7.5">
+<h3><span class="header-section-number">10.7.5</span> <code>.clear()</code> 清空此list內所有item</h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="list-.html#cb71-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb71-2"><a href="list-.html#cb71-2" aria-hidden="true" tabindex="-1"></a>thislist.clear()</span>
+<span id="cb71-3"><a href="list-.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb71-4"><a href="list-.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; []</span></span></code></pre></div>
+</div>
+</div>
+<div id="mutable-copy-list" class="section level2" number="10.8">
+<h2><span class="header-section-number">10.8</span> [mutable] copy list</h2>
+<ul>
+<li>在討論mutable或inmuatable的問題時，都是在討論當你把原物件copy一次後，對新copy的物件做事，會不會影響到舊物件(i.e. <code>list1_copy = list1</code>，那對list1_copy做修改時，list1會不會跟著動？)<br />
+</li>
+<li>而對list來說，就是會，因為variable name只是一個reference，指到記憶體位置，所以原物件和copy後的物件，其實都指到同一個位置，那你一改他，兩個variable就都會跟著動</li>
+</ul>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="list-.html#cb72-1" aria-hidden="true" tabindex="-1"></a>old_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb72-2"><a href="list-.html#cb72-2" aria-hidden="true" tabindex="-1"></a>bad_new_list <span class="op">=</span> old_list</span>
+<span id="cb72-3"><a href="list-.html#cb72-3" aria-hidden="true" tabindex="-1"></a>old_list.pop()</span>
+<span id="cb72-4"><a href="list-.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb72-5"><a href="list-.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(old_list)</span>
+<span id="cb72-6"><a href="list-.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2]</span></span>
+<span id="cb72-7"><a href="list-.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bad_new_list)</span>
+<span id="cb72-8"><a href="list-.html#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2]</span></span></code></pre></div>
+<ul>
+<li>所以對mutable object，請愛用<code>list1_copy = list1.copy()</code>，或是用<code>list1_copy = list(list1)</code>來做copy，不要用<code>list1_copy = list1</code>來做copy：</li>
+</ul>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="list-.html#cb73-1" aria-hidden="true" tabindex="-1"></a>old_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb73-2"><a href="list-.html#cb73-2" aria-hidden="true" tabindex="-1"></a>new_list <span class="op">=</span> old_list.copy()</span>
+<span id="cb73-3"><a href="list-.html#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-4"><a href="list-.html#cb73-4" aria-hidden="true" tabindex="-1"></a>new_list.pop()</span>
+<span id="cb73-5"><a href="list-.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb73-6"><a href="list-.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_list)</span>
+<span id="cb73-7"><a href="list-.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2]</span></span>
+<span id="cb73-8"><a href="list-.html#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(old_list)</span>
+<span id="cb73-9"><a href="list-.html#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2, 3]</span></span></code></pre></div>
+</div>
+<div id="loop-for" class="section level2" number="10.9">
+<h2><span class="header-section-number">10.9</span> [loop] for</h2>
+<div id="loop-index" class="section level3" number="10.9.1">
+<h3><span class="header-section-number">10.9.1</span> loop index</h3>
 <ul>
 <li>R的觀點來做迭代，習慣取index，那就會寫成下面這樣：</li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="list-.html#cb37-1"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(a_list)): </span>
-<span id="cb37-2"><a href="list-.html#cb37-2"></a>    <span class="bu">print</span>(<span class="st">&quot;index = &quot;</span>, index, <span class="st">&quot;, number in list = &quot;</span>, a_list[index])</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="list-.html#cb74-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;cherry&quot;</span>]</span>
+<span id="cb74-2"><a href="list-.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(a_list)): </span>
+<span id="cb74-3"><a href="list-.html#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(index)</span></code></pre></div>
 <ul>
-<li>len(a_list)得到他的長度=5，而range(5)表示由0開始stop在5，所以就得到0,1,2,3,4這五個index<br />
+<li>len(a_list)得到他的長度=3，而range(3)表示由0開始stop在3，所以就得到0,1,2這3個index</li>
+</ul>
+</div>
+<div id="loop-items" class="section level3" number="10.9.2">
+<h3><span class="header-section-number">10.9.2</span> loop items</h3>
+<ul>
+<li>但python的觀點，都是直接取裡面的items做迭代，那就會寫成這樣：</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="list-.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> a_list:</span>
+<span id="cb75-2"><a href="list-.html#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item)</span></code></pre></div>
+</div>
+<div id="enumerate" class="section level3" number="10.9.3">
+<h3><span class="header-section-number">10.9.3</span> <code>enumerate()</code></h3>
+<ul>
+<li>最後，python才有的，又取index，又取item，語法是： enumerate</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="list-.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, item <span class="kw">in</span> <span class="bu">enumerate</span>(a_list):</span>
+<span id="cb76-2"><a href="list-.html#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;index = &quot;</span>, index, <span class="st">&quot;, number in list = &quot;</span>, item)</span></code></pre></div>
+</div>
+</div>
+<div id="loop-list-comprehension" class="section level2" number="10.10">
+<h2><span class="header-section-number">10.10</span> [loop] list comprehension</h2>
+<div id="simple-example" class="section level3" number="10.10.1">
+<h3><span class="header-section-number">10.10.1</span> simple example</h3>
+<ul>
+<li>簡單講，就是把for loop簡化成一行的版本<br />
 </li>
-<li>但python的觀點，都是直接取裡面的element做迭代，那就會寫成這樣：</li>
+<li>例如以下的例子，我已有一個字串list，然後我想取出每個item的第一個字母，變成新的list，那用for回圈寫會長這樣：</li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="list-.html#cb38-1"></a><span class="cf">for</span> element <span class="kw">in</span> a_list:</span>
-<span id="cb38-2"><a href="list-.html#cb38-2"></a>    <span class="bu">print</span>(<span class="st">&quot;number in list = &quot;</span>, element)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="list-.html#cb77-1" aria-hidden="true" tabindex="-1"></a>doctor <span class="op">=</span> [<span class="st">&#39;house&#39;</span>, <span class="st">&#39;cuddy&#39;</span>, <span class="st">&#39;chase&#39;</span>, <span class="st">&#39;thirteen&#39;</span>, <span class="st">&#39;wilson&#39;</span>]</span>
+<span id="cb77-2"><a href="list-.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="list-.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 目標：抓出每個element中的第一個字  </span></span>
+<span id="cb77-4"><a href="list-.html#cb77-4" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> []</span>
+<span id="cb77-5"><a href="list-.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> doc <span class="kw">in</span> doctor:</span>
+<span id="cb77-6"><a href="list-.html#cb77-6" aria-hidden="true" tabindex="-1"></a>    first.append(doc[<span class="dv">0</span>])</span>
+<span id="cb77-7"><a href="list-.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(first)</span>
+<span id="cb77-8"><a href="list-.html#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;h&#39;, &#39;c&#39;, &#39;c&#39;, &#39;t&#39;, &#39;w&#39;]</span></span></code></pre></div>
 <ul>
-<li>最後，python才有的，又取index，又取element，語法是： enumerate</li>
+<li>那如果用list comprehension，就寫成以下這樣：</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="list-.html#cb39-1"></a><span class="cf">for</span> index, element <span class="kw">in</span> <span class="bu">enumerate</span>(a_list):</span>
-<span id="cb39-2"><a href="list-.html#cb39-2"></a>    <span class="bu">print</span>(<span class="st">&quot;index = &quot;</span>, index, <span class="st">&quot;, number in list = &quot;</span>, element)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="list-.html#cb78-1" aria-hidden="true" tabindex="-1"></a>list_comp <span class="op">=</span> [doc[<span class="dv">0</span>] <span class="cf">for</span> doc <span class="kw">in</span> doctor]</span>
+<span id="cb78-2"><a href="list-.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(list_comp)</span>
+<span id="cb78-3"><a href="list-.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;h&#39;, &#39;c&#39;, &#39;c&#39;, &#39;t&#39;, &#39;w&#39;]</span></span></code></pre></div>
+<ul>
+<li>帥…還真的一行幹掉，我們首先來教要怎麼閱讀這種code。<br />
+</li>
+<li>在閱讀上，我們要先辨認出三個結構：
+<ul>
+<li>要output出來的data structure，寫在最外面，也就是我們看到的中括號，告訴我們他要output成一個list<br />
+</li>
+<li>for loop要iterate的part，也就是在最後面看到的<code>for doc in doctor</code>。其中doctor叫做iterable，doc叫iterator variable(代表iterable中的member)<br />
+</li>
+<li>每iterate完一個，要output出什麼，也就是最前面看到的<code>doc[0]</code>，這部分我們叫“output expression”<br />
+</li>
+</ul></li>
+<li>了解一個list comprehension是由這三個組成後，閱讀的順序就會變成：
+<ul>
+<li>先讀要for loop的地方，所以知道他要做的是<code>for doc in doctor</code><br />
+</li>
+<li>再讀每iterate完一次，要output什麼東西出來，所以從<code>doc[0]</code>可知，要丟第一個字母出來<br />
+</li>
+<li>最後，看到最外面是中括號，就知道要把這些結果，搜集成list<br />
+</li>
+</ul></li>
+<li>所以，總結起來，list comprehension是由以下的pattern組合而成：<code>["output expression"  for "iterator variable" in "iterable" ]</code><br />
+</li>
+<li>有了這個概念後，就可以開始練習把傳統的for loop轉成list comprehension了</li>
+</ul>
+</div>
+<div id="nested-for-loop" class="section level3" number="10.10.2">
+<h3><span class="header-section-number">10.10.2</span> nested for loop</h3>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="list-.html#cb79-1" aria-hidden="true" tabindex="-1"></a>pairs_1 <span class="op">=</span> []</span>
+<span id="cb79-2"><a href="list-.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num1 <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">2</span>):</span>
+<span id="cb79-3"><a href="list-.html#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> num2 <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>, <span class="dv">8</span>):</span>
+<span id="cb79-4"><a href="list-.html#cb79-4" aria-hidden="true" tabindex="-1"></a>        pairs_1.append((num1, num2))</span>
+<span id="cb79-5"><a href="list-.html#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pairs_1)</span>
+<span id="cb79-6"><a href="list-.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [(0, 6), (0, 7), (1, 6), (1, 7)]</span></span></code></pre></div>
+<ul>
+<li>像這種兩個for回圈，寫成list comprehension時，可以這樣寫：</li>
+</ul>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="list-.html#cb80-1" aria-hidden="true" tabindex="-1"></a>pairs_2 <span class="op">=</span> [(num1,num2) <span class="cf">for</span> num1 <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">2</span>) <span class="cf">for</span> num2 <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>,<span class="dv">8</span>)]</span>
+<span id="cb80-2"><a href="list-.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pairs_2)</span>
+<span id="cb80-3"><a href="list-.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [(0, 6), (0, 7), (1, 6), (1, 7)]</span></span></code></pre></div>
+</div>
+<div id="conditional-for-loop" class="section level3" number="10.10.3">
+<h3><span class="header-section-number">10.10.3</span> conditional for loop</h3>
+<ul>
+<li>如果for回圈裡面，有if, if-else, if-elif-else的話，可以寫成list comprehension嗎？<br />
+</li>
+<li>答案是，if和if-else可以，但if-elif-else不行。而且if和if-else的寫法有特定pattern，兩者寫法不同，吞下去就對了</li>
+</ul>
+<div id="if" class="section level4" number="10.10.3.1">
+<h4><span class="header-section-number">10.10.3.1</span> if</h4>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="list-.html#cb81-1" aria-hidden="true" tabindex="-1"></a>fellowship <span class="op">=</span> [<span class="st">&#39;frodo&#39;</span>, <span class="st">&#39;samwise&#39;</span>, <span class="st">&#39;merry&#39;</span>, <span class="st">&#39;aragorn&#39;</span>, <span class="st">&#39;legolas&#39;</span>, <span class="st">&#39;boromir&#39;</span>, <span class="st">&#39;gimli&#39;</span>]</span>
+<span id="cb81-2"><a href="list-.html#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="list-.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co">#我現在想重新建立一個list，裡面的element，都要是字數&gt;=7的我才收進來，那就用for loop 加上 if吧！  </span></span>
+<span id="cb81-4"><a href="list-.html#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="list-.html#cb81-5" aria-hidden="true" tabindex="-1"></a>fellowship_for_if <span class="op">=</span> []</span>
+<span id="cb81-6"><a href="list-.html#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> member <span class="kw">in</span> fellowship:</span>
+<span id="cb81-7"><a href="list-.html#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(member) <span class="op">&gt;=</span> <span class="dv">7</span>:</span>
+<span id="cb81-8"><a href="list-.html#cb81-8" aria-hidden="true" tabindex="-1"></a>        fellowship_for_if.append(member)</span>
+<span id="cb81-9"><a href="list-.html#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-10"><a href="list-.html#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fellowship_for_if)</span>
+<span id="cb81-11"><a href="list-.html#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;samwise&#39;, &#39;aragorn&#39;, &#39;legolas&#39;, &#39;boromir&#39;]</span></span></code></pre></div>
+<ul>
+<li>那同樣的結構，當然可以用list comprehension來寫了，就是先for，再if</li>
+</ul>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="list-.html#cb82-1" aria-hidden="true" tabindex="-1"></a>fellowship_list_comprehension <span class="op">=</span> [member <span class="cf">for</span> member <span class="kw">in</span> fellowship <span class="cf">if</span> <span class="bu">len</span>(member)<span class="op">&gt;=</span><span class="dv">7</span>]</span>
+<span id="cb82-2"><a href="list-.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                          2. output expression為member      1.iteration part        </span></span>
+<span id="cb82-3"><a href="list-.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="list-.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the new list</span></span>
+<span id="cb82-5"><a href="list-.html#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fellowship_list_comprehension)</span>
+<span id="cb82-6"><a href="list-.html#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;samwise&#39;, &#39;aragorn&#39;, &#39;legolas&#39;, &#39;boromir&#39;]</span></span></code></pre></div>
+<ul>
+<li>之前有說過第一塊要放output expression，所以，比較正確的做法，應該是寫<code>member if len(member)&gt;=7 for member in fellowship</code>才對，但…就不能這樣寫。反而，在if-else時，一定要這樣寫。</li>
+</ul>
+</div>
+<div id="if-else" class="section level4" number="10.10.3.2">
+<h4><span class="header-section-number">10.10.3.2</span> if-else</h4>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="list-.html#cb83-1" aria-hidden="true" tabindex="-1"></a>new_fellowship <span class="op">=</span> [member <span class="cf">if</span> <span class="bu">len</span>(member) <span class="op">&gt;=</span> <span class="dv">7</span> <span class="cf">else</span> <span class="st">&#39;&#39;</span> <span class="cf">for</span> member <span class="kw">in</span> fellowship]</span>
+<span id="cb83-2"><a href="list-.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co">#               |----expression part想呈現成這樣----| |---iteration part-------|</span></span>
+<span id="cb83-3"><a href="list-.html#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="list-.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the new list</span></span>
+<span id="cb83-5"><a href="list-.html#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_fellowship)</span>
+<span id="cb83-6"><a href="list-.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;&#39;, &#39;samwise&#39;, &#39;&#39;, &#39;aragorn&#39;, &#39;legolas&#39;, &#39;boromir&#39;, &#39;&#39;]</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="排序.sort" class="section level2" number="10.11">
+<h2><span class="header-section-number">10.11</span> 排序(<code>.sort()</code>)</h2>
+<div id="sort" class="section level3" number="10.11.1">
+<h3><span class="header-section-number">10.11.1</span> <code>.sort()</code></h3>
+<ul>
+<li>字串型的list，就是照字母順序由小到大</li>
+</ul>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="list-.html#cb84-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;mango&quot;</span>, <span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;pineapple&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
+<span id="cb84-2"><a href="list-.html#cb84-2" aria-hidden="true" tabindex="-1"></a>thislist.sort()</span>
+<span id="cb84-3"><a href="list-.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb84-4"><a href="list-.html#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;banana&#39;, &#39;kiwi&#39;, &#39;mango&#39;, &#39;orange&#39;, &#39;pineapple&#39;]</span></span></code></pre></div>
+<ul>
+<li>數值型就照大小，由小到大</li>
+</ul>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="list-.html#cb85-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">82</span>, <span class="dv">23</span>]</span>
+<span id="cb85-2"><a href="list-.html#cb85-2" aria-hidden="true" tabindex="-1"></a>thislist.sort()</span>
+<span id="cb85-3"><a href="list-.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb85-4"><a href="list-.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [23, 50, 65, 82, 100]</span></span></code></pre></div>
+</div>
+<div id="sortreverse-true" class="section level3" number="10.11.2">
+<h3><span class="header-section-number">10.11.2</span> <code>.sort(reverse = True)</code></h3>
+<ul>
+<li>倒過來牌，用<code>reverse = True</code> (不是descending = TRUE)</li>
+</ul>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="list-.html#cb86-1" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">82</span>, <span class="dv">23</span>]</span>
+<span id="cb86-2"><a href="list-.html#cb86-2" aria-hidden="true" tabindex="-1"></a>thislist.sort(reverse <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb86-3"><a href="list-.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb86-4"><a href="list-.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [100, 82, 65, 50, 23]</span></span></code></pre></div>
+</div>
+<div id="sortkey-my_func" class="section level3" number="10.11.3">
+<h3><span class="header-section-number">10.11.3</span> <code>.sort(key = my_func)</code></h3>
+<ul>
+<li>我們可以自己定義一個function，讓list裡面的每個item，都先做完這個運算後，再排序<br />
+</li>
+<li>例如，我想讓我的list items，依照距離50這個數值的遠近排列：</li>
+</ul>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="list-.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfunc(n):</span>
+<span id="cb87-2"><a href="list-.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="bu">abs</span>(n <span class="op">-</span> <span class="dv">50</span>)</span>
+<span id="cb87-3"><a href="list-.html#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="list-.html#cb87-4" aria-hidden="true" tabindex="-1"></a>thislist <span class="op">=</span> [<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">82</span>, <span class="dv">23</span>]</span>
+<span id="cb87-5"><a href="list-.html#cb87-5" aria-hidden="true" tabindex="-1"></a>thislist.sort(key <span class="op">=</span> myfunc)</span>
+<span id="cb87-6"><a href="list-.html#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thislist)</span>
+<span id="cb87-7"><a href="list-.html#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [50, 65, 23, 82, 100]</span></span></code></pre></div>
+</div>
+</div>
+<div id="順序倒過來.reverse" class="section level2" number="10.12">
+<h2><span class="header-section-number">10.12</span> 順序倒過來(<code>.reverse()</code>)</h2>
+<ul>
+<li>如果我想把一個list，左右顛倒，就可以用.reverse</li>
+</ul>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="list-.html#cb88-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb88-2"><a href="list-.html#cb88-2" aria-hidden="true" tabindex="-1"></a>my_list.reverse()</span>
+<span id="cb88-3"><a href="list-.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list)</span>
+<span id="cb88-4"><a href="list-.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5, 4, 3, 2, 1]</span></span></code></pre></div>
+</div>
+<div id="list.counta-計算a在list中出現幾次" class="section level2" number="10.13">
+<h2><span class="header-section-number">10.13</span> list.count(‘a’) = 計算’a’在list中出現幾次</h2>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="list-.html#cb89-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
+<span id="cb89-2"><a href="list-.html#cb89-2" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> a_list.count(<span class="st">&quot;banana&quot;</span>)</span>
+<span id="cb89-3"><a href="list-.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new)</span>
+<span id="cb89-4"><a href="list-.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+</div>
+<div id="practice" class="section level2" number="10.14">
+<h2><span class="header-section-number">10.14</span> Practice</h2>
+<ul>
+<li>現在來做個簡單的練習，在<code>tweets.csv</code>中，有一個欄位是created_at，是說這個訊息在幾點幾分建立的，我們看一下：</li>
+</ul>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="list-.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb90-2"><a href="list-.html#cb90-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&quot;./data/tweets.csv&quot;</span>)</span>
+<span id="cb90-3"><a href="list-.html#cb90-3" aria-hidden="true" tabindex="-1"></a>tweet_time <span class="op">=</span> df[<span class="st">&quot;created_at&quot;</span>]</span></code></pre></div>
+<ul>
+<li>現在，假如我想抓出“時間”的資訊就好，也就是第12~19個element，我可以怎麼做呢？<br />
+</li>
+<li>先建一個空list，然後用for回圈，對每個element都抓12~19的字元，append回這個空list？<br />
+</li>
+<li>sure，當然可以，但好遜，我們用list comprehension不就好了？</li>
+</ul>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="list-.html#cb91-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> [entry[<span class="dv">11</span>:<span class="dv">19</span>] <span class="cf">for</span> entry <span class="kw">in</span> tweet_time]</span>
+<span id="cb91-2"><a href="list-.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="dv">0</span>:<span class="dv">10</span>])</span>
+<span id="cb91-3"><a href="list-.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:18&#39;, &#39;23:40:17&#39;, &#39;23:40:18&#39;, &#39;23:40:18&#39;]</span></span></code></pre></div>
+<ul>
+<li>nice，那如果我現在龜毛一點，我想抓hh:mm:ss中的ss=17的就好，怎麼做？</li>
+</ul>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="list-.html#cb92-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> [entry[<span class="dv">11</span>:<span class="dv">19</span>] <span class="cf">for</span> entry <span class="kw">in</span> tweet_time <span class="cf">if</span> entry[<span class="dv">17</span>:<span class="dv">19</span>]<span class="op">==</span><span class="st">&#39;17&#39;</span>]</span>
+<span id="cb92-2"><a href="list-.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result2)</span>
+<span id="cb92-3"><a href="list-.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;, &#39;23:40:17&#39;]</span></span></code></pre></div>
+
 </div>
 </div>
             </section>
@@ -706,8 +1086,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="python-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="numpy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="collections-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tuple-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -749,14 +1129,28 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["python_tutorial.pdf", "python_tutorial.epub"],
+"download": ["python tutorial.pdf", "python tutorial.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 }
 });
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

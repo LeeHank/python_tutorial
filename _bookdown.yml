@@ -1,6 +1,49 @@
-book_filename: "python_tutorial"
+book_filename: "python tutorial"
 delete_merged_file: true
-output_dir: "docs"
+rmd_files:
+- "index.Rmd"
+- "H_環境設置與執行.Rmd"
+- "環境設置.Rmd" # 都還沒寫
+- "執行python.Rmd"  # 缺reticulate, vs code
+- "註解與indention.Rmd"
+- "print.Rmd"
+- "variable.Rmd"
+- "H_basic_data_types.Rmd"
+- "data_types_overview.Rmd"
+- "numeric整理與實戰.Rmd"
+- "string整理與實戰.Rmd"  # 還沒統整w3school的架構
+- "H_python_collections.Rmd"
+- "collections_overview.Rmd"
+- "list整理與實戰.Rmd"
+- "tuple整理與實戰.Rmd"
+- "dictionary整理與實戰.Rmd"
+- "set整理與實戰.Rmd"
+- "H_條件判斷.Rmd"
+- "None整理與實戰.Rmd"
+- "boolean整理與實戰.Rmd"
+- "conditional_operators.Rmd"
+- "if_statement.Rmd"
+- "H_loops.Rmd"
+- "for_loop.Rmd"
+- "while_loop.Rmd"
+- "H_functions.Rmd"
+- "function101.Rmd"
+- "異常和處理.Rmd"
+- "flexible_args.Rmd"
+- "recursion.Rmd"
+- 'nested_function.Rmd'
+- 'variable_scope.Rmd'
+- "H_oop.Rmd"
+- "oop_fundamentals.Rmd"
+- "class_instance_level.Rmd"
+- "attribute_protection.Rmd"
+- "equality_and_str.Rmd"
+- "封裝繼承多形.Rmd"
+#- "_module_package.Rmd"
+#- "python_pandas.Rmd"
+output_dir: docs
 language:
   ui:
     chapter_name: "Chapter "
+new_session: yes
+before_chapter_script: "_common.R"

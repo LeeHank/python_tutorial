@@ -1,0 +1,161 @@
+# Variables
+
+## overview
+
+### 建立variable
+
+-   python和R一樣，都不用宣告資料類型，就可以assign variable了：
+
+```{python}
+x = 4       # x is of type int
+x = "Sally" # x is now of type str
+print(x)
+```
+
+-   如果想要和C/Java一樣，assign variable時同時宣告資料類型，那要用casting
+
+```{python}
+x = str(3)    # x will be '3'
+y = int(3)    # y will be 3
+z = float(3)  # z will be 3.0
+```
+
+### 用`type()`來確認variable資料類型
+
+```{python}
+x = 5
+y = "John"
+print(type(x))
+print(type(y))
+```
+
+## variable names
+
+### 規則
+
+-   python中對variable name的要求是：
+
+    -   只能是由alpha-numeric + underscores所組成(A-z, 0-9, \_)\
+    -   開頭不能是數字，只能英文或底線\
+    -   case-sensitive，大小寫有差拉
+
+```{python eval = FALSE}
+# 合法的variable name  
+myvar = "John"
+my_var = "John"
+_my_var = "John"
+myVar = "John"
+MYVAR = "John"
+myvar2 = "John"
+
+# 不合法的variable name
+2myvar = "John"
+my-var = "John"
+my var = "John"
+```
+
+### 多個字的variable name
+
+-   如果variable name想由多個字組成，哪有三種習慣性寫法：
+
+    -   Snake Case: 像蛇一樣一節一節的，用底線隔開，例如 `my_variable_name`\
+    -   Pascal Case: 每個字的開頭都給他大寫，例如 `MyVariableName`\
+    -   Camel Case: 像駱駝一樣，頭低低，後面駝峰都高起，所以首字小寫，之後都大寫，例如 `myVariableName`
+
+## 一次assign多個variables
+
+### 多個value，assign給多個variable
+
+```{python}
+x, y, z = "Orange", "Banana", "Cherry"
+print(x)
+print(y)
+print(z)
+```
+
+### 同一個value，assign給多個variable
+
+```{python}
+x = y = z = "Orange"
+print(x)
+print(y)
+print(z)
+```
+
+### unpack a collection
+
+-   在python中，collection包含list, tuple, dictionary, set\
+-   那我可以把這些collection中的各個element，assign給各個variable，例如：
+
+```{python}
+fruits = ["apple", "banana", "cherry"]
+x, y, z = fruits
+print(x)
+print(y)
+print(z)
+```
+
+-   而這招最常用的還是用在tuple上：
+
+```{python}
+fruits = ("apple", "banana", "cherry")
+x, y, z = fruits
+print(x)
+print(y)
+print(z)
+```
+
+## Assignment Operators
+
+-   Python有許多assignment operators，整理如下：
+
+| Operator | Example   | Same As      |
+|----------|-----------|--------------|
+| `=`      | x = 5     | x = 5        |
+| `+=`     | x += 3    | x = x + 3    |
+| `-=`     | x -= 3    | x = x - 3    |
+| `*=`     | x \*= 3   | x = x \* 3   |
+| `/=`     | x /= 3    | x = x / 3    |
+| `%=`     | x %= 3    | x = x % 3    |
+| `//`     | x //= 3   | x = x // 3   |
+| `**=`    | x \*\*= 3 | x = x \*\* 3 |
+
+* 備註：  
+  * `x % 3`的意思是，我要取餘數    
+  * `x // 3`的意思是，我要取商   
+  * `x ** 3`的意思是，x的3次方  
+
+## variable scope
+
+### Global Variables
+
+-   想把function中的variable(e.g. x這個variable)，拉到global environment，就先用`global x`來宣告我的x是屬於global的，之後在這個function內把value給assign到x，就會放在global environment裡：
+
+-   來看看沒宣告的例子：
+
+```{python}
+x = "awesome"
+
+def myfunc():
+  x = "fantastic"
+  print("Python is " + x)
+
+myfunc()
+
+print("Python is " + x)
+```
+
+-   再看看有宣告的例子：
+
+```{python}
+x = "awesome"
+
+def myfunc():
+  global x
+  x = "fantastic"
+  print("Python is " + x)
+
+myfunc()
+
+print("Python is " + x)
+```

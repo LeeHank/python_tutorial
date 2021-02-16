@@ -75,60 +75,6 @@ plt.scatter(year, pop, s = age)
 plt.show()
 ```
 
-# 資料結構： dictionary  
-
-* dictionary和list的差別在於：  
-  1. dictionary用 {}表示，list用[]表示  
-  2. dictionary沒有順序性，list有  
-  3. dictionary一定是key-value的pair，他是index by key(所以你要select他的element，是輸入key); list是index by number(所以你要select他的element，是輸入index number)    
-  4. dictionary的key是immutable，value是mutable，而list全都是mutable   
-  
-```{python}
-d1 = {'apple':1, 'pear':2, 'orange':3}
-d1
-```
-
-## select element 用 dictionary['key']    
-
-```{python}
-d1['apple']
-```
-## 刪除用del diction['key']  
-
-```{python}
-print(d1)
-del d1['pear']
-print(d1)
-```
-## 添加一個element進去用 dictionary['new key'] = new_value  
-
-```{python}
-d1['b'] = 20
-d1
-```
-
-## 更新key的value用 dictionary['key'] = new_value  
-
-```{python}
-d1['b'] = 300
-d1
-```
-## dictionary中的key一定是字串，但value可以是任何東西  
-
-```{python}
-def func():
-    return 0
-
-d4 = {'apple':[1,2,3], #value是list
-      'pear':{'gg':3, 'yy':'aa'}, #value是dictionary
-      'orange':func} #value是function  
-d4
-```
-## select這種複雜dictionary就一層一層剝下去  
-
-```{python}
-print(d4['pear']['gg'])
-```
 
 # Pandas  
 
@@ -266,67 +212,6 @@ print(cars.iloc[:,[2]])
 
 # Logic, Control Flow and Filtering  
 
-## Comparison operators  
-
-* >, <, >=, <=, ==, !=  
-* 用在字串的比較時，我比較不熟，所以整理一下：  
-
-```{python}
-"Chars" > "Chloe"
-```
-
-* 他會每一個字逐一比較，照字母順序比  
-
-```{python}
-# Comparison of booleans
-True == False
-
-# Comparison of integers
--5*15 != 75
-
-# Comparison of strings
-"pyscript" == "PyScript"
-
-# Compare a boolean with an integer
-True == 1
-```
-
-```{python}
-# Create arrays
-import numpy as np
-my_house = np.array([18.0, 20.0, 10.75, 9.50])
-your_house = np.array([14.0, 24.0, 14.25, 9.0])
-
-# my_house greater than or equal to 18
-print(my_house >= 18)
-
-# my_house less than your_house
-print(my_house < your_house)
-```
-
-## Boolean Operators  
-
-* True "and" False  
-* True "or" False  
-* "not" True (R的寫法是!TRUE)  
-* "not" False (R的寫法是!FALSE)  
-
-```{python}
-# Define variables
-my_kitchen = 18.0
-your_kitchen = 14.0
-
-# my_kitchen bigger than 10 and smaller than 18?
-print(my_kitchen > 10 and my_kitchen < 18)
-
-# my_kitchen smaller than 14 or bigger than 17?
-print(my_kitchen < 14 or my_kitchen > 17)
-
-# Double my_kitchen smaller than triple your_kitchen?
-print(my_kitchen *2 < your_kitchen *3)
-```
-
-
 ## Numpy np.logical_and()/np.logical_or()/np.logical_not()  
 
 * 如果a是一個numpy array，我們不能寫出`a >7 or a<10`這種寫法，必須寫成 `np.logical_or(a>7, a<10)`  
@@ -344,26 +229,6 @@ print(np.logical_or(my_house > 18.5, my_house < 10))
 print(np.logical_and(my_house <11, your_house<11))
 ```
 
-## if, elif, else  
-
-```{python}
-z = 4
-if z%2 == 0:
-  print("checking " + str(z))
-  print("z is even")
-else:
-  print("z is odd")
-```
-
-```{python}
-z = 6
-if z % 2 == 0:
-  print("z is divisible by 2")
-elif z % 3 == 0:
-  print("z is divisible by 3")
-else:
-  print("z is neither divisible by 2 nor by 3")
-```
 
 ## Filtering pandas DataFrame  
 
@@ -426,92 +291,7 @@ medium = cars[between]
 print(medium)
 ```
 
-# Loops  
-
-## while loop  
-
-```{python}
-error = 50
-while error >1:
-  error = error/4
-  print(error)
-```
-
-## for loop  
-
-### loop over a list  
-
-```{python}
-fam = [1.73, 1.68, 1.71, 1.89]
-for height in fam:
-  print(height)
-```
-
-```{python}
-# house list of lists
-house = [["hallway", 11.25], 
-         ["kitchen", 18.0], 
-         ["living room", 20.0], 
-         ["bedroom", 10.75], 
-         ["bathroom", 9.50]]
-         
-# Build a for loop from scratch
-for i in house:
-    print("the "+i[0]+" is "+str(i[1])+" sqm")
-```
-
-```{python}
-fam = [1.73, 1.68, 1.71, 1.89]
-for index, height in enumerate(fam):
-  print("index" + str(index) + ":" + str(height))
-```
-
-### loop over string  
-
-```{python}
-for c in "family":
-  print(c)
-```
-
-### loop over dictionary  
-
-```{python}
-world = {
-  "afghanistan": 30.55,
-  "albania": 2.77,
-  "algeria": 39.21
-}
-
-for key, value in world.items():
-  print(key + " -- " + str(value))
-```
-
-### loop over Numpy array  
-
-```{python}
-import numpy as np
-np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
-np_weight = np.array([65.4, 59.2, 63.6, 88.4, 68.7])
-bmi = np_weight / np_height ** 2
-
-for val in bmi:
-  print(val)
-```
-
-```{python}
-meas = np.array([np_height, np_weight])
-meas
-```
-
-```{python}
-for val in meas:
-  print(val)
-```
-
-```{python}
-for val in np.nditer(meas):
-  print(val)
-```
+# loop
 
 ### loop over DataFrame  
 

@@ -1,0 +1,279 @@
+# Exception Handling  
+
+* 在python中，我們看到的`Error`，就叫異常(exception)  
+* 異常分兩種：  
+  * 系統內建的異常： 例如`ValueError()`, `TypeError()`,...
+  * 自己定義的異常  
+* 那總結一下這章要講的重點：  
+  * [異常] 先介紹各種異常  
+  * [處理] function在運行時，我想主動卡控東西，若違反我的規則，我要主動丟error出去 -> `raise XXXError("error message here")`    
+  * [處理] function在運行時，若出現不可預知的error，我們該怎麼處理？ -> `try: ..., except: ...`  
+
+## 各種異常介紹  
+
+### AttributeError  
+
+* 在python中，所有東西都是object，都有自己的屬性(attribute)。  
+* 那如果你今天call某個object一個不屬於他的屬性，那就會丟`AttributeError`  
+* 例如下例，os裡面沒有`.test`這個屬性，所以你call他就會報錯：  
+
+```{python error = TRUE}
+import os
+os.test
+```
+
+### ModuleNotFoundError  
+
+* 如果我們在import一個module時，沒有這個module，那就會報`ModuleNotFoundError`  
+
+```{python error = TRUE}
+import hank_module
+```
+
+### IndexError  
+
+* 如果某個list的長度只有1，你卻要取用他index=2，那就會報IndexError  
+
+```{python error = TRUE}
+a = ["hank"]
+a[2]
+```
+
+### KeyError  
+
+* 訪問字典時，key寫錯了，沒有這個key  
+
+```{python error = TRUE}
+a = {"name": "hank"}
+a['salary']
+```
+
+### NameError  
+
+* call一個沒有被定義過的變數  
+
+```{python error = TRUE}
+a = hank * 2
+```
+
+### ZeroDivisionError  
+
+* 把0當除數時，會報的error  
+
+```{python error = TRUE}
+3/0
+```
+
+### 自定義的error  
+
+* 其實剛剛介紹的各種Error，都是繼承自`Exception`這個class，簡單驗證一下：  
+
+```{python}
+a = TypeError("type is wrong")
+print(isinstance(a, TypeError))
+print(isinstance(a, Exception))
+```
+
+* 如果我們在pycharm裡，按ctrl/command，再把滑鼠點到程式碼中的`TypeError`，他會開啟TypeError的source code，就可以看到第一行他就在做繼承  
+
+```{python eval = FALSE}
+class TypeError(Exception):
+  # ...
+```
+
+* 所以，要寫我自己定義的error，就依樣畫葫蘆就好：  
+
+```{python error = TRUE}
+class MyException(Exception):
+  pass
+
+raise MyException("這是我定義的異常")
+```
+
+
+## `raise XXXError("error message herer")`  
+
+* 上一章講function時，有建議養成習慣，在function的一開始，都先確認input argument是否合法，若不合法，直接報error，不用再繼續做下去  
+* 那這在R裡面，就是寫個條件判斷，若不合法，就做`stop("error message")`  
+* 而在Python裡面，我們已經知道Error都要加上error type才完整，所以大概會寫成這樣： `raise XXXError("error message")`  
+* 可以看到，和R的差別，就是多個`raise`，以及`XXX`  
+* 來看例子：  
+
+```{python}
+def square(value): 
+  
+  if (not type(value) is int) and (not type(value) is float):
+    raise TypeError("`value` must be the type of int/float")
+  
+  new_value = value**2 
+  
+  # output
+  return new_value
+```
+
+* 可以看到上例，如果輸入的value，不是數值型資料(i.e. int/float)，那就報錯  
+* 這邊可以注意，你要報什麼類型的錯，其實隨你高興，你要寫`raise ValueError("error message")`，python也不會管你，這只是你要寫給user看得東西而已。  
+* 來試試看管不管用：  
+
+```{python error = TRUE}
+print(square(3))
+print(square(1.4))
+print(square('haha'))
+```
+
+
+## `try...except...`
+
+* 就像if...else...有多種寫法一樣，try...except也是，以下寫出最複雜的例子，記得除了try和except一定要以外，其他都是可有可無  
+
+```{python eval = FALSE}
+try:
+  # 執行一段可能報error的code
+except:
+  # 如果發生error，執行此處的code
+else:
+  # 如果沒發生error，執行此處的code
+finally:
+  # 不管有沒有發生error，最後都得執行此處的code
+```
+
+### 基本款：只寫`except`  
+
+* `try...except...`其實就是R裡面的tryCatch，通常是碰到我們`不想停下來的錯誤`時，而做的處理(如果是嚴重錯誤，必須直接跳出的話，就會用`raise XXError("error message")`)  
+* 舉個例子，我如果沿用剛剛`square` function，去算大量的數據時：  
+
+```{python error = TRUE}
+input_list = [2, 3.5, 7, '4', 8, 10]
+res = []
+for item in input_list:
+  temp_res = square(item)
+  res.append(temp_res)
+
+```
+
+* 會發現報了error之後，後面的東西全都停掉了  
+* 但我更傾向，不要報error，而是隨便塞個東西進去，然後print個message讓我知道哪裡出錯就好，那我就可以改成這樣寫：  
+
+```{python}
+input_list = [2, 3.5, 7, '4', 8, 10]
+res = []
+for item in input_list:
+  try:
+    temp_res = square(item)
+    res.append(temp_res)
+  except:
+    res.append(None)
+    print(f"input = {item} occurs error!!")
+
+print("The result is: ", res)
+```
+
+* 那我的程序就可以順利跑完，得到result，並把發生錯誤的項目print在log裡讓我們知道。  
+
+* 再舉個例子，我有個function，想要input一串數字，然後output出哪些數是100的因數：  
+
+```{python error = TRUE}
+def factor_100(my_list):
+  res = []
+  for item in my_list:
+    if 100 % item == 0:
+      res.append(item)
+  return(res)
+
+
+print(factor_100([2, 5, 7]))
+print(factor_100([2, 5, 7, 0]))
+```
+
+* 從上面的例子可以看到，第二次嘗試時，因為丟了0進去，所以誘發了`ZeroDivisionError`，表示0不可以放分母。  
+* 但...，我們其實不希望丟這個error出來，因為對於0這種數，他就不會是因數，所以我希望碰到error就跳過  
+
+```{python}
+def factor_100(my_list):
+  res = []
+  for item in my_list:
+    try:
+      # 可能發生error的那句statement放這
+      if 100 % item == 0:
+        res.append(item)
+    except:
+      # 碰到error時，run這裡
+      print("0不能當除數拉！！")
+  return(res)
+
+
+print(factor_100([2, 5, 7]))
+print(factor_100([2, 5, 7, 0]))
+```
+
+### 進階款： `except XXerror`
+
+* 剛剛這樣寫好像很棒了，但如果你試試run以下的code:  
+
+```{python}
+print(factor_100([2, 5, 7, 'hank']))
+```
+
+* 會發現...wtf，我input的東西哪裡有0？問題是出在我丟一個字串("hank")進去了  
+* 所以，except後面其實還可以接：碰到哪種error時，執行我。那我就可以寫"碰到`ZeroDivisionError`時，怎樣怎樣"; "碰到`TypeError`時，怎樣怎樣"  
+
+
+```{python}
+def factor_100(my_list):
+  res = []
+  for item in my_list:
+    try:
+      # 可能發生error的那句statement放這
+      if 100 % item == 0:
+        res.append(item)
+    except ZeroDivisionError:
+      # 碰到error時，run這裡
+      print("0不能當除數拉！！")
+    except TypeError:
+      # 碰到error時，run這裡
+      print("請你輸入int/float的資料類型")
+    except:
+      print("我實在不知道哪裡出錯了，但反正跳過")
+      
+  return(res)
+
+
+print(factor_100([2, 5, 7]))
+print(factor_100([2, 5, 7, 0]))
+print(factor_100([2, 5, 7, "hank"]))
+```
+
+### 懶人款: `except Exception as e`    
+
+* 剛剛的except，把各種type的error都考慮進去了，很棒棒沒錯，但實務上，我們常常也不知道會碰到什麼error  
+* 所以，我們可以改成這樣寫：`except Exception as e`，意思是，我要except掉所有的`Exception` object，也就是所有type的Error，並且，`as e`表示我還把這個object給存起來，那我後續搭配`print(e)`，就可以看到所屬的type和所屬的error message了：
+
+
+```{python}
+def factor_100(my_list):
+  res = []
+  for item in my_list:
+    try:
+      # 可能發生error的那句statement放這
+      if 100 % item == 0:
+        res.append(item)
+    except Exception as e:
+      print(e)
+      
+  return(res)
+
+
+print(factor_100([2, 5, 7]))
+print(factor_100([2, 5, 7, 0]))
+print(factor_100([2, 5, 7, "hank"]))
+```
+
+
+  
+
+* 但我現在想要給user更多資訊，讓user知道，到底我遇到哪種type的error
+
+
+
+
+

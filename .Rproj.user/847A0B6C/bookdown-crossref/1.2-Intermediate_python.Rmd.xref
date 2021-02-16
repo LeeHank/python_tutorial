@@ -6,13 +6,6 @@ h1:customization Customization
 h2:xy-labels-and-title x,y labels and title
 h2:ticks Ticks
 h2:加入第三軸-s-size 加入第三軸： s (size)
-h1:資料結構-dictionary 資料結構： dictionary
-h2:select-element-用-dictionarykey select element 用 dictionary[]
-h2:刪除用del-dictionkey 刪除用del diction[]
-h2:添加一個element進去用-dictionarynew-key-new_value 添加一個element進去用 dictionary[] = new_value
-h2:更新key的value用-dictionarykey-new_value 更新key的value用 dictionary[] = new_value
-h2:dictionary中的key一定是字串但value可以是任何東西 dictionary中的key一定是字串，但value可以是任何東西
-h2:select這種複雜dictionary就一層一層剝下去 select這種複雜dictionary就一層一層剝下去
 h1:pandas Pandas
 h2:創建pd.dataframe 創建pd.DataFrame
 h3:將dictionary轉成data.frame 將dictionary轉成data.frame
@@ -24,18 +17,9 @@ h2:select Select
 h3:section [] & [[]]
 h3:loc-and-iloc loc and iloc
 h1:logic-control-flow-and-filtering Logic, Control Flow and Filtering
-h2:comparison-operators Comparison operators
-h2:boolean-operators Boolean Operators
 h2:numpy-np.logical_andnp.logical_ornp.logical_not Numpy np.logical_and()/np.logical_or()/np.logical_not()
-h2:if-elif-else if, elif, else
 h2:filtering-pandas-dataframe Filtering pandas DataFrame
-h1:loops Loops
-h2:while-loop while loop
-h2:for-loop for loop
-h3:loop-over-a-list loop over a list
-h3:loop-over-string loop over string
-h3:loop-over-dictionary loop over dictionary
-h3:loop-over-numpy-array loop over Numpy array
+h1:loop loop
 h3:loop-over-dataframe loop over DataFrame
 h3:add-column-by-for-loops add column by for loops
 h3:add-column-by-apply-method add column by apply method

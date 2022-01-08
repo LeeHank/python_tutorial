@@ -392,5 +392,5 @@ print(emp.name)
 print(emp.salary)
 #> 0
 print(emp.hire_date)
-#> 2021-02-17 01:58:16.631733
+#> 2022-01-08 17:45:51.802810
 ```

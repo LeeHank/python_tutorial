@@ -172,7 +172,7 @@ x = ("apple", "banana", "cherry")
 x[0] = "orange"
 #> Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: 'tuple' object does not support item assignment
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 
@@ -243,7 +243,7 @@ doctor = ['house', 'cuddy', 'chase', 'thirteen', 'wilson']
 doc_tuple = (doc[0] for doc in doctor)
 
 print(doc_tuple)
-#> <generator object <genexpr> at 0x13b07cf90>
+#> <generator object <genexpr> at 0x11a3f1040>
 ```
 
 ## join兩個tuple用加號  

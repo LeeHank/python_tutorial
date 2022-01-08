@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 27 closure | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="27.1 把function當成output 之前講nested function，是在強調他可以簡化原function內部的計算(我把原function內一直重複出現的pattern，寫成一個inner function，讓他在裡面可以重複使用)。 但有時候我們寫nested function的目的，是為了要output出這個nested function 例如這樣： def...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 27 closure | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="27.1 把function當成output 之前講nested function，是在強調他可以簡化原function內部的計算(我把原function內一直重複出現的pattern，寫成一個inner function，讓他在裡面可以重複使用)。 但有時候我們寫nested function的目的，是為了要output出這個nested function 例如這樣： def...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 27 closure | Python Tutorial">
+<meta name="twitter:description" content="27.1 把function當成output 之前講nested function，是在強調他可以簡化原function內部的計算(我把原function內一直重複出現的pattern，寫成一個inner function，讓他在裡面可以重複使用)。 但有時候我們寫nested function的目的，是為了要output出這個nested function 例如這樣： def...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="active" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="closure" class="section level1" number="27">
+<h1>
+<span class="header-section-number">27</span> closure<a class="anchor" aria-label="anchor" href="#closure"><i class="fas fa-link"></i></a>
+</h1>
+<div id="把function當成output" class="section level2" number="27.1">
+<h2>
+<span class="header-section-number">27.1</span> 把function當成output<a class="anchor" aria-label="anchor" href="#%E6%8A%8Afunction%E7%95%B6%E6%88%90output"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>之前講nested function，是在強調他可以簡化原function內部的計算(我把原function內一直重複出現的pattern，寫成一個inner function，讓他在裡面可以重複使用)。<br>
+</li>
+<li>但有時候我們寫nested function的目的，是為了要output出這個nested function<br>
+</li>
+<li>例如這樣：</li>
+</ul>
+<div class="sourceCode" id="cb279"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb279-1"><a href="closure.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> raise_val(n):</span>
+<span id="cb279-2"><a href="closure.html#cb279-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the inner function."""</span></span>
+<span id="cb279-3"><a href="closure.html#cb279-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb279-4"><a href="closure.html#cb279-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inner(x):</span>
+<span id="cb279-5"><a href="closure.html#cb279-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Raise x to the power of n."""</span></span>
+<span id="cb279-6"><a href="closure.html#cb279-6" aria-hidden="true" tabindex="-1"></a>        raised <span class="op">=</span> x <span class="op">**</span> n</span>
+<span id="cb279-7"><a href="closure.html#cb279-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> raised</span>
+<span id="cb279-8"><a href="closure.html#cb279-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb279-9"><a href="closure.html#cb279-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inner</span>
+<span id="cb279-10"><a href="closure.html#cb279-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-11"><a href="closure.html#cb279-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-12"><a href="closure.html#cb279-12" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> raise_val(<span class="dv">2</span>)</span>
+<span id="cb279-13"><a href="closure.html#cb279-13" aria-hidden="true" tabindex="-1"></a>cube <span class="op">=</span> raise_val(<span class="dv">3</span>)</span>
+<span id="cb279-14"><a href="closure.html#cb279-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="dv">2</span>), cube(<span class="dv">4</span>))</span>
+<span id="cb279-15"><a href="closure.html#cb279-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 64</span></span></code></pre></div>
+<ul>
+<li>酷…我input東西後，可以製作出各式各樣的function<br>
+</li>
+<li>那，為啥要這麼做呢？ 其實很簡單啊，還是在偷懶啊。想想看，如果今天你要寫個2次方的function，3次方的function，4次方的function…，你要一直重複定義這些一樣pattern的寫法(def function(x) x**2)，你不累嗎？所以我就寫個general function，然後你只要輸入n，我就給你n次方的function<br>
+</li>
+</ul>
+</div>
+<div id="closure-1" class="section level2" number="27.2">
+<h2>
+<span class="header-section-number">27.2</span> closure<a class="anchor" aria-label="anchor" href="#closure-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>剛剛講了nested function，以及把nested function給output出來<br>
+</li>
+<li>那現在要講的是，這個output的nested function，可以攜帶他外層的資訊(nonlocal variables)一起出來，這種行為我們叫closure<br>
+</li>
+<li>看以下這個簡單的例子：</li>
+</ul>
+<div class="sourceCode" id="cb280"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb280-1"><a href="closure.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo():</span>
+<span id="cb280-2"><a href="closure.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb280-3"><a href="closure.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> bar():</span>
+<span id="cb280-4"><a href="closure.html#cb280-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(a)</span>
+<span id="cb280-5"><a href="closure.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bar</span>
+<span id="cb280-6"><a href="closure.html#cb280-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb280-7"><a href="closure.html#cb280-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> foo()</span>
+<span id="cb280-8"><a href="closure.html#cb280-8" aria-hidden="true" tabindex="-1"></a>f()</span>
+<span id="cb280-9"><a href="closure.html#cb280-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5</span></span></code></pre></div>
+<ul>
+<li>可以看到，當我們call <code>f</code>的時候，其實是在call<code>bar</code>這個函數，那bar這個函數會需要用到a，那a從哪裡來？我又沒定義，他怎麼知道？<br>
+</li>
+<li>答案是，你如果只看<code>bar</code>這個函數，你當然沒有a的資訊，但如果你是用<code>foo()</code>所造出的<code>bar</code>函數，那他就帶有enclosing scope的<code>a = 5</code>這個資訊了。這個a就是nonlocal variable。<br>
+</li>
+<li>驗證一下，<code>f</code>這個函數是用<code>foo()</code>所output出的function，所以他應該會帶有closure性質，那我就可以用以下語法檢驗：</li>
+</ul>
+<div class="sourceCode" id="cb281"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb281-1"><a href="closure.html#cb281-1" aria-hidden="true" tabindex="-1"></a>f.__closure__</span>
+<span id="cb281-2"><a href="closure.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (&lt;cell at 0x1378c3f10: int object at 0x10c64a960&gt;,)</span></span></code></pre></div>
+<ul>
+<li>發現，f果然存有<code>.__closure__</code>這個attribute<br>
+</li>
+<li>如果你只是一般的function物件，是不會有<code>.__closure__</code>這個attribute的</li>
+</ul>
+<div class="sourceCode" id="cb282"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="closure.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bar():</span>
+<span id="cb282-2"><a href="closure.html#cb282-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(a)</span>
+<span id="cb282-3"><a href="closure.html#cb282-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb282-4"><a href="closure.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(bar)</span>
+<span id="cb282-5"><a href="closure.html#cb282-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']</span></span></code></pre></div>
+<ul>
+<li>那回到<code>f.__closure__</code>，我現在看不到他的長相，但可以看他的type:</li>
+</ul>
+<div class="sourceCode" id="cb283"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb283-1"><a href="closure.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(f.__closure__)</span>
+<span id="cb283-2"><a href="closure.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'tuple'&gt;</span></span></code></pre></div>
+<ul>
+<li>發現是一個tuple，他裡面其實就存有所有要用到的一對一對的(nonlocal variable, value) pair<br>
+</li>
+<li>比如剛剛這個例子，就是(a, 5)這個pair<br>
+</li>
+<li>所以我們可以驗證一下，<code>f.__closure__</code>這個tuple是不是只有一個pair:</li>
+</ul>
+<div class="sourceCode" id="cb284"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb284-1"><a href="closure.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(f.__closure__)</span>
+<span id="cb284-2"><a href="closure.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span></code></pre></div>
+<ul>
+<li>如果要抓出來看，用以下語法：</li>
+</ul>
+<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="closure.html#cb285-1" aria-hidden="true" tabindex="-1"></a>f.__closure__[<span class="dv">0</span>].cell_contents</span>
+<span id="cb285-2"><a href="closure.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="closure.html#cb286-1" aria-hidden="true" tabindex="-1"></a>f.__closure__[<span class="dv">0</span>].cell_contents</span>
+<span id="cb286-2"><a href="closure.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5</span></span></code></pre></div>
+<ul>
+<li>打鐵趁熱，看以下的例子：</li>
+</ul>
+<div class="sourceCode" id="cb287"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a href="closure.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parent(arg1, arg2):</span>
+<span id="cb287-2"><a href="closure.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  value <span class="op">=</span> <span class="dv">22</span></span>
+<span id="cb287-3"><a href="closure.html#cb287-3" aria-hidden="true" tabindex="-1"></a>  my_dict <span class="op">=</span> {<span class="st">"chocolate"</span>: <span class="st">"yummy"</span>}</span>
+<span id="cb287-4"><a href="closure.html#cb287-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb287-5"><a href="closure.html#cb287-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> child():</span>
+<span id="cb287-6"><a href="closure.html#cb287-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="dv">2</span><span class="op">*</span>value) <span class="co"># 這邊就用到nonlocal variable: value</span></span>
+<span id="cb287-7"><a href="closure.html#cb287-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_dict[<span class="st">'chocolate'</span>]) <span class="co"># 這邊就用到nonlocal variable: my_dict</span></span>
+<span id="cb287-8"><a href="closure.html#cb287-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(arg1<span class="op">+</span>arg2) <span class="co"># 這邊用到nonlocal variable: arg1, arg2</span></span>
+<span id="cb287-9"><a href="closure.html#cb287-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb287-10"><a href="closure.html#cb287-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> child</span></code></pre></div>
+<ul>
+<li>從這邊可以看到，我們要output出來的<code>child</code> function，他會攜帶<code>arg1</code>, <code>arg2</code>, <code>my_dict</code>, <code>value</code>這四個nonlocal variable(照字母順序排列)<br>
+</li>
+<li>驗證一下：</li>
+</ul>
+<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="closure.html#cb288-1" aria-hidden="true" tabindex="-1"></a>new_function <span class="op">=</span> parent(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb288-2"><a href="closure.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(new_function.__closure__)</span>
+<span id="cb288-3"><a href="closure.html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4</span></span></code></pre></div>
+<ul>
+<li>果然帶有4個nonlocal variables，我們一一把它們叫出來看：</li>
+</ul>
+<div class="sourceCode" id="cb289"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb289-1"><a href="closure.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> new_function.__closure__:</span>
+<span id="cb289-2"><a href="closure.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(element.cell_contents)</span>
+<span id="cb289-3"><a href="closure.html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb289-4"><a href="closure.html#cb289-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4</span></span>
+<span id="cb289-5"><a href="closure.html#cb289-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'chocolate': 'yummy'}</span></span>
+<span id="cb289-6"><a href="closure.html#cb289-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></div>
+<div class="next"><a href="decorator.html"><span class="header-section-number">28</span> decorator</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#closure"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="nav-link" href="#%E6%8A%8Afunction%E7%95%B6%E6%88%90output"><span class="header-section-number">27.1</span> 把function當成output</a></li>
+<li><a class="nav-link" href="#closure-1"><span class="header-section-number">27.2</span> closure</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/closure.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/closure.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

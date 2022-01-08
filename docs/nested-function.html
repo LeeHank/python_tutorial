@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 25 Nested Function | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="把一個function，定義在另一個function內，那這個內部的function，我們就叫nested function，或是叫inner function，或是叫helper function，或叫child function 就像我們在main...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 25 Nested Function | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="把一個function，定義在另一個function內，那這個內部的function，我們就叫nested function，或是叫inner function，或是叫helper function，或叫child function 就像我們在main...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 25 Nested Function | Python Tutorial">
+<meta name="twitter:description" content="把一個function，定義在另一個function內，那這個內部的function，我們就叫nested function，或是叫inner function，或是叫helper function，或叫child function 就像我們在main...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="active" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nested-function" class="section level1" number="25">
+<h1>
+<span class="header-section-number">25</span> Nested Function<a class="anchor" aria-label="anchor" href="#nested-function"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>把一個function，定義在另一個function內，那這個內部的function，我們就叫nested function，或是叫inner function，或是叫helper function，或叫child function<br>
+</li>
+<li>就像我們在main script上，同一種pattern的code，複製貼上三次，就會想寫一個function一樣，如果我今天在自己定義的function中，同一種pattern的code，也複製貼上三次，那我就會想寫一個inner function<br>
+</li>
+<li>先來看醜醜的例子：</li>
+</ul>
+<div class="sourceCode" id="cb269"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb269-1"><a href="nested-function.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mult2plus5(x1, x2, x3):</span>
+<span id="cb269-2"><a href="nested-function.html#cb269-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""multiply 2 thenplus 5 for input three values."""</span></span>
+<span id="cb269-3"><a href="nested-function.html#cb269-3" aria-hidden="true" tabindex="-1"></a>    new_x1 <span class="op">=</span> x1 <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb269-4"><a href="nested-function.html#cb269-4" aria-hidden="true" tabindex="-1"></a>    new_x2 <span class="op">=</span> x2 <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb269-5"><a href="nested-function.html#cb269-5" aria-hidden="true" tabindex="-1"></a>    new_x3 <span class="op">=</span> x3 <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb269-6"><a href="nested-function.html#cb269-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (new_x1, new_x2, new_x3)</span>
+<span id="cb269-7"><a href="nested-function.html#cb269-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-8"><a href="nested-function.html#cb269-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mult2plus5(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span>
+<span id="cb269-9"><a href="nested-function.html#cb269-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (9, 11, 13)</span></span></code></pre></div>
+<ul>
+<li>改寫成nested function的例子</li>
+</ul>
+<div class="sourceCode" id="cb270"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb270-1"><a href="nested-function.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mult2plus5_nested(x1, x2, x3):</span>
+<span id="cb270-2"><a href="nested-function.html#cb270-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb270-3"><a href="nested-function.html#cb270-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inner(x):</span>
+<span id="cb270-4"><a href="nested-function.html#cb270-4" aria-hidden="true" tabindex="-1"></a>      value <span class="op">=</span> x<span class="op">*</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb270-5"><a href="nested-function.html#cb270-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> value</span>
+<span id="cb270-6"><a href="nested-function.html#cb270-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb270-7"><a href="nested-function.html#cb270-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (inner(x1), inner(x2), inner(x3))</span>
+<span id="cb270-8"><a href="nested-function.html#cb270-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-9"><a href="nested-function.html#cb270-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mult2plus5_nested(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))    </span>
+<span id="cb270-10"><a href="nested-function.html#cb270-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (9, 11, 13)</span></span></code></pre></div>
+<ul>
+<li>所以nested function的主要用途，就是節省力氣拉，沒什麼特別的</li>
+</ul>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></div>
+<div class="next"><a href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#nested-function"><span class="header-section-number">25</span> Nested Function</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/nested_function.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/nested_function.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

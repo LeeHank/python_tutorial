@@ -66,12 +66,12 @@ b = {
 }
 #> Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: unhashable type: 'list'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 b
 #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'b' is not defined
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 
@@ -265,7 +265,7 @@ d['name']
 d['Name']
 #> Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: 'Name'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 
@@ -541,7 +541,7 @@ print(d['name'])
 print(d['nam'])
 #> Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: 'nam'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 

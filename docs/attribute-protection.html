@@ -1,895 +1,456 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 28 Attribute Protection | Python Tutorial</title>
-  <meta name="description" content="Chapter 28 Attribute Protection | Python Tutorial" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 28 Attribute Protection | Python Tutorial" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 28 Attribute Protection | Python Tutorial" />
-  
-  
-  
-
-<meta name="author" content="Hank Lee" />
-
-
-<meta name="date" content="2021-02-17" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="class-level-vs-instance-level.html"/>
-<link rel="next" href="isinstance-equality-string-representation.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 32 Attribute Protection | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="這節要來講如何保護我們的attribute，更精確的說，是保護instance-level attribute 要做到實例屬性的保護，由淺至深可分為以下四種： [放任型] 開發者啥都不做，user想做啥都可以。 [信任型] 我希望initialize後，提醒你這些屬性小心使用，盡量不要修改 [中庸型] 我希望initialize後，你要改屬性，要先經過我的審核機制才能改：...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 32 Attribute Protection | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="這節要來講如何保護我們的attribute，更精確的說，是保護instance-level attribute 要做到實例屬性的保護，由淺至深可分為以下四種： [放任型] 開發者啥都不做，user想做啥都可以。 [信任型] 我希望initialize後，提醒你這些屬性小心使用，盡量不要修改 [中庸型] 我希望initialize後，你要改屬性，要先經過我的審核機制才能改：...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 32 Attribute Protection | Python Tutorial">
+<meta name="twitter:description" content="這節要來講如何保護我們的attribute，更精確的說，是保護instance-level attribute 要做到實例屬性的保護，由淺至深可分為以下四種： [放任型] 開發者啥都不做，user想做啥都可以。 [信任型] 我希望initialize後，提醒你這些屬性小心使用，盡量不要修改 [中庸型] 我希望initialize後，你要改屬性，要先經過我的審核機制才能改：...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="part"><span><b>環境設置與執行</b></span></li>
-<li class="chapter" data-level="1" data-path="python-environmental-setting.html"><a href="python-environmental-setting.html"><i class="fa fa-check"></i><b>1</b> Python Environmental Setting</a></li>
-<li class="chapter" data-level="2" data-path="-python-code.html"><a href="-python-code.html"><i class="fa fa-check"></i><b>2</b> 執行Python的code</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="-python-code.html"><a href="-python-code.html#在command-line執行"><i class="fa fa-check"></i><b>2.1</b> 在command line執行</a></li>
-<li class="chapter" data-level="2.2" data-path="-python-code.html"><a href="-python-code.html#寫成.py檔後執行"><i class="fa fa-check"></i><b>2.2</b> 寫成.py檔後執行</a></li>
-<li class="chapter" data-level="2.3" data-path="-python-code.html"><a href="-python-code.html#在vs-code中執行"><i class="fa fa-check"></i><b>2.3</b> 在VS code中執行</a></li>
-<li class="chapter" data-level="2.4" data-path="-python-code.html"><a href="-python-code.html#在-rstudio-中執行"><i class="fa fa-check"></i><b>2.4</b> 在 RStudio 中執行</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="-python-code.html"><a href="-python-code.html#新增檔案python-script"><i class="fa fa-check"></i><b>2.4.1</b> 新增檔案/python script</a></li>
-<li class="chapter" data-level="2.4.2" data-path="-python-code.html"><a href="-python-code.html#用rmarkdown"><i class="fa fa-check"></i><b>2.4.2</b> 用RMarkdown</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="-indention.html"><a href="-indention.html"><i class="fa fa-check"></i><b>3</b> 註解與indention</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="-indention.html"><a href="-indention.html#插入註解"><i class="fa fa-check"></i><b>3.1</b> 插入註解</a></li>
-<li class="chapter" data-level="3.2" data-path="-indention.html"><a href="-indention.html#indention"><i class="fa fa-check"></i><b>3.2</b> indention</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="print.html"><a href="print.html"><i class="fa fa-check"></i><b>4</b> print</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="print.html"><a href="print.html#print可以放多個element進去"><i class="fa fa-check"></i><b>4.1</b> print可以放多個element進去</a></li>
-<li class="chapter" data-level="4.2" data-path="print.html"><a href="print.html#用sep來改間隔"><i class="fa fa-check"></i><b>4.2</b> 用<code>sep=</code>來改間隔</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>5</b> Variables</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="variables.html"><a href="variables.html#overview"><i class="fa fa-check"></i><b>5.1</b> overview</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="variables.html"><a href="variables.html#建立variable"><i class="fa fa-check"></i><b>5.1.1</b> 建立variable</a></li>
-<li class="chapter" data-level="5.1.2" data-path="variables.html"><a href="variables.html#用type來確認variable資料類型"><i class="fa fa-check"></i><b>5.1.2</b> 用<code>type()</code>來確認variable資料類型</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="variables.html"><a href="variables.html#variable-names"><i class="fa fa-check"></i><b>5.2</b> variable names</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="variables.html"><a href="variables.html#規則"><i class="fa fa-check"></i><b>5.2.1</b> 規則</a></li>
-<li class="chapter" data-level="5.2.2" data-path="variables.html"><a href="variables.html#多個字的variable-name"><i class="fa fa-check"></i><b>5.2.2</b> 多個字的variable name</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="variables.html"><a href="variables.html#一次assign多個variables"><i class="fa fa-check"></i><b>5.3</b> 一次assign多個variables</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="variables.html"><a href="variables.html#多個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.1</b> 多個value，assign給多個variable</a></li>
-<li class="chapter" data-level="5.3.2" data-path="variables.html"><a href="variables.html#同一個valueassign給多個variable"><i class="fa fa-check"></i><b>5.3.2</b> 同一個value，assign給多個variable</a></li>
-<li class="chapter" data-level="5.3.3" data-path="variables.html"><a href="variables.html#unpack-a-collection"><i class="fa fa-check"></i><b>5.3.3</b> unpack a collection</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="variables.html"><a href="variables.html#assignment-operators"><i class="fa fa-check"></i><b>5.4</b> Assignment Operators</a></li>
-<li class="chapter" data-level="5.5" data-path="variables.html"><a href="variables.html#variable-scope"><i class="fa fa-check"></i><b>5.5</b> variable scope</a>
-<ul>
-<li class="chapter" data-level="5.5.1" data-path="variables.html"><a href="variables.html#global-variables"><i class="fa fa-check"></i><b>5.5.1</b> Global Variables</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>Python Basic Data Types</b></span></li>
-<li class="chapter" data-level="6" data-path="python-data-types.html"><a href="python-data-types.html"><i class="fa fa-check"></i><b>6</b> Python Data Types</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="python-data-types.html"><a href="python-data-types.html#built-in-data-types"><i class="fa fa-check"></i><b>6.1</b> Built-in Data Types</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="python-data-types.html"><a href="python-data-types.html#基本款"><i class="fa fa-check"></i><b>6.1.1</b> 基本款</a></li>
-<li class="chapter" data-level="6.1.2" data-path="python-data-types.html"><a href="python-data-types.html#collections"><i class="fa fa-check"></i><b>6.1.2</b> collections</a></li>
-<li class="chapter" data-level="6.1.3" data-path="python-data-types.html"><a href="python-data-types.html#binary"><i class="fa fa-check"></i><b>6.1.3</b> binary</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="python-data-types.html"><a href="python-data-types.html#getting-the-data-type"><i class="fa fa-check"></i><b>6.2</b> Getting the data type</a></li>
-<li class="chapter" data-level="6.3" data-path="python-data-types.html"><a href="python-data-types.html#setting-the-specific-data-type"><i class="fa fa-check"></i><b>6.3</b> Setting the specific data type</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="int-float-.html"><a href="int-float-.html"><i class="fa fa-check"></i><b>7</b> int &amp; float 整理與實戰</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="int-float-.html"><a href="int-float-.html#建立intfloat變數"><i class="fa fa-check"></i><b>7.1</b> 建立int/float變數</a></li>
-<li class="chapter" data-level="7.2" data-path="int-float-.html"><a href="int-float-.html#宣告intfloat變數"><i class="fa fa-check"></i><b>7.2</b> 宣告int/float變數</a></li>
-<li class="chapter" data-level="7.3" data-path="int-float-.html"><a href="int-float-.html#型別轉換"><i class="fa fa-check"></i><b>7.3</b> 型別轉換</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="string-.html"><a href="string-.html"><i class="fa fa-check"></i><b>8</b> string整理與實戰</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="string-.html"><a href="string-.html#字串的定義"><i class="fa fa-check"></i><b>8.1</b> 字串的定義</a></li>
-<li class="chapter" data-level="8.2" data-path="string-.html"><a href="string-.html#字串的基本操作"><i class="fa fa-check"></i><b>8.2</b> 字串的基本操作</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="string-.html"><a href="string-.html#利用來定義逃脫字元"><i class="fa fa-check"></i><b>8.2.1</b> 利用""來定義逃脫字元</a></li>
-<li class="chapter" data-level="8.2.2" data-path="string-.html"><a href="string-.html#把字串看成listindex時從0開始"><i class="fa fa-check"></i><b>8.2.2</b> 把字串看成list，index時從0開始</a></li>
-<li class="chapter" data-level="8.2.3" data-path="string-.html"><a href="string-.html#字串常用功能去空白改小寫取代"><i class="fa fa-check"></i><b>8.2.3</b> 字串常用功能：去空白、改小寫、取代</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="string-.html"><a href="string-.html#字串的format-i.e.-r的paste功能"><i class="fa fa-check"></i><b>8.3</b> 字串的format (i.e. R的paste()功能)</a>
-<ul>
-<li class="chapter" data-level="8.3.1" data-path="string-.html"><a href="string-.html#直接一路加號到底"><i class="fa fa-check"></i><b>8.3.1</b> 直接一路加號到底</a></li>
-<li class="chapter" data-level="8.3.2" data-path="string-.html"><a href="string-.html#用s-d-來做"><i class="fa fa-check"></i><b>8.3.2</b> 用%s, %d 來做</a></li>
-<li class="chapter" data-level="8.3.3" data-path="string-.html"><a href="string-.html#用和.format"><i class="fa fa-check"></i><b>8.3.3</b> 用{}和.format</a></li>
-<li class="chapter" data-level="8.3.4" data-path="string-.html"><a href="string-.html#用f吧"><i class="fa fa-check"></i><b>8.3.4</b> 用f吧!</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="string-.html"><a href="string-.html#字串的join-i.e.-r的collapse"><i class="fa fa-check"></i><b>8.4</b> 字串的join (i.e. R的collapse)</a></li>
-</ul></li>
-<li class="part"><span><b>Python Collections</b></span></li>
-<li class="chapter" data-level="9" data-path="collections-overview.html"><a href="collections-overview.html"><i class="fa fa-check"></i><b>9</b> collections overview</a></li>
-<li class="chapter" data-level="10" data-path="list-.html"><a href="list-.html"><i class="fa fa-check"></i><b>10</b> list整理與實戰</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="list-.html"><a href="list-.html#list定義"><i class="fa fa-check"></i><b>10.1</b> list定義</a></li>
-<li class="chapter" data-level="10.2" data-path="list-.html"><a href="list-.html#建-建立list"><i class="fa fa-check"></i><b>10.2</b> [建] 建立list</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="list-.html"><a href="list-.html#建立單維list"><i class="fa fa-check"></i><b>10.2.1</b> 建立單維list</a></li>
-<li class="chapter" data-level="10.2.2" data-path="list-.html"><a href="list-.html#建立多維list"><i class="fa fa-check"></i><b>10.2.2</b> 建立多維list</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="list-.html"><a href="list-.html#查-取用list裡面的item"><i class="fa fa-check"></i><b>10.3</b> [查] 取用list裡面的item</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="list-.html"><a href="list-.html#用index-0取第一個item"><i class="fa fa-check"></i><b>10.3.1</b> 用index = 0取第一個item</a></li>
-<li class="chapter" data-level="10.3.2" data-path="list-.html"><a href="list-.html#用index--2取由右數來第2個"><i class="fa fa-check"></i><b>10.3.2</b> 用index = -2取由右數來第2個</a></li>
-<li class="chapter" data-level="10.3.3" data-path="list-.html"><a href="list-.html#表示從index3取到index7"><i class="fa fa-check"></i><b>10.3.3</b> 3:8表示從index3取到index7</a></li>
-<li class="chapter" data-level="10.3.4" data-path="list-.html"><a href="list-.html#用.indexa找出a所屬的index"><i class="fa fa-check"></i><b>10.3.4</b> 用<code>.index('a')</code>找出’a’所屬的index</a></li>
-<li class="chapter" data-level="10.3.5" data-path="list-.html"><a href="list-.html#用in來確認item在不在list裡"><i class="fa fa-check"></i><b>10.3.5</b> 用<code>in</code>來確認item在不在list裡</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="list-.html"><a href="list-.html#改-修改list裡面的item"><i class="fa fa-check"></i><b>10.4</b> [改] 修改list裡面的item</a></li>
-<li class="chapter" data-level="10.5" data-path="list-.html"><a href="list-.html#增-增加list裡面的item"><i class="fa fa-check"></i><b>10.5</b> [增] 增加list裡面的item</a>
-<ul>
-<li class="chapter" data-level="10.5.1" data-path="list-.html"><a href="list-.html#加到最後面用.append"><i class="fa fa-check"></i><b>10.5.1</b> 加到最後面，用<code>.append()</code></a></li>
-<li class="chapter" data-level="10.5.2" data-path="list-.html"><a href="list-.html#加到指定的位置用.insert"><i class="fa fa-check"></i><b>10.5.2</b> 加到指定的位置，用<code>.insert()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.6" data-path="list-.html"><a href="list-.html#增-join兩個list"><i class="fa fa-check"></i><b>10.6</b> [增] join兩個list</a></li>
-<li class="chapter" data-level="10.7" data-path="list-.html"><a href="list-.html#刪-刪除list裡面的item"><i class="fa fa-check"></i><b>10.7</b> [刪] 刪除list裡面的item</a>
-<ul>
-<li class="chapter" data-level="10.7.1" data-path="list-.html"><a href="list-.html#removeitem-刪除該item"><i class="fa fa-check"></i><b>10.7.1</b> <code>.remove(item)</code> 刪除該item</a></li>
-<li class="chapter" data-level="10.7.2" data-path="list-.html"><a href="list-.html#pop-刪除最後一筆"><i class="fa fa-check"></i><b>10.7.2</b> <code>.pop()</code> 刪除最後一筆</a></li>
-<li class="chapter" data-level="10.7.3" data-path="list-.html"><a href="list-.html#popindex-刪除該index"><i class="fa fa-check"></i><b>10.7.3</b> <code>.pop(index)</code> 刪除該index</a></li>
-<li class="chapter" data-level="10.7.4" data-path="list-.html"><a href="list-.html#del-listindex-刪除該list中的此index"><i class="fa fa-check"></i><b>10.7.4</b> <code>del list[index]</code> 刪除該list中的此index</a></li>
-<li class="chapter" data-level="10.7.5" data-path="list-.html"><a href="list-.html#clear-清空此list內所有item"><i class="fa fa-check"></i><b>10.7.5</b> <code>.clear()</code> 清空此list內所有item</a></li>
-</ul></li>
-<li class="chapter" data-level="10.8" data-path="list-.html"><a href="list-.html#mutable-copy-list"><i class="fa fa-check"></i><b>10.8</b> [mutable] copy list</a></li>
-<li class="chapter" data-level="10.9" data-path="list-.html"><a href="list-.html#loop-for"><i class="fa fa-check"></i><b>10.9</b> [loop] for</a>
-<ul>
-<li class="chapter" data-level="10.9.1" data-path="list-.html"><a href="list-.html#loop-index"><i class="fa fa-check"></i><b>10.9.1</b> loop index</a></li>
-<li class="chapter" data-level="10.9.2" data-path="list-.html"><a href="list-.html#loop-items"><i class="fa fa-check"></i><b>10.9.2</b> loop items</a></li>
-<li class="chapter" data-level="10.9.3" data-path="list-.html"><a href="list-.html#enumerate"><i class="fa fa-check"></i><b>10.9.3</b> <code>enumerate()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.10" data-path="list-.html"><a href="list-.html#loop-list-comprehension"><i class="fa fa-check"></i><b>10.10</b> [loop] list comprehension</a>
-<ul>
-<li class="chapter" data-level="10.10.1" data-path="list-.html"><a href="list-.html#simple-example"><i class="fa fa-check"></i><b>10.10.1</b> simple example</a></li>
-<li class="chapter" data-level="10.10.2" data-path="list-.html"><a href="list-.html#nested-for-loop"><i class="fa fa-check"></i><b>10.10.2</b> nested for loop</a></li>
-<li class="chapter" data-level="10.10.3" data-path="list-.html"><a href="list-.html#conditional-for-loop"><i class="fa fa-check"></i><b>10.10.3</b> conditional for loop</a></li>
-</ul></li>
-<li class="chapter" data-level="10.11" data-path="list-.html"><a href="list-.html#排序.sort"><i class="fa fa-check"></i><b>10.11</b> 排序(<code>.sort()</code>)</a>
-<ul>
-<li class="chapter" data-level="10.11.1" data-path="list-.html"><a href="list-.html#sort"><i class="fa fa-check"></i><b>10.11.1</b> <code>.sort()</code></a></li>
-<li class="chapter" data-level="10.11.2" data-path="list-.html"><a href="list-.html#sortreverse-true"><i class="fa fa-check"></i><b>10.11.2</b> <code>.sort(reverse = True)</code></a></li>
-<li class="chapter" data-level="10.11.3" data-path="list-.html"><a href="list-.html#sortkey-my_func"><i class="fa fa-check"></i><b>10.11.3</b> <code>.sort(key = my_func)</code></a></li>
-</ul></li>
-<li class="chapter" data-level="10.12" data-path="list-.html"><a href="list-.html#順序倒過來.reverse"><i class="fa fa-check"></i><b>10.12</b> 順序倒過來(<code>.reverse()</code>)</a></li>
-<li class="chapter" data-level="10.13" data-path="list-.html"><a href="list-.html#list.counta-計算a在list中出現幾次"><i class="fa fa-check"></i><b>10.13</b> list.count(‘a’) = 計算’a’在list中出現幾次</a></li>
-<li class="chapter" data-level="10.14" data-path="list-.html"><a href="list-.html#practice"><i class="fa fa-check"></i><b>10.14</b> Practice</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="tuple-.html"><a href="tuple-.html"><i class="fa fa-check"></i><b>11</b> tuple整理與實戰</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="tuple-.html"><a href="tuple-.html#建-tuple定義與創建"><i class="fa fa-check"></i><b>11.1</b> [建] tuple定義與創建</a></li>
-<li class="chapter" data-level="11.2" data-path="tuple-.html"><a href="tuple-.html#主要用在保護數據和unpack"><i class="fa fa-check"></i><b>11.2</b> 主要用在保護數據和unpack</a></li>
-<li class="chapter" data-level="11.3" data-path="tuple-.html"><a href="tuple-.html#查-取用tuple中的item"><i class="fa fa-check"></i><b>11.3</b> [查] 取用tuple中的item</a>
-<ul>
-<li class="chapter" data-level="11.3.1" data-path="tuple-.html"><a href="tuple-.html#用list1index取數據"><i class="fa fa-check"></i><b>11.3.1</b> 用<code>list1[index]</code>取數據</a></li>
-<li class="chapter" data-level="11.3.2" data-path="tuple-.html"><a href="tuple-.html#用負號往回取"><i class="fa fa-check"></i><b>11.3.2</b> 用負號往回取</a></li>
-<li class="chapter" data-level="11.3.3" data-path="tuple-.html"><a href="tuple-.html#是指取index2到index4"><i class="fa fa-check"></i><b>11.3.3</b> 2:5是指取index=2到index=4</a></li>
-<li class="chapter" data-level="11.3.4" data-path="tuple-.html"><a href="tuple-.html#找index用.indexa"><i class="fa fa-check"></i><b>11.3.4</b> 找index用<code>.index('a')</code></a></li>
-<li class="chapter" data-level="11.3.5" data-path="tuple-.html"><a href="tuple-.html#確認每個item有沒有在tuple內也是用in"><i class="fa fa-check"></i><b>11.3.5</b> 確認每個item有沒有在tuple內也是用<code>in</code></a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="tuple-.html"><a href="tuple-.html#改-增-刪-tuple不可修改"><i class="fa fa-check"></i><b>11.4</b> [改, 增, 刪] tuple不可修改</a></li>
-<li class="chapter" data-level="11.5" data-path="tuple-.html"><a href="tuple-.html#immutable"><i class="fa fa-check"></i><b>11.5</b> immutable</a></li>
-<li class="chapter" data-level="11.6" data-path="tuple-.html"><a href="tuple-.html#loop-for回圈"><i class="fa fa-check"></i><b>11.6</b> [loop] for回圈</a></li>
-<li class="chapter" data-level="11.7" data-path="tuple-.html"><a href="tuple-.html#loop-comprehension"><i class="fa fa-check"></i><b>11.7</b> [loop] comprehension</a></li>
-<li class="chapter" data-level="11.8" data-path="tuple-.html"><a href="tuple-.html#join兩個tuple用加號"><i class="fa fa-check"></i><b>11.8</b> join兩個tuple用加號</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="dictionary-.html"><a href="dictionary-.html"><i class="fa fa-check"></i><b>12</b> dictionary整理與實戰</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="dictionary-.html"><a href="dictionary-.html#dict的定義"><i class="fa fa-check"></i><b>12.1</b> dict的定義</a></li>
-<li class="chapter" data-level="12.2" data-path="dictionary-.html"><a href="dictionary-.html#建-dict的創建"><i class="fa fa-check"></i><b>12.2</b> [建] dict的創建</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="dictionary-.html"><a href="dictionary-.html#直接用"><i class="fa fa-check"></i><b>12.2.1</b> 直接用</a></li>
-<li class="chapter" data-level="12.2.2" data-path="dictionary-.html"><a href="dictionary-.html#用dicta2-bhaha來建立"><i class="fa fa-check"></i><b>12.2.2</b> 用<code>dict(a=2, b="haha")</code>來建立</a></li>
-<li class="chapter" data-level="12.2.3" data-path="dictionary-.html"><a href="dictionary-.html#用dictiterable_pair來創建"><i class="fa fa-check"></i><b>12.2.3</b> 用<code>dict(iterable_pair)</code>來創建</a></li>
-</ul></li>
-<li class="chapter" data-level="12.3" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.keys-d.values-d.items查詢"><i class="fa fa-check"></i><b>12.3</b> [查] 用<code>d.keys()</code>, <code>d.values()</code>, <code>d.items()</code>查詢</a>
-<ul>
-<li class="chapter" data-level="12.3.1" data-path="dictionary-.html"><a href="dictionary-.html#keys可以得到最外層的所有key值"><i class="fa fa-check"></i><b>12.3.1</b> <code>.keys()</code>可以得到最外層的所有key值</a></li>
-<li class="chapter" data-level="12.3.2" data-path="dictionary-.html"><a href="dictionary-.html#values可以得到所有value"><i class="fa fa-check"></i><b>12.3.2</b> <code>.values()</code>可以得到所有value</a></li>
-<li class="chapter" data-level="12.3.3" data-path="dictionary-.html"><a href="dictionary-.html#items可以得到keyvalue的tupple"><i class="fa fa-check"></i><b>12.3.3</b> <code>.items()</code>可以得到(key,value)的tupple</a></li>
-</ul></li>
-<li class="chapter" data-level="12.4" data-path="dictionary-.html"><a href="dictionary-.html#查-用d.getkey來取用dict裡面的item"><i class="fa fa-check"></i><b>12.4</b> [查] 用<code>d.get("key")</code>來取用dict裡面的item</a></li>
-<li class="chapter" data-level="12.5" data-path="dictionary-.html"><a href="dictionary-.html#改-修改dict裡面的item"><i class="fa fa-check"></i><b>12.5</b> [改] 修改dict裡面的item</a></li>
-<li class="chapter" data-level="12.6" data-path="dictionary-.html"><a href="dictionary-.html#增-增加dict的item"><i class="fa fa-check"></i><b>12.6</b> [增] 增加dict的item</a>
-<ul>
-<li class="chapter" data-level="12.6.1" data-path="dictionary-.html"><a href="dictionary-.html#dnew_key-new_value"><i class="fa fa-check"></i><b>12.6.1</b> <code>d["new_key"] = new_value</code></a></li>
-<li class="chapter" data-level="12.6.2" data-path="dictionary-.html"><a href="dictionary-.html#update可以合併2個字典"><i class="fa fa-check"></i><b>12.6.2</b> <code>.update()</code>可以合併2個字典</a></li>
-<li class="chapter" data-level="12.6.3" data-path="dictionary-.html"><a href="dictionary-.html#d1-d2-d3合併多個字典"><i class="fa fa-check"></i><b>12.6.3</b> <code>{**d1, **d2, **d3}</code>合併多個字典</a></li>
-</ul></li>
-<li class="chapter" data-level="12.7" data-path="dictionary-.html"><a href="dictionary-.html#刪-刪除dict的item"><i class="fa fa-check"></i><b>12.7</b> [刪] 刪除dict的item</a>
-<ul>
-<li class="chapter" data-level="12.7.1" data-path="dictionary-.html"><a href="dictionary-.html#popkey會把選定的key整個砍掉並把對應的value丟出來"><i class="fa fa-check"></i><b>12.7.1</b> <code>.pop('key')</code>會把選定的key整個砍掉，並把對應的value丟出來</a></li>
-<li class="chapter" data-level="12.7.2" data-path="dictionary-.html"><a href="dictionary-.html#del-dkey會刪到這組item"><i class="fa fa-check"></i><b>12.7.2</b> <code>del d['key']</code>會刪到這組item</a></li>
-</ul></li>
-<li class="chapter" data-level="12.8" data-path="dictionary-.html"><a href="dictionary-.html#mutable-copy"><i class="fa fa-check"></i><b>12.8</b> [mutable] copy</a></li>
-<li class="chapter" data-level="12.9" data-path="dictionary-.html"><a href="dictionary-.html#loop-for迴圈"><i class="fa fa-check"></i><b>12.9</b> [loop] for迴圈</a>
-<ul>
-<li class="chapter" data-level="12.9.1" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-keys"><i class="fa fa-check"></i><b>12.9.1</b> loop over keys</a></li>
-<li class="chapter" data-level="12.9.2" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-values"><i class="fa fa-check"></i><b>12.9.2</b> loop over values</a></li>
-<li class="chapter" data-level="12.9.3" data-path="dictionary-.html"><a href="dictionary-.html#loop-over-key-value"><i class="fa fa-check"></i><b>12.9.3</b> loop over (key, value)</a></li>
-</ul></li>
-<li class="chapter" data-level="12.10" data-path="dictionary-.html"><a href="dictionary-.html#loop-dictionary-comprehension"><i class="fa fa-check"></i><b>12.10</b> [loop] dictionary comprehension</a></li>
-<li class="chapter" data-level="12.11" data-path="dictionary-.html"><a href="dictionary-.html#如何安全的訪問字典"><i class="fa fa-check"></i><b>12.11</b> 如何安全的訪問字典</a>
-<ul>
-<li class="chapter" data-level="12.11.1" data-path="dictionary-.html"><a href="dictionary-.html#自己寫條件判斷"><i class="fa fa-check"></i><b>12.11.1</b> 自己寫條件判斷</a></li>
-<li class="chapter" data-level="12.11.2" data-path="dictionary-.html"><a href="dictionary-.html#愛用.get"><i class="fa fa-check"></i><b>12.11.2</b> 愛用<code>.get()</code></a></li>
-<li class="chapter" data-level="12.11.3" data-path="dictionary-.html"><a href="dictionary-.html#改用defaultdict這種type"><i class="fa fa-check"></i><b>12.11.3</b> 改用<code>defaultdict</code>這種type</a></li>
-</ul></li>
-<li class="chapter" data-level="12.12" data-path="dictionary-.html"><a href="dictionary-.html#how-to"><i class="fa fa-check"></i><b>12.12</b> How to…</a>
-<ul>
-<li class="chapter" data-level="12.12.1" data-path="dictionary-.html"><a href="dictionary-.html#如何將字典按照keyvalue大小排序"><i class="fa fa-check"></i><b>12.12.1</b> 如何將字典按照key/value大小排序</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="set-.html"><a href="set-.html"><i class="fa fa-check"></i><b>13</b> set應用實戰</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="set-.html"><a href="set-.html#定義set"><i class="fa fa-check"></i><b>13.1</b> 定義set</a></li>
-<li class="chapter" data-level="13.2" data-path="set-.html"><a href="set-.html#查-只能用for-loop與in"><i class="fa fa-check"></i><b>13.2</b> [查] 只能用<code>for loop</code>與<code>in</code></a></li>
-<li class="chapter" data-level="13.3" data-path="set-.html"><a href="set-.html#改-set無法做修改"><i class="fa fa-check"></i><b>13.3</b> [改] set無法做修改</a></li>
-<li class="chapter" data-level="13.4" data-path="set-.html"><a href="set-.html#刪-.remove與.discard"><i class="fa fa-check"></i><b>13.4</b> [刪] <code>.remove()</code>與<code>.discard()</code></a></li>
-<li class="chapter" data-level="13.5" data-path="set-.html"><a href="set-.html#增-.add與.update"><i class="fa fa-check"></i><b>13.5</b> [增] <code>.add()</code>與<code>.update()</code></a>
-<ul>
-<li class="chapter" data-level="13.5.1" data-path="set-.html"><a href="set-.html#增加一個item用.add"><i class="fa fa-check"></i><b>13.5.1</b> 增加一個item用<code>.add()</code></a></li>
-<li class="chapter" data-level="13.5.2" data-path="set-.html"><a href="set-.html#增加多個item用.update"><i class="fa fa-check"></i><b>13.5.2</b> 增加多個item用<code>.update()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="13.6" data-path="set-.html"><a href="set-.html#mutable-請愛用.copy"><i class="fa fa-check"></i><b>13.6</b> [mutable] 請愛用<code>.copy()</code></a></li>
-<li class="chapter" data-level="13.7" data-path="set-.html"><a href="set-.html#loop-for-1"><i class="fa fa-check"></i><b>13.7</b> [loop] for</a></li>
-<li class="chapter" data-level="13.8" data-path="set-.html"><a href="set-.html#loop-comprehension-1"><i class="fa fa-check"></i><b>13.8</b> [loop] comprehension</a></li>
-<li class="chapter" data-level="13.9" data-path="set-.html"><a href="set-.html#特殊技-集合運算"><i class="fa fa-check"></i><b>13.9</b> [特殊技] 集合運算</a></li>
-<li class="chapter" data-level="13.10" data-path="set-.html"><a href="set-.html#特殊技-對list取unique"><i class="fa fa-check"></i><b>13.10</b> [特殊技] 對list取unique</a></li>
-<li class="chapter" data-level="13.11" data-path="set-.html"><a href="set-.html#特殊技-將字串中unique-character轉成list"><i class="fa fa-check"></i><b>13.11</b> [特殊技] 將字串中unique character轉成list</a></li>
-</ul></li>
-<li class="part"><span><b>條件判斷</b></span></li>
-<li class="chapter" data-level="14" data-path="none.html"><a href="none.html"><i class="fa fa-check"></i><b>14</b> None</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="none.html"><a href="none.html#定義"><i class="fa fa-check"></i><b>14.1</b> 定義</a></li>
-<li class="chapter" data-level="14.2" data-path="none.html"><a href="none.html#is-none"><i class="fa fa-check"></i><b>14.2</b> <code>is None</code></a></li>
-<li class="chapter" data-level="14.3" data-path="none.html"><a href="none.html#使用時機"><i class="fa fa-check"></i><b>14.3</b> 使用時機</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="none.html"><a href="none.html#與資料庫互動"><i class="fa fa-check"></i><b>14.3.1</b> 與資料庫互動</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="boolean-.html"><a href="boolean-.html"><i class="fa fa-check"></i><b>15</b> boolean整理與實戰</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="boolean-.html"><a href="boolean-.html#大部分的value轉成boolean都是true"><i class="fa fa-check"></i><b>15.1</b> 大部分的value，轉成boolean都是True</a></li>
-<li class="chapter" data-level="15.2" data-path="boolean-.html"><a href="boolean-.html#少部分value轉成boolean會是false"><i class="fa fa-check"></i><b>15.2</b> 少部分value，轉成boolean會是False</a></li>
-<li class="chapter" data-level="15.3" data-path="boolean-.html"><a href="boolean-.html#搭配if-statement"><i class="fa fa-check"></i><b>15.3</b> 搭配if statement</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="conditional-operators.html"><a href="conditional-operators.html"><i class="fa fa-check"></i><b>16</b> Conditional Operators</a>
-<ul>
-<li class="chapter" data-level="16.0.1" data-path="conditional-operators.html"><a href="conditional-operators.html#section"><i class="fa fa-check"></i><b>16.0.1</b> <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code></a></li>
-<li class="chapter" data-level="16.0.2" data-path="conditional-operators.html"><a href="conditional-operators.html#and-or-not"><i class="fa fa-check"></i><b>16.0.2</b> <code>and</code>, <code>or</code>, <code>not</code></a></li>
-<li class="chapter" data-level="16.0.3" data-path="conditional-operators.html"><a href="conditional-operators.html#in-not-in"><i class="fa fa-check"></i><b>16.0.3</b> <code>in</code>, <code>not in</code></a></li>
-<li class="chapter" data-level="16.0.4" data-path="conditional-operators.html"><a href="conditional-operators.html#is-is-not"><i class="fa fa-check"></i><b>16.0.4</b> <code>is</code>, <code>is not</code></a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="if-statement.html"><a href="if-statement.html"><i class="fa fa-check"></i><b>17</b> If statement</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="if-statement.html"><a href="if-statement.html#if-1"><i class="fa fa-check"></i><b>17.1</b> if…</a></li>
-<li class="chapter" data-level="17.2" data-path="if-statement.html"><a href="if-statement.html#ifelse"><i class="fa fa-check"></i><b>17.2</b> if…else…</a></li>
-<li class="chapter" data-level="17.3" data-path="if-statement.html"><a href="if-statement.html#ifelifelse"><i class="fa fa-check"></i><b>17.3</b> if…elif…else…</a></li>
-<li class="chapter" data-level="17.4" data-path="if-statement.html"><a href="if-statement.html#一行的if"><i class="fa fa-check"></i><b>17.4</b> 一行的if</a></li>
-<li class="chapter" data-level="17.5" data-path="if-statement.html"><a href="if-statement.html#一行的ifelse"><i class="fa fa-check"></i><b>17.5</b> 一行的if…else…</a></li>
-<li class="chapter" data-level="17.6" data-path="if-statement.html"><a href="if-statement.html#善用pass"><i class="fa fa-check"></i><b>17.6</b> 善用pass</a></li>
-<li class="chapter" data-level="17.7" data-path="if-statement.html"><a href="if-statement.html#if-條件太多時怎麼優化"><i class="fa fa-check"></i><b>17.7</b> if 條件太多時，怎麼優化</a></li>
-</ul></li>
-<li class="part"><span><b>Loops</b></span></li>
-<li class="chapter" data-level="18" data-path="for-loop.html"><a href="for-loop.html"><i class="fa fa-check"></i><b>18</b> for loop</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="for-loop.html"><a href="for-loop.html#寫法"><i class="fa fa-check"></i><b>18.1</b> 寫法</a></li>
-<li class="chapter" data-level="18.2" data-path="for-loop.html"><a href="for-loop.html#善用break終止迴圈"><i class="fa fa-check"></i><b>18.2</b> 善用break終止迴圈</a></li>
-<li class="chapter" data-level="18.3" data-path="for-loop.html"><a href="for-loop.html#善用continue跳入下一個迴圈"><i class="fa fa-check"></i><b>18.3</b> 善用continue跳入下一個迴圈</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="while-loop.html"><a href="while-loop.html"><i class="fa fa-check"></i><b>19</b> while loop</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="while-loop.html"><a href="while-loop.html#while-寫法"><i class="fa fa-check"></i><b>19.1</b> while 寫法</a></li>
-<li class="chapter" data-level="19.2" data-path="while-loop.html"><a href="while-loop.html#確認每次都有更新內容"><i class="fa fa-check"></i><b>19.2</b> 確認每次都有更新內容</a></li>
-<li class="chapter" data-level="19.3" data-path="while-loop.html"><a href="while-loop.html#善用break"><i class="fa fa-check"></i><b>19.3</b> 善用<code>break</code></a></li>
-</ul></li>
-<li class="part"><span><b>Functions</b></span></li>
-<li class="chapter" data-level="20" data-path="function101.html"><a href="function101.html"><i class="fa fa-check"></i><b>20</b> function101</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="function101.html"><a href="function101.html#function的結構"><i class="fa fa-check"></i><b>20.1</b> function的結構</a></li>
-<li class="chapter" data-level="20.2" data-path="function101.html"><a href="function101.html#docstring的標準格式"><i class="fa fa-check"></i><b>20.2</b> Docstring的標準格式</a></li>
-<li class="chapter" data-level="20.3" data-path="function101.html"><a href="function101.html#先檢驗argument的合法性"><i class="fa fa-check"></i><b>20.3</b> 先檢驗argument的合法性</a></li>
-<li class="chapter" data-level="20.4" data-path="function101.html"><a href="function101.html#記得return"><i class="fa fa-check"></i><b>20.4</b> 記得<code>return</code></a></li>
-<li class="chapter" data-level="20.5" data-path="function101.html"><a href="function101.html#default-argument"><i class="fa fa-check"></i><b>20.5</b> default argument</a></li>
-</ul></li>
-<li class="chapter" data-level="21" data-path="exception-handling.html"><a href="exception-handling.html"><i class="fa fa-check"></i><b>21</b> Exception Handling</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="exception-handling.html"><a href="exception-handling.html#各種異常介紹"><i class="fa fa-check"></i><b>21.1</b> 各種異常介紹</a>
-<ul>
-<li class="chapter" data-level="21.1.1" data-path="exception-handling.html"><a href="exception-handling.html#attributeerror"><i class="fa fa-check"></i><b>21.1.1</b> AttributeError</a></li>
-<li class="chapter" data-level="21.1.2" data-path="exception-handling.html"><a href="exception-handling.html#modulenotfounderror"><i class="fa fa-check"></i><b>21.1.2</b> ModuleNotFoundError</a></li>
-<li class="chapter" data-level="21.1.3" data-path="exception-handling.html"><a href="exception-handling.html#indexerror"><i class="fa fa-check"></i><b>21.1.3</b> IndexError</a></li>
-<li class="chapter" data-level="21.1.4" data-path="exception-handling.html"><a href="exception-handling.html#keyerror"><i class="fa fa-check"></i><b>21.1.4</b> KeyError</a></li>
-<li class="chapter" data-level="21.1.5" data-path="exception-handling.html"><a href="exception-handling.html#nameerror"><i class="fa fa-check"></i><b>21.1.5</b> NameError</a></li>
-<li class="chapter" data-level="21.1.6" data-path="exception-handling.html"><a href="exception-handling.html#zerodivisionerror"><i class="fa fa-check"></i><b>21.1.6</b> ZeroDivisionError</a></li>
-<li class="chapter" data-level="21.1.7" data-path="exception-handling.html"><a href="exception-handling.html#自定義的error"><i class="fa fa-check"></i><b>21.1.7</b> 自定義的error</a></li>
-</ul></li>
-<li class="chapter" data-level="21.2" data-path="exception-handling.html"><a href="exception-handling.html#raise-xxxerrorerror-message-herer"><i class="fa fa-check"></i><b>21.2</b> <code>raise XXXError("error message herer")</code></a></li>
-<li class="chapter" data-level="21.3" data-path="exception-handling.html"><a href="exception-handling.html#try...except..."><i class="fa fa-check"></i><b>21.3</b> <code>try...except...</code></a>
-<ul>
-<li class="chapter" data-level="21.3.1" data-path="exception-handling.html"><a href="exception-handling.html#基本款只寫except"><i class="fa fa-check"></i><b>21.3.1</b> 基本款：只寫<code>except</code></a></li>
-<li class="chapter" data-level="21.3.2" data-path="exception-handling.html"><a href="exception-handling.html#進階款-except-xxerror"><i class="fa fa-check"></i><b>21.3.2</b> 進階款： <code>except XXerror</code></a></li>
-<li class="chapter" data-level="21.3.3" data-path="exception-handling.html"><a href="exception-handling.html#懶人款-except-exception-as-e"><i class="fa fa-check"></i><b>21.3.3</b> 懶人款: <code>except Exception as e</code></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="22" data-path="flexible-arguments.html"><a href="flexible-arguments.html"><i class="fa fa-check"></i><b>22</b> flexible arguments</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#args"><i class="fa fa-check"></i><b>22.1</b> <code>*args</code></a></li>
-<li class="chapter" data-level="22.2" data-path="flexible-arguments.html"><a href="flexible-arguments.html#kwargs"><i class="fa fa-check"></i><b>22.2</b> <code>**kwargs</code></a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="flexible-arguments.html"><a href="flexible-arguments.html#使用時機-1"><i class="fa fa-check"></i><b>22.2.1</b> 使用時機</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="23" data-path="recursion.html"><a href="recursion.html"><i class="fa fa-check"></i><b>23</b> recursion</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="recursion.html"><a href="recursion.html#n-計算"><i class="fa fa-check"></i><b>23.1</b> n! 計算</a></li>
-<li class="chapter" data-level="23.2" data-path="recursion.html"><a href="recursion.html#費氏數列"><i class="fa fa-check"></i><b>23.2</b> 費氏數列</a></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html"><i class="fa fa-check"></i><b>24</b> Nested Function and closure</a>
-<ul>
-<li class="chapter" data-level="24.1" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#nested-function"><i class="fa fa-check"></i><b>24.1</b> Nested function</a></li>
-<li class="chapter" data-level="24.2" data-path="nested-function-and-closure.html"><a href="nested-function-and-closure.html#closure"><i class="fa fa-check"></i><b>24.2</b> Closure</a></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="variable-scope-1.html"><a href="variable-scope-1.html"><i class="fa fa-check"></i><b>25</b> Variable Scope</a>
-<ul>
-<li class="chapter" data-level="25.1" data-path="variable-scope-1.html"><a href="variable-scope-1.html#intro"><i class="fa fa-check"></i><b>25.1</b> Intro</a></li>
-<li class="chapter" data-level="25.2" data-path="variable-scope-1.html"><a href="variable-scope-1.html#legb-scope"><i class="fa fa-check"></i><b>25.2</b> LEGB scope</a></li>
-<li class="chapter" data-level="25.3" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用global這個keyword把local-scope的object給推到global-scope"><i class="fa fa-check"></i><b>25.3</b> 用<code>global</code>這個keyword，把local scope的object給推到global scope</a></li>
-<li class="chapter" data-level="25.4" data-path="variable-scope-1.html"><a href="variable-scope-1.html#enclosing-function-scope的例子"><i class="fa fa-check"></i><b>25.4</b> Enclosing function scope的例子</a></li>
-<li class="chapter" data-level="25.5" data-path="variable-scope-1.html"><a href="variable-scope-1.html#用nonlocal這個keyword"><i class="fa fa-check"></i><b>25.5</b> 用<code>nonlocal</code>這個keyword…</a></li>
-</ul></li>
-<li class="part"><span><b>Object Oriented Programming</b></span></li>
-<li class="chapter" data-level="26" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html"><i class="fa fa-check"></i><b>26</b> OOP Fundamentals</a>
-<ul>
-<li class="chapter" data-level="26.1" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#what-is-oop"><i class="fa fa-check"></i><b>26.1</b> What is OOP?</a></li>
-<li class="chapter" data-level="26.2" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#oop-in-python"><i class="fa fa-check"></i><b>26.2</b> OOP in Python</a></li>
-<li class="chapter" data-level="26.3" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#my-first-class"><i class="fa fa-check"></i><b>26.3</b> My first class</a></li>
-<li class="chapter" data-level="26.4" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#the-__init__-constructor"><i class="fa fa-check"></i><b>26.4</b> the <code>__init__</code> constructor</a></li>
-<li class="chapter" data-level="26.5" data-path="oop-fundamentals.html"><a href="oop-fundamentals.html#寫class的sop"><i class="fa fa-check"></i><b>26.5</b> 寫Class的SOP</a></li>
-</ul></li>
-<li class="chapter" data-level="27" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html"><i class="fa fa-check"></i><b>27</b> Class-level vs Instance-level</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-attribute-vs-class-level-attribute"><i class="fa fa-check"></i><b>27.1</b> Instance-level attribute vs Class-level attribute</a>
-<ul>
-<li class="chapter" data-level="27.1.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介實例屬性與類屬性"><i class="fa fa-check"></i><b>27.1.1</b> 簡介<code>實例屬性</code>與<code>類屬性</code></a></li>
-<li class="chapter" data-level="27.1.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性可以繼承類屬性"><i class="fa fa-check"></i><b>27.1.2</b> <code>實例屬性</code>可以繼承<code>類屬性</code></a></li>
-<li class="chapter" data-level="27.1.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性與類屬性的修改"><i class="fa fa-check"></i><b>27.1.3</b> <code>實例屬性</code>與<code>類屬性</code>的修改</a></li>
-<li class="chapter" data-level="27.1.4" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#類屬性用在哪"><i class="fa fa-check"></i><b>27.1.4</b> <code>類屬性</code>用在哪</a></li>
-</ul></li>
-<li class="chapter" data-level="27.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#instance-level-method-vs-class-level-method"><i class="fa fa-check"></i><b>27.2</b> Instance-level method vs Class-level method</a>
-<ul>
-<li class="chapter" data-level="27.2.1" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#簡介類方法和實例方法"><i class="fa fa-check"></i><b>27.2.1</b> 簡介<code>類方法</code>和<code>實例方法</code></a></li>
-<li class="chapter" data-level="27.2.2" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#實例屬性的使用時機"><i class="fa fa-check"></i><b>27.2.2</b> 實例屬性的使用時機</a></li>
-</ul></li>
-<li class="chapter" data-level="27.3" data-path="class-level-vs-instance-level.html"><a href="class-level-vs-instance-level.html#小結"><i class="fa fa-check"></i><b>27.3</b> 小結</a></li>
-</ul></li>
-<li class="chapter" data-level="28" data-path="attribute-protection.html"><a href="attribute-protection.html"><i class="fa fa-check"></i><b>28</b> Attribute Protection</a>
-<ul>
-<li class="chapter" data-level="28.1" data-path="attribute-protection.html"><a href="attribute-protection.html#naming-convention"><i class="fa fa-check"></i><b>28.1</b> Naming Convention</a></li>
-<li class="chapter" data-level="28.2" data-path="attribute-protection.html"><a href="attribute-protection.html#放任型-不保護"><i class="fa fa-check"></i><b>28.2</b> [放任型] 不保護</a></li>
-<li class="chapter" data-level="28.3" data-path="attribute-protection.html"><a href="attribute-protection.html#信任型-用單底線提醒"><i class="fa fa-check"></i><b>28.3</b> [信任型] 用單底線提醒</a></li>
-<li class="chapter" data-level="28.4" data-path="attribute-protection.html"><a href="attribute-protection.html#嚴父型-用雙底線不給動"><i class="fa fa-check"></i><b>28.4</b> [嚴父型] 用雙底線不給動</a></li>
-<li class="chapter" data-level="28.5" data-path="attribute-protection.html"><a href="attribute-protection.html#中庸型-雙底線-property-.setter"><i class="fa fa-check"></i><b>28.5</b> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code></a>
-<ul>
-<li class="chapter" data-level="28.5.1" data-path="attribute-protection.html"><a href="attribute-protection.html#old-school-作法"><i class="fa fa-check"></i><b>28.5.1</b> old-school 作法</a></li>
-<li class="chapter" data-level="28.5.2" data-path="attribute-protection.html"><a href="attribute-protection.html#正規作法"><i class="fa fa-check"></i><b>28.5.2</b> 正規作法</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="29" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html"><i class="fa fa-check"></i><b>29</b> isinstance, equality, 與 string representation</a>
-<ul>
-<li class="chapter" data-level="29.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#type-與-isinstance"><i class="fa fa-check"></i><b>29.1</b> <code>type</code> 與 <code>isinstance</code></a>
-<ul>
-<li class="chapter" data-level="29.1.1" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#繼承與isinstance"><i class="fa fa-check"></i><b>29.1.1</b> 繼承與isinstance</a></li>
-</ul></li>
-<li class="chapter" data-level="29.2" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#eq__-object-equality"><i class="fa fa-check"></i><b>29.2</b> <code>__eq__</code> (object equality)</a></li>
-<li class="chapter" data-level="29.3" data-path="isinstance-equality-string-representation.html"><a href="isinstance-equality-string-representation.html#str__與__repr__"><i class="fa fa-check"></i><b>29.3</b> <code>__str__</code>與<code>__repr__</code></a></li>
-</ul></li>
-<li class="chapter" data-level="30" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html"><i class="fa fa-check"></i><b>30</b> Encapsulation, Inheritacne, and Polymorphism</a>
-<ul>
-<li class="chapter" data-level="30.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#封裝"><i class="fa fa-check"></i><b>30.1</b> 封裝</a></li>
-<li class="chapter" data-level="30.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#繼承inheritance"><i class="fa fa-check"></i><b>30.2</b> 繼承(inheritance)</a>
-<ul>
-<li class="chapter" data-level="30.2.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#simple-inheritance"><i class="fa fa-check"></i><b>30.2.1</b> simple inheritance</a></li>
-<li class="chapter" data-level="30.2.2" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加instance-level-attribute-method"><i class="fa fa-check"></i><b>30.2.2</b> 增加instance-level attribute &amp; method</a></li>
-<li class="chapter" data-level="30.2.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#增加class-level-attribute"><i class="fa fa-check"></i><b>30.2.3</b> 增加class-level attribute</a></li>
-</ul></li>
-<li class="chapter" data-level="30.3" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形"><i class="fa fa-check"></i><b>30.3</b> 多形</a>
-<ul>
-<li class="chapter" data-level="30.3.1" data-path="encapsulation-inheritacne-and-polymorphism.html"><a href="encapsulation-inheritacne-and-polymorphism.html#多形的使用時機"><i class="fa fa-check"></i><b>30.3.1</b> 多形的使用時機</a></li>
-</ul></li>
-</ul></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Tutorial</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="active" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="attribute-protection" class="section level1" number="28">
-<h1><span class="header-section-number">Chapter 28</span> Attribute Protection</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="attribute-protection" class="section level1" number="32">
+<h1>
+<span class="header-section-number">32</span> Attribute Protection<a class="anchor" aria-label="anchor" href="#attribute-protection"><i class="fas fa-link"></i></a>
+</h1>
 <ul>
-<li>這節要來講如何保護我們的attribute，更精確的說，是保護<code>instance-level attribute</code><br />
+<li>這節要來講如何保護我們的attribute，更精確的說，是保護<code>instance-level attribute</code><br>
 </li>
 <li>要做到實例屬性的保護，由淺至深可分為以下四種：
 <ul>
-<li>[放任型] 開發者啥都不做，user想做啥都可以。<br />
+<li>[放任型] 開發者啥都不做，user想做啥都可以。<br>
 </li>
-<li>[信任型] 我希望initialize後，提醒你這些屬性小心使用，盡量不要修改<br />
+<li>[信任型] 我希望initialize後，提醒你這些屬性小心使用，盡量不要修改<br>
 </li>
-<li>[中庸型] 我希望initialize後，你要改屬性，要先經過我的審核機制才能改： 用decorator(<span class="citation">@property</span>, setter)<br />
+<li>[中庸型] 我希望initialize後，你要改屬性，要先經過我的審核機制才能改： 用decorator(<span class="citation">@property</span>, setter)<br>
 </li>
 <li>[嚴父型] 我希望initialize後，你不准修改和查詢屬性：那就用私有屬性的做法，我也不給你set和get method。</li>
-</ul></li>
 </ul>
-<div id="naming-convention" class="section level2" number="28.1">
-<h2><span class="header-section-number">28.1</span> Naming Convention</h2>
+</li>
+</ul>
+<div id="naming-convention" class="section level2" number="32.1">
+<h2>
+<span class="header-section-number">32.1</span> Naming Convention<a class="anchor" aria-label="anchor" href="#naming-convention"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>在python中，instance-level attribute的命名是有慣例的(naming convention)：
 <ul>
-<li>一般的變數型態，表不保護，user想做啥都可以。這被我歸類在[放任型]<br />
+<li>一般的變數型態，表不保護，user想做啥都可以。這被我歸類在[放任型]<br>
 </li>
-<li>單底線開頭，表受保護屬性，用來<strong>提醒</strong>user，不要調用和修改。但只有提醒功能，user還是可用可改。這被我歸類在[信任型]<br />
+<li>單底線開頭，表受保護屬性，用來<strong>提醒</strong>user，不要調用和修改。但只有提醒功能，user還是可用可改。這被我歸類在[信任型]<br>
 </li>
 <li>雙底線開頭，表私有屬性(private variable)，這種命名規則會<strong>告訴</strong>系統，這個attribute只給class在內部使用，不讓user從外部去<strong>找到</strong>和<strong>使用</strong>這個屬性。這被我歸類在[嚴父型]。那如果再搭配可用來修改的decorator(e.g. <code>@property</code>, <code>.setter</code>)，就被我歸類為[中庸型]</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
-<div id="放任型-不保護" class="section level2" number="28.2">
-<h2><span class="header-section-number">28.2</span> [放任型] 不保護</h2>
+<div id="放任型-不保護" class="section level2" number="32.2">
+<h2>
+<span class="header-section-number">32.2</span> [放任型] 不保護<a class="anchor" aria-label="anchor" href="#%E6%94%BE%E4%BB%BB%E5%9E%8B-%E4%B8%8D%E4%BF%9D%E8%AD%B7"><i class="fas fa-link"></i></a>
+</h2>
 </div>
-<div id="信任型-用單底線提醒" class="section level2" number="28.3">
-<h2><span class="header-section-number">28.3</span> [信任型] 用單底線提醒</h2>
+<div id="信任型-用單底線提醒" class="section level2" number="32.3">
+<h2>
+<span class="header-section-number">32.3</span> [信任型] 用單底線提醒<a class="anchor" aria-label="anchor" href="#%E4%BF%A1%E4%BB%BB%E5%9E%8B-%E7%94%A8%E5%96%AE%E5%BA%95%E7%B7%9A%E6%8F%90%E9%86%92"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
-<li>以下我們舉個例子，此例我要在<code>__init__()</code>裡面，加上一個受保護的屬性，叫做<code>._protect_var</code></li>
+<li>以下我們舉個例子，此例我要在<code>__init__()</code>裡面，加上一個受保護的屬性，叫做<code>._protect_var</code>
+</li>
 </ul>
-<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="attribute-protection.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb285-2"><a href="attribute-protection.html#cb285-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb285-3"><a href="attribute-protection.html#cb285-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb285-4"><a href="attribute-protection.html#cb285-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.age <span class="op">=</span> age</span>
-<span id="cb285-5"><a href="attribute-protection.html#cb285-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 受保護屬性，用單底線開頭，提醒user不要用不要改</span></span>
-<span id="cb285-6"><a href="attribute-protection.html#cb285-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>._protect_var <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb379-1"><a href="attribute-protection.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb379-2"><a href="attribute-protection.html#cb379-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb379-3"><a href="attribute-protection.html#cb379-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb379-4"><a href="attribute-protection.html#cb379-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.age <span class="op">=</span> age</span>
+<span id="cb379-5"><a href="attribute-protection.html#cb379-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 受保護屬性，用單底線開頭，提醒user不要用不要改</span></span>
+<span id="cb379-6"><a href="attribute-protection.html#cb379-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>._protect_var <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
 <ul>
 <li>這樣的做法，用意只是<strong>提醒</strong>user，這個屬性你不要用，也不要改。但他只有提醒功能，如果user要用要改，都還是可以做到：</li>
 </ul>
-<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="attribute-protection.html#cb286-1" aria-hidden="true" tabindex="-1"></a>someone <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="st">&quot;28&quot;</span>)</span>
-<span id="cb286-2"><a href="attribute-protection.html#cb286-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-3"><a href="attribute-protection.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="co"># user還是可以調用這個屬性</span></span>
-<span id="cb286-4"><a href="attribute-protection.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._protect_var)</span>
-<span id="cb286-5"><a href="attribute-protection.html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="co"># user還是可以修改這個屬性</span></span>
-<span id="cb286-6"><a href="attribute-protection.html#cb286-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span>
-<span id="cb286-7"><a href="attribute-protection.html#cb286-7" aria-hidden="true" tabindex="-1"></a>someone._protect_var <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb286-8"><a href="attribute-protection.html#cb286-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._protect_var)</span>
-<span id="cb286-9"><a href="attribute-protection.html#cb286-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20</span></span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb380-1"><a href="attribute-protection.html#cb380-1" aria-hidden="true" tabindex="-1"></a>someone <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="st">"28"</span>)</span>
+<span id="cb380-2"><a href="attribute-protection.html#cb380-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb380-3"><a href="attribute-protection.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="co"># user還是可以調用這個屬性</span></span>
+<span id="cb380-4"><a href="attribute-protection.html#cb380-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._protect_var)</span>
+<span id="cb380-5"><a href="attribute-protection.html#cb380-5" aria-hidden="true" tabindex="-1"></a><span class="co"># user還是可以修改這個屬性</span></span>
+<span id="cb380-6"><a href="attribute-protection.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span>
+<span id="cb380-7"><a href="attribute-protection.html#cb380-7" aria-hidden="true" tabindex="-1"></a>someone._protect_var <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb380-8"><a href="attribute-protection.html#cb380-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._protect_var)</span>
+<span id="cb380-9"><a href="attribute-protection.html#cb380-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20</span></span></code></pre></div>
 </div>
-<div id="嚴父型-用雙底線不給動" class="section level2" number="28.4">
-<h2><span class="header-section-number">28.4</span> [嚴父型] 用雙底線不給動</h2>
+<div id="嚴父型-用雙底線不給動" class="section level2" number="32.4">
+<h2>
+<span class="header-section-number">32.4</span> [嚴父型] 用雙底線不給動<a class="anchor" aria-label="anchor" href="#%E5%9A%B4%E7%88%B6%E5%9E%8B-%E7%94%A8%E9%9B%99%E5%BA%95%E7%B7%9A%E4%B8%8D%E7%B5%A6%E5%8B%95"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>接下來我們舉雙底線開頭的例子，下例中我們新增一個<code>.__private_var</code>的私有屬性：</li>
 </ul>
-<div class="sourceCode" id="cb287"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a href="attribute-protection.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb287-2"><a href="attribute-protection.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb287-3"><a href="attribute-protection.html#cb287-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb287-4"><a href="attribute-protection.html#cb287-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.age <span class="op">=</span> age</span>
-<span id="cb287-5"><a href="attribute-protection.html#cb287-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>._protect_var <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb287-6"><a href="attribute-protection.html#cb287-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 私有屬性用雙底線開頭，只能在class內部使用</span></span>
-<span id="cb287-7"><a href="attribute-protection.html#cb287-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__private_var <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb287-8"><a href="attribute-protection.html#cb287-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb287-9"><a href="attribute-protection.html#cb287-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> show_private(<span class="va">self</span>):</span>
-<span id="cb287-10"><a href="attribute-protection.html#cb287-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="va">self</span>.__private_var)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb381-1"><a href="attribute-protection.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb381-2"><a href="attribute-protection.html#cb381-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb381-3"><a href="attribute-protection.html#cb381-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb381-4"><a href="attribute-protection.html#cb381-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.age <span class="op">=</span> age</span>
+<span id="cb381-5"><a href="attribute-protection.html#cb381-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>._protect_var <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb381-6"><a href="attribute-protection.html#cb381-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 私有屬性用雙底線開頭，只能在class內部使用</span></span>
+<span id="cb381-7"><a href="attribute-protection.html#cb381-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__private_var <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb381-8"><a href="attribute-protection.html#cb381-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb381-9"><a href="attribute-protection.html#cb381-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> show_private(<span class="va">self</span>):</span>
+<span id="cb381-10"><a href="attribute-protection.html#cb381-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="va">self</span>.__private_var)</span></code></pre></div>
 <ul>
-<li>這樣做以後，如果user從外部要調用這個屬性，會得到error<br />
+<li>這樣做以後，如果user從外部要調用這個屬性，會得到error<br>
 </li>
 <li>但如果我們寫個method來調用這個屬性就ok，因為private variable就是專for class內部使用的</li>
 </ul>
-<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="attribute-protection.html#cb288-1" aria-hidden="true" tabindex="-1"></a>someone <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="st">&quot;28&quot;</span>)</span>
-<span id="cb288-2"><a href="attribute-protection.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.__private_var)</span>
-<span id="cb288-3"><a href="attribute-protection.html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: &#39;People&#39; object has no attribute &#39;__private_var&#39;</span></span>
-<span id="cb288-4"><a href="attribute-protection.html#cb288-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb288-5"><a href="attribute-protection.html#cb288-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb288-6"><a href="attribute-protection.html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb288-7"><a href="attribute-protection.html#cb288-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.show_private())</span>
-<span id="cb288-8"><a href="attribute-protection.html#cb288-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb382-1"><a href="attribute-protection.html#cb382-1" aria-hidden="true" tabindex="-1"></a>someone <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="st">"28"</span>)</span>
+<span id="cb382-2"><a href="attribute-protection.html#cb382-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.__private_var)</span>
+<span id="cb382-3"><a href="attribute-protection.html#cb382-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute '__private_var'</span></span>
+<span id="cb382-4"><a href="attribute-protection.html#cb382-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb382-5"><a href="attribute-protection.html#cb382-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb382-6"><a href="attribute-protection.html#cb382-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span>
+<span id="cb382-7"><a href="attribute-protection.html#cb382-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.show_private())</span>
+<span id="cb382-8"><a href="attribute-protection.html#cb382-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span></code></pre></div>
 <ul>
-<li>那為什麼我們不能用<code>someone.__private_var</code>這個指令？我們可以用<code>dir()</code>來看一下有哪些attribute/method可以用：</li>
+<li>那為什麼我們不能用<code>someone.__private_var</code>這個指令？我們可以用<code><a href="https://rdrr.io/r/base/list.files.html">dir()</a></code>來看一下有哪些attribute/method可以用：</li>
 </ul>
-<div class="sourceCode" id="cb289"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb289-1"><a href="attribute-protection.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dir</span>(someone))</span>
-<span id="cb289-2"><a href="attribute-protection.html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;_People__private_var&#39;, &#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;_protect_var&#39;, &#39;age&#39;, &#39;name&#39;, &#39;show_private&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb383-1"><a href="attribute-protection.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dir</span>(someone))</span>
+<span id="cb383-2"><a href="attribute-protection.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ['_People__private_var', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_protect_var', 'age', 'name', 'show_private']</span></span></code></pre></div>
 <ul>
-<li>從上面可以看到，我們可以用的屬性和method中，有看到我定義的保護屬性<code>_protect_var</code>，但根本沒出現我定義的私有屬性<code>__priate_var</code>，所以，當你用<code>someone.__private_var</code>，python才會跟你說，沒有這個attribute或method<br />
+<li>從上面可以看到，我們可以用的屬性和method中，有看到我定義的保護屬性<code>_protect_var</code>，但根本沒出現我定義的私有屬性<code>__priate_var</code>，所以，當你用<code>someone.__private_var</code>，python才會跟你說，沒有這個attribute或method<br>
 </li>
 <li>但，你可以看到第一個attribute的名稱叫：<code>_People__private_var</code>，表示，python是自動幫你把private variabe和class名稱給黏在一起，變成一個新的attribute供user調用，所以其實user還是可以藉由這個方法，取得和修改private variable</li>
 </ul>
-<div class="sourceCode" id="cb290"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="attribute-protection.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._People__private_var)</span>
-<span id="cb290-2"><a href="attribute-protection.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span>
-<span id="cb290-3"><a href="attribute-protection.html#cb290-3" aria-hidden="true" tabindex="-1"></a>someone._People__private_var <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb290-4"><a href="attribute-protection.html#cb290-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._People__private_var)</span>
-<span id="cb290-5"><a href="attribute-protection.html#cb290-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30</span></span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb384-1"><a href="attribute-protection.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._People__private_var)</span>
+<span id="cb384-2"><a href="attribute-protection.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10</span></span>
+<span id="cb384-3"><a href="attribute-protection.html#cb384-3" aria-hidden="true" tabindex="-1"></a>someone._People__private_var <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb384-4"><a href="attribute-protection.html#cb384-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone._People__private_var)</span>
+<span id="cb384-5"><a href="attribute-protection.html#cb384-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30</span></span></code></pre></div>
 <ul>
-<li>所以講白了，python的理念，還是給user很大的自由度。即使是最嚴格的類型，user還是可以找到方法去修改。<br />
+<li>所以講白了，python的理念，還是給user很大的自由度。即使是最嚴格的類型，user還是可以找到方法去修改。<br>
 </li>
 <li>最後，來釐清個觀念：user不能調用<code>someone.__private_var</code>，但卻可以藉由這種方式修改(<code>someone.__private_var = xxx</code>)!?</li>
 </ul>
-<div class="sourceCode" id="cb291"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="attribute-protection.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.__private_var) <span class="co"># 會報error</span></span>
-<span id="cb291-2"><a href="attribute-protection.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: &#39;People&#39; object has no attribute &#39;__private_var&#39;</span></span>
-<span id="cb291-3"><a href="attribute-protection.html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb291-4"><a href="attribute-protection.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb291-5"><a href="attribute-protection.html#cb291-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb291-6"><a href="attribute-protection.html#cb291-6" aria-hidden="true" tabindex="-1"></a>someone.__private_var <span class="op">=</span> <span class="dv">40</span> <span class="co"># 不會報error</span></span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb385-1"><a href="attribute-protection.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.__private_var) <span class="co"># 會報error</span></span>
+<span id="cb385-2"><a href="attribute-protection.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute '__private_var'</span></span>
+<span id="cb385-3"><a href="attribute-protection.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb385-4"><a href="attribute-protection.html#cb385-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb385-5"><a href="attribute-protection.html#cb385-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span>
+<span id="cb385-6"><a href="attribute-protection.html#cb385-6" aria-hidden="true" tabindex="-1"></a>someone.__private_var <span class="op">=</span> <span class="dv">40</span> <span class="co"># 不會報error</span></span></code></pre></div>
 <ul>
-<li>看起來好像做到修改了，但其實，這樣做是在“新增”一個attribute，而不是“修改”我們舊有的私有屬性，我們看系統內部在讀<code>self.__private</code>是讀到誰就知道了：</li>
+<li>看起來好像做到修改了，但其實，這樣做是在”新增”一個attribute，而不是”修改”我們舊有的私有屬性，我們看系統內部在讀<code>self.__private</code>是讀到誰就知道了：</li>
 </ul>
-<div class="sourceCode" id="cb292"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="attribute-protection.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.show_private())</span>
-<span id="cb292-2"><a href="attribute-protection.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30</span></span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb386-1"><a href="attribute-protection.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(someone.show_private())</span>
+<span id="cb386-2"><a href="attribute-protection.html#cb386-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30</span></span></code></pre></div>
 <ul>
-<li>我們發現，系統讀到的還是舊的<code>.__private_var</code>(40)，而不是剛剛assign的這筆(30)<br />
+<li>我們發現，系統讀到的還是舊的<code>.__private_var</code>(40)，而不是剛剛assign的這筆(30)<br>
 </li>
-<li>因為<code>someone.__private_var = 40</code>的意思，其實是create了一個新attribute給這個instance，只是他的名稱剛好也叫<code>.__private_var</code>而已。但系統在讀<code>self.__private_var</code>時，還是讀一開始設好的那個<code>.__private_var</code><br />
+<li>因為<code>someone.__private_var = 40</code>的意思，其實是create了一個新attribute給這個instance，只是他的名稱剛好也叫<code>.__private_var</code>而已。但系統在讀<code>self.__private_var</code>時，還是讀一開始設好的那個<code>.__private_var</code><br>
 </li>
 <li>也因為剛剛這種直接assign attribute的做法，讓我們現在可以直接調用這筆新增的<code>.__private_var</code>了</li>
 </ul>
-<div class="sourceCode" id="cb293"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb293-1"><a href="attribute-protection.html#cb293-1" aria-hidden="true" tabindex="-1"></a>someone.__private_var</span>
-<span id="cb293-2"><a href="attribute-protection.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40</span></span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb387-1"><a href="attribute-protection.html#cb387-1" aria-hidden="true" tabindex="-1"></a>someone.__private_var</span>
+<span id="cb387-2"><a href="attribute-protection.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40</span></span></code></pre></div>
 </div>
-<div id="中庸型-雙底線-property-.setter" class="section level2" number="28.5">
-<h2><span class="header-section-number">28.5</span> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code></h2>
+<div id="中庸型-雙底線-property-.setter" class="section level2" number="32.5">
+<h2>
+<span class="header-section-number">32.5</span> [中庸型] 雙底線 + <code>@property</code> + <code>.setter</code><a class="anchor" aria-label="anchor" href="#%E4%B8%AD%E5%BA%B8%E5%9E%8B-%E9%9B%99%E5%BA%95%E7%B7%9A-property-.setter"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
-<li>有時候，我們設private variable，並不是不讓別人修改，而是希望別人修改的時候，能符合我們設定好的遊戲規則<br />
+<li>有時候，我們設private variable，並不是不讓別人修改，而是希望別人修改的時候，能符合我們設定好的遊戲規則<br>
 </li>
-<li>如果要做到這個，我們就會用以下的寫法來做<br />
+<li>如果要做到這個，我們就會用以下的寫法來做<br>
 </li>
 <li>首先介紹old-school的做法(加入get和set的method)，因為比較好理解到底在做什麼。但這種寫法沒人再寫了，所以我們還是要學標準版的寫法：加decorator的寫法</li>
 </ul>
-<div id="old-school-作法" class="section level3" number="28.5.1">
-<h3><span class="header-section-number">28.5.1</span> old-school 作法</h3>
+<div id="old-school-作法" class="section level3" number="32.5.1">
+<h3>
+<span class="header-section-number">32.5.1</span> old-school 作法<a class="anchor" aria-label="anchor" href="#old-school-%E4%BD%9C%E6%B3%95"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>假設我們要寫一個People的class，在initialize的時候，會用到name和age兩個attribute，而我們希望user initialize後，就盡可能不要改他。那我們會寫成這樣：</li>
 </ul>
-<div class="sourceCode" id="cb294"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb294-1"><a href="attribute-protection.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb294-2"><a href="attribute-protection.html#cb294-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb294-3"><a href="attribute-protection.html#cb294-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
-<span id="cb294-4"><a href="attribute-protection.html#cb294-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
-<span id="cb294-5"><a href="attribute-protection.html#cb294-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb294-6"><a href="attribute-protection.html#cb294-6" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="dv">28</span>)</span>
-<span id="cb294-7"><a href="attribute-protection.html#cb294-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
-<span id="cb294-8"><a href="attribute-protection.html#cb294-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: &#39;People&#39; object has no attribute &#39;name&#39;</span></span>
-<span id="cb294-9"><a href="attribute-protection.html#cb294-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb294-10"><a href="attribute-protection.html#cb294-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb294-11"><a href="attribute-protection.html#cb294-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb294-12"><a href="attribute-protection.html#cb294-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.age)</span>
-<span id="cb294-13"><a href="attribute-protection.html#cb294-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: &#39;People&#39; object has no attribute &#39;age&#39;</span></span>
-<span id="cb294-14"><a href="attribute-protection.html#cb294-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb294-15"><a href="attribute-protection.html#cb294-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback: </span></span>
-<span id="cb294-16"><a href="attribute-protection.html#cb294-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb388-1"><a href="attribute-protection.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb388-2"><a href="attribute-protection.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb388-3"><a href="attribute-protection.html#cb388-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
+<span id="cb388-4"><a href="attribute-protection.html#cb388-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
+<span id="cb388-5"><a href="attribute-protection.html#cb388-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb388-6"><a href="attribute-protection.html#cb388-6" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="dv">28</span>)</span>
+<span id="cb388-7"><a href="attribute-protection.html#cb388-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
+<span id="cb388-8"><a href="attribute-protection.html#cb388-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute 'name'</span></span>
+<span id="cb388-9"><a href="attribute-protection.html#cb388-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb388-10"><a href="attribute-protection.html#cb388-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb388-11"><a href="attribute-protection.html#cb388-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span>
+<span id="cb388-12"><a href="attribute-protection.html#cb388-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.age)</span>
+<span id="cb388-13"><a href="attribute-protection.html#cb388-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute 'age'</span></span>
+<span id="cb388-14"><a href="attribute-protection.html#cb388-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb388-15"><a href="attribute-protection.html#cb388-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb388-16"><a href="attribute-protection.html#cb388-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
 <ul>
-<li>可以看到，name和age現在都無法調用了<br />
+<li>可以看到，name和age現在都無法調用了<br>
 </li>
 <li>那如果，我可以允許user做修改，但必須符合我的遊戲規則，那我可以寫個get和set method來卡空：</li>
 </ul>
-<div class="sourceCode" id="cb295"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb295-1"><a href="attribute-protection.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb295-2"><a href="attribute-protection.html#cb295-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb295-3"><a href="attribute-protection.html#cb295-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
-<span id="cb295-4"><a href="attribute-protection.html#cb295-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
-<span id="cb295-5"><a href="attribute-protection.html#cb295-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb295-6"><a href="attribute-protection.html#cb295-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> get_name(<span class="va">self</span>):</span>
-<span id="cb295-7"><a href="attribute-protection.html#cb295-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name  </span>
-<span id="cb295-8"><a href="attribute-protection.html#cb295-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
-<span id="cb295-9"><a href="attribute-protection.html#cb295-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_name) <span class="kw">is</span> <span class="bu">str</span>:</span>
-<span id="cb295-10"><a href="attribute-protection.html#cb295-10" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__name <span class="op">=</span> new_name</span>
-<span id="cb295-11"><a href="attribute-protection.html#cb295-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb295-12"><a href="attribute-protection.html#cb295-12" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;new_name should be the type of string.&quot;</span>)</span>
-<span id="cb295-13"><a href="attribute-protection.html#cb295-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb295-14"><a href="attribute-protection.html#cb295-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> get_age(<span class="va">self</span>):</span>
-<span id="cb295-15"><a href="attribute-protection.html#cb295-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age  </span>
-<span id="cb295-16"><a href="attribute-protection.html#cb295-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_age(<span class="va">self</span>, new_age):</span>
-<span id="cb295-17"><a href="attribute-protection.html#cb295-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_age) <span class="kw">is</span> <span class="bu">int</span>:</span>
-<span id="cb295-18"><a href="attribute-protection.html#cb295-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__age <span class="op">=</span> new_age</span>
-<span id="cb295-19"><a href="attribute-protection.html#cb295-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb295-20"><a href="attribute-protection.html#cb295-20" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;new_age should be the type of integer.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb389-1"><a href="attribute-protection.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb389-2"><a href="attribute-protection.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb389-3"><a href="attribute-protection.html#cb389-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
+<span id="cb389-4"><a href="attribute-protection.html#cb389-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
+<span id="cb389-5"><a href="attribute-protection.html#cb389-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb389-6"><a href="attribute-protection.html#cb389-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> get_name(<span class="va">self</span>):</span>
+<span id="cb389-7"><a href="attribute-protection.html#cb389-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name  </span>
+<span id="cb389-8"><a href="attribute-protection.html#cb389-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_name(<span class="va">self</span>, new_name):</span>
+<span id="cb389-9"><a href="attribute-protection.html#cb389-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_name) <span class="kw">is</span> <span class="bu">str</span>:</span>
+<span id="cb389-10"><a href="attribute-protection.html#cb389-10" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__name <span class="op">=</span> new_name</span>
+<span id="cb389-11"><a href="attribute-protection.html#cb389-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb389-12"><a href="attribute-protection.html#cb389-12" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"new_name should be the type of string."</span>)</span>
+<span id="cb389-13"><a href="attribute-protection.html#cb389-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb389-14"><a href="attribute-protection.html#cb389-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> get_age(<span class="va">self</span>):</span>
+<span id="cb389-15"><a href="attribute-protection.html#cb389-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age  </span>
+<span id="cb389-16"><a href="attribute-protection.html#cb389-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> set_age(<span class="va">self</span>, new_age):</span>
+<span id="cb389-17"><a href="attribute-protection.html#cb389-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_age) <span class="kw">is</span> <span class="bu">int</span>:</span>
+<span id="cb389-18"><a href="attribute-protection.html#cb389-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__age <span class="op">=</span> new_age</span>
+<span id="cb389-19"><a href="attribute-protection.html#cb389-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb389-20"><a href="attribute-protection.html#cb389-20" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"new_age should be the type of integer."</span>)</span></code></pre></div>
 <ul>
 <li>有了set這道防線後，user就不能亂設attribute了：</li>
 </ul>
-<div class="sourceCode" id="cb296"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb296-1"><a href="attribute-protection.html#cb296-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="st">&quot;28&quot;</span>)</span>
-<span id="cb296-2"><a href="attribute-protection.html#cb296-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb296-3"><a href="attribute-protection.html#cb296-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
-<span id="cb296-4"><a href="attribute-protection.html#cb296-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
-<span id="cb296-5"><a href="attribute-protection.html#cb296-5" aria-hidden="true" tabindex="-1"></a>hank.set_name(<span class="dv">12345</span>)</span>
-<span id="cb296-6"><a href="attribute-protection.html#cb296-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_name should be the type of string.</span></span>
-<span id="cb296-7"><a href="attribute-protection.html#cb296-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
-<span id="cb296-8"><a href="attribute-protection.html#cb296-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
-<span id="cb296-9"><a href="attribute-protection.html#cb296-9" aria-hidden="true" tabindex="-1"></a>hank.set_name(<span class="st">&quot;hank lee&quot;</span>)</span>
-<span id="cb296-10"><a href="attribute-protection.html#cb296-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
-<span id="cb296-11"><a href="attribute-protection.html#cb296-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank lee</span></span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb390-1"><a href="attribute-protection.html#cb390-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="st">"28"</span>)</span>
+<span id="cb390-2"><a href="attribute-protection.html#cb390-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb390-3"><a href="attribute-protection.html#cb390-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
+<span id="cb390-4"><a href="attribute-protection.html#cb390-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
+<span id="cb390-5"><a href="attribute-protection.html#cb390-5" aria-hidden="true" tabindex="-1"></a>hank.set_name(<span class="dv">12345</span>)</span>
+<span id="cb390-6"><a href="attribute-protection.html#cb390-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_name should be the type of string.</span></span>
+<span id="cb390-7"><a href="attribute-protection.html#cb390-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
+<span id="cb390-8"><a href="attribute-protection.html#cb390-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
+<span id="cb390-9"><a href="attribute-protection.html#cb390-9" aria-hidden="true" tabindex="-1"></a>hank.set_name(<span class="st">"hank lee"</span>)</span>
+<span id="cb390-10"><a href="attribute-protection.html#cb390-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.get_name())</span>
+<span id="cb390-11"><a href="attribute-protection.html#cb390-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank lee</span></span></code></pre></div>
 <ul>
-<li>由此例可以發現，我們新增兩個方法讓user去調用(i.e. get_name)和修改(i.e. set_name)<br />
+<li>由此例可以發現，我們新增兩個方法讓user去調用(i.e. get_name)和修改(i.e. set_name)<br>
 </li>
 <li>藉由這種不便利性，來減少user去使用和修改這些private variable的頻率，也藉由寫method，加入一些卡空機制進去</li>
 </ul>
 </div>
-<div id="正規作法" class="section level3" number="28.5.2">
-<h3><span class="header-section-number">28.5.2</span> 正規作法</h3>
+<div id="正規作法" class="section level3" number="32.5.2">
+<h3>
+<span class="header-section-number">32.5.2</span> 正規作法<a class="anchor" aria-label="anchor" href="#%E6%AD%A3%E8%A6%8F%E4%BD%9C%E6%B3%95"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>那正規作法，其實是把<code>get_name()</code>和<code>get_age()</code>這兩個method，換成<code>@property</code>的寫法，見下例：</li>
 </ul>
-<div class="sourceCode" id="cb297"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb297-1"><a href="attribute-protection.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb297-2"><a href="attribute-protection.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb297-3"><a href="attribute-protection.html#cb297-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
-<span id="cb297-4"><a href="attribute-protection.html#cb297-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
-<span id="cb297-5"><a href="attribute-protection.html#cb297-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb297-6"><a href="attribute-protection.html#cb297-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def get_name(self):</span></span>
-<span id="cb297-7"><a href="attribute-protection.html#cb297-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   return self.__name</span></span>
-<span id="cb297-8"><a href="attribute-protection.html#cb297-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
-<span id="cb297-9"><a href="attribute-protection.html#cb297-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>):</span>
-<span id="cb297-10"><a href="attribute-protection.html#cb297-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name</span>
-<span id="cb297-11"><a href="attribute-protection.html#cb297-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb297-12"><a href="attribute-protection.html#cb297-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def get_age(self):</span></span>
-<span id="cb297-13"><a href="attribute-protection.html#cb297-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   return self.__age  </span></span>
-<span id="cb297-14"><a href="attribute-protection.html#cb297-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
-<span id="cb297-15"><a href="attribute-protection.html#cb297-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>):</span>
-<span id="cb297-16"><a href="attribute-protection.html#cb297-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb391-1"><a href="attribute-protection.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb391-2"><a href="attribute-protection.html#cb391-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb391-3"><a href="attribute-protection.html#cb391-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
+<span id="cb391-4"><a href="attribute-protection.html#cb391-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
+<span id="cb391-5"><a href="attribute-protection.html#cb391-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb391-6"><a href="attribute-protection.html#cb391-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def get_name(self):</span></span>
+<span id="cb391-7"><a href="attribute-protection.html#cb391-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   return self.__name</span></span>
+<span id="cb391-8"><a href="attribute-protection.html#cb391-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
+<span id="cb391-9"><a href="attribute-protection.html#cb391-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>):</span>
+<span id="cb391-10"><a href="attribute-protection.html#cb391-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name</span>
+<span id="cb391-11"><a href="attribute-protection.html#cb391-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb391-12"><a href="attribute-protection.html#cb391-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def get_age(self):</span></span>
+<span id="cb391-13"><a href="attribute-protection.html#cb391-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   return self.__age  </span></span>
+<span id="cb391-14"><a href="attribute-protection.html#cb391-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
+<span id="cb391-15"><a href="attribute-protection.html#cb391-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>):</span>
+<span id="cb391-16"><a href="attribute-protection.html#cb391-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age</span></code></pre></div>
 <ul>
-<li>由這種寫法可以發現，我們加<code>@property</code>這個decorator在method的上面，用來宣告說我要使用property的功能。然後底下用來取代<code>get_name</code> method的東西，要直接用private variable的名稱，所以會是<code>name</code>或<code>age</code><br />
+<li>由這種寫法可以發現，我們加<code>@property</code>這個decorator在method的上面，用來宣告說我要使用property的功能。然後底下用來取代<code>get_name</code> method的東西，要直接用private variable的名稱，所以會是<code>name</code>或<code>age</code><br>
 </li>
-<li>那這種寫法的好處是，user現在可以用熟悉的<code>{instance名稱}.{attribute名稱}</code>來調用這些private variable，不用再寫<code>get_name()</code>或<code>get_age()</code></li>
+<li>那這種寫法的好處是，user現在可以用熟悉的<code>{instance名稱}.{attribute名稱}</code>來調用這些private variable，不用再寫<code>get_name()</code>或<code>get_age()</code>
+</li>
 </ul>
-<div class="sourceCode" id="cb298"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb298-1"><a href="attribute-protection.html#cb298-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="dv">28</span>)</span>
-<span id="cb298-2"><a href="attribute-protection.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
-<span id="cb298-3"><a href="attribute-protection.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
-<span id="cb298-4"><a href="attribute-protection.html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.age)</span>
-<span id="cb298-5"><a href="attribute-protection.html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28</span></span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb392-1"><a href="attribute-protection.html#cb392-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="dv">28</span>)</span>
+<span id="cb392-2"><a href="attribute-protection.html#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
+<span id="cb392-3"><a href="attribute-protection.html#cb392-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
+<span id="cb392-4"><a href="attribute-protection.html#cb392-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.age)</span>
+<span id="cb392-5"><a href="attribute-protection.html#cb392-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28</span></span></code></pre></div>
 <ul>
-<li><p>從此例也可看出，我們剛剛寫的<code>name</code>和<code>age</code>兩個method，再加上<code>@property</code>後，他就不再是method了(你看我是用<code>hank.name</code>來取得name，而不是用<code>hank.name()</code>來取得name，但我在class中，<code>name()</code>明明是以method的方式存在的，我還有return勒！)</p></li>
+<li><p>從此例也可看出，我們剛剛寫的<code>name</code>和<code>age</code>兩個method，再加上<code>@property</code>後，他就不再是method了(你看我是用<code>hank.name</code>來取得name，而不是用<code>hank.name()</code>來取得name，但我在class中，<code><a href="https://rdrr.io/r/base/name.html">name()</a></code>明明是以method的方式存在的，我還有return勒！)</p></li>
 <li><p>再來，我們要改造<code>set_name()</code>這個method，也是用decorator(<code>xx.setter</code>)，見下例:</p></li>
 </ul>
-<div class="sourceCode" id="cb299"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb299-1"><a href="attribute-protection.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
-<span id="cb299-2"><a href="attribute-protection.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
-<span id="cb299-3"><a href="attribute-protection.html#cb299-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
-<span id="cb299-4"><a href="attribute-protection.html#cb299-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
-<span id="cb299-5"><a href="attribute-protection.html#cb299-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-6"><a href="attribute-protection.html#cb299-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
-<span id="cb299-7"><a href="attribute-protection.html#cb299-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>):</span>
-<span id="cb299-8"><a href="attribute-protection.html#cb299-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name</span>
-<span id="cb299-9"><a href="attribute-protection.html#cb299-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-10"><a href="attribute-protection.html#cb299-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def set_name(self, new_name):</span></span>
-<span id="cb299-11"><a href="attribute-protection.html#cb299-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if type(new_name) is str:</span></span>
-<span id="cb299-12"><a href="attribute-protection.html#cb299-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     self.__name = new_name</span></span>
-<span id="cb299-13"><a href="attribute-protection.html#cb299-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   else:</span></span>
-<span id="cb299-14"><a href="attribute-protection.html#cb299-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     print(&quot;new_name should be the type of string.&quot;)</span></span>
-<span id="cb299-15"><a href="attribute-protection.html#cb299-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">@name.setter</span></span>
-<span id="cb299-16"><a href="attribute-protection.html#cb299-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>, new_name):</span>
-<span id="cb299-17"><a href="attribute-protection.html#cb299-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_name) <span class="kw">is</span> <span class="bu">str</span>:</span>
-<span id="cb299-18"><a href="attribute-protection.html#cb299-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__name <span class="op">=</span> new_name</span>
-<span id="cb299-19"><a href="attribute-protection.html#cb299-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb299-20"><a href="attribute-protection.html#cb299-20" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;new_name should be the type of string.&quot;</span>)</span>
-<span id="cb299-21"><a href="attribute-protection.html#cb299-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-22"><a href="attribute-protection.html#cb299-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-23"><a href="attribute-protection.html#cb299-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
-<span id="cb299-24"><a href="attribute-protection.html#cb299-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>):</span>
-<span id="cb299-25"><a href="attribute-protection.html#cb299-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age</span>
-<span id="cb299-26"><a href="attribute-protection.html#cb299-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-27"><a href="attribute-protection.html#cb299-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def set_age(self, new_age):</span></span>
-<span id="cb299-28"><a href="attribute-protection.html#cb299-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if type(new_age) is int:</span></span>
-<span id="cb299-29"><a href="attribute-protection.html#cb299-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     self.__age = new_age</span></span>
-<span id="cb299-30"><a href="attribute-protection.html#cb299-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   else:</span></span>
-<span id="cb299-31"><a href="attribute-protection.html#cb299-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     print(&quot;new_age should be the type of integer.&quot;)</span></span>
-<span id="cb299-32"><a href="attribute-protection.html#cb299-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">@age.setter</span></span>
-<span id="cb299-33"><a href="attribute-protection.html#cb299-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>, new_age):</span>
-<span id="cb299-34"><a href="attribute-protection.html#cb299-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_age) <span class="kw">is</span> <span class="bu">int</span>:</span>
-<span id="cb299-35"><a href="attribute-protection.html#cb299-35" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__age <span class="op">=</span> new_age</span>
-<span id="cb299-36"><a href="attribute-protection.html#cb299-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb299-37"><a href="attribute-protection.html#cb299-37" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">&quot;new_age should be the type of integer.&quot;</span>)</span>
-<span id="cb299-38"><a href="attribute-protection.html#cb299-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb299-39"><a href="attribute-protection.html#cb299-39" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb393-1"><a href="attribute-protection.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> People:</span>
+<span id="cb393-2"><a href="attribute-protection.html#cb393-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, age):</span>
+<span id="cb393-3"><a href="attribute-protection.html#cb393-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__name <span class="op">=</span> name</span>
+<span id="cb393-4"><a href="attribute-protection.html#cb393-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.__age <span class="op">=</span> age</span>
+<span id="cb393-5"><a href="attribute-protection.html#cb393-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-6"><a href="attribute-protection.html#cb393-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
+<span id="cb393-7"><a href="attribute-protection.html#cb393-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>):</span>
+<span id="cb393-8"><a href="attribute-protection.html#cb393-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__name</span>
+<span id="cb393-9"><a href="attribute-protection.html#cb393-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-10"><a href="attribute-protection.html#cb393-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def set_name(self, new_name):</span></span>
+<span id="cb393-11"><a href="attribute-protection.html#cb393-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if type(new_name) is str:</span></span>
+<span id="cb393-12"><a href="attribute-protection.html#cb393-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     self.__name = new_name</span></span>
+<span id="cb393-13"><a href="attribute-protection.html#cb393-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   else:</span></span>
+<span id="cb393-14"><a href="attribute-protection.html#cb393-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     print("new_name should be the type of string.")</span></span>
+<span id="cb393-15"><a href="attribute-protection.html#cb393-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">@name.setter</span></span>
+<span id="cb393-16"><a href="attribute-protection.html#cb393-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> name(<span class="va">self</span>, new_name):</span>
+<span id="cb393-17"><a href="attribute-protection.html#cb393-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_name) <span class="kw">is</span> <span class="bu">str</span>:</span>
+<span id="cb393-18"><a href="attribute-protection.html#cb393-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__name <span class="op">=</span> new_name</span>
+<span id="cb393-19"><a href="attribute-protection.html#cb393-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb393-20"><a href="attribute-protection.html#cb393-20" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"new_name should be the type of string."</span>)</span>
+<span id="cb393-21"><a href="attribute-protection.html#cb393-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-22"><a href="attribute-protection.html#cb393-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-23"><a href="attribute-protection.html#cb393-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">@property</span></span>
+<span id="cb393-24"><a href="attribute-protection.html#cb393-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>):</span>
+<span id="cb393-25"><a href="attribute-protection.html#cb393-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.__age</span>
+<span id="cb393-26"><a href="attribute-protection.html#cb393-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-27"><a href="attribute-protection.html#cb393-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># def set_age(self, new_age):</span></span>
+<span id="cb393-28"><a href="attribute-protection.html#cb393-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if type(new_age) is int:</span></span>
+<span id="cb393-29"><a href="attribute-protection.html#cb393-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     self.__age = new_age</span></span>
+<span id="cb393-30"><a href="attribute-protection.html#cb393-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   else:</span></span>
+<span id="cb393-31"><a href="attribute-protection.html#cb393-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#     print("new_age should be the type of integer.")</span></span>
+<span id="cb393-32"><a href="attribute-protection.html#cb393-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">@age.setter</span></span>
+<span id="cb393-33"><a href="attribute-protection.html#cb393-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> age(<span class="va">self</span>, new_age):</span>
+<span id="cb393-34"><a href="attribute-protection.html#cb393-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(new_age) <span class="kw">is</span> <span class="bu">int</span>:</span>
+<span id="cb393-35"><a href="attribute-protection.html#cb393-35" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.__age <span class="op">=</span> new_age</span>
+<span id="cb393-36"><a href="attribute-protection.html#cb393-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb393-37"><a href="attribute-protection.html#cb393-37" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"new_age should be the type of integer."</span>)</span>
+<span id="cb393-38"><a href="attribute-protection.html#cb393-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb393-39"><a href="attribute-protection.html#cb393-39" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
 <ul>
-<li>可以看到，差別就是加上<code>name.setter</code>和<code>age.setter</code>，然後method name維持原來的private variable name<br />
+<li>可以看到，差別就是加上<code>name.setter</code>和<code>age.setter</code>，然後method name維持原來的private variable name<br>
 </li>
 <li>來試試看能不能work</li>
 </ul>
-<div class="sourceCode" id="cb300"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb300-1"><a href="attribute-protection.html#cb300-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">&quot;hank&quot;</span>, age <span class="op">=</span> <span class="st">&quot;28&quot;</span>)</span>
-<span id="cb300-2"><a href="attribute-protection.html#cb300-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-3"><a href="attribute-protection.html#cb300-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
-<span id="cb300-4"><a href="attribute-protection.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
-<span id="cb300-5"><a href="attribute-protection.html#cb300-5" aria-hidden="true" tabindex="-1"></a>hank.name <span class="op">=</span> <span class="dv">12345</span></span>
-<span id="cb300-6"><a href="attribute-protection.html#cb300-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_name should be the type of string.</span></span>
-<span id="cb300-7"><a href="attribute-protection.html#cb300-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
-<span id="cb300-8"><a href="attribute-protection.html#cb300-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
-<span id="cb300-9"><a href="attribute-protection.html#cb300-9" aria-hidden="true" tabindex="-1"></a>hank.name <span class="op">=</span> <span class="st">&quot;hank lee&quot;</span></span>
-<span id="cb300-10"><a href="attribute-protection.html#cb300-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
-<span id="cb300-11"><a href="attribute-protection.html#cb300-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank lee</span></span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb394-1"><a href="attribute-protection.html#cb394-1" aria-hidden="true" tabindex="-1"></a>hank <span class="op">=</span> People(name <span class="op">=</span> <span class="st">"hank"</span>, age <span class="op">=</span> <span class="st">"28"</span>)</span>
+<span id="cb394-2"><a href="attribute-protection.html#cb394-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-3"><a href="attribute-protection.html#cb394-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
+<span id="cb394-4"><a href="attribute-protection.html#cb394-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
+<span id="cb394-5"><a href="attribute-protection.html#cb394-5" aria-hidden="true" tabindex="-1"></a>hank.name <span class="op">=</span> <span class="dv">12345</span></span>
+<span id="cb394-6"><a href="attribute-protection.html#cb394-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_name should be the type of string.</span></span>
+<span id="cb394-7"><a href="attribute-protection.html#cb394-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
+<span id="cb394-8"><a href="attribute-protection.html#cb394-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank</span></span>
+<span id="cb394-9"><a href="attribute-protection.html#cb394-9" aria-hidden="true" tabindex="-1"></a>hank.name <span class="op">=</span> <span class="st">"hank lee"</span></span>
+<span id="cb394-10"><a href="attribute-protection.html#cb394-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hank.name)</span>
+<span id="cb394-11"><a href="attribute-protection.html#cb394-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hank lee</span></span></code></pre></div>
 <ul>
-<li>可以發現，可以work<br />
+<li>可以發現，可以work<br>
 </li>
-<li>而且，藉由decorator，我們又把method變成attribute了。注意到現在是寫<code>hank.name = 12345</code>，就會跑我定義的method並檢查合法性，而不是寫<code>hank.name(12345)</code>。<br />
+<li>而且，藉由decorator，我們又把method變成attribute了。注意到現在是寫<code>hank.name = 12345</code>，就會跑我定義的method並檢查合法性，而不是寫<code>hank.name(12345)</code>。<br>
 </li>
 <li>所以，這樣做，可以讓user用起來更直覺的同時，又兼顧到資料的正確性</li>
 </ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></div>
+<div class="next"><a href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#attribute-protection"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="nav-link" href="#naming-convention"><span class="header-section-number">32.1</span> Naming Convention</a></li>
+<li><a class="nav-link" href="#%E6%94%BE%E4%BB%BB%E5%9E%8B-%E4%B8%8D%E4%BF%9D%E8%AD%B7"><span class="header-section-number">32.2</span> [放任型] 不保護</a></li>
+<li><a class="nav-link" href="#%E4%BF%A1%E4%BB%BB%E5%9E%8B-%E7%94%A8%E5%96%AE%E5%BA%95%E7%B7%9A%E6%8F%90%E9%86%92"><span class="header-section-number">32.3</span> [信任型] 用單底線提醒</a></li>
+<li><a class="nav-link" href="#%E5%9A%B4%E7%88%B6%E5%9E%8B-%E7%94%A8%E9%9B%99%E5%BA%95%E7%B7%9A%E4%B8%8D%E7%B5%A6%E5%8B%95"><span class="header-section-number">32.4</span> [嚴父型] 用雙底線不給動</a></li>
+<li>
+<a class="nav-link" href="#%E4%B8%AD%E5%BA%B8%E5%9E%8B-%E9%9B%99%E5%BA%95%E7%B7%9A-property-.setter"><span class="header-section-number">32.5</span> [中庸型] 雙底線 + @property + .setter</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#old-school-%E4%BD%9C%E6%B3%95"><span class="header-section-number">32.5.1</span> old-school 作法</a></li>
+<li><a class="nav-link" href="#%E6%AD%A3%E8%A6%8F%E4%BD%9C%E6%B3%95"><span class="header-section-number">32.5.2</span> 正規作法</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/attribute_protection.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/attribute_protection.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
-</div>
-</div>
-            </section>
+</div> <!-- .container -->
 
-          </div>
-        </div>
-      </div>
-<a href="class-level-vs-instance-level.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="isinstance-equality-string-representation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["python tutorial.pdf", "python tutorial.epub"],
-"toc": {
-"collapse": "section"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -901,7 +462,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

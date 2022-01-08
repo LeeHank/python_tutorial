@@ -1,10 +1,16 @@
 book_filename: "python tutorial"
+new_session: yes
+before_chapter_script: "_common.R"
 delete_merged_file: true
+output_dir: docs
+language:
+  ui:
+    chapter_name: "Chapter "
 rmd_files:
 - "index.Rmd"
 - "H_環境設置與執行.Rmd"
 - "環境設置.Rmd" # 都還沒寫
-- "執行python.Rmd"  # 缺reticulate, vs code
+- "執行python.Rmd"  # 缺reticulate, VScode
 - "註解與indention.Rmd"
 - "print.Rmd"
 - "variable.Rmd"
@@ -31,19 +37,19 @@ rmd_files:
 - "異常和處理.Rmd"
 - "flexible_args.Rmd"
 - "recursion.Rmd"
+- "function_as_object.Rmd"
 - 'nested_function.Rmd'
 - 'variable_scope.Rmd'
+- 'closure.Rmd'
+- "decorator.Rmd"
+# - "context_manager.Rmd"
+- "functional_programming.Rmd"
 - "H_oop.Rmd"
 - "oop_fundamentals.Rmd"
 - "class_instance_level.Rmd"
 - "attribute_protection.Rmd"
 - "equality_and_str.Rmd"
 - "封裝繼承多形.Rmd"
+# - "深入認識class和object"
 #- "_module_package.Rmd"
 #- "python_pandas.Rmd"
-output_dir: docs
-language:
-  ui:
-    chapter_name: "Chapter "
-new_session: yes
-before_chapter_script: "_common.R"

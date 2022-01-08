@@ -75,7 +75,7 @@ someone = People(name = "hank", age = "28")
 print(someone.__private_var)
 #> Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute '__private_var'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 print(someone.show_private())
 #> 10
@@ -109,7 +109,7 @@ print(someone._People__private_var)
 print(someone.__private_var) # 會報error
 #> Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute '__private_var'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 someone.__private_var = 40 # 不會報error
 ```
@@ -153,12 +153,12 @@ hank = People(name = "hank", age = 28)
 print(hank.name)
 #> Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute 'name'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 print(hank.age)
 #> Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: 'People' object has no attribute 'age'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 

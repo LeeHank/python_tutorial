@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 12 dictionary整理與實戰 | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="dictionary是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension)...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 12 dictionary整理與實戰 | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="dictionary是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension)...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 12 dictionary整理與實戰 | Python Tutorial">
+<meta name="twitter:description" content="dictionary是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension)...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="active" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dictionary整理與實戰" class="section level1" number="12">
+<h1>
+<span class="header-section-number">12</span> dictionary整理與實戰<a class="anchor" aria-label="anchor" href="#dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>dictionary是python內建的一種collection<br>
+</li>
+<li>既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part：
+<ul>
+<li>如何建立？<br>
+</li>
+<li>如何增、刪、查、改？<br>
+</li>
+</ul>
+</li>
+<li>這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy<br>
+</li>
+<li>接著就開始介紹如何loop他(用for, comprehension)<br>
+</li>
+<li>最後就是補齊這個object還沒介紹到的methods<br>
+</li>
+<li>實戰的部分，就會以”How to…“的方式整理常見的需求</li>
+</ul>
+<div id="dict的定義" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> dict的定義<a class="anchor" aria-label="anchor" href="#dict%E7%9A%84%E5%AE%9A%E7%BE%A9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>dictionary就是JSON的key-value pair資料表示法(也可想成R的list)<br>
+</li>
+<li>dictionary裡面的每個element，我們仍然叫他”item”。所以一個item，就是一組key-value pair</li>
+</ul>
+<div class="sourceCode" id="cb133"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb133-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {</span>
+<span id="cb133-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"name"</span>: <span class="st">"Hank"</span>,</span>
+<span id="cb133-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"id"</span>: <span class="dv">19002329</span>,</span>
+<span id="cb133-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dept"</span>: <span class="st">"AW0010"</span>,</span>
+<span id="cb133-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dog"</span>: <span class="va">True</span></span>
+<span id="cb133-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb133-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict)</span>
+<span id="cb133-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'name': 'Hank', 'id': 19002329, 'dept': 'AW0010', 'dog': True}</span></span>
+<span id="cb133-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(my_dict))</span>
+<span id="cb133-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb133-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'dict'&gt;</span></span></code></pre></div>
+<ul>
+<li>dictionary的特性:
+<ul>
+<li>ordered: 在python 3.7以後，dictionary是ordered; 在python 3.6以前，dictionary是unordered。事實上，我還是傾向將dict看成無順序的，因為我們取用裡面的資料還是用key，不是用座號(index)<br>
+</li>
+<li>changeable: 可以改裡面的內容，可以增加，可以刪除<br>
+</li>
+<li>does not allow duplicates</li>
+</ul>
+</li>
+<li>dictionary和list的差別在於：
+<ol style="list-style-type: decimal">
+<li>dictionary用 {}表示，list用[]表示<br>
+</li>
+<li>dictionary沒有順序性，list有<br>
+</li>
+<li>dictionary一定是key-value的pair，他是index by key(所以你要select他的element，是輸入key); list是index by number(所以你要select他的element，是輸入index number)<br>
+</li>
+<li>dictionary的key是immutable，value是mutable，而list全都是mutable</li>
+</ol>
+</li>
+</ul>
+</div>
+<div id="建-dict的創建" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> [建] dict的創建<a class="anchor" aria-label="anchor" href="#%E5%BB%BA-dict%E7%9A%84%E5%89%B5%E5%BB%BA"><i class="fas fa-link"></i></a>
+</h2>
+<div id="直接用" class="section level3" number="12.2.1">
+<h3>
+<span class="header-section-number">12.2.1</span> 直接用<a class="anchor" aria-label="anchor" href="#%E7%9B%B4%E6%8E%A5%E7%94%A8"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>創建dictionary時，key必須是immutable，所以key可以是int, string, tupple，但key不可以是list這種mutable</li>
+</ul>
+<div class="sourceCode" id="cb134"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {</span>
+<span id="cb134-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-2" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="st">'a'</span>,</span>
+<span id="cb134-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-3" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>: <span class="st">'b'</span>,</span>
+<span id="cb134-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'3'</span>: <span class="st">'c'</span>,</span>
+<span id="cb134-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-5" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>): <span class="st">'haha'</span></span>
+<span id="cb134-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb134-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-7" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb134-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb134-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1: 'a', 2: 'b', '3': 'c', (2, 3, 4): 'haha'}</span></span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb135-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {</span>
+<span id="cb135-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-2" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]: <span class="st">'haha'</span>,</span>
+<span id="cb135-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'two'</span>: <span class="dv">2</span></span>
+<span id="cb135-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb135-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: unhashable type: 'list'</span></span>
+<span id="cb135-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb135-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb135-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span>
+<span id="cb135-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-9" aria-hidden="true" tabindex="-1"></a>b</span>
+<span id="cb135-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'b' is not defined</span></span>
+<span id="cb135-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb135-12"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb135-13"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb135-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+</div>
+<div id="用dicta2-bhaha來建立" class="section level3" number="12.2.2">
+<h3>
+<span class="header-section-number">12.2.2</span> 用<code>dict(a=2, b="haha")</code>來建立<a class="anchor" aria-label="anchor" href="#%E7%94%A8dicta2-bhaha%E4%BE%86%E5%BB%BA%E7%AB%8B"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>此外，我們可以用<code>dict()</code>來創建空字典(初始化字典)</li>
+</ul>
+<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb136-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb136-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span>
+<span id="cb136-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {}</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb137-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb137-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="bu">dict</span>(a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">3</span>, c<span class="op">=</span><span class="st">"0"</span>)</span>
+<span id="cb137-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb137-2" aria-hidden="true" tabindex="-1"></a>d</span>
+<span id="cb137-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb137-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 2, 'b': 3, 'c': '0'}</span></span></code></pre></div>
+<ul>
+<li>可以看到，這種寫法就和R的 <code>list(a=2, b=3, c="0")</code>一模一樣了</li>
+</ul>
+</div>
+<div id="用dictiterable_pair來創建" class="section level3" number="12.2.3">
+<h3>
+<span class="header-section-number">12.2.3</span> 用<code>dict(iterable_pair)</code>來創建<a class="anchor" aria-label="anchor" href="#%E7%94%A8dictiterable_pair%E4%BE%86%E5%89%B5%E5%BB%BA"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>我們可以給<code>dict()</code>一個iterable物件，然後這個物件裡都是一個一個pair<br>
+</li>
+<li>舉例來說這樣：</li>
+</ul>
+<div class="sourceCode" id="cb138"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb138-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [[<span class="st">'a'</span>, <span class="dv">1</span>],[<span class="st">'b'</span>,<span class="dv">2</span>]] <span class="co">#x是list，為iterable，裡面的每個element，都是個pair</span></span>
+<span id="cb138-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb138-2" aria-hidden="true" tabindex="-1"></a>c2 <span class="op">=</span> <span class="bu">dict</span>(x)</span>
+<span id="cb138-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c2)</span>
+<span id="cb138-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 1, 'b': 2}</span></span></code></pre></div>
+<ul>
+<li>那除了用list這種iterable，我們其實更喜歡用tuple，例如這樣：</li>
+</ul>
+<div class="sourceCode" id="cb139"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb139-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ((<span class="st">'a'</span>, <span class="dv">1</span>),(<span class="st">'b'</span>,<span class="dv">2</span>)) <span class="co">#x是tuple，為iterable，且裡面的每個element，都是個pair</span></span>
+<span id="cb139-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb139-2" aria-hidden="true" tabindex="-1"></a>c3 <span class="op">=</span> <span class="bu">dict</span>(y)</span>
+<span id="cb139-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c3)</span>
+<span id="cb139-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 1, 'b': 2}</span></span></code></pre></div>
+<ul>
+<li>有了這兩個基礎後，就可以來學用zip來建立字典了<br>
+</li>
+<li>先來看看zip是什麼</li>
+</ul>
+<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="cb140-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>]</span>
+<span id="cb140-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">zip</span>(y,x):</span>
+<span id="cb140-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb140-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('a', 1)</span></span>
+<span id="cb140-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('b', 2)</span></span>
+<span id="cb140-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('c', 3)</span></span>
+<span id="cb140-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb140-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('d', 4)</span></span></code></pre></div>
+<ul>
+<li>水喔，所以可以猜測，<code>zip(y,x)</code>的結果，應該就是[(‘a’, 1), (‘b’, 2), (‘c’, 3), (‘d’, 4)]這種iterable object<br>
+</li>
+<li>那所以，我如果想要建立dictionary，就可以：</li>
+</ul>
+<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(<span class="bu">zip</span>(y,x))</span>
+<span id="cb141-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 1, 'b': 2, 'c': 3, 'd': 4}</span></span></code></pre></div>
+<ul>
+<li>其實，最重要的重點倒不是zip，而是要學會將pair資料轉成dictionary(用<code>dict()</code>)<br>
+</li>
+<li>例如，以後看到下面這種資料結構就不要怕，一秒轉成dictionary</li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-1" aria-hidden="true" tabindex="-1"></a>tup <span class="op">=</span> (</span>
+<span id="cb142-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-2" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"li"</span>, <span class="dv">90</span>),</span>
+<span id="cb142-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"wang"</span>, <span class="dv">100</span>),</span>
+<span id="cb142-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"cheng"</span>, <span class="dv">73</span>),</span>
+<span id="cb142-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"chen"</span>, <span class="dv">44</span>)</span>
+<span id="cb142-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb142-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(tup)</span>
+<span id="cb142-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'li': 90, 'wang': 100, 'cheng': 73, 'chen': 44}</span></span></code></pre></div>
+</div>
+</div>
+<div id="查-用d.keys-d.values-d.items查詢" class="section level2" number="12.3">
+<h2>
+<span class="header-section-number">12.3</span> [查] 用<code>d.keys()</code>, <code>d.values()</code>, <code>d.items()</code>查詢<a class="anchor" aria-label="anchor" href="#%E6%9F%A5-%E7%94%A8d.keys-d.values-d.items%E6%9F%A5%E8%A9%A2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="keys可以得到最外層的所有key值" class="section level3" number="12.3.1">
+<h3>
+<span class="header-section-number">12.3.1</span> <code>.keys()</code>可以得到最外層的所有key值<a class="anchor" aria-label="anchor" href="#keys%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0%E6%9C%80%E5%A4%96%E5%B1%A4%E7%9A%84%E6%89%80%E6%9C%89key%E5%80%BC"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>只有一層的dictionary，不易外的就是給我他的key值</li>
+</ul>
+<div class="sourceCode" id="cb143"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb143-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb143-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="bu">dict</span>(a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">3</span>, c<span class="op">=</span><span class="st">"0"</span>)</span>
+<span id="cb143-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.keys())</span>
+<span id="cb143-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_keys(['a', 'b', 'c'])</span></span></code></pre></div>
+<ul>
+<li>但像這種nested dictionary，他只會給我最外層的key值</li>
+</ul>
+<div class="sourceCode" id="cb144"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-1" aria-hidden="true" tabindex="-1"></a>tt <span class="op">=</span> {</span>
+<span id="cb144-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-2" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: {</span>
+<span id="cb144-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-3" aria-hidden="true" tabindex="-1"></a>                <span class="dv">2</span>: {},</span>
+<span id="cb144-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-4" aria-hidden="true" tabindex="-1"></a>                <span class="dv">3</span>: {}</span>
+<span id="cb144-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-5" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb144-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-6" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>: {</span>
+<span id="cb144-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-7" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span>:{</span>
+<span id="cb144-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-8" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">6</span>:{},</span>
+<span id="cb144-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-9" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">7</span>:{}</span>
+<span id="cb144-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-10" aria-hidden="true" tabindex="-1"></a>            }    </span>
+<span id="cb144-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-11" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb144-12"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb144-13"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-13" aria-hidden="true" tabindex="-1"></a>tt</span>
+<span id="cb144-14"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb144-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1: {2: {}, 3: {}}, 4: {5: {6: {}, 7: {</span><span class="re">}}}</span><span class="co">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb145-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tt.keys())</span>
+<span id="cb145-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_keys([1, 4])</span></span></code></pre></div>
+</div>
+<div id="values可以得到所有value" class="section level3" number="12.3.2">
+<h3>
+<span class="header-section-number">12.3.2</span> <code>.values()</code>可以得到所有value<a class="anchor" aria-label="anchor" href="#values%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0%E6%89%80%E6%9C%89value"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>對於一層的dictionary，不意外的得到所有values</li>
+</ul>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb146-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="bu">dict</span>(a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">3</span>, c<span class="op">=</span><span class="st">"0"</span>)</span>
+<span id="cb146-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.values())</span>
+<span id="cb146-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_values([2, 3, '0'])</span></span></code></pre></div>
+<ul>
+<li>對於nested dictionary，他就是print出第二層的東西而已(因為第二層就是第一層的value)</li>
+</ul>
+<div class="sourceCode" id="cb147"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb147-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tt.values())</span>
+<span id="cb147-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_values([{2: {}, 3: {}}, {5: {6: {}, 7: {</span><span class="re">}}}</span><span class="co">])</span></span></code></pre></div>
+</div>
+<div id="items可以得到keyvalue的tupple" class="section level3" number="12.3.3">
+<h3>
+<span class="header-section-number">12.3.3</span> <code>.items()</code>可以得到(key,value)的tupple<a class="anchor" aria-label="anchor" href="#items%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0keyvalue%E7%9A%84tupple"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>dictionary裡面的每個element，我們叫他item。一個item，就是一個key-value pair<br>
+</li>
+<li>所以，不意外的，用<code>.items()</code>可以得到這組pair</li>
+</ul>
+<div class="sourceCode" id="cb148"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb148-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb148-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="bu">dict</span>(a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">3</span>, c<span class="op">=</span><span class="st">"0"</span>)</span>
+<span id="cb148-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.items())</span>
+<span id="cb148-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_items([('a', 2), ('b', 3), ('c', '0')])</span></span></code></pre></div>
+</div>
+</div>
+<div id="查-用d.getkey來取用dict裡面的item" class="section level2" number="12.4">
+<h2>
+<span class="header-section-number">12.4</span> [查] 用<code>d.get("key")</code>來取用dict裡面的item<a class="anchor" aria-label="anchor" href="#%E6%9F%A5-%E7%94%A8d.getkey%E4%BE%86%E5%8F%96%E7%94%A8dict%E8%A3%A1%E9%9D%A2%E7%9A%84item"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>通常我們在取用dictionary裡面的item時，我們都是給key，求value (因為key是唯一值)，不太會，給value，求key(因為value不唯一)<br>
+</li>
+<li>那通常都是先學到用<code>d['key']</code>來獲取value，用 <code>d['new_key'] = new_value</code>來修改值<br>
+</li>
+<li>但這邊衍伸兩個重點
+<ul>
+<li>實務上，不會用<code>d['key']</code>來獲取value，而是用<code>d.get('key')</code>來獲取value，理由等下說明<br>
+</li>
+<li>既然可用<code>d['new_key'] = new_value</code>來更改dictionary，表示dictionary也是mutable，所以他不能當另一個字典的key。例如，你不可寫<code>e = {d: 'haha'}</code>，因為d現在是mutable object了</li>
+</ul>
+</li>
+<li>現在先來講第一個重點，<code>.get</code>的運用<br>
+</li>
+<li>假設我們現在創建一個dictionary</li>
+</ul>
+<div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {</span>
+<span id="cb149-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>: <span class="st">"Hank"</span>,</span>
+<span id="cb149-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ok"</span>: <span class="st">"no problem"</span></span>
+<span id="cb149-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb149-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-5" aria-hidden="true" tabindex="-1"></a>d</span>
+<span id="cb149-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb149-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'name': 'Hank', 'ok': 'no problem'}</span></span></code></pre></div>
+<ul>
+<li>那我想獲取name所對應的value，傳統上就會這樣寫</li>
+</ul>
+<div class="sourceCode" id="cb150"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb150-1" aria-hidden="true" tabindex="-1"></a>d[<span class="st">'name'</span>]</span>
+<span id="cb150-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'Hank'</span></span></code></pre></div>
+<ul>
+<li>看起來沒問題。但如果今天我手殘，打成’Name”，那就會報error</li>
+</ul>
+<div class="sourceCode" id="cb151"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb151-1" aria-hidden="true" tabindex="-1"></a>d[<span class="st">'Name'</span>]</span>
+<span id="cb151-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: 'Name'</span></span>
+<span id="cb151-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb151-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb151-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb151-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb151-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+<ul>
+<li>這在運行程式時，是一個困擾，因為有時候我們不確定有哪些key，但我就都想try try看，那一error程式就停了<br>
+</li>
+<li>所以，用<code>.get('key')</code>時，有抓到的，他會回傳value，沒抓到的，他會回傳None(注意，None是python一個特殊的type，可以想成R的NA這種特殊type)</li>
+</ul>
+<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.get(<span class="st">'name'</span>))</span>
+<span id="cb152-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Hank</span></span>
+<span id="cb152-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.get(<span class="st">'Name'</span>))</span>
+<span id="cb152-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; None</span></span></code></pre></div>
+</div>
+<div id="改-修改dict裡面的item" class="section level2" number="12.5">
+<h2>
+<span class="header-section-number">12.5</span> [改] 修改dict裡面的item<a class="anchor" aria-label="anchor" href="#%E6%94%B9-%E4%BF%AE%E6%94%B9dict%E8%A3%A1%E9%9D%A2%E7%9A%84item"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>要改dictionary裡面的值，可以指定key來改：</li>
+</ul>
+<div class="sourceCode" id="cb153"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb153-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-1" aria-hidden="true" tabindex="-1"></a>thisdict <span class="op">=</span> {</span>
+<span id="cb153-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brand"</span>: <span class="st">"Ford"</span>,</span>
+<span id="cb153-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"Mustang"</span>,</span>
+<span id="cb153-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>: <span class="dv">1964</span></span>
+<span id="cb153-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb153-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-6" aria-hidden="true" tabindex="-1"></a>thisdict[<span class="st">"year"</span>] <span class="op">=</span> <span class="dv">2018</span></span>
+<span id="cb153-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisdict)</span>
+<span id="cb153-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb153-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'brand': 'Ford', 'model': 'Mustang', 'year': 2018}</span></span></code></pre></div>
+<ul>
+<li>也可以用<code>.update()</code>的方法，覆蓋過去</li>
+</ul>
+<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-1" aria-hidden="true" tabindex="-1"></a>thisdict <span class="op">=</span> {</span>
+<span id="cb154-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brand"</span>: <span class="st">"Ford"</span>,</span>
+<span id="cb154-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"Mustang"</span>,</span>
+<span id="cb154-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>: <span class="dv">1964</span></span>
+<span id="cb154-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb154-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-6" aria-hidden="true" tabindex="-1"></a>thisdict.update({<span class="st">"year"</span>: <span class="dv">2020</span>})</span>
+<span id="cb154-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisdict)</span>
+<span id="cb154-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb154-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'brand': 'Ford', 'model': 'Mustang', 'year': 2020}</span></span></code></pre></div>
+</div>
+<div id="增-增加dict的item" class="section level2" number="12.6">
+<h2>
+<span class="header-section-number">12.6</span> [增] 增加dict的item<a class="anchor" aria-label="anchor" href="#%E5%A2%9E-%E5%A2%9E%E5%8A%A0dict%E7%9A%84item"><i class="fas fa-link"></i></a>
+</h2>
+<div id="dnew_key-new_value" class="section level3" number="12.6.1">
+<h3>
+<span class="header-section-number">12.6.1</span> <code>d["new_key"] = new_value</code><a class="anchor" aria-label="anchor" href="#dnew_key-new_value"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>就像剛剛的修改一樣，我們可以指定”新的key”，來做到新增</li>
+</ul>
+<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-1" aria-hidden="true" tabindex="-1"></a>thisdict <span class="op">=</span> {</span>
+<span id="cb155-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brand"</span>: <span class="st">"Ford"</span>,</span>
+<span id="cb155-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"Mustang"</span>,</span>
+<span id="cb155-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>: <span class="dv">1964</span></span>
+<span id="cb155-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb155-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-6" aria-hidden="true" tabindex="-1"></a>thisdict[<span class="st">"color"</span>] <span class="op">=</span> <span class="st">"red"</span></span>
+<span id="cb155-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisdict)</span>
+<span id="cb155-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb155-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'brand': 'Ford', 'model': 'Mustang', 'year': 1964, 'color': 'red'}</span></span></code></pre></div>
+</div>
+<div id="update可以合併2個字典" class="section level3" number="12.6.2">
+<h3>
+<span class="header-section-number">12.6.2</span> <code>.update()</code>可以合併2個字典<a class="anchor" aria-label="anchor" href="#update%E5%8F%AF%E4%BB%A5%E5%90%88%E4%BD%B52%E5%80%8B%E5%AD%97%E5%85%B8"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>或是，用<code>.update()</code>，直接合併新的資料進來</li>
+</ul>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {</span>
+<span id="cb156-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-2" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="dv">1</span>,</span>
+<span id="cb156-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-3" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>: <span class="dv">2</span></span>
+<span id="cb156-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb156-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {</span>
+<span id="cb156-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-6" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>: <span class="dv">3</span>,</span>
+<span id="cb156-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-7" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>: <span class="dv">4</span></span>
+<span id="cb156-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb156-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-9" aria-hidden="true" tabindex="-1"></a>a.update(b)</span>
+<span id="cb156-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb156-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb156-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1: 1, 2: 2, 3: 3, 4: 4}</span></span></code></pre></div>
+<ul>
+<li>如果update中的字典，和之前的字典有重複的key，那會直接覆蓋過去(所以，就是做到修改)</li>
+</ul>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {</span>
+<span id="cb157-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-2" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="dv">1</span>,</span>
+<span id="cb157-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-3" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>: <span class="dv">2</span></span>
+<span id="cb157-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb157-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {</span>
+<span id="cb157-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-6" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="dv">3</span>,</span>
+<span id="cb157-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-7" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>: <span class="dv">4</span></span>
+<span id="cb157-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb157-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-9" aria-hidden="true" tabindex="-1"></a>a.update(b)</span>
+<span id="cb157-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb157-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb157-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1: 3, 2: 2, 4: 4}</span></span></code></pre></div>
+</div>
+<div id="d1-d2-d3合併多個字典" class="section level3" number="12.6.3">
+<h3>
+<span class="header-section-number">12.6.3</span> <code>{**d1, **d2, **d3}</code>合併多個字典<a class="anchor" aria-label="anchor" href="#d1-d2-d3%E5%90%88%E4%BD%B5%E5%A4%9A%E5%80%8B%E5%AD%97%E5%85%B8"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>當我們有多個字典時，當然還是可用<code>.update()</code>來兩倆合併，但有點笨：</li>
+</ul>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="op">=</span> {<span class="st">'name'</span>: <span class="st">'Python'</span>, <span class="st">'age'</span>: <span class="dv">27</span>}</span>
+<span id="cb158-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="op">=</span> {<span class="st">'version'</span>: <span class="fl">3.6</span>, <span class="st">'platform'</span>: <span class="st">'Mac'</span>}</span>
+<span id="cb158-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> {<span class="st">'size'</span>: <span class="st">'59MB'</span>}</span>
+<span id="cb158-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-5" aria-hidden="true" tabindex="-1"></a>d1.update(d2)</span>
+<span id="cb158-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-6" aria-hidden="true" tabindex="-1"></a>d1.update(d3)</span>
+<span id="cb158-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d1)</span>
+<span id="cb158-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb158-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'name': 'Python', 'age': 27, 'version': 3.6, 'platform': 'Mac', 'size': '59MB'}</span></span></code></pre></div>
+<ul>
+<li>比較好的作法是這樣：</li>
+</ul>
+<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb159-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="op">=</span> {<span class="st">'name'</span>: <span class="st">'Python'</span>, <span class="st">'age'</span>: <span class="dv">27</span>}</span>
+<span id="cb159-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb159-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="op">=</span> {<span class="st">'version'</span>: <span class="fl">3.6</span>, <span class="st">'platform'</span>: <span class="st">'Mac'</span>}</span>
+<span id="cb159-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb159-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> {<span class="st">'size'</span>: <span class="st">'59MB'</span>}</span>
+<span id="cb159-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb159-4" aria-hidden="true" tabindex="-1"></a>{<span class="op">**</span>d1, <span class="op">**</span>d2, <span class="op">**</span>d3}</span>
+<span id="cb159-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'name': 'Python', 'age': 27, 'version': 3.6, 'platform': 'Mac', 'size': '59MB'}</span></span></code></pre></div>
+</div>
+</div>
+<div id="刪-刪除dict的item" class="section level2" number="12.7">
+<h2>
+<span class="header-section-number">12.7</span> [刪] 刪除dict的item<a class="anchor" aria-label="anchor" href="#%E5%88%AA-%E5%88%AA%E9%99%A4dict%E7%9A%84item"><i class="fas fa-link"></i></a>
+</h2>
+<div id="popkey會把選定的key整個砍掉並把對應的value丟出來" class="section level3" number="12.7.1">
+<h3>
+<span class="header-section-number">12.7.1</span> <code>.pop('key')</code>會把選定的key整個砍掉，並把對應的value丟出來<a class="anchor" aria-label="anchor" href="#popkey%E6%9C%83%E6%8A%8A%E9%81%B8%E5%AE%9A%E7%9A%84key%E6%95%B4%E5%80%8B%E7%A0%8D%E6%8E%89%E4%B8%A6%E6%8A%8A%E5%B0%8D%E6%87%89%E7%9A%84value%E4%B8%9F%E5%87%BA%E4%BE%86"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {</span>
+<span id="cb160-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-2" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>: <span class="dv">1</span>,</span>
+<span id="cb160-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-3" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>: <span class="dv">2</span>,</span>
+<span id="cb160-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-4" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>: <span class="dv">3</span></span>
+<span id="cb160-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb160-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> b.pop(<span class="dv">3</span>)</span>
+<span id="cb160-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb160-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb160-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb160-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb160-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1: 1, 2: 2}</span></span></code></pre></div>
+</div>
+<div id="del-dkey會刪到這組item" class="section level3" number="12.7.2">
+<h3>
+<span class="header-section-number">12.7.2</span> <code>del d['key']</code>會刪到這組item<a class="anchor" aria-label="anchor" href="#del-dkey%E6%9C%83%E5%88%AA%E5%88%B0%E9%80%99%E7%B5%84item"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb161"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb161-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-1" aria-hidden="true" tabindex="-1"></a>thisdict <span class="op">=</span> {</span>
+<span id="cb161-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brand"</span>: <span class="st">"Ford"</span>,</span>
+<span id="cb161-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"Mustang"</span>,</span>
+<span id="cb161-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>: <span class="dv">1964</span></span>
+<span id="cb161-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb161-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> thisdict[<span class="st">"model"</span>]</span>
+<span id="cb161-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisdict)</span>
+<span id="cb161-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb161-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'brand': 'Ford', 'year': 1964}</span></span></code></pre></div>
+</div>
+</div>
+<div id="mutable-copy" class="section level2" number="12.8">
+<h2>
+<span class="header-section-number">12.8</span> [mutable] copy<a class="anchor" aria-label="anchor" href="#mutable-copy"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>字典也是mutable，所以不能用<code>dict_copy = dict</code>這種方式做複製，因為這樣又會出現改一邊，另一邊跟著改的窘境<br>
+</li>
+<li>所以，作法一樣，用<code>dict_copy = dict.copy()</code>這種方法來做</li>
+</ul>
+<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-1" aria-hidden="true" tabindex="-1"></a>thisdict <span class="op">=</span> {</span>
+<span id="cb162-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brand"</span>: <span class="st">"Ford"</span>,</span>
+<span id="cb162-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"Mustang"</span>,</span>
+<span id="cb162-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>: <span class="dv">1964</span></span>
+<span id="cb162-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb162-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-6" aria-hidden="true" tabindex="-1"></a>mydict <span class="op">=</span> thisdict.copy()</span>
+<span id="cb162-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mydict)</span>
+<span id="cb162-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'brand': 'Ford', 'model': 'Mustang', 'year': 1964}</span></span></code></pre></div>
+</div>
+<div id="loop-for迴圈" class="section level2" number="12.9">
+<h2>
+<span class="header-section-number">12.9</span> [loop] for迴圈<a class="anchor" aria-label="anchor" href="#loop-for%E8%BF%B4%E5%9C%88"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>剛剛已經學過，如果一個字典的object叫d，那
+<ul>
+<li>d.keys(): 可以得到所有的key<br>
+</li>
+<li>d.values(): 可以得到所有的value<br>
+</li>
+<li>d.items(): 可以得到所有的(key, value)所成的tuple<br>
+</li>
+</ul>
+</li>
+<li>那迴圈時，就可以善用這三招</li>
+</ul>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {</span>
+<span id="cb163-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'key1'</span>: <span class="st">'value1'</span>,</span>
+<span id="cb163-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'key2'</span>: <span class="st">'value2'</span>,</span>
+<span id="cb163-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'key3'</span>: <span class="st">'value3'</span></span>
+<span id="cb163-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb163-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span>
+<span id="cb163-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}</span></span></code></pre></div>
+<div id="loop-over-keys" class="section level3" number="12.9.1">
+<h3>
+<span class="header-section-number">12.9.1</span> loop over keys<a class="anchor" aria-label="anchor" href="#loop-over-keys"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> d.keys():</span>
+<span id="cb164-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb164-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key)</span>
+<span id="cb164-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb164-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key1</span></span>
+<span id="cb164-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key2</span></span>
+<span id="cb164-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb164-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key3</span></span></code></pre></div>
+</div>
+<div id="loop-over-values" class="section level3" number="12.9.2">
+<h3>
+<span class="header-section-number">12.9.2</span> loop over values<a class="anchor" aria-label="anchor" href="#loop-over-values"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> d.values():</span>
+<span id="cb165-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value)</span>
+<span id="cb165-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; value1</span></span>
+<span id="cb165-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; value2</span></span>
+<span id="cb165-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; value3</span></span></code></pre></div>
+</div>
+<div id="loop-over-key-value" class="section level3" number="12.9.3">
+<h3>
+<span class="header-section-number">12.9.3</span> loop over (key, value)<a class="anchor" aria-label="anchor" href="#loop-over-key-value"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> d.items():</span>
+<span id="cb166-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key <span class="op">+</span> <span class="st">" -- "</span> <span class="op">+</span> <span class="bu">str</span>(value))</span>
+<span id="cb166-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key1 -- value1</span></span>
+<span id="cb166-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key2 -- value2</span></span>
+<span id="cb166-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb166-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; key3 -- value3</span></span></code></pre></div>
+</div>
+</div>
+<div id="loop-dictionary-comprehension" class="section level2" number="12.10">
+<h2>
+<span class="header-section-number">12.10</span> [loop] dictionary comprehension<a class="anchor" aria-label="anchor" href="#loop-dictionary-comprehension"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>假設，我今天想用for迴圈來做出一個字典，做法如下</li>
+</ul>
+<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb167-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {}</span>
+<span id="cb167-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> a:</span>
+<span id="cb167-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-4" aria-hidden="true" tabindex="-1"></a>        b[<span class="bu">str</span>(item)] <span class="op">=</span> item</span>
+<span id="cb167-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb167-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}</span></span></code></pre></div>
+<ul>
+<li>那dictionary comprehension，就是較簡潔的寫法：</li>
+</ul>
+<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb168-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> {<span class="bu">str</span>(item): item <span class="cf">for</span> item <span class="kw">in</span> a}</span>
+<span id="cb168-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb168-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}</span></span></code></pre></div>
+<ul>
+<li>事實上，除了寫法簡潔，performance也快很多</li>
+</ul>
+</div>
+<div id="如何安全的訪問字典" class="section level2" number="12.11">
+<h2>
+<span class="header-section-number">12.11</span> 如何安全的訪問字典<a class="anchor" aria-label="anchor" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E7%9A%84%E8%A8%AA%E5%95%8F%E5%AD%97%E5%85%B8"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>這邊文長，重點也不多(就是推廣用<code>.get()</code>而已)，所以要不要讀都沒差<br>
+</li>
+<li>在python中，如果我們想獲取某個key的value，但key又不小心key錯，或此key不在這個dictionary裡面時，會報error:</li>
+</ul>
+<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {</span>
+<span id="cb169-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'name'</span>: <span class="st">'python'</span>,</span>
+<span id="cb169-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'age'</span>: <span class="dv">27</span>,</span>
+<span id="cb169-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'version'</span>: <span class="fl">3.7</span></span>
+<span id="cb169-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb169-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d[<span class="st">'name'</span>])</span>
+<span id="cb169-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; python</span></span>
+<span id="cb169-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d[<span class="st">'nam'</span>])</span>
+<span id="cb169-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: 'nam'</span></span>
+<span id="cb169-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb169-11"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb169-12"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb169-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+<ul>
+<li>那處理這種問題的方法，有三種：</li>
+</ul>
+<div id="自己寫條件判斷" class="section level3" number="12.11.1">
+<h3>
+<span class="header-section-number">12.11.1</span> 自己寫條件判斷<a class="anchor" aria-label="anchor" href="#%E8%87%AA%E5%B7%B1%E5%AF%AB%E6%A2%9D%E4%BB%B6%E5%88%A4%E6%96%B7"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>這是最hardcore的寫法，很常出現在非python族群的人會寫的內容：</li>
+</ul>
+<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> safe_get(my_key, my_dic):</span>
+<span id="cb170-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> my_key <span class="kw">in</span> my_dic:</span>
+<span id="cb170-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(my_dic[my_key])</span>
+<span id="cb170-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb170-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="st">'error for key'</span>)</span>
+<span id="cb170-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(safe_get(<span class="st">'name'</span>, d))</span>
+<span id="cb170-8"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; python</span></span>
+<span id="cb170-9"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(safe_get(<span class="st">'nam'</span>, d))</span>
+<span id="cb170-10"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb170-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; error for key</span></span></code></pre></div>
+</div>
+<div id="愛用.get" class="section level3" number="12.11.2">
+<h3>
+<span class="header-section-number">12.11.2</span> 愛用<code>.get()</code><a class="anchor" aria-label="anchor" href="#%E6%84%9B%E7%94%A8.get"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>其實你用<code>.get()</code>，就是幫你做到上面這件事<br>
+</li>
+<li>當key值不在原本的dictionary裡面，預設是return <code>None</code>，那你也可以改</li>
+</ul>
+<div class="sourceCode" id="cb171"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb171-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> d.get(<span class="st">"nam"</span>)</span>
+<span id="cb171-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res <span class="kw">is</span> <span class="va">None</span>)</span>
+<span id="cb171-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span>
+<span id="cb171-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-4" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> d.get(<span class="st">"nam"</span>, <span class="st">"error for key"</span>)</span>
+<span id="cb171-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res)</span>
+<span id="cb171-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb171-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; error for key</span></span></code></pre></div>
+</div>
+<div id="改用defaultdict這種type" class="section level3" number="12.11.3">
+<h3>
+<span class="header-section-number">12.11.3</span> 改用<code>defaultdict</code>這種type<a class="anchor" aria-label="anchor" href="#%E6%94%B9%E7%94%A8defaultdict%E9%80%99%E7%A8%AEtype"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>我們可以改用這種type並事先定義好，找不到key的處理方式:</li>
+</ul>
+<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict  </span>
+<span id="cb172-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb172-2" aria-hidden="true" tabindex="-1"></a>d_new <span class="op">=</span> defaultdict(<span class="kw">lambda</span>: <span class="st">"error for key"</span>, d)</span>
+<span id="cb172-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb172-3" aria-hidden="true" tabindex="-1"></a>d_new[<span class="st">'nam'</span>]</span>
+<span id="cb172-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb172-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'error for key'</span></span></code></pre></div>
+<ul>
+<li>
+<code>defaultdict</code>的第一個argument，就是告訴他，key不在此dictionary時，要return什麼出來</li>
+</ul>
+</div>
+</div>
+<div id="how-to" class="section level2" number="12.12">
+<h2>
+<span class="header-section-number">12.12</span> How to…<a class="anchor" aria-label="anchor" href="#how-to"><i class="fas fa-link"></i></a>
+</h2>
+<div id="如何將字典按照keyvalue大小排序" class="section level3" number="12.12.1">
+<h3>
+<span class="header-section-number">12.12.1</span> 如何將字典按照key/value大小排序<a class="anchor" aria-label="anchor" href="#%E5%A6%82%E4%BD%95%E5%B0%87%E5%AD%97%E5%85%B8%E6%8C%89%E7%85%A7keyvalue%E5%A4%A7%E5%B0%8F%E6%8E%92%E5%BA%8F"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>假設現在有一個字典如下：</li>
+</ul>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {</span>
+<span id="cb173-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'zhao'</span>: <span class="dv">68</span>,</span>
+<span id="cb173-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'qian'</span>: <span class="dv">80</span>,</span>
+<span id="cb173-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'sun'</span>: <span class="dv">72</span>,</span>
+<span id="cb173-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'li'</span>: <span class="dv">90</span>,</span>
+<span id="cb173-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'zhou'</span>: <span class="dv">83</span></span>
+<span id="cb173-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb173-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li>可以把這個字典，想成人名和考試成績的對應<br>
+</li>
+<li>然後，我想照value(考試成績)由高到低排序<br>
+</li>
+<li>那做法上，會先用<code>.items()</code>來做出(key,value) pair，然後再做排序<br>
+</li>
+<li>先看一下d.items()長怎樣：</li>
+</ul>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d.items())</span>
+<span id="cb174-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dict_items([('zhao', 68), ('qian', 80), ('sun', 72), ('li', 90), ('zhou', 83)])</span></span>
+<span id="cb174-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(d.items()))</span>
+<span id="cb174-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'dict_items'&gt;</span></span></code></pre></div>
+<ul>
+<li>可以得知，這是一個iterable object，外觀看起來像list，裡面每個element是key-value pair tuple<br>
+</li>
+<li>但他真實的type不是list，是dict_items<br>
+</li>
+<li>我們可以選擇用<code>sorted(iterable, key)</code>這種方式做排序，或把它轉成list後，用<code>.sort(key)</code>來做排序</li>
+</ul>
+<div id="用通用版的function-sorted" class="section level4" number="12.12.1.1">
+<h4>
+<span class="header-section-number">12.12.1.1</span> 用通用版的function: <code>sorted()</code><a class="anchor" aria-label="anchor" href="#%E7%94%A8%E9%80%9A%E7%94%A8%E7%89%88%E7%9A%84function-sorted"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(</span>
+<span id="cb175-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-2" aria-hidden="true" tabindex="-1"></a>        d.items(), <span class="co"># 我要將此iterable做排序</span></span>
+<span id="cb175-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-3" aria-hidden="true" tabindex="-1"></a>        key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">1</span>] <span class="co"># 怎麼排？令這個iterable的一個element叫x，</span></span>
+<span id="cb175-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-4" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># 我要對他的第二個元素: x[1]做排序</span></span>
+<span id="cb175-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb175-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb175-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('zhao', 68), ('sun', 72), ('qian', 80), ('zhou', 83), ('li', 90)]</span></span></code></pre></div>
+<ul>
+<li>從結果來看，可知道已順利依照value由小排到大<br>
+</li>
+<li>如果要由大到小，就加上<code>reverse = True</code>這個argument就好</li>
+</ul>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(d.items(), key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb176-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('li', 90), ('zhou', 83), ('qian', 80), ('sun', 72), ('zhao', 68)]</span></span></code></pre></div>
+<ul>
+<li>舉一反三，如果要對key的大小做排序(依姓氏排序)，那就是：</li>
+</ul>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(d.items(), key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
+<span id="cb177-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('li', 90), ('qian', 80), ('sun', 72), ('zhao', 68), ('zhou', 83)]</span></span></code></pre></div>
+<ul>
+<li>ok，那回到原來的目的，依照value由大到小排序，且轉回dictionary</li>
+</ul>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(<span class="bu">sorted</span>(d.items(), key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb178-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'li': 90, 'zhou': 83, 'qian': 80, 'sun': 72, 'zhao': 68}</span></span></code></pre></div>
+</div>
+<div id="用list專用的method-.sortkey" class="section level4" number="12.12.1.2">
+<h4>
+<span class="header-section-number">12.12.1.2</span> 用list專用的method: <code>.sort(key)</code><a class="anchor" aria-label="anchor" href="#%E7%94%A8list%E5%B0%88%E7%94%A8%E7%9A%84method-.sortkey"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li>剛剛知道，<code>d.items()</code>的結果很像list，但不是list，所以我先轉成list後，再排序</li>
+</ul>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb179-1" aria-hidden="true" tabindex="-1"></a>item_list <span class="op">=</span> <span class="bu">list</span>(d.items())</span>
+<span id="cb179-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(item_list)</span>
+<span id="cb179-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('zhao', 68), ('qian', 80), ('sun', 72), ('li', 90), ('zhou', 83)]</span></span>
+<span id="cb179-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(item_list))</span>
+<span id="cb179-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'list'&gt;</span></span></code></pre></div>
+<ul>
+<li>接著就很簡單了，用學過的<code>.sort(key = ..., reverse = True)</code>來處理</li>
+</ul>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-1" aria-hidden="true" tabindex="-1"></a>item_list.sort(</span>
+<span id="cb180-2"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">1</span>], <span class="co">#key就是function的意思，我先用這function算出結果，才用結果做排序</span></span>
+<span id="cb180-3"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-3" aria-hidden="true" tabindex="-1"></a>  reverse <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb180-4"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb180-5"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-6"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(item_list)</span>
+<span id="cb180-7"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('li', 90), ('zhou', 83), ('qian', 80), ('sun', 72), ('zhao', 68)]</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></div>
+<div class="next"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="nav-link" href="#dict%E7%9A%84%E5%AE%9A%E7%BE%A9"><span class="header-section-number">12.1</span> dict的定義</a></li>
+<li>
+<a class="nav-link" href="#%E5%BB%BA-dict%E7%9A%84%E5%89%B5%E5%BB%BA"><span class="header-section-number">12.2</span> [建] dict的創建</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%A8"><span class="header-section-number">12.2.1</span> 直接用</a></li>
+<li><a class="nav-link" href="#%E7%94%A8dicta2-bhaha%E4%BE%86%E5%BB%BA%E7%AB%8B"><span class="header-section-number">12.2.2</span> 用dict(a=2, b="haha")來建立</a></li>
+<li><a class="nav-link" href="#%E7%94%A8dictiterable_pair%E4%BE%86%E5%89%B5%E5%BB%BA"><span class="header-section-number">12.2.3</span> 用dict(iterable_pair)來創建</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E6%9F%A5-%E7%94%A8d.keys-d.values-d.items%E6%9F%A5%E8%A9%A2"><span class="header-section-number">12.3</span> [查] 用d.keys(), d.values(), d.items()查詢</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#keys%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0%E6%9C%80%E5%A4%96%E5%B1%A4%E7%9A%84%E6%89%80%E6%9C%89key%E5%80%BC"><span class="header-section-number">12.3.1</span> .keys()可以得到最外層的所有key值</a></li>
+<li><a class="nav-link" href="#values%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0%E6%89%80%E6%9C%89value"><span class="header-section-number">12.3.2</span> .values()可以得到所有value</a></li>
+<li><a class="nav-link" href="#items%E5%8F%AF%E4%BB%A5%E5%BE%97%E5%88%B0keyvalue%E7%9A%84tupple"><span class="header-section-number">12.3.3</span> .items()可以得到(key,value)的tupple</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%E6%9F%A5-%E7%94%A8d.getkey%E4%BE%86%E5%8F%96%E7%94%A8dict%E8%A3%A1%E9%9D%A2%E7%9A%84item"><span class="header-section-number">12.4</span> [查] 用d.get("key")來取用dict裡面的item</a></li>
+<li><a class="nav-link" href="#%E6%94%B9-%E4%BF%AE%E6%94%B9dict%E8%A3%A1%E9%9D%A2%E7%9A%84item"><span class="header-section-number">12.5</span> [改] 修改dict裡面的item</a></li>
+<li>
+<a class="nav-link" href="#%E5%A2%9E-%E5%A2%9E%E5%8A%A0dict%E7%9A%84item"><span class="header-section-number">12.6</span> [增] 增加dict的item</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dnew_key-new_value"><span class="header-section-number">12.6.1</span> d["new_key"] = new_value</a></li>
+<li><a class="nav-link" href="#update%E5%8F%AF%E4%BB%A5%E5%90%88%E4%BD%B52%E5%80%8B%E5%AD%97%E5%85%B8"><span class="header-section-number">12.6.2</span> .update()可以合併2個字典</a></li>
+<li><a class="nav-link" href="#d1-d2-d3%E5%90%88%E4%BD%B5%E5%A4%9A%E5%80%8B%E5%AD%97%E5%85%B8"><span class="header-section-number">12.6.3</span> {**d1, **d2, **d3}合併多個字典</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E5%88%AA-%E5%88%AA%E9%99%A4dict%E7%9A%84item"><span class="header-section-number">12.7</span> [刪] 刪除dict的item</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#popkey%E6%9C%83%E6%8A%8A%E9%81%B8%E5%AE%9A%E7%9A%84key%E6%95%B4%E5%80%8B%E7%A0%8D%E6%8E%89%E4%B8%A6%E6%8A%8A%E5%B0%8D%E6%87%89%E7%9A%84value%E4%B8%9F%E5%87%BA%E4%BE%86"><span class="header-section-number">12.7.1</span> .pop('key')會把選定的key整個砍掉，並把對應的value丟出來</a></li>
+<li><a class="nav-link" href="#del-dkey%E6%9C%83%E5%88%AA%E5%88%B0%E9%80%99%E7%B5%84item"><span class="header-section-number">12.7.2</span> del d['key']會刪到這組item</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#mutable-copy"><span class="header-section-number">12.8</span> [mutable] copy</a></li>
+<li>
+<a class="nav-link" href="#loop-for%E8%BF%B4%E5%9C%88"><span class="header-section-number">12.9</span> [loop] for迴圈</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#loop-over-keys"><span class="header-section-number">12.9.1</span> loop over keys</a></li>
+<li><a class="nav-link" href="#loop-over-values"><span class="header-section-number">12.9.2</span> loop over values</a></li>
+<li><a class="nav-link" href="#loop-over-key-value"><span class="header-section-number">12.9.3</span> loop over (key, value)</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#loop-dictionary-comprehension"><span class="header-section-number">12.10</span> [loop] dictionary comprehension</a></li>
+<li>
+<a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E7%9A%84%E8%A8%AA%E5%95%8F%E5%AD%97%E5%85%B8"><span class="header-section-number">12.11</span> 如何安全的訪問字典</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%AF%AB%E6%A2%9D%E4%BB%B6%E5%88%A4%E6%96%B7"><span class="header-section-number">12.11.1</span> 自己寫條件判斷</a></li>
+<li><a class="nav-link" href="#%E6%84%9B%E7%94%A8.get"><span class="header-section-number">12.11.2</span> 愛用.get()</a></li>
+<li><a class="nav-link" href="#%E6%94%B9%E7%94%A8defaultdict%E9%80%99%E7%A8%AEtype"><span class="header-section-number">12.11.3</span> 改用defaultdict這種type</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#how-to"><span class="header-section-number">12.12</span> How to…</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%87%E5%AD%97%E5%85%B8%E6%8C%89%E7%85%A7keyvalue%E5%A4%A7%E5%B0%8F%E6%8E%92%E5%BA%8F"><span class="header-section-number">12.12.1</span> 如何將字典按照key/value大小排序</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

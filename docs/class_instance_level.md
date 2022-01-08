@@ -44,7 +44,7 @@ print(Student.name)
 # instance會繼承class的屬性，所以還是看得到count
 #> Error in py_call_impl(callable, dots$args, dots$keywords): AttributeError: type object 'Student' has no attribute 'name'
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 print(hank.count)
 #> 0
@@ -299,7 +299,7 @@ class People:
 print(People.test3(v1 = "hahaha"))
 #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'self' is not defined
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 #>   File "<string>", line 24, in test3
 ```
@@ -313,7 +313,7 @@ p2 = People(name = "hank", age = 28)
 p2.test3(v1 = "hahaha")
 #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'self' is not defined
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 #>   File "<string>", line 24, in test3
 ```

@@ -1,12 +1,12 @@
 --- 
 title: "Python Tutorial"
 author: "Hank Lee"
-date: "2021-02-17"
+date: "2022-01-08"
 site: bookdown::bookdown_site
+output: bookdown::bs4_book
 documentclass: book
+description: "This is a cookbook of python programming"
 ---
-
-
 
 # Introduction {.unnumbered}
 

@@ -3,18 +3,10 @@ title: "Python Tutorial"
 author: "Hank Lee"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+output: bookdown::bs4_book
 documentclass: book
+description: "This is a cookbook of python programming"
 ---
-
-```{r include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      warning = FALSE,
-                      message = FALSE,
-                      tidy = TRUE,
-                      collapse = TRUE,
-                      comment = "#>")
-library(reticulate)
-```
 
 # Introduction {.unnumbered}
 

@@ -63,7 +63,7 @@ print(func1()) # 在global scope中呼叫func1
 print(val) # 在global scope中呼叫num
 #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'val' is not defined
 #> 
-#> Detailed traceback: 
+#> Detailed traceback:
 #>   File "<string>", line 1, in <module>
 ```
 

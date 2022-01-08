@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 執行Python的code | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content='2.1 command line  2.1.1 用interactive mode 執行 在command line，打python或ipython，就會進入互動視窗，然後就可以互動的執行了 要結束時，再按quit()，就會退出視窗 ipython print("Hello, World") quit()  2.1.2 寫成.py檔後執行...'>
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 2 執行Python的code | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content='2.1 command line  2.1.1 用interactive mode 執行 在command line，打python或ipython，就會進入互動視窗，然後就可以互動的執行了 要結束時，再按quit()，就會退出視窗 ipython print("Hello, World") quit()  2.1.2 寫成.py檔後執行...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 執行Python的code | Python Tutorial">
+<meta name="twitter:description" content='2.1 command line  2.1.1 用interactive mode 執行 在command line，打python或ipython，就會進入互動視窗，然後就可以互動的執行了 要結束時，再按quit()，就會退出視窗 ipython print("Hello, World") quit()  2.1.2 寫成.py檔後執行...'>
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="active" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="執行python的code" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> 執行Python的code<a class="anchor" aria-label="anchor" href="#%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code"><i class="fas fa-link"></i></a>
+</h1>
+<div id="command-line" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> command line<a class="anchor" aria-label="anchor" href="#command-line"><i class="fas fa-link"></i></a>
+</h2>
+<div id="用interactive-mode-執行" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> 用interactive mode 執行<a class="anchor" aria-label="anchor" href="#%E7%94%A8interactive-mode-%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>在command line，打<code>python</code>或<code>ipython</code>，就會進入互動視窗，然後就可以互動的執行了<br>
+</li>
+<li>要結束時，再按<code><a href="https://rdrr.io/r/base/quit.html">quit()</a></code>，就會退出視窗</li>
+</ul>
+<pre><code>ipython
+print("Hello, World")
+quit()</code></pre>
+</div>
+<div id="寫成.py檔後執行" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> 寫成.py檔後執行<a class="anchor" aria-label="anchor" href="#%E5%AF%AB%E6%88%90.py%E6%AA%94%E5%BE%8C%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>我們可以開一個script，在裡面寫code，然後存成.py檔，例如<code>hello.py</code><br>
+</li>
+<li>然後，在command line，用<code>python /path/to/this/file/hello.py</code>，就可以執行這個.py檔了</li>
+</ul>
+</div>
+</div>
+<div id="在vs-code中執行" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> 在VS code中執行<a class="anchor" aria-label="anchor" href="#%E5%9C%A8vs-code%E4%B8%AD%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h2>
+<div id="設定要使用的python版本" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> 設定要使用的python版本<a class="anchor" aria-label="anchor" href="#%E8%A8%AD%E5%AE%9A%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84python%E7%89%88%E6%9C%AC"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>以下內容，整理至官方網站： <a href="https://code.visualstudio.com/docs/python/environments" class="uri">https://code.visualstudio.com/docs/python/environments</a><br>
+</li>
+<li>打開VS code後，輸入command+shift+p (<code>⇧⌘P</code>)，然後key入<code>preferences: open user settings</code>，開啟設定。然後照下面圖面做設定：</li>
+</ul>
+<div class="inline-figure"><img src="images/vscode_py_setting1.jpg"></div>
+<ul>
+<li>打開json檔後，做以下的輸入：</li>
+</ul>
+<pre><code>{
+    "jupyter.alwaysTrustNotebooks": true,
+    "python.pythonPath": "/Users/hanklee/.pyenv/versions/3.8.0/bin/python",
+    "terminal.integrated.env.osx": {
+    
+    "PATH": ""
+    }
+}</code></pre>
+<ul>
+<li>這邊要注意的只有裡面的兩行一定要有：
+<ul>
+<li>
+<code>"python.pythonPath": "/Users/hanklee/...."</code>， 這邊的路徑，就是放你想要跑的版本。例如我都用<code>pyenv</code>來管理我的python version，那我可以在terminal用<code>pyenv global 3.8.0</code>來選定我要用3.8.0的版本後，再下<code>which python</code>，來得到這個版本的路徑。做完這行設定後，只要在VScode中點視窗右上角的run，他就會幫你下達這個指令：<code>path/to/python/version path/to/this/file</code>。<br>
+</li>
+<li>
+<code>"PATH": ""</code>，這個指令，是我google到的解法(<a href="https://stackoverflow.com/questions/54582361/vscode-terminal-shows-incorrect-python-version-and-path-launching-terminal-from/55043991">連結</a>)，主要是要解決，在VScode中，我開視窗下面的terminal，但執行python時，還是沒有執行到<code>python.pythonPath</code>的版本。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="腳本執行" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> 腳本執行<a class="anchor" aria-label="anchor" href="#%E8%85%B3%E6%9C%AC%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>這邊再找時間舉個例子做截圖吧。用<code>hello-world.py</code>這種script，示範點選畫面右上角的箭頭來run，或是底下的terminal自己key <code>python hello-world.py</code>都可以。</li>
+</ul>
+</div>
+<div id="逐行執行" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> 逐行執行<a class="anchor" aria-label="anchor" href="#%E9%80%90%E8%A1%8C%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>逐行執行的部分，要再查一下，目前就只會在jupyter中逐行執行，但很笨</li>
+</ul>
+</div>
+<div id="debug" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> debug<a class="anchor" aria-label="anchor" href="#debug"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>ToDo…</li>
+</ul>
+</div>
+</div>
+<div id="在-rstudio-中執行" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> 在 RStudio 中執行<a class="anchor" aria-label="anchor" href="#%E5%9C%A8-rstudio-%E4%B8%AD%E5%9F%B7%E8%A1%8C"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>應該要用Reticulate的架構來整理，等有空再說吧</li>
+</ul>
+<div id="新增檔案python-script" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> 新增檔案/python script<a class="anchor" aria-label="anchor" href="#%E6%96%B0%E5%A2%9E%E6%AA%94%E6%A1%88python-script"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>只要新增一個.py的檔案，就可以像寫R一樣逐行執行</li>
+</ul>
+</div>
+<div id="用rmarkdown" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> 用RMarkdown<a class="anchor" aria-label="anchor" href="#%E7%94%A8rmarkdown"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>開RMarkdown檔案，然後用<code>command + option + p</code>，開啟python的chunk，就可以執行了</li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></div>
+<div class="next"><a href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li>
+<a class="nav-link" href="#command-line"><span class="header-section-number">2.1</span> command line</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E7%94%A8interactive-mode-%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.1.1</span> 用interactive mode 執行</a></li>
+<li><a class="nav-link" href="#%E5%AF%AB%E6%88%90.py%E6%AA%94%E5%BE%8C%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.1.2</span> 寫成.py檔後執行</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E5%9C%A8vs-code%E4%B8%AD%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.2</span> 在VS code中執行</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84python%E7%89%88%E6%9C%AC"><span class="header-section-number">2.2.1</span> 設定要使用的python版本</a></li>
+<li><a class="nav-link" href="#%E8%85%B3%E6%9C%AC%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.2.2</span> 腳本執行</a></li>
+<li><a class="nav-link" href="#%E9%80%90%E8%A1%8C%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.2.3</span> 逐行執行</a></li>
+<li><a class="nav-link" href="#debug"><span class="header-section-number">2.2.4</span> debug</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E5%9C%A8-rstudio-%E4%B8%AD%E5%9F%B7%E8%A1%8C"><span class="header-section-number">2.3</span> 在 RStudio 中執行</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%AA%94%E6%A1%88python-script"><span class="header-section-number">2.3.1</span> 新增檔案/python script</a></li>
+<li><a class="nav-link" href="#%E7%94%A8rmarkdown"><span class="header-section-number">2.3.2</span> 用RMarkdown</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/%E5%9F%B7%E8%A1%8Cpython.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/%E5%9F%B7%E8%A1%8Cpython.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

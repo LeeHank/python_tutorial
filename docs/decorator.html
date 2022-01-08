@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 28 decorator | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="28.1 先備知識 在講decorator前，我們先複習decorator會用到的4個先備知識 functions as objects nested functions nonlocal scope closure  28.1.1 function as object 定義好的function，他本身就是一個object，例如： def my_func(): ...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 28 decorator | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="28.1 先備知識 在講decorator前，我們先複習decorator會用到的4個先備知識 functions as objects nested functions nonlocal scope closure  28.1.1 function as object 定義好的function，他本身就是一個object，例如： def my_func(): ...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 28 decorator | Python Tutorial">
+<meta name="twitter:description" content="28.1 先備知識 在講decorator前，我們先複習decorator會用到的4個先備知識 functions as objects nested functions nonlocal scope closure  28.1.1 function as object 定義好的function，他本身就是一個object，例如： def my_func(): ...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="active" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="decorator" class="section level1" number="28">
+<h1>
+<span class="header-section-number">28</span> decorator<a class="anchor" aria-label="anchor" href="#decorator"><i class="fas fa-link"></i></a>
+</h1>
+<div id="先備知識" class="section level2" number="28.1">
+<h2>
+<span class="header-section-number">28.1</span> 先備知識<a class="anchor" aria-label="anchor" href="#%E5%85%88%E5%82%99%E7%9F%A5%E8%AD%98"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>在講decorator前，我們先複習decorator會用到的4個先備知識
+<ul>
+<li>functions as objects<br>
+</li>
+<li>nested functions<br>
+</li>
+<li>nonlocal scope<br>
+</li>
+<li>closure</li>
+</ul>
+</li>
+</ul>
+<div id="function-as-object" class="section level3" number="28.1.1">
+<h3>
+<span class="header-section-number">28.1.1</span> function as object<a class="anchor" aria-label="anchor" href="#function-as-object"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>定義好的function，他本身就是一個object，例如：</li>
+</ul>
+<div class="sourceCode" id="cb290"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="decorator.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_func():</span>
+<span id="cb290-2"><a href="decorator.html#cb290-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"hello"</span>)</span>
+<span id="cb290-3"><a href="decorator.html#cb290-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-4"><a href="decorator.html#cb290-4" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(my_func)</span>
+<span id="cb290-5"><a href="decorator.html#cb290-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'function'&gt;</span></span></code></pre></div>
+<ul>
+<li>
+<code>my_func</code>是一個object，但<code>my_func()</code>是call這個函數</li>
+</ul>
+<div class="sourceCode" id="cb291"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="decorator.html#cb291-1" aria-hidden="true" tabindex="-1"></a>my_func</span>
+<span id="cb291-2"><a href="decorator.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function my_func at 0x10cef4ee0&gt;</span></span>
+<span id="cb291-3"><a href="decorator.html#cb291-3" aria-hidden="true" tabindex="-1"></a>my_func()</span>
+<span id="cb291-4"><a href="decorator.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span></code></pre></div>
+<ul>
+<li>我們可以把函數object拿去assign成一個variable、放在list/dictionary裡面、或當成其他函數的一個argument</li>
+</ul>
+<div class="sourceCode" id="cb292"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="decorator.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_func():</span>
+<span id="cb292-2"><a href="decorator.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"hello"</span>)</span>
+<span id="cb292-3"><a href="decorator.html#cb292-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-4"><a href="decorator.html#cb292-4" aria-hidden="true" tabindex="-1"></a><span class="co"># assign成一個variable</span></span>
+<span id="cb292-5"><a href="decorator.html#cb292-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> my_func</span>
+<span id="cb292-6"><a href="decorator.html#cb292-6" aria-hidden="true" tabindex="-1"></a>f()</span>
+<span id="cb292-7"><a href="decorator.html#cb292-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-8"><a href="decorator.html#cb292-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 放在list, dictionary裡面</span></span>
+<span id="cb292-9"><a href="decorator.html#cb292-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb292-10"><a href="decorator.html#cb292-10" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [my_func, <span class="bu">print</span>]</span>
+<span id="cb292-11"><a href="decorator.html#cb292-11" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">0</span>]()</span>
+<span id="cb292-12"><a href="decorator.html#cb292-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-13"><a href="decorator.html#cb292-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 當其他函數的argument</span></span>
+<span id="cb292-14"><a href="decorator.html#cb292-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb292-15"><a href="decorator.html#cb292-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> second_function(func):</span>
+<span id="cb292-16"><a href="decorator.html#cb292-16" aria-hidden="true" tabindex="-1"></a>  func()</span>
+<span id="cb292-17"><a href="decorator.html#cb292-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-18"><a href="decorator.html#cb292-18" aria-hidden="true" tabindex="-1"></a>second_function(my_func)</span>
+<span id="cb292-19"><a href="decorator.html#cb292-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span></code></pre></div>
+</div>
+<div id="nested-function-1" class="section level3" number="28.1.2">
+<h3>
+<span class="header-section-number">28.1.2</span> nested function<a class="anchor" aria-label="anchor" href="#nested-function-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>定義： 在一個function底下，又定義一個function，這個內層的function，我們叫inner function/ nested function/ helper function/ child function 都可以<br>
+</li>
+<li>此外，我們可以把這個nested function給output出來</li>
+</ul>
+<div class="sourceCode" id="cb293"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb293-1"><a href="decorator.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="co"># outer function/ parent function</span></span>
+<span id="cb293-2"><a href="decorator.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parent():</span>
+<span id="cb293-3"><a href="decorator.html#cb293-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># nested/inner/child/helper function</span></span>
+<span id="cb293-4"><a href="decorator.html#cb293-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> child():</span>
+<span id="cb293-5"><a href="decorator.html#cb293-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb293-6"><a href="decorator.html#cb293-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> child</span></code></pre></div>
+</div>
+<div id="nonlocal-variable" class="section level3" number="28.1.3">
+<h3>
+<span class="header-section-number">28.1.3</span> nonlocal variable<a class="anchor" aria-label="anchor" href="#nonlocal-variable"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>定義： local variable是指最內層的scope所定義的variable，而nonlocal scope，就是最內層的外面一層(仍在函數的scope內)所定義的variable<br>
+</li>
+<li>nonlocal scope就是LEGB中的E(Enclosing scope)</li>
+</ul>
+<div class="sourceCode" id="cb294"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb294-1"><a href="decorator.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parent(arg1, arg2):</span>
+<span id="cb294-2"><a href="decorator.html#cb294-2" aria-hidden="true" tabindex="-1"></a>  value <span class="op">=</span> <span class="dv">22</span></span>
+<span id="cb294-3"><a href="decorator.html#cb294-3" aria-hidden="true" tabindex="-1"></a>  my_dict <span class="op">=</span> {<span class="st">"chocolate"</span>: <span class="st">"yummy"</span>}</span>
+<span id="cb294-4"><a href="decorator.html#cb294-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb294-5"><a href="decorator.html#cb294-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> child():</span>
+<span id="cb294-6"><a href="decorator.html#cb294-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="dv">2</span><span class="op">*</span>value) <span class="co"># 這邊就用到nonlocal variable: value</span></span>
+<span id="cb294-7"><a href="decorator.html#cb294-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_dict[<span class="st">'chocolate'</span>]) <span class="co"># 這邊就用到nonlocal variable: my_dict</span></span>
+<span id="cb294-8"><a href="decorator.html#cb294-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(arg1<span class="op">+</span>arg2) <span class="co"># 這邊用到nonlocal variable: arg1, arg2</span></span>
+<span id="cb294-9"><a href="decorator.html#cb294-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb294-10"><a href="decorator.html#cb294-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> child</span></code></pre></div>
+<ul>
+<li>上例中，child內的scope，叫local scope; child外但是是parent內的scope，叫nonlocal scope/ enclosing scope<br>
+</li>
+<li>所以，<code>arg1</code>, <code>arg2</code>, <code>my_dict</code>, <code>value</code>為四個nonlocal variable(照字母順序排列)</li>
+</ul>
+</div>
+<div id="closure-2" class="section level3" number="28.1.4">
+<h3>
+<span class="header-section-number">28.1.4</span> closure<a class="anchor" aria-label="anchor" href="#closure-2"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>output的nested function，所攜帶的nonlocal variables，我們叫closure<br>
+</li>
+<li>例如下例：</li>
+</ul>
+<div class="sourceCode" id="cb295"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb295-1"><a href="decorator.html#cb295-1" aria-hidden="true" tabindex="-1"></a>new_function <span class="op">=</span> parent(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb295-2"><a href="decorator.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="co"># new_function會帶有closure屬性，且type是tuple，裡面的每個element，都是(nonlocal_var, value)的pair</span></span>
+<span id="cb295-3"><a href="decorator.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(new_function.__closure__)</span>
+<span id="cb295-4"><a href="decorator.html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 長度會是4，因為有四組pair</span></span>
+<span id="cb295-5"><a href="decorator.html#cb295-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'tuple'&gt;</span></span>
+<span id="cb295-6"><a href="decorator.html#cb295-6" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(new_function.__closure__)</span>
+<span id="cb295-7"><a href="decorator.html#cb295-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 看closure的內容</span></span>
+<span id="cb295-8"><a href="decorator.html#cb295-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4</span></span>
+<span id="cb295-9"><a href="decorator.html#cb295-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> new_function.__closure__:</span>
+<span id="cb295-10"><a href="decorator.html#cb295-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(element.cell_contents)</span>
+<span id="cb295-11"><a href="decorator.html#cb295-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb295-12"><a href="decorator.html#cb295-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4</span></span>
+<span id="cb295-13"><a href="decorator.html#cb295-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'chocolate': 'yummy'}</span></span>
+<span id="cb295-14"><a href="decorator.html#cb295-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22</span></span></code></pre></div>
+</div>
+</div>
+<div id="intro-to-decorator" class="section level2" number="28.2">
+<h2>
+<span class="header-section-number">28.2</span> Intro to decorator<a class="anchor" aria-label="anchor" href="#intro-to-decorator"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb296"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb296-1"><a href="decorator.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_args(func):</span>
+<span id="cb296-2"><a href="decorator.html#cb296-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(a, b):</span>
+<span id="cb296-3"><a href="decorator.html#cb296-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(<span class="dv">2</span><span class="op">*</span>a, <span class="dv">2</span><span class="op">*</span>b)</span>
+<span id="cb296-4"><a href="decorator.html#cb296-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(wrapper)</span></code></pre></div>
+<ul>
+<li>decorator就字面上的意思就是<code>裝飾子</code>，裝飾什麼東西呢？裝飾一個已經存在的funciton<br>
+</li>
+<li>例如下例：</li>
+</ul>
+<div class="sourceCode" id="cb297"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb297-1"><a href="decorator.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="at">@double_args</span></span>
+<span id="cb297-2"><a href="decorator.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multiply(a, b):</span>
+<span id="cb297-3"><a href="decorator.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">*</span> b</span>
+<span id="cb297-4"><a href="decorator.html#cb297-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb297-5"><a href="decorator.html#cb297-5" aria-hidden="true" tabindex="-1"></a>multiply(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb297-6"><a href="decorator.html#cb297-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20</span></span></code></pre></div>
+<ul>
+<li>在此例中，<code>@double_args</code>就是一個decorator，他裝飾的東西，就是下面的function: <code>multiply</code><br>
+</li>
+<li>他如何裝飾的呢？他會把<code>multiply</code>的arguments，都先乘以2，再丟到<code>multiply</code>這個function裡面<br>
+</li>
+<li>這也是為什麼<code>multiply(1, 5)</code>會變成 2x10 = 20 的原因<br>
+</li>
+<li>那<code>@double_args</code>的背後到底是什麼？為什麼可以有這種效果呢？<br>
+</li>
+<li>其實 <code>@double_args</code>的寫法，等同於在做下面這件事：</li>
+</ul>
+<div class="sourceCode" id="cb298"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb298-1"><a href="decorator.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 定義一個function，讓他的input argument是要裝飾的function</span></span>
+<span id="cb298-2"><a href="decorator.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_args(func):</span>
+<span id="cb298-3"><a href="decorator.html#cb298-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 定義一個nested function，來改變`func`的行為</span></span>
+<span id="cb298-4"><a href="decorator.html#cb298-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(a, b):</span>
+<span id="cb298-5"><a href="decorator.html#cb298-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(<span class="dv">2</span><span class="op">*</span>a, <span class="dv">2</span><span class="op">*</span>b) <span class="co"># 把func的arguments都先乘上2，再evaluate</span></span>
+<span id="cb298-6"><a href="decorator.html#cb298-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb298-7"><a href="decorator.html#cb298-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 回傳這個修改好的function</span></span>
+<span id="cb298-8"><a href="decorator.html#cb298-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(wrapper)</span>
+<span id="cb298-9"><a href="decorator.html#cb298-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-10"><a href="decorator.html#cb298-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 準備要被裝飾的function如下</span></span>
+<span id="cb298-11"><a href="decorator.html#cb298-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multiply(a, b):</span>
+<span id="cb298-12"><a href="decorator.html#cb298-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">*</span> b</span>
+<span id="cb298-13"><a href="decorator.html#cb298-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-14"><a href="decorator.html#cb298-14" aria-hidden="true" tabindex="-1"></a>multiply <span class="op">=</span> double_args(multiply)</span>
+<span id="cb298-15"><a href="decorator.html#cb298-15" aria-hidden="true" tabindex="-1"></a>multiply(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb298-16"><a href="decorator.html#cb298-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20</span></span></code></pre></div>
+<ul>
+<li>所以可以發現，<code>@dobule_args</code>的作用，其實是在做這件事：</li>
+</ul>
+<div class="sourceCode" id="cb299"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb299-1"><a href="decorator.html#cb299-1" aria-hidden="true" tabindex="-1"></a>multiply <span class="op">=</span> double_args(multiply)</span></code></pre></div>
+<ul>
+<li><p>他把被裝飾的function(i.e. multiply)，丟到<code>裝飾function</code>(i.e. double_args)，然後assign成和被裝飾的function一樣的名字，那之後用這個function，就都會是被裝飾後的版本了<br></p></li>
+<li><p>所以重點在於<code>@double_args</code>的寫法，是<code>func = double_args(func)</code>的簡潔寫法，而func可以放任何要被裝飾的函數</p></li>
+<li><p>打鐵趁熱，練習一下。我想寫一個decorator，讓每個被他裝飾的function，都會自動print出”hahaha”：</p></li>
+</ul>
+<div class="sourceCode" id="cb300"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb300-1"><a href="decorator.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> haha(func):</span>
+<span id="cb300-2"><a href="decorator.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb300-3"><a href="decorator.html#cb300-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"hahaha"</span>)</span>
+<span id="cb300-4"><a href="decorator.html#cb300-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb300-5"><a href="decorator.html#cb300-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb300-6"><a href="decorator.html#cb300-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-7"><a href="decorator.html#cb300-7" aria-hidden="true" tabindex="-1"></a><span class="at">@haha</span></span>
+<span id="cb300-8"><a href="decorator.html#cb300-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func1():</span>
+<span id="cb300-9"><a href="decorator.html#cb300-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"this is function 1"</span>)</span>
+<span id="cb300-10"><a href="decorator.html#cb300-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-11"><a href="decorator.html#cb300-11" aria-hidden="true" tabindex="-1"></a>func1()</span>
+<span id="cb300-12"><a href="decorator.html#cb300-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hahaha</span></span>
+<span id="cb300-13"><a href="decorator.html#cb300-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; this is function 1</span></span>
+<span id="cb300-14"><a href="decorator.html#cb300-14" aria-hidden="true" tabindex="-1"></a><span class="at">@haha</span></span>
+<span id="cb300-15"><a href="decorator.html#cb300-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func2():</span>
+<span id="cb300-16"><a href="decorator.html#cb300-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"this is function 2"</span>)</span>
+<span id="cb300-17"><a href="decorator.html#cb300-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-18"><a href="decorator.html#cb300-18" aria-hidden="true" tabindex="-1"></a>func2()</span>
+<span id="cb300-19"><a href="decorator.html#cb300-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hahaha</span></span>
+<span id="cb300-20"><a href="decorator.html#cb300-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; this is function 2</span></span></code></pre></div>
+<ul>
+<li>從這個例子中，我們已經可以很快看到decorator的一個使用時機：
+<ul>
+<li>當我們想新增一個功能到已經寫好的多個函數中時(e.g. 這邊的<code>func1</code>, <code>func2</code>)，我不用再一一去改這些已經定義過的函數，我只要寫個decorator，然後把他加上在這些函數上就好。</li>
+<li>而且，如果之後決定拿掉這些功能，那也只要拔掉decorator的標籤即可，我都不用動到我之前定義好的<code>func1</code>, <code>func2</code>, …</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="decorators-and-metadata" class="section level2" number="28.3">
+<h2>
+<span class="header-section-number">28.3</span> Decorators and metadata<a class="anchor" aria-label="anchor" href="#decorators-and-metadata"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>decorator有一個問題是，他會讓我們原始function的metadata(e.g. docstring)消失：<br>
+</li>
+<li>例如，我的原始function叫<code>sleep_n_seconds</code>，如下：</li>
+</ul>
+<div class="sourceCode" id="cb301"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb301-1"><a href="decorator.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sleep_n_seconds(n<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb301-2"><a href="decorator.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb301-3"><a href="decorator.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Purpose:</span></span>
+<span id="cb301-4"><a href="decorator.html#cb301-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Pause processing for n seconds.</span></span>
+<span id="cb301-5"><a href="decorator.html#cb301-5" aria-hidden="true" tabindex="-1"></a><span class="co">  Args:</span></span>
+<span id="cb301-6"><a href="decorator.html#cb301-6" aria-hidden="true" tabindex="-1"></a><span class="co">    n (int): The number of seconds to pause for.</span></span>
+<span id="cb301-7"><a href="decorator.html#cb301-7" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb301-8"><a href="decorator.html#cb301-8" aria-hidden="true" tabindex="-1"></a>  time.sleep(n)</span></code></pre></div>
+<ul>
+<li>那我是看得到他的docstring的：</li>
+</ul>
+<div class="sourceCode" id="cb302"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb302-1"><a href="decorator.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.__doc__)</span>
+<span id="cb302-2"><a href="decorator.html#cb302-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb302-3"><a href="decorator.html#cb302-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Purpose:</span></span>
+<span id="cb302-4"><a href="decorator.html#cb302-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Pause processing for n seconds.</span></span>
+<span id="cb302-5"><a href="decorator.html#cb302-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Args:</span></span>
+<span id="cb302-6"><a href="decorator.html#cb302-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     n (int): The number of seconds to pause for.</span></span>
+<span id="cb302-7"><a href="decorator.html#cb302-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span></code></pre></div>
+<ul>
+<li>但如果我把<code>timer</code>這個decoratro加上去，就會變成看不到</li>
+</ul>
+<div class="sourceCode" id="cb303"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb303-1"><a href="decorator.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb303-2"><a href="decorator.html#cb303-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-3"><a href="decorator.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> timer(func):</span>
+<span id="cb303-4"><a href="decorator.html#cb303-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb303-5"><a href="decorator.html#cb303-5" aria-hidden="true" tabindex="-1"></a>    t_start <span class="op">=</span> time.time()</span>
+<span id="cb303-6"><a href="decorator.html#cb303-6" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb303-7"><a href="decorator.html#cb303-7" aria-hidden="true" tabindex="-1"></a>    t_total <span class="op">=</span> time.time() <span class="op">-</span> t_start</span>
+<span id="cb303-8"><a href="decorator.html#cb303-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> took </span><span class="sc">{</span>t_total<span class="sc">}</span><span class="ss"> seconds to run"</span>)</span>
+<span id="cb303-9"><a href="decorator.html#cb303-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb303-10"><a href="decorator.html#cb303-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb303-11"><a href="decorator.html#cb303-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb303-12"><a href="decorator.html#cb303-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-13"><a href="decorator.html#cb303-13" aria-hidden="true" tabindex="-1"></a><span class="at">@timer</span></span>
+<span id="cb303-14"><a href="decorator.html#cb303-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sleep_n_seconds(n<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb303-15"><a href="decorator.html#cb303-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb303-16"><a href="decorator.html#cb303-16" aria-hidden="true" tabindex="-1"></a><span class="co">  Purpose:</span></span>
+<span id="cb303-17"><a href="decorator.html#cb303-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Pause processing for n seconds.</span></span>
+<span id="cb303-18"><a href="decorator.html#cb303-18" aria-hidden="true" tabindex="-1"></a><span class="co">  Args:</span></span>
+<span id="cb303-19"><a href="decorator.html#cb303-19" aria-hidden="true" tabindex="-1"></a><span class="co">    n (int): The number of seconds to pause for.</span></span>
+<span id="cb303-20"><a href="decorator.html#cb303-20" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb303-21"><a href="decorator.html#cb303-21" aria-hidden="true" tabindex="-1"></a>  time.sleep(n)</span>
+<span id="cb303-22"><a href="decorator.html#cb303-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-23"><a href="decorator.html#cb303-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-24"><a href="decorator.html#cb303-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.__doc__)</span>
+<span id="cb303-25"><a href="decorator.html#cb303-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; None</span></span></code></pre></div>
+<ul>
+<li>為什麼會這樣？這是因為，我們現在以為的<code>sleep_n_seconds</code>，其實是decorator中，被吐出來的<code>wrapper</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb304"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb304-1"><a href="decorator.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.<span class="va">__name__</span>)</span>
+<span id="cb304-2"><a href="decorator.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; wrapper</span></span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb305-1"><a href="decorator.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb305-2"><a href="decorator.html#cb305-2" aria-hidden="true" tabindex="-1"></a>    t_start <span class="op">=</span> time.time()</span>
+<span id="cb305-3"><a href="decorator.html#cb305-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb305-4"><a href="decorator.html#cb305-4" aria-hidden="true" tabindex="-1"></a>    t_total <span class="op">=</span> time.time() <span class="op">-</span> t_start</span>
+<span id="cb305-5"><a href="decorator.html#cb305-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> took </span><span class="sc">{</span>t_total<span class="sc">}</span><span class="ss"> seconds to run"</span>)</span>
+<span id="cb305-6"><a href="decorator.html#cb305-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<ul>
+<li>而這個<code>wrapper</code>，很明顯的沒寫docstring，所以才會讓你看不到原本<code>sleep_n_seconds</code>的docstring<br>
+</li>
+<li>如果要讓<code>wrapper</code>也呈現原本<code>sleep_n_seconds</code>的docstring，我們可以再加一個decorator<code>@wraps(func)</code>在前面：</li>
+</ul>
+<div class="sourceCode" id="cb306"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb306-1"><a href="decorator.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb306-2"><a href="decorator.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> wraps <span class="co"># 加入這行，引用wraps</span></span>
+<span id="cb306-3"><a href="decorator.html#cb306-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-4"><a href="decorator.html#cb306-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> timer(func):</span>
+<span id="cb306-5"><a href="decorator.html#cb306-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">@wraps</span>(func) <span class="co"># 加入這行，有參數的decorator，參數的func就是一開始丟入timer的func</span></span>
+<span id="cb306-6"><a href="decorator.html#cb306-6" aria-hidden="true" tabindex="-1"></a>               <span class="co"># 所以他會把func的docstring加進來</span></span>
+<span id="cb306-7"><a href="decorator.html#cb306-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb306-8"><a href="decorator.html#cb306-8" aria-hidden="true" tabindex="-1"></a>    t_start <span class="op">=</span> time.time()</span>
+<span id="cb306-9"><a href="decorator.html#cb306-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb306-10"><a href="decorator.html#cb306-10" aria-hidden="true" tabindex="-1"></a>    t_total <span class="op">=</span> time.time() <span class="op">-</span> t_start</span>
+<span id="cb306-11"><a href="decorator.html#cb306-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> took </span><span class="sc">{</span>t_total<span class="sc">}</span><span class="ss"> seconds to run"</span>)</span>
+<span id="cb306-12"><a href="decorator.html#cb306-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb306-13"><a href="decorator.html#cb306-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb306-14"><a href="decorator.html#cb306-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb306-15"><a href="decorator.html#cb306-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-16"><a href="decorator.html#cb306-16" aria-hidden="true" tabindex="-1"></a><span class="at">@timer</span></span>
+<span id="cb306-17"><a href="decorator.html#cb306-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sleep_n_seconds(n<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb306-18"><a href="decorator.html#cb306-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb306-19"><a href="decorator.html#cb306-19" aria-hidden="true" tabindex="-1"></a><span class="co">  Purpose:</span></span>
+<span id="cb306-20"><a href="decorator.html#cb306-20" aria-hidden="true" tabindex="-1"></a><span class="co">    Pause processing for n seconds.</span></span>
+<span id="cb306-21"><a href="decorator.html#cb306-21" aria-hidden="true" tabindex="-1"></a><span class="co">  Args:</span></span>
+<span id="cb306-22"><a href="decorator.html#cb306-22" aria-hidden="true" tabindex="-1"></a><span class="co">    n (int): The number of seconds to pause for.</span></span>
+<span id="cb306-23"><a href="decorator.html#cb306-23" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb306-24"><a href="decorator.html#cb306-24" aria-hidden="true" tabindex="-1"></a>  time.sleep(n)</span>
+<span id="cb306-25"><a href="decorator.html#cb306-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-26"><a href="decorator.html#cb306-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.<span class="va">__name__</span>)</span>
+<span id="cb306-27"><a href="decorator.html#cb306-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds</span></span>
+<span id="cb306-28"><a href="decorator.html#cb306-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.__doc__)</span>
+<span id="cb306-29"><a href="decorator.html#cb306-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb306-30"><a href="decorator.html#cb306-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Purpose:</span></span>
+<span id="cb306-31"><a href="decorator.html#cb306-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Pause processing for n seconds.</span></span>
+<span id="cb306-32"><a href="decorator.html#cb306-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Args:</span></span>
+<span id="cb306-33"><a href="decorator.html#cb306-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     n (int): The number of seconds to pause for.</span></span>
+<span id="cb306-34"><a href="decorator.html#cb306-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span></code></pre></div>
+<ul>
+<li>上面的code中，注意：
+<ul>
+<li>一開始先引用了： <code>from functools import wraps</code>
+</li>
+<li>
+<code>wrapper</code>的前面，加上了有參數的decorator，<code>@wraps(func)</code>，參數的func就是一開始丟入timer的func，所以他會把func的docstring加進來<br>
+</li>
+</ul>
+</li>
+<li>事實上，他加進來的是所有的meta-data，不只docstring，還包括：
+<ul>
+<li>default argument的值是多少<br>
+</li>
+<li>wrap進來的原始function長怎樣(i.e. 還沒被裝飾前的<code>sleep_n_seconds</code>)</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb307"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb307-1"><a href="decorator.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># default argument的值</span></span>
+<span id="cb307-2"><a href="decorator.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sleep_n_seconds.__defaults__)</span>
+<span id="cb307-3"><a href="decorator.html#cb307-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-4"><a href="decorator.html#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="co"># original function，可以直接使用這個裝飾前的function</span></span>
+<span id="cb307-5"><a href="decorator.html#cb307-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; None</span></span>
+<span id="cb307-6"><a href="decorator.html#cb307-6" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds.__wrapped__</span>
+<span id="cb307-7"><a href="decorator.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function sleep_n_seconds at 0x10d079c10&gt;</span></span></code></pre></div>
+<ul>
+<li>在實務上，這個original function蠻有用的。<br>
+</li>
+<li>比如說，你原本寫了一堆function，也都運作得好好的，但你老闆突然神來一筆，寫了一個decorator，強迫你要加到你目前的所有function上<br>
+</li>
+<li>但你一加上這個decorator後，發現運算速度慢好多…<br>
+</li>
+<li>那為了說服老闆，你就可以做這個實驗：
+<ul>
+<li>計算加入decorator”前”的計算時間<br>
+</li>
+<li>計算加入decorator”後”的計算時間<br>
+</li>
+<li>看一下差多少就知道了<br>
+</li>
+</ul>
+</li>
+<li>如果加入decorator以後，計算速度變慢超多，那表示這個decorator太肥，要評估看看是不是真的有需要用這個decorator</li>
+</ul>
+</div>
+<div id="有arguments的decorators" class="section level2" number="28.4">
+<h2>
+<span class="header-section-number">28.4</span> 有arguments的decorators<a class="anchor" aria-label="anchor" href="#%E6%9C%89arguments%E7%9A%84decorators"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>剛剛介紹的decorator，在定義的時候，都只有<code>func</code>一個參數，表示他即將要裝飾的function。但有的時候，我會希望還能再加上其他參數。<br>
+</li>
+<li>例如，我想寫一個decorator，叫<code>run_n_times</code>，他會將要裝飾的那個function，重複run n次，那這時候就需要n這個argument了<br>
+</li>
+<li>那寫法的邏輯其實是這樣：
+<ul>
+<li>寫個function，他的input argument只有<code>n</code>，然後他的output是一個decorator!!</li>
+<li>我們再用這個output出來的decorator，去裝飾我要裝飾的function</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb308"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb308-1"><a href="decorator.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_n_times(n):</span>
+<span id="cb308-2"><a href="decorator.html#cb308-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb308-3"><a href="decorator.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Define and return a decorator</span></span>
+<span id="cb308-4"><a href="decorator.html#cb308-4" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb308-5"><a href="decorator.html#cb308-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 之前寫好的decorator放這邊，然後讓他吃我的參數n，讓他變成新的decorator</span></span>
+<span id="cb308-6"><a href="decorator.html#cb308-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> decorator(func):</span>
+<span id="cb308-7"><a href="decorator.html#cb308-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb308-8"><a href="decorator.html#cb308-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n): <span class="co"># 重複進行n次</span></span>
+<span id="cb308-9"><a href="decorator.html#cb308-9" aria-hidden="true" tabindex="-1"></a>        func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb308-10"><a href="decorator.html#cb308-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb308-11"><a href="decorator.html#cb308-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 把這個定義好的，新的decorator，給丟出來</span></span>
+<span id="cb308-12"><a href="decorator.html#cb308-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> decorator</span></code></pre></div>
+<ul>
+<li>所以，現在我如果用<code>run_n_times(3)</code>，那就可以做出一個讓被修飾的function run 3次的decorator：</li>
+</ul>
+<div class="sourceCode" id="cb309"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb309-1"><a href="decorator.html#cb309-1" aria-hidden="true" tabindex="-1"></a>run_three_time <span class="op">=</span> run_n_times(<span class="dv">3</span>)</span>
+<span id="cb309-2"><a href="decorator.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="at">@run_three_time</span></span>
+<span id="cb309-3"><a href="decorator.html#cb309-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello():</span>
+<span id="cb309-4"><a href="decorator.html#cb309-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"hello"</span>)</span>
+<span id="cb309-5"><a href="decorator.html#cb309-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb309-6"><a href="decorator.html#cb309-6" aria-hidden="true" tabindex="-1"></a>say_hello()</span>
+<span id="cb309-7"><a href="decorator.html#cb309-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb309-8"><a href="decorator.html#cb309-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb309-9"><a href="decorator.html#cb309-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span></code></pre></div>
+<ul>
+<li>cool，但實務在用時，<code>@run_three_time</code>，可以直接簡化成<code>@run_n_times(3)</code>就好！！<br>
+</li>
+<li>我們以run 5次來當範例試試：</li>
+</ul>
+<div class="sourceCode" id="cb310"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb310-1"><a href="decorator.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="at">@run_n_times</span>(<span class="dv">5</span>)</span>
+<span id="cb310-2"><a href="decorator.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello():</span>
+<span id="cb310-3"><a href="decorator.html#cb310-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"hello"</span>)</span>
+<span id="cb310-4"><a href="decorator.html#cb310-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-5"><a href="decorator.html#cb310-5" aria-hidden="true" tabindex="-1"></a>say_hello()</span>
+<span id="cb310-6"><a href="decorator.html#cb310-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb310-7"><a href="decorator.html#cb310-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb310-8"><a href="decorator.html#cb310-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb310-9"><a href="decorator.html#cb310-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span>
+<span id="cb310-10"><a href="decorator.html#cb310-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span></code></pre></div>
+<ul>
+<li>打鐵趁熱，來寫個html的generator，讓我輸入的文字，自動加上指定的tag:</li>
+</ul>
+<div class="sourceCode" id="cb311"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb311-1"><a href="decorator.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> html(open_tag, close_tag):</span>
+<span id="cb311-2"><a href="decorator.html#cb311-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> decorator(func):</span>
+<span id="cb311-3"><a href="decorator.html#cb311-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">@wraps</span>(func)</span>
+<span id="cb311-4"><a href="decorator.html#cb311-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb311-5"><a href="decorator.html#cb311-5" aria-hidden="true" tabindex="-1"></a>      msg <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb311-6"><a href="decorator.html#cb311-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="ss">f'</span><span class="sc">{</span>open_tag<span class="sc">}{</span>msg<span class="sc">}{</span>close_tag<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb311-7"><a href="decorator.html#cb311-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb311-8"><a href="decorator.html#cb311-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> decorator</span></code></pre></div>
+<ul>
+<li>加上粗體的tag:</li>
+</ul>
+<div class="sourceCode" id="cb312"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb312-1"><a href="decorator.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="at">@html</span>(<span class="st">"&lt;b&gt;"</span>, <span class="st">"&lt;/b&gt;"</span>)</span>
+<span id="cb312-2"><a href="decorator.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello(name):</span>
+<span id="cb312-3"><a href="decorator.html#cb312-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="ss">f'Hello </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!'</span></span>
+<span id="cb312-4"><a href="decorator.html#cb312-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb312-5"><a href="decorator.html#cb312-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hello(<span class="st">'Alice'</span>))</span>
+<span id="cb312-6"><a href="decorator.html#cb312-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;b&gt;Hello Alice!&lt;/b&gt;</span></span></code></pre></div>
+<ul>
+<li>加上斜體的tag</li>
+</ul>
+<div class="sourceCode" id="cb313"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb313-1"><a href="decorator.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="at">@html</span>(<span class="st">"&lt;i&gt;"</span>, <span class="st">"&lt;/i&gt;"</span>)</span>
+<span id="cb313-2"><a href="decorator.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> goodbye(name):</span>
+<span id="cb313-3"><a href="decorator.html#cb313-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="ss">f'Goodbye </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.'</span></span>
+<span id="cb313-4"><a href="decorator.html#cb313-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb313-5"><a href="decorator.html#cb313-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(goodbye(<span class="st">'Alice'</span>))</span>
+<span id="cb313-6"><a href="decorator.html#cb313-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;i&gt;Goodbye Alice.&lt;/i&gt;</span></span></code></pre></div>
+<ul>
+<li>加上div的tag</li>
+</ul>
+<div class="sourceCode" id="cb314"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb314-1"><a href="decorator.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap the result of hello_goodbye() in &lt;div&gt; and &lt;/div&gt;</span></span>
+<span id="cb314-2"><a href="decorator.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="at">@html</span>(<span class="st">"&lt;div&gt;"</span>, <span class="st">"&lt;/div&gt;"</span>)</span>
+<span id="cb314-3"><a href="decorator.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello_goodbye(name):</span>
+<span id="cb314-4"><a href="decorator.html#cb314-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="ss">f'</span><span class="ch">\n</span><span class="sc">{</span>hello(name)<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>goodbye(name)<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span></span>
+<span id="cb314-5"><a href="decorator.html#cb314-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb314-6"><a href="decorator.html#cb314-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hello_goodbye(<span class="st">'Alice'</span>))</span>
+<span id="cb314-7"><a href="decorator.html#cb314-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;div&gt;</span></span>
+<span id="cb314-8"><a href="decorator.html#cb314-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;b&gt;Hello Alice!&lt;/b&gt;</span></span>
+<span id="cb314-9"><a href="decorator.html#cb314-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;i&gt;Goodbye Alice.&lt;/i&gt;</span></span>
+<span id="cb314-10"><a href="decorator.html#cb314-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;/div&gt;</span></span></code></pre></div>
+</div>
+<div id="real-world-examples" class="section level2" number="28.5">
+<h2>
+<span class="header-section-number">28.5</span> Real-world examples<a class="anchor" aria-label="anchor" href="#real-world-examples"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>decorator的使用時機: add common behavior to multiple functions</li>
+</ul>
+<div id="time-a-function" class="section level3" number="28.5.1">
+<h3>
+<span class="header-section-number">28.5.1</span> time a function<a class="anchor" aria-label="anchor" href="#time-a-function"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>我想寫一個<code>timer</code>的decorator，來print出該function要花多少時間run</li>
+</ul>
+<div class="sourceCode" id="cb315"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb315-1"><a href="decorator.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb315-2"><a href="decorator.html#cb315-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb315-3"><a href="decorator.html#cb315-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> timer(func):</span>
+<span id="cb315-4"><a href="decorator.html#cb315-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb315-5"><a href="decorator.html#cb315-5" aria-hidden="true" tabindex="-1"></a><span class="co">  Purpose:</span></span>
+<span id="cb315-6"><a href="decorator.html#cb315-6" aria-hidden="true" tabindex="-1"></a><span class="co">    A decorator that prints how long a function took to run</span></span>
+<span id="cb315-7"><a href="decorator.html#cb315-7" aria-hidden="true" tabindex="-1"></a><span class="co">  Args:</span></span>
+<span id="cb315-8"><a href="decorator.html#cb315-8" aria-hidden="true" tabindex="-1"></a><span class="co">    func (callable): The function being decorated  </span></span>
+<span id="cb315-9"><a href="decorator.html#cb315-9" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns:</span></span>
+<span id="cb315-10"><a href="decorator.html#cb315-10" aria-hidden="true" tabindex="-1"></a><span class="co">    callable: the decorated function</span></span>
+<span id="cb315-11"><a href="decorator.html#cb315-11" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb315-12"><a href="decorator.html#cb315-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb315-13"><a href="decorator.html#cb315-13" aria-hidden="true" tabindex="-1"></a>    t_start <span class="op">=</span> time.time()</span>
+<span id="cb315-14"><a href="decorator.html#cb315-14" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb315-15"><a href="decorator.html#cb315-15" aria-hidden="true" tabindex="-1"></a>    t_total <span class="op">=</span> time.time() <span class="op">-</span> t_start</span>
+<span id="cb315-16"><a href="decorator.html#cb315-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> took </span><span class="sc">{</span>t_total<span class="sc">}</span><span class="ss"> seconds to run"</span>)</span>
+<span id="cb315-17"><a href="decorator.html#cb315-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb315-18"><a href="decorator.html#cb315-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb315-19"><a href="decorator.html#cb315-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span></code></pre></div>
+<ul>
+<li>那我現在寫一個<code>sleep_n_seconds</code>的function，就可以測測是不是可以work</li>
+</ul>
+<div class="sourceCode" id="cb316"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a href="decorator.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="at">@timer</span></span>
+<span id="cb316-2"><a href="decorator.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sleep_n_seconds(n):</span>
+<span id="cb316-3"><a href="decorator.html#cb316-3" aria-hidden="true" tabindex="-1"></a>  time.sleep(n)</span>
+<span id="cb316-4"><a href="decorator.html#cb316-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-5"><a href="decorator.html#cb316-5" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds(<span class="dv">2</span>)</span>
+<span id="cb316-6"><a href="decorator.html#cb316-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 2.0100839138031006 seconds to run</span></span>
+<span id="cb316-7"><a href="decorator.html#cb316-7" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds(<span class="dv">5</span>)</span>
+<span id="cb316-8"><a href="decorator.html#cb316-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 5.004548072814941 seconds to run</span></span></code></pre></div>
+</div>
+<div id="counter" class="section level3" number="28.5.2">
+<h3>
+<span class="header-section-number">28.5.2</span> counter<a class="anchor" aria-label="anchor" href="#counter"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>假設我們今天寫了一個新的web app，然後想看看各支function被call了幾次<br>
+</li>
+<li>那過了一陣子後，我們就可以看一下是不是有些function可以被remove，反正user根本都沒在用<br>
+</li>
+<li>那我就可以寫個decorator，加在我所有想觀察的function的上面，就可以做到這件事：</li>
+</ul>
+<div class="sourceCode" id="cb317"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb317-1"><a href="decorator.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> counter(func):</span>
+<span id="cb317-2"><a href="decorator.html#cb317-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb317-3"><a href="decorator.html#cb317-3" aria-hidden="true" tabindex="-1"></a>    wrapper.count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb317-4"><a href="decorator.html#cb317-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call the function being decorated and return the result</span></span>
+<span id="cb317-5"><a href="decorator.html#cb317-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb317-6"><a href="decorator.html#cb317-6" aria-hidden="true" tabindex="-1"></a>  wrapper.count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb317-7"><a href="decorator.html#cb317-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the new decorated function</span></span>
+<span id="cb317-8"><a href="decorator.html#cb317-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb317-9"><a href="decorator.html#cb317-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb317-10"><a href="decorator.html#cb317-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Decorate foo() with the counter() decorator</span></span>
+<span id="cb317-11"><a href="decorator.html#cb317-11" aria-hidden="true" tabindex="-1"></a><span class="at">@counter</span></span>
+<span id="cb317-12"><a href="decorator.html#cb317-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo():</span>
+<span id="cb317-13"><a href="decorator.html#cb317-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'calling foo()'</span>)</span>
+<span id="cb317-14"><a href="decorator.html#cb317-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb317-15"><a href="decorator.html#cb317-15" aria-hidden="true" tabindex="-1"></a>foo()</span>
+<span id="cb317-16"><a href="decorator.html#cb317-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; calling foo()</span></span>
+<span id="cb317-17"><a href="decorator.html#cb317-17" aria-hidden="true" tabindex="-1"></a>foo()</span>
+<span id="cb317-18"><a href="decorator.html#cb317-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; calling foo()</span></span>
+<span id="cb317-19"><a href="decorator.html#cb317-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'foo() was called </span><span class="sc">{</span>foo<span class="sc">.</span>count<span class="sc">}</span><span class="ss"> times.'</span>)</span>
+<span id="cb317-20"><a href="decorator.html#cb317-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; foo() was called 2 times.</span></span></code></pre></div>
+</div>
+<div id="print-the-return-type" class="section level3" number="28.5.3">
+<h3>
+<span class="header-section-number">28.5.3</span> print the return type<a class="anchor" aria-label="anchor" href="#print-the-return-type"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>在debug的時候，常常會懷疑，原本寫好的function，吐出來的value的資料類型，到底是不是我心中想的那樣<br>
+</li>
+<li>例如，我以為我寫的這個function，會吐tuple出來，但結果他是吐list<br>
+</li>
+<li>那常見的作法，就是進到這個function去debug，或是在這個function中，叫他多print一下return的type<br>
+</li>
+<li>但只要有這個需求的function一多，你就又會覺得很煩了，所以這時候，就又可以用decorator了： 我只要寫個decorator，那我想裝飾哪些function就看哪些function：</li>
+</ul>
+<div class="sourceCode" id="cb318"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb318-1"><a href="decorator.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_return_type(func):</span>
+<span id="cb318-2"><a href="decorator.html#cb318-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define wrapper(), the decorated function</span></span>
+<span id="cb318-3"><a href="decorator.html#cb318-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb318-4"><a href="decorator.html#cb318-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call the function being decorated</span></span>
+<span id="cb318-5"><a href="decorator.html#cb318-5" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">*</span>kwargs)</span>
+<span id="cb318-6"><a href="decorator.html#cb318-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">() returned type </span><span class="sc">{</span><span class="bu">type</span>(result)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb318-7"><a href="decorator.html#cb318-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb318-8"><a href="decorator.html#cb318-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the decorated function</span></span>
+<span id="cb318-9"><a href="decorator.html#cb318-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span></code></pre></div>
+<ul>
+<li>現在來試試效果：</li>
+</ul>
+<div class="sourceCode" id="cb319"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb319-1"><a href="decorator.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="at">@print_return_type</span></span>
+<span id="cb319-2"><a href="decorator.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(value):</span>
+<span id="cb319-3"><a href="decorator.html#cb319-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> value</span>
+<span id="cb319-4"><a href="decorator.html#cb319-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb319-5"><a href="decorator.html#cb319-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(foo(<span class="dv">42</span>))</span>
+<span id="cb319-6"><a href="decorator.html#cb319-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; foo() returned type &lt;class 'int'&gt;</span></span>
+<span id="cb319-7"><a href="decorator.html#cb319-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42</span></span>
+<span id="cb319-8"><a href="decorator.html#cb319-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(foo([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]))</span>
+<span id="cb319-9"><a href="decorator.html#cb319-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; foo() returned type &lt;class 'list'&gt;</span></span>
+<span id="cb319-10"><a href="decorator.html#cb319-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2, 3]</span></span>
+<span id="cb319-11"><a href="decorator.html#cb319-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(foo({<span class="st">'a'</span>: <span class="dv">42</span>}))</span>
+<span id="cb319-12"><a href="decorator.html#cb319-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; foo() returned type &lt;class 'dict'&gt;</span></span>
+<span id="cb319-13"><a href="decorator.html#cb319-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 42}</span></span></code></pre></div>
+</div>
+<div id="memorize-results" class="section level3" number="28.5.4">
+<h3>
+<span class="header-section-number">28.5.4</span> memorize results<a class="anchor" aria-label="anchor" href="#memorize-results"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>有時候我們寫了一個function，他每做一次運算，都要花很久的時間。</li>
+<li>那我就希望，把input, output給記下來，例如我如果call過n次這個function，我就累積了n筆input和output，可記成這樣：</li>
+</ul>
+<div class="sourceCode" id="cb320"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb320-1"><a href="decorator.html#cb320-1" aria-hidden="true" tabindex="-1"></a>cache <span class="op">=</span> {</span>
+<span id="cb320-2"><a href="decorator.html#cb320-2" aria-hidden="true" tabindex="-1"></a>  (arg1_1, arg2_1): result_1,</span>
+<span id="cb320-3"><a href="decorator.html#cb320-3" aria-hidden="true" tabindex="-1"></a>  (arg1_2, arg2_2): result_2,</span>
+<span id="cb320-4"><a href="decorator.html#cb320-4" aria-hidden="true" tabindex="-1"></a>  ...,</span>
+<span id="cb320-5"><a href="decorator.html#cb320-5" aria-hidden="true" tabindex="-1"></a>  (arg1_n, arg2_n): result_n</span>
+<span id="cb320-6"><a href="decorator.html#cb320-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li>那之後call這個function時，我就先去查之前有沒有做過這組input，如果有，我就直接給你output的結果，根本不用再跑一次這個function<br>
+</li>
+<li>那要達成這個目的，我就可以寫個decorator:</li>
+</ul>
+<div class="sourceCode" id="cb321"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb321-1"><a href="decorator.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> memorize(func):</span>
+<span id="cb321-2"><a href="decorator.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb321-3"><a href="decorator.html#cb321-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Purpose:</span></span>
+<span id="cb321-4"><a href="decorator.html#cb321-4" aria-hidden="true" tabindex="-1"></a><span class="co">    store the results of the decorated function for fast lookup</span></span>
+<span id="cb321-5"><a href="decorator.html#cb321-5" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb321-6"><a href="decorator.html#cb321-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb321-7"><a href="decorator.html#cb321-7" aria-hidden="true" tabindex="-1"></a>  cache <span class="op">=</span> {}</span>
+<span id="cb321-8"><a href="decorator.html#cb321-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb321-9"><a href="decorator.html#cb321-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (args, kwargs) <span class="kw">not</span> <span class="kw">in</span> cache:</span>
+<span id="cb321-10"><a href="decorator.html#cb321-10" aria-hidden="true" tabindex="-1"></a>      cache[(args, kwargs)] <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb321-11"><a href="decorator.html#cb321-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cache.get(args, kwargs)</span>
+<span id="cb321-12"><a href="decorator.html#cb321-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb321-13"><a href="decorator.html#cb321-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span></code></pre></div>
+<ul>
+<li>來試試看他的效果(報error，之後再debug吧)</li>
+</ul>
+<div class="sourceCode" id="cb322"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb322-1"><a href="decorator.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="at">@memorize</span></span>
+<span id="cb322-2"><a href="decorator.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> slow_function(a, b):</span>
+<span id="cb322-3"><a href="decorator.html#cb322-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"sleeping..."</span>)</span>
+<span id="cb322-4"><a href="decorator.html#cb322-4" aria-hidden="true" tabindex="-1"></a>  time.sleep(<span class="dv">5</span>)</span>
+<span id="cb322-5"><a href="decorator.html#cb322-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb322-6"><a href="decorator.html#cb322-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-7"><a href="decorator.html#cb322-7" aria-hidden="true" tabindex="-1"></a>slow_function(a <span class="op">=</span> <span class="dv">3</span>, b <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb322-8"><a href="decorator.html#cb322-8" aria-hidden="true" tabindex="-1"></a>slow_function(a <span class="op">=</span> <span class="dv">3</span>, b <span class="op">=</span> <span class="dv">4</span>)</span></code></pre></div>
+</div>
+<div id="timeout" class="section level3" number="28.5.5">
+<h3>
+<span class="header-section-number">28.5.5</span> timeout<a class="anchor" aria-label="anchor" href="#timeout"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>這邊要寫一個decorator，他會去監控我的function的運行時間，如果超過我的忍耐，我就直接停到這個function<br>
+</li>
+<li>這會是一個有argument的decorator，參數是<code>n_seconds</code>，也就是我可以容忍的運行秒數</li>
+</ul>
+<div class="sourceCode" id="cb323"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb323-1"><a href="decorator.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb323-2"><a href="decorator.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> signal</span>
+<span id="cb323-3"><a href="decorator.html#cb323-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-4"><a href="decorator.html#cb323-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> timeout(n_seconds):</span>
+<span id="cb323-5"><a href="decorator.html#cb323-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> decorator(func):</span>
+<span id="cb323-6"><a href="decorator.html#cb323-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb323-7"><a href="decorator.html#cb323-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># set an alarm for n seconds</span></span>
+<span id="cb323-8"><a href="decorator.html#cb323-8" aria-hidden="true" tabindex="-1"></a>      signal.alarm(n_seconds)</span>
+<span id="cb323-9"><a href="decorator.html#cb323-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">try</span>:</span>
+<span id="cb323-10"><a href="decorator.html#cb323-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb323-11"><a href="decorator.html#cb323-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">finally</span>:</span>
+<span id="cb323-12"><a href="decorator.html#cb323-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># cancel alarm</span></span>
+<span id="cb323-13"><a href="decorator.html#cb323-13" aria-hidden="true" tabindex="-1"></a>        signal.alarm(<span class="dv">0</span>)</span>
+<span id="cb323-14"><a href="decorator.html#cb323-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb323-15"><a href="decorator.html#cb323-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> decorator</span></code></pre></div>
+<ul>
+<li>這邊注意到，使用到了沒學過的<code>signal</code> module，那它的作用是，你用<code>signal.alarm(3)</code>，，來開起計時器，如果3秒後還沒結束，他就會跳timeout error出來<br>
+</li>
+<li>那我們試試看以下例子：</li>
+</ul>
+<div class="sourceCode" id="cb324"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb324-1"><a href="decorator.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="at">@timeout</span>(<span class="dv">3</span>)</span>
+<span id="cb324-2"><a href="decorator.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo():</span>
+<span id="cb324-3"><a href="decorator.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  time.sleep(<span class="dv">2</span>)</span>
+<span id="cb324-4"><a href="decorator.html#cb324-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"foo!"</span>)</span>
+<span id="cb324-5"><a href="decorator.html#cb324-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb324-6"><a href="decorator.html#cb324-6" aria-hidden="true" tabindex="-1"></a>foo()</span>
+<span id="cb324-7"><a href="decorator.html#cb324-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; foo!</span></span></code></pre></div>
+<ul>
+<li>運行時間，小於3秒，所以ok<br>
+</li>
+<li>那如果運行時間大於3秒，會show timeout error (這邊就不執行了，因為session會斷掉)</li>
+</ul>
+<div class="sourceCode" id="cb325"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb325-1"><a href="decorator.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="at">@timeout</span>(<span class="dv">3</span>)</span>
+<span id="cb325-2"><a href="decorator.html#cb325-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo():</span>
+<span id="cb325-3"><a href="decorator.html#cb325-3" aria-hidden="true" tabindex="-1"></a>  time.sleep(<span class="dv">5</span>)</span>
+<span id="cb325-4"><a href="decorator.html#cb325-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"foo!"</span>)</span>
+<span id="cb325-5"><a href="decorator.html#cb325-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-6"><a href="decorator.html#cb325-6" aria-hidden="true" tabindex="-1"></a>foo()</span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="closure.html"><span class="header-section-number">27</span> closure</a></div>
+<div class="next"><a href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#decorator"><span class="header-section-number">28</span> decorator</a></li>
+<li>
+<a class="nav-link" href="#%E5%85%88%E5%82%99%E7%9F%A5%E8%AD%98"><span class="header-section-number">28.1</span> 先備知識</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#function-as-object"><span class="header-section-number">28.1.1</span> function as object</a></li>
+<li><a class="nav-link" href="#nested-function-1"><span class="header-section-number">28.1.2</span> nested function</a></li>
+<li><a class="nav-link" href="#nonlocal-variable"><span class="header-section-number">28.1.3</span> nonlocal variable</a></li>
+<li><a class="nav-link" href="#closure-2"><span class="header-section-number">28.1.4</span> closure</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#intro-to-decorator"><span class="header-section-number">28.2</span> Intro to decorator</a></li>
+<li><a class="nav-link" href="#decorators-and-metadata"><span class="header-section-number">28.3</span> Decorators and metadata</a></li>
+<li><a class="nav-link" href="#%E6%9C%89arguments%E7%9A%84decorators"><span class="header-section-number">28.4</span> 有arguments的decorators</a></li>
+<li>
+<a class="nav-link" href="#real-world-examples"><span class="header-section-number">28.5</span> Real-world examples</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#time-a-function"><span class="header-section-number">28.5.1</span> time a function</a></li>
+<li><a class="nav-link" href="#counter"><span class="header-section-number">28.5.2</span> counter</a></li>
+<li><a class="nav-link" href="#print-the-return-type"><span class="header-section-number">28.5.3</span> print the return type</a></li>
+<li><a class="nav-link" href="#memorize-results"><span class="header-section-number">28.5.4</span> memorize results</a></li>
+<li><a class="nav-link" href="#timeout"><span class="header-section-number">28.5.5</span> timeout</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/decorator.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/decorator.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

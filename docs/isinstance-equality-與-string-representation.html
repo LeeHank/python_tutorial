@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 33 isinstance, equality, 與 string representation | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="33.1 type 與 isinstance 之前已經用過很多次type()，例如下例： a = [1,2] print(type(a)) #&gt; &lt;class 'list'&gt; 可以看到，顯示出來的type是list 而且，我們終於看懂前面的class是什麼意思了：在python中萬物都是object，所以你去問一個object的type，就是在問他的class是誰拉！！...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 33 isinstance, equality, 與 string representation | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="33.1 type 與 isinstance 之前已經用過很多次type()，例如下例： a = [1,2] print(type(a)) #&gt; &lt;class 'list'&gt; 可以看到，顯示出來的type是list 而且，我們終於看懂前面的class是什麼意思了：在python中萬物都是object，所以你去問一個object的type，就是在問他的class是誰拉！！...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 33 isinstance, equality, 與 string representation | Python Tutorial">
+<meta name="twitter:description" content="33.1 type 與 isinstance 之前已經用過很多次type()，例如下例： a = [1,2] print(type(a)) #&gt; &lt;class 'list'&gt; 可以看到，顯示出來的type是list 而且，我們終於看懂前面的class是什麼意思了：在python中萬物都是object，所以你去問一個object的type，就是在問他的class是誰拉！！...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="active" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="isinstance-equality-與-string-representation" class="section level1" number="33">
+<h1>
+<span class="header-section-number">33</span> isinstance, equality, 與 string representation<a class="anchor" aria-label="anchor" href="#isinstance-equality-%E8%88%87-string-representation"><i class="fas fa-link"></i></a>
+</h1>
+<div id="type-與-isinstance" class="section level2" number="33.1">
+<h2>
+<span class="header-section-number">33.1</span> <code>type</code> 與 <code>isinstance</code><a class="anchor" aria-label="anchor" href="#type-%E8%88%87-isinstance"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>之前已經用過很多次<code><a href="https://rdrr.io/r/base/typeof.html">type()</a></code>，例如下例：</li>
+</ul>
+<div class="sourceCode" id="cb395"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb395-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb395-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb395-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb395-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb395-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb395-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'list'&gt;</span></span></code></pre></div>
+<ul>
+<li>可以看到，顯示出來的type是<code>list</code><br>
+</li>
+<li>而且，我們終於看懂前面的<code>class</code>是什麼意思了：在python中萬物都是object，所以你去問一個object的type，就是在問他的class是誰拉！！<br>
+</li>
+<li>那現在多教一個指令，叫<code>isinstance()</code>，他的用法如下：</li>
+</ul>
+<div class="sourceCode" id="cb396"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb396-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb396-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb396-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb396-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, <span class="bu">list</span>))</span>
+<span id="cb396-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb396-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<ul>
+<li>所以蠻好懂的，第一個argument就是放你要驗證的object(e.g. 此例的<code>a</code>)，第二個argument就是去看看他是不是這個class的instance<br>
+</li>
+<li>再來個練習，我自己寫的class，用type會長怎樣：</li>
+</ul>
+<div class="sourceCode" id="cb397"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb397-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
+<span id="cb397-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb397-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb397-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> A()</span>
+<span id="cb397-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb397-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb397-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class '__main__.A'&gt;</span></span></code></pre></div>
+<ul>
+<li>cool，他的type就是A。那用用看<code>isinstance</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb398"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb398-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, A))</span>
+<span id="cb398-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<div id="繼承與isinstance" class="section level3" number="33.1.1">
+<h3>
+<span class="header-section-number">33.1.1</span> 繼承與isinstance<a class="anchor" aria-label="anchor" href="#%E7%B9%BC%E6%89%BF%E8%88%87isinstance"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>重點來了，如果今天有繼承的話，那子類的instance，也會是父類的instance</li>
+</ul>
+<div class="sourceCode" id="cb399"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb399-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
+<span id="cb399-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb399-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> B(A):</span>
+<span id="cb399-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb399-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> A()</span>
+<span id="cb399-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> B()</span>
+<span id="cb399-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(b))</span>
+<span id="cb399-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class '__main__.B'&gt;</span></span>
+<span id="cb399-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(b, B))</span>
+<span id="cb399-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span>
+<span id="cb399-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(b, A))</span>
+<span id="cb399-15"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span>
+<span id="cb399-16"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb399-17"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class '__main__.A'&gt;</span></span>
+<span id="cb399-18"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, A))</span>
+<span id="cb399-19"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span>
+<span id="cb399-20"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(a, B))</span>
+<span id="cb399-21"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb399-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<ul>
+<li>可以明顯看到，雖然b的type是B，但在判斷instance時，他仍是A的instance!!<br>
+</li>
+<li>因為我們要判斷b是不是A的instance時，就是看A的instance該有的attribute和method他是不是都有。而因為B繼承A，所以A有的，B都有，B做出來的instance全都繼承過去了，所以他仍是A的instance<br>
+</li>
+<li>但a就不會是B的instance了，道理很簡單，B的instance該有的attribute和method，a未必都有(因為B就是繼承A後，要加了他獨有的attribute和methods)</li>
+</ul>
+</div>
+</div>
+<div id="eq__-object-equality" class="section level2" number="33.2">
+<h2>
+<span class="header-section-number">33.2</span> <code>__eq__</code> (object equality)<a class="anchor" aria-label="anchor" href="#eq__-object-equality"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>用我們現在學到的方法來寫class的話，會碰到以下問題：兩個instance的attribute完全相同，但比較結果卻說不同：</li>
+</ul>
+<div class="sourceCode" id="cb400"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb400-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer:</span>
+<span id="cb400-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, <span class="bu">id</span>):</span>
+<span id="cb400-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb400-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> <span class="bu">id</span></span>
+<span id="cb400-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb400-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-6" aria-hidden="true" tabindex="-1"></a>cust1 <span class="op">=</span> Customer(<span class="st">"Hank"</span>, <span class="dv">19002329</span>)</span>
+<span id="cb400-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-7" aria-hidden="true" tabindex="-1"></a>cust2 <span class="op">=</span> Customer(<span class="st">"Hank"</span>, <span class="dv">19002329</span>)</span>
+<span id="cb400-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb400-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-9" aria-hidden="true" tabindex="-1"></a>cust1 <span class="op">==</span> cust2</span>
+<span id="cb400-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb400-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<ul>
+<li>為什麼會這樣？因為在比相不相同時，是比記憶體位置一不一樣：</li>
+</ul>
+<div class="sourceCode" id="cb401"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb401-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust1)</span>
+<span id="cb401-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x10f0e3220&gt;</span></span>
+<span id="cb401-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust2)</span>
+<span id="cb401-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x10f0e3400&gt;</span></span></code></pre></div>
+<ul>
+<li>很明顯的看到，兩個記憶體位置不同，所以才說不相等<br>
+</li>
+<li>聽起來很合理，但很難用啊，兩個object的attribute相同，我就希望他們比較的結果是一樣啊。<br>
+</li>
+<li>其實python內建的class，就有做這種處理了，比如說：</li>
+</ul>
+<div class="sourceCode" id="cb402"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb402-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb402-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
+<span id="cb402-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
+<span id="cb402-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-4" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(a)</span>
+<span id="cb402-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4547578096</span></span>
+<span id="cb402-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-6" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(b)</span>
+<span id="cb402-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4547578336</span></span>
+<span id="cb402-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">==</span> b)</span>
+<span id="cb402-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [ True]</span></span></code></pre></div>
+<ul>
+<li>可以看到，兩個object的記憶體位置不同，但比較結果是True，這怎麼辦到的？<br>
+</li>
+<li>這其實就是要多寫一個”equality constructor”。對比於”initial constructor”是<code>__init__(self, ...)</code>，這個equality constructor是寫成<code>__eq__(self, other)</code>，其中”self”, “other”就是固定的參數，不要去換<br>
+</li>
+<li>寫法如下：</li>
+</ul>
+<div class="sourceCode" id="cb403"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb403-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer:</span>
+<span id="cb403-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, <span class="bu">id</span>):</span>
+<span id="cb403-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb403-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> <span class="bu">id</span></span>
+<span id="cb403-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb403-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"__eq__() is called"</span>)</span>
+<span id="cb403-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="va">self</span>.name <span class="op">==</span> other.name) <span class="op">&amp;</span> (<span class="va">self</span>.<span class="bu">id</span> <span class="op">==</span> other.<span class="bu">id</span>)</span>
+<span id="cb403-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb403-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-9" aria-hidden="true" tabindex="-1"></a>cust1 <span class="op">=</span> Customer(<span class="st">"Hank"</span>, <span class="dv">19002329</span>)</span>
+<span id="cb403-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-10" aria-hidden="true" tabindex="-1"></a>cust2 <span class="op">=</span> Customer(<span class="st">"Hank"</span>, <span class="dv">19002329</span>)</span>
+<span id="cb403-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb403-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-12" aria-hidden="true" tabindex="-1"></a>cust1 <span class="op">==</span> cust2</span>
+<span id="cb403-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; __eq__() is called</span></span>
+<span id="cb403-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb403-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<ul>
+<li><p>這邊就看到，我們得條件是，兩個比較的instance的name和id若完全相同，我就認定他是equal的。裡面的self和other就各指稱兩個instance，最後的return結果一定要是True/Fale。</p></li>
+<li>
+<p>除了equality operator外，其實還有其他的comparison，比如：</p>
+<table class="table table-sm">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Method</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>`__eq__`: equal</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>`__ne__`: not equal</td>
+</tr>
+<tr class="odd">
+<td>&gt;=</td>
+<td>`__ge__`: greater or equal than</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>`__le__`: less or equal than</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>`__gt__`: greater than</td>
+</tr>
+<tr class="even">
+<td>&lt;</td>
+<td>`__lt__`: less than</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>接下來講兩個細節：</p>
+<ul>
+<li>不同class的instance，能不能比啊？會錯亂嗎？<br>
+</li>
+<li>Parent class的instance和Child class的instance在比時，用誰的equality constructor？</li>
+</ul>
+</li>
+<li><p>先講答案，第一點是，只要equality constructor一樣，就可以比，所以會造錯亂。解決方式是，再多比一個<code>type(self)==type(other)</code>就好<br></p></li>
+<li><p>第二點的答案是，always用child class的equality constructor</p></li>
+<li><p>先來看第一點的範例吧</p></li>
+</ul>
+<div class="sourceCode" id="cb404"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb404-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Buyer:</span>
+<span id="cb404-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb404-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb404-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb404-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb404-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.number <span class="op">==</span> other.number</span>
+<span id="cb404-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Phone:</span>
+<span id="cb404-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb404-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb404-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb404-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb404-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.number <span class="op">==</span> other.number</span>
+<span id="cb404-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb404-15"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-15" aria-hidden="true" tabindex="-1"></a>buyer1 <span class="op">=</span> Buyer(<span class="dv">19002329</span>)</span>
+<span id="cb404-16"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-16" aria-hidden="true" tabindex="-1"></a>phone_number <span class="op">=</span> Phone(<span class="dv">19002329</span>)</span>
+<span id="cb404-17"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-18"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-18" aria-hidden="true" tabindex="-1"></a>buyer1 <span class="op">==</span> phone_number</span>
+<span id="cb404-19"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb404-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<ul>
+<li>我建了兩個class，第一個是客戶的class，他的attribute是number，指的是他的編號；第二個是電話號碼的class，他的attribute也是number，但指的是電話號碼。結果這兩個不一樣的東西，就剛好都有number，就被比成一樣了。<br>
+</li>
+<li>所以實務上在比較時，equality constructor，都會再加上type的條件：</li>
+</ul>
+<div class="sourceCode" id="cb405"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb405-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(buyer1)</span>
+<span id="cb405-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb405-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class '__main__.Buyer'&gt;</span></span>
+<span id="cb405-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb405-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(phone_number)</span>
+<span id="cb405-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb405-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class '__main__.Phone'&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb406-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Buyer:</span>
+<span id="cb406-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb406-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb406-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb406-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb406-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="va">self</span>.number <span class="op">==</span> other.number) <span class="op">&amp;</span> (<span class="bu">type</span>(<span class="va">self</span>)<span class="op">==</span><span class="bu">type</span>(other))</span>
+<span id="cb406-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb406-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Phone:</span>
+<span id="cb406-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb406-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb406-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb406-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb406-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="va">self</span>.number <span class="op">==</span> other.number) <span class="op">&amp;</span> (<span class="bu">type</span>(<span class="va">self</span>)<span class="op">==</span><span class="bu">type</span>(other))</span>
+<span id="cb406-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb406-15"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-15" aria-hidden="true" tabindex="-1"></a>buyer1 <span class="op">=</span> Buyer(<span class="dv">19002329</span>)</span>
+<span id="cb406-16"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-16" aria-hidden="true" tabindex="-1"></a>phone_number <span class="op">=</span> Phone(<span class="dv">19002329</span>)</span>
+<span id="cb406-17"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb406-18"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-18" aria-hidden="true" tabindex="-1"></a>buyer1 <span class="op">==</span> phone_number</span>
+<span id="cb406-19"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb406-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<ul>
+<li>接著就講到parent class和child class的比較。always用child class的equality constructor：</li>
+</ul>
+<div class="sourceCode" id="cb407"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb407-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Parent:</span>
+<span id="cb407-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb407-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Parent's __eq__() called"</span>)</span>
+<span id="cb407-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb407-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb407-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Child(Parent):</span>
+<span id="cb407-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb407-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Child's __eq__() called"</span>)</span>
+<span id="cb407-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb407-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb407-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-11" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> Parent()</span>
+<span id="cb407-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Child()</span>
+<span id="cb407-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb407-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-14" aria-hidden="true" tabindex="-1"></a>p <span class="op">==</span> c </span>
+<span id="cb407-15"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Child's __eq__() called</span></span>
+<span id="cb407-16"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb407-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+</div>
+<div id="str__與__repr__" class="section level2" number="33.3">
+<h2>
+<span class="header-section-number">33.3</span> <code>__str__</code>與<code>__repr__</code><a class="anchor" aria-label="anchor" href="#str__%E8%88%87__repr__"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>接下來的議題，是有關object的printing<br>
+</li>
+<li>我們目前對class的寫法，會讓我們每次去print一個instance的時候，他都只給我們記憶體位置，例如：</li>
+</ul>
+<div class="sourceCode" id="cb408"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb408-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> salary:</span>
+<span id="cb408-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb408-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb408-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-5" aria-hidden="true" tabindex="-1"></a>my_salary <span class="op">=</span> salary(<span class="dv">22000</span>)</span>
+<span id="cb408-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_salary)</span>
+<span id="cb408-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.salary object at 0x10f0f8520&gt;</span></span></code></pre></div>
+<ul>
+<li>damn…這麼簡單的class，我當然希望他直接print 22K給我看啊<br>
+</li>
+<li>Python其他內建的class，都有做這種處理，不信你看numpy的instance:</li>
+</ul>
+<div class="sourceCode" id="cb409"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb409-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb409-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb409-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb409-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb409-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb409-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb409-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1 2 3]</span></span></code></pre></div>
+<ul>
+<li>
+<p>為什麼勒？因為python有兩種constructor，一個叫<code>__str__</code>，一個叫<code>__repr__</code></p>
+<ul>
+<li>定義在<code>__str__</code>內的東西，是要給end user看的，是informal的資訊，可以藉由<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>和<code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>看到這些較親民的訊息<br>
+</li>
+<li>定義在<code>__repr__</code>內的東西，是要給developer看的，是formal的資訊，他會告訴你type, 記憶體位置等資訊，可以藉由直接key object name，或是<code>repr()</code>來取得。不信你直接call numpy的object看看，他就會送你array訊息</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb410"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb410-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb410-1" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb410-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([1, 2, 3])</span></span></code></pre></div>
+<ul>
+<li>那現在回頭寫我剛剛的salary class:</li>
+</ul>
+<div class="sourceCode" id="cb411"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb411-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> salary:</span>
+<span id="cb411-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number):</span>
+<span id="cb411-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.number <span class="op">=</span> number</span>
+<span id="cb411-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb411-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb411-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(<span class="va">self</span>.number)</span>
+<span id="cb411-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb411-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb411-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Salary(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>number<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb411-10"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb411-11"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-11" aria-hidden="true" tabindex="-1"></a>my_salary <span class="op">=</span> salary(<span class="dv">22000</span>)</span>
+<span id="cb411-12"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_salary)</span>
+<span id="cb411-13"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22000</span></span>
+<span id="cb411-14"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-14" aria-hidden="true" tabindex="-1"></a>my_salary</span>
+<span id="cb411-15"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb411-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Salary(22000)</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></div>
+<div class="next"><a href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#isinstance-equality-%E8%88%87-string-representation"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li>
+<a class="nav-link" href="#type-%E8%88%87-isinstance"><span class="header-section-number">33.1</span> type 與 isinstance</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E7%B9%BC%E6%89%BF%E8%88%87isinstance"><span class="header-section-number">33.1.1</span> 繼承與isinstance</a></li></ul>
+</li>
+<li><a class="nav-link" href="#eq__-object-equality"><span class="header-section-number">33.2</span> __eq__ (object equality)</a></li>
+<li><a class="nav-link" href="#str__%E8%88%87__repr__"><span class="header-section-number">33.3</span> __str__與__repr__</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/equality_and_str.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/equality_and_str.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

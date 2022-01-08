@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 13 set應用實戰 | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="set是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 13 set應用實戰 | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="set是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 13 set應用實戰 | Python Tutorial">
+<meta name="twitter:description" content="set是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="active" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="set應用實戰" class="section level1" number="13">
+<h1>
+<span class="header-section-number">13</span> set應用實戰<a class="anchor" aria-label="anchor" href="#set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>set是python內建的一種collection<br>
+</li>
+<li>既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part：
+<ul>
+<li>如何建立？<br>
+</li>
+<li>如何增、刪、查、改？<br>
+</li>
+</ul>
+</li>
+<li>這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy<br>
+</li>
+<li>接著就開始介紹如何loop他(用for, comprehension)<br>
+</li>
+<li>最後就是補齊這個object還沒介紹到的methods<br>
+</li>
+<li>實戰的部分，就會以”How to…“的方式整理常見的需求</li>
+</ul>
+<div id="定義set" class="section level2" number="13.1">
+<h2>
+<span class="header-section-number">13.1</span> 定義set<a class="anchor" aria-label="anchor" href="#%E5%AE%9A%E7%BE%A9set"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>集合就是只有key，沒有value的dictionary<br>
+</li>
+<li>例如，以下是dictionary</li>
+</ul>
+<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {</span>
+<span id="cb181-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'a'</span>: <span class="dv">1</span>,</span>
+<span id="cb181-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'b'</span>: <span class="dv">5</span></span>
+<span id="cb181-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb181-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict)</span>
+<span id="cb181-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb181-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a': 1, 'b': 5}</span></span></code></pre></div>
+<ul>
+<li>而，以下就是set</li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-1" aria-hidden="true" tabindex="-1"></a>my_set <span class="op">=</span> {<span class="st">'a'</span>, <span class="st">'b'</span>}</span>
+<span id="cb182-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_set)</span>
+<span id="cb182-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a', 'b'}</span></span></code></pre></div>
+<ul>
+<li>set的特點，其實和dictionary的key的特點一樣(也和數學上的集合的特點一樣)，就是’唯一’和’無序’。<br>
+</li>
+<li>唯一就是key值唯一，你多給他重複的key，他也幫你刪掉。無序就是你每次print的時候，他順序都會亂跳，所以你有不能用index的方法來獲取set裡面的element</li>
+</ul>
+</div>
+<div id="查-只能用for-loop與in" class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> [查] 只能用<code>for loop</code>與<code>in</code><a class="anchor" aria-label="anchor" href="#%E6%9F%A5-%E5%8F%AA%E8%83%BD%E7%94%A8for-loop%E8%88%87in"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>因為set又沒有list/tuple的index，也沒有dictionary的key，所以你既不能用<code>set1[index]</code>來取資料，也不能用<code>set1['key']</code>來取資料<br>
+</li>
+<li>所以，只能做兩件事：
+<ul>
+<li>用for迴圈來loop看看總共有哪些item<br>
+</li>
+<li>用<code>in</code>來確認，你指定的item有沒有在這個set裡面</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb183"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb183-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb183-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> thisset:</span>
+<span id="cb183-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(x)</span>
+<span id="cb183-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; cherry</span></span>
+<span id="cb183-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
+<span id="cb183-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb183-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span></code></pre></div>
+<ul>
+<li>check “banana”是否在這個set中</li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb184-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb184-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb184-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb184-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"banana"</span> <span class="kw">in</span> thisset)</span>
+<span id="cb184-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+</div>
+<div id="改-set無法做修改" class="section level2" number="13.3">
+<h2>
+<span class="header-section-number">13.3</span> [改] set無法做修改<a class="anchor" aria-label="anchor" href="#%E6%94%B9-set%E7%84%A1%E6%B3%95%E5%81%9A%E4%BF%AE%E6%94%B9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>set無法做修改的原因，是因為他無法取出你指定的那個item，所以他無法像list那樣，用<code>list1[index] = new_value</code>，也無法像dictionary那樣，用<code>dic1['key'] = new_value</code>來做修改<br>
+</li>
+<li>但set可以做刪除和新增。所以如果一個set是<code>{"apple", "banana", "orange"}</code>，那我想把”banana”改成”kiwi”，那就是刪除”banana”，再新增”kiwi”就好</li>
+</ul>
+</div>
+<div id="刪-.remove與.discard" class="section level2" number="13.4">
+<h2>
+<span class="header-section-number">13.4</span> [刪] <code>.remove()</code>與<code>.discard()</code><a class="anchor" aria-label="anchor" href="#%E5%88%AA-.remove%E8%88%87.discard"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<code>.remove()</code>和<code>.discard()</code>的差別，是在remove一個不存在的值時，他會跳error，但discard一個不存在的值時，他就裝沒事而已</li>
+</ul>
+<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb185-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-3" aria-hidden="true" tabindex="-1"></a>thisset.remove(<span class="st">"banana"</span>)</span>
+<span id="cb185-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb185-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb185-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'cherry', 'apple'}</span></span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb186-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-3" aria-hidden="true" tabindex="-1"></a>thisset.remove(<span class="st">"kiwi"</span>)</span>
+<span id="cb186-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): KeyError: 'kiwi'</span></span>
+<span id="cb186-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb186-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb186-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb186-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb187-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-3" aria-hidden="true" tabindex="-1"></a>thisset.discard(<span class="st">"banana"</span>)</span>
+<span id="cb187-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb187-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb187-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'cherry', 'apple'}</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb188-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-3" aria-hidden="true" tabindex="-1"></a>thisset.discard(<span class="st">"kiwi"</span>)</span>
+<span id="cb188-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb188-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb188-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'cherry', 'banana', 'apple'}</span></span></code></pre></div>
+</div>
+<div id="增-.add與.update" class="section level2" number="13.5">
+<h2>
+<span class="header-section-number">13.5</span> [增] <code>.add()</code>與<code>.update()</code><a class="anchor" aria-label="anchor" href="#%E5%A2%9E-.add%E8%88%87.update"><i class="fas fa-link"></i></a>
+</h2>
+<div id="增加一個item用.add" class="section level3" number="13.5.1">
+<h3>
+<span class="header-section-number">13.5.1</span> 增加一個item用<code>.add()</code><a class="anchor" aria-label="anchor" href="#%E5%A2%9E%E5%8A%A0%E4%B8%80%E5%80%8Bitem%E7%94%A8.add"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb189"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb189-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-3" aria-hidden="true" tabindex="-1"></a>thisset.add(<span class="st">"orange"</span>)</span>
+<span id="cb189-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb189-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'cherry', 'banana', 'orange', 'apple'}</span></span></code></pre></div>
+</div>
+<div id="增加多個item用.update" class="section level3" number="13.5.2">
+<h3>
+<span class="header-section-number">13.5.2</span> 增加多個item用<code>.update()</code><a class="anchor" aria-label="anchor" href="#%E5%A2%9E%E5%8A%A0%E5%A4%9A%E5%80%8Bitem%E7%94%A8.update"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb190-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-2" aria-hidden="true" tabindex="-1"></a>tropical <span class="op">=</span> {<span class="st">"pineapple"</span>, <span class="st">"mango"</span>, <span class="st">"papaya"</span>}</span>
+<span id="cb190-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-4" aria-hidden="true" tabindex="-1"></a>thisset.update(tropical)</span>
+<span id="cb190-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb190-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'banana', 'pineapple', 'mango', 'apple', 'cherry', 'papaya'}</span></span></code></pre></div>
+<ul>
+<li>如果update的東西，裡面有和原本重複的值，那就只會留一個，因為set就是unique</li>
+</ul>
+<div class="sourceCode" id="cb191"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-1" aria-hidden="true" tabindex="-1"></a>thisset <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>}</span>
+<span id="cb191-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-2" aria-hidden="true" tabindex="-1"></a>tropical <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"papaya"</span>}</span>
+<span id="cb191-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-4" aria-hidden="true" tabindex="-1"></a>thisset.update(tropical)</span>
+<span id="cb191-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
+<span id="cb191-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'banana', 'apple', 'cherry', 'papaya'}</span></span></code></pre></div>
+</div>
+</div>
+<div id="mutable-請愛用.copy" class="section level2" number="13.6">
+<h2>
+<span class="header-section-number">13.6</span> [mutable] 請愛用<code>.copy()</code><a class="anchor" aria-label="anchor" href="#mutable-%E8%AB%8B%E6%84%9B%E7%94%A8.copy"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>set也是mutable，所以以下慘劇會重現：</li>
+</ul>
+<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-1" aria-hidden="true" tabindex="-1"></a>set1 <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>}</span>
+<span id="cb192-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-2" aria-hidden="true" tabindex="-1"></a>set1_copy <span class="op">=</span> set1  </span>
+<span id="cb192-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-4" aria-hidden="true" tabindex="-1"></a>set1_copy.remove(<span class="st">"apple"</span>)</span>
+<span id="cb192-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1_copy)</span>
+<span id="cb192-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span>
+<span id="cb192-8"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1)</span>
+<span id="cb192-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span></code></pre></div>
+<ul>
+<li>記得用<code>.copy()</code>來解決問題</li>
+</ul>
+<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-1" aria-hidden="true" tabindex="-1"></a>set1 <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>}</span>
+<span id="cb193-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-2" aria-hidden="true" tabindex="-1"></a>set1_copy <span class="op">=</span> set1.copy()  </span>
+<span id="cb193-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-4" aria-hidden="true" tabindex="-1"></a>set1_copy.remove(<span class="st">"apple"</span>)</span>
+<span id="cb193-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1_copy)</span>
+<span id="cb193-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span>
+<span id="cb193-8"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1)</span>
+<span id="cb193-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana', 'apple'}</span></span></code></pre></div>
+</div>
+<div id="loop-for-1" class="section level2" number="13.7">
+<h2>
+<span class="header-section-number">13.7</span> [loop] for<a class="anchor" aria-label="anchor" href="#loop-for-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>這邊就沒什麼，你只能loop他的item:</li>
+</ul>
+<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-1" aria-hidden="true" tabindex="-1"></a>set1 <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>}</span>
+<span id="cb194-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> set1:</span>
+<span id="cb194-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(item)</span>
+<span id="cb194-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; orange</span></span>
+<span id="cb194-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
+<span id="cb194-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span></code></pre></div>
+</div>
+<div id="loop-comprehension-1" class="section level2" number="13.8">
+<h2>
+<span class="header-section-number">13.8</span> [loop] comprehension<a class="anchor" aria-label="anchor" href="#loop-comprehension-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>set可以看成簡化版的dictionary，那既然可以做dictionary comprehension，就應該可以做set comprehension</li>
+</ul>
+<div class="sourceCode" id="cb195"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-1" aria-hidden="true" tabindex="-1"></a>set1 <span class="op">=</span> {<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>}</span>
+<span id="cb195-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-2" aria-hidden="true" tabindex="-1"></a>set2 <span class="op">=</span> {item <span class="cf">for</span> item <span class="kw">in</span> set1}</span>
+<span id="cb195-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set2)</span>
+<span id="cb195-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'apple', 'banana'}</span></span></code></pre></div>
+</div>
+<div id="特殊技-集合運算" class="section level2" number="13.9">
+<h2>
+<span class="header-section-number">13.9</span> [特殊技] 集合運算<a class="anchor" aria-label="anchor" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E9%9B%86%E5%90%88%E9%81%8B%E7%AE%97"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>set可以做數學上的交集(&amp;)、聯集(|)、差集(-)、補集(^)</li>
+</ul>
+<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>}</span>
+<span id="cb196-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> {<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>}</span>
+<span id="cb196-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s1 <span class="op">&amp;</span> s2)</span>
+<span id="cb196-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {3, 4}</span></span>
+<span id="cb196-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s1 <span class="op">|</span> s2)</span>
+<span id="cb196-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1, 2, 3, 4, 5, 6}</span></span>
+<span id="cb196-8"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s1 <span class="op">-</span> s2) <span class="co">#是s1，但不是s2</span></span>
+<span id="cb196-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1, 2}</span></span>
+<span id="cb196-10"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s1 <span class="op">^</span> s2)</span>
+<span id="cb196-11"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb196-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {1, 2, 5, 6}</span></span></code></pre></div>
+</div>
+<div id="特殊技-對list取unique" class="section level2" number="13.10">
+<h2>
+<span class="header-section-number">13.10</span> [特殊技] 對list取unique<a class="anchor" aria-label="anchor" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E5%B0%8Dlist%E5%8F%96unique"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>例如我有一個list，我想取出unique的值：</li>
+</ul>
+<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb197-1" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>]</span>
+<span id="cb197-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb197-2" aria-hidden="true" tabindex="-1"></a>l_unique <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(l))</span>
+<span id="cb197-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(l_unique)</span>
+<span id="cb197-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb197-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2, 3, 4, 5]</span></span></code></pre></div>
+</div>
+<div id="特殊技-將字串中unique-character轉成list" class="section level2" number="13.11">
+<h2>
+<span class="header-section-number">13.11</span> [特殊技] 將字串中unique character轉成list<a class="anchor" aria-label="anchor" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E5%B0%87%E5%AD%97%E4%B8%B2%E4%B8%ADunique-character%E8%BD%89%E6%88%90list"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>這招蠻牛的，看一下例子就會了</li>
+</ul>
+<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-1" aria-hidden="true" tabindex="-1"></a>my_string <span class="op">=</span> <span class="st">"aabbcdefg"</span></span>
+<span id="cb198-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-2" aria-hidden="true" tabindex="-1"></a>string_to_set <span class="op">=</span> <span class="bu">set</span>(my_string)</span>
+<span id="cb198-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(string_to_set)</span>
+<span id="cb198-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'c', 'a', 'd', 'e', 'g', 'b', 'f'}</span></span></code></pre></div>
+
+</div>
+</div>
+
+
+
+<div class="chapter-nav">
+<div class="prev"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></div>
+<div class="next"><a href="none.html"><span class="header-section-number">14</span> None</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9set"><span class="header-section-number">13.1</span> 定義set</a></li>
+<li><a class="nav-link" href="#%E6%9F%A5-%E5%8F%AA%E8%83%BD%E7%94%A8for-loop%E8%88%87in"><span class="header-section-number">13.2</span> [查] 只能用for loop與in</a></li>
+<li><a class="nav-link" href="#%E6%94%B9-set%E7%84%A1%E6%B3%95%E5%81%9A%E4%BF%AE%E6%94%B9"><span class="header-section-number">13.3</span> [改] set無法做修改</a></li>
+<li><a class="nav-link" href="#%E5%88%AA-.remove%E8%88%87.discard"><span class="header-section-number">13.4</span> [刪] .remove()與.discard()</a></li>
+<li>
+<a class="nav-link" href="#%E5%A2%9E-.add%E8%88%87.update"><span class="header-section-number">13.5</span> [增] .add()與.update()</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%B8%80%E5%80%8Bitem%E7%94%A8.add"><span class="header-section-number">13.5.1</span> 增加一個item用.add()</a></li>
+<li><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%A4%9A%E5%80%8Bitem%E7%94%A8.update"><span class="header-section-number">13.5.2</span> 增加多個item用.update()</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#mutable-%E8%AB%8B%E6%84%9B%E7%94%A8.copy"><span class="header-section-number">13.6</span> [mutable] 請愛用.copy()</a></li>
+<li><a class="nav-link" href="#loop-for-1"><span class="header-section-number">13.7</span> [loop] for</a></li>
+<li><a class="nav-link" href="#loop-comprehension-1"><span class="header-section-number">13.8</span> [loop] comprehension</a></li>
+<li><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E9%9B%86%E5%90%88%E9%81%8B%E7%AE%97"><span class="header-section-number">13.9</span> [特殊技] 集合運算</a></li>
+<li><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E5%B0%8Dlist%E5%8F%96unique"><span class="header-section-number">13.10</span> [特殊技] 對list取unique</a></li>
+<li><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%8A%80-%E5%B0%87%E5%AD%97%E4%B8%B2%E4%B8%ADunique-character%E8%BD%89%E6%88%90list"><span class="header-section-number">13.11</span> [特殊技] 將字串中unique character轉成list</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/set%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/set%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+  
+
+  
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

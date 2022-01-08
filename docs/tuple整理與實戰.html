@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 tuple整理與實戰 | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="tuple是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 11 tuple整理與實戰 | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="tuple是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 tuple整理與實戰 | Python Tutorial">
+<meta name="twitter:description" content="tuple是python內建的一種collection 既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part： 如何建立？ 如何增、刪、查、改？ 這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy 接著就開始介紹如何loop他(用for, comprehension) 最後就是補齊這個object還沒介紹到的methods...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="active" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tuple整理與實戰" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> tuple整理與實戰<a class="anchor" aria-label="anchor" href="#tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>tuple是python內建的一種collection<br>
+</li>
+<li>既然是collection，我們就可以把它當資料庫看，所以會依序介紹作為資料庫最基礎的幾個part：
+<ul>
+<li>如何建立？<br>
+</li>
+<li>如何增、刪、查、改？<br>
+</li>
+</ul>
+</li>
+<li>這些基礎會了後，就確認一下是否為mutable物件，來決定如何做copy<br>
+</li>
+<li>接著就開始介紹如何loop他(用for, comprehension)<br>
+</li>
+<li>最後就是補齊這個object還沒介紹到的methods<br>
+</li>
+<li>實戰的部分，就會以”How to…“的方式整理常見的需求</li>
+</ul>
+<div id="建-tuple定義與創建" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> [建] tuple定義與創建<a class="anchor" aria-label="anchor" href="#%E5%BB%BA-tuple%E5%AE%9A%E7%BE%A9%E8%88%87%E5%89%B5%E5%BB%BA"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>tuple用小括號來創建，例如：</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb115-1" aria-hidden="true" tabindex="-1"></a>my_tuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb115-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_tuple)</span>
+<span id="cb115-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('apple', 'banana', 'cherry')</span></span>
+<span id="cb115-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(my_tuple))</span>
+<span id="cb115-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'tuple'&gt;</span></span></code></pre></div>
+<ul>
+<li>特別提醒，如果只有一個元素，那必須加上逗號才會是tuple</li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>,)</span>
+<span id="cb116-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(thistuple))</span>
+<span id="cb116-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="co">#NOT a tuple</span></span>
+<span id="cb116-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'tuple'&gt;</span></span>
+<span id="cb116-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-6" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>)</span>
+<span id="cb116-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(thistuple))</span>
+<span id="cb116-8"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb116-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'str'&gt;</span></span></code></pre></div>
+<ul>
+<li>tuple的特色是
+<ul>
+<li>ordered: 所以他也是用index來取裡面的items<br>
+</li>
+<li>unchangeable: 這是他最大的特色，不可修改。所以你要改裡面的item，或是要新增/刪除item，都是不允許的<br>
+</li>
+<li>allow duplicate: tuple裡面的item可以重複</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="主要用在保護數據和unpack" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> 主要用在保護數據和unpack<a class="anchor" aria-label="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E5%9C%A8%E4%BF%9D%E8%AD%B7%E6%95%B8%E6%93%9A%E5%92%8Cunpack"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>已經有了list，為何還要tuple？有以下三個時機用tuple比list好
+<ul>
+<li>tuple比list快，所以element爆多時，可以選tuple: tuple會比較快的原因是，他不可修改，所以建立tuple時，會開”一個”大小固定的記憶體空間給他。但如果是建立list，會開”兩個”記憶體空間，一個是給實際的list數據，另一個是拿來當擴展使用的。所以tuple較快，但list較彈性<br>
+</li>
+<li>tuple不可修改，所以比較安全：如果我們寫程式時，有一段資料要重複使用(e.g. 已經設定好的一組黃金參數)，那就傾向用tuple，因為沒有人可以修改他。但如果用list，就很怕出亂子<br>
+</li>
+<li>寫function時，tuple有unpack的特性，可以unpack a tuple into several variables!先看例子：</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb117-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-3" aria-hidden="true" tabindex="-1"></a>green, yellow, red <span class="op">=</span> fruits</span>
+<span id="cb117-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(green)</span>
+<span id="cb117-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span>
+<span id="cb117-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(yellow)</span>
+<span id="cb117-8"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
+<span id="cb117-9"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(red)</span>
+<span id="cb117-10"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb117-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; cherry</span></span></code></pre></div>
+<ul>
+<li>這個的好處是，寫function時，要return的東西如果是多個variable，在R就會寫成list，然後之後就要用錢字號去取裡面的每個element。但在python，就喜歡return一個tuple，然後之後用unpack的特性去接這些結果：</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> raise_both(value1, value2):</span>
+<span id="cb118-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb118-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Raise value1 to the power of value2</span></span>
+<span id="cb118-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="co">  and vice versa.</span></span>
+<span id="cb118-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb118-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb118-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-7" aria-hidden="true" tabindex="-1"></a>  new_value1 <span class="op">=</span> value1 <span class="op">**</span> value2</span>
+<span id="cb118-8"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-8" aria-hidden="true" tabindex="-1"></a>  new_value2 <span class="op">=</span> value2 <span class="op">**</span> value1</span>
+<span id="cb118-9"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb118-10"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-10" aria-hidden="true" tabindex="-1"></a>  new_tuple <span class="op">=</span> (new_value1, new_value2)</span>
+<span id="cb118-11"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb118-12"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb118-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> new_tuple</span></code></pre></div>
+<ul>
+<li>那實際使用這個function時，就會這樣做：</li>
+</ul>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb119-1" aria-hidden="true" tabindex="-1"></a>result1, result2 <span class="op">=</span> raise_both(<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb119-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result1)</span>
+<span id="cb119-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8</span></span>
+<span id="cb119-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb119-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result2)</span>
+<span id="cb119-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9</span></span></code></pre></div>
+<ul>
+<li>最後講一個小trick，如果要assign的variable個數，小於吐出來的value的個數怎辦？<br>
+</li>
+<li>可以把星號加在某個variable前面，就會把剩餘的value全包給那個變數:</li>
+</ul>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"strawberry"</span>, <span class="st">"raspberry"</span>)</span>
+<span id="cb120-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-3" aria-hidden="true" tabindex="-1"></a>(green, yellow, <span class="op">*</span>red) <span class="op">=</span> fruits</span>
+<span id="cb120-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(green)</span>
+<span id="cb120-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span>
+<span id="cb120-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(yellow)</span>
+<span id="cb120-8"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
+<span id="cb120-9"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(red)</span>
+<span id="cb120-10"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb120-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ['cherry', 'strawberry', 'raspberry']</span></span></code></pre></div>
+</div>
+<div id="查-取用tuple中的item" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> [查] 取用tuple中的item<a class="anchor" aria-label="anchor" href="#%E6%9F%A5-%E5%8F%96%E7%94%A8tuple%E4%B8%AD%E7%9A%84item"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>tuple在查的部分，和list是一模一樣的</li>
+</ul>
+<div id="用list1index取數據" class="section level3" number="11.3.1">
+<h3>
+<span class="header-section-number">11.3.1</span> 用<code>list1[index]</code>取數據<a class="anchor" aria-label="anchor" href="#%E7%94%A8list1index%E5%8F%96%E6%95%B8%E6%93%9A"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb121"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb121-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb121-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thistuple[<span class="dv">1</span>])</span>
+<span id="cb121-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span></code></pre></div>
+</div>
+<div id="用負號往回取" class="section level3" number="11.3.2">
+<h3>
+<span class="header-section-number">11.3.2</span> 用負號往回取<a class="anchor" aria-label="anchor" href="#%E7%94%A8%E8%B2%A0%E8%99%9F%E5%BE%80%E5%9B%9E%E5%8F%96"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb122-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb122-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thistuple[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb122-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; cherry</span></span></code></pre></div>
+</div>
+<div id="是指取index2到index4" class="section level3" number="11.3.3">
+<h3>
+<span class="header-section-number">11.3.3</span> 2:5是指取index=2到index=4<a class="anchor" aria-label="anchor" href="#%E6%98%AF%E6%8C%87%E5%8F%96index2%E5%88%B0index4"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb123-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"orange"</span>, <span class="st">"kiwi"</span>, <span class="st">"melon"</span>, <span class="st">"mango"</span>)</span>
+<span id="cb123-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thistuple[<span class="dv">2</span>:<span class="dv">5</span>])</span>
+<span id="cb123-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('cherry', 'orange', 'kiwi')</span></span></code></pre></div>
+</div>
+<div id="找index用.indexa" class="section level3" number="11.3.4">
+<h3>
+<span class="header-section-number">11.3.4</span> 找index用<code>.index('a')</code><a class="anchor" aria-label="anchor" href="#%E6%89%BEindex%E7%94%A8.indexa"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb124"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb124-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb124-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"orange"</span>, <span class="st">"kiwi"</span>, <span class="st">"melon"</span>, <span class="st">"mango"</span>)</span>
+<span id="cb124-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb124-2" aria-hidden="true" tabindex="-1"></a>thistuple.index(<span class="st">"banana"</span>)</span>
+<span id="cb124-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span></code></pre></div>
+</div>
+<div id="確認每個item有沒有在tuple內也是用in" class="section level3" number="11.3.5">
+<h3>
+<span class="header-section-number">11.3.5</span> 確認每個item有沒有在tuple內也是用<code>in</code><a class="anchor" aria-label="anchor" href="#%E7%A2%BA%E8%AA%8D%E6%AF%8F%E5%80%8Bitem%E6%9C%89%E6%B2%92%E6%9C%89%E5%9C%A8tuple%E5%85%A7%E4%B9%9F%E6%98%AF%E7%94%A8in"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb125"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb125-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb125-1" aria-hidden="true" tabindex="-1"></a>thistuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb125-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"apple"</span> <span class="kw">in</span> thistuple:</span>
+<span id="cb125-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Yes, 'apple' is in the fruits tuple"</span>)</span>
+<span id="cb125-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Yes, 'apple' is in the fruits tuple</span></span></code></pre></div>
+</div>
+</div>
+<div id="改-增-刪-tuple不可修改" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> [改, 增, 刪] tuple不可修改<a class="anchor" aria-label="anchor" href="#%E6%94%B9-%E5%A2%9E-%E5%88%AA-tuple%E4%B8%8D%E5%8F%AF%E4%BF%AE%E6%94%B9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>tuple是unchangable，所以不能改，不能增，也不能刪</li>
+</ul>
+<div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb126-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"orange"</span></span>
+<span id="cb126-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: 'tuple' object does not support item assignment</span></span>
+<span id="cb126-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb126-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb126-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+<ul>
+<li>如果真的要改，就要先轉成list，再轉回tuple，但有點脫褲子放屁拉</li>
+</ul>
+<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb127-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb127-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bu">list</span>(x)</span>
+<span id="cb127-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"orange"</span></span>
+<span id="cb127-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bu">tuple</span>(y)</span>
+<span id="cb127-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb127-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('orange', 'banana', 'cherry')</span></span></code></pre></div>
+</div>
+<div id="immutable" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> immutable<a class="anchor" aria-label="anchor" href="#immutable"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>tuple根本不能改，所以其實不太需要去討論<code>tuple1_copy = tuple1</code>之後，改動tuple1_copy會不會影響到tuple1的問題</li>
+</ul>
+</div>
+<div id="loop-for回圈" class="section level2" number="11.6">
+<h2>
+<span class="header-section-number">11.6</span> [loop] for回圈<a class="anchor" aria-label="anchor" href="#loop-for%E5%9B%9E%E5%9C%88"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>loop index</li>
+</ul>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-1" aria-hidden="true" tabindex="-1"></a>a_tuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb128-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(a_tuple)): </span>
+<span id="cb128-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(index)</span>
+<span id="cb128-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0</span></span>
+<span id="cb128-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb128-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb128-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+<ul>
+<li>loop items</li>
+</ul>
+<div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-1" aria-hidden="true" tabindex="-1"></a>a_tuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb129-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> a_tuple:</span>
+<span id="cb129-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item)</span>
+<span id="cb129-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span>
+<span id="cb129-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
+<span id="cb129-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb129-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; cherry</span></span></code></pre></div>
+<ul>
+<li>loop index &amp; items</li>
+</ul>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-1" aria-hidden="true" tabindex="-1"></a>a_tuple <span class="op">=</span> (<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb130-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, item <span class="kw">in</span> <span class="bu">enumerate</span>(a_tuple):</span>
+<span id="cb130-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"index = "</span>, index, <span class="st">", number in tuple = "</span>, item)</span>
+<span id="cb130-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; index =  0 , number in tuple =  apple</span></span>
+<span id="cb130-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; index =  1 , number in tuple =  banana</span></span>
+<span id="cb130-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb130-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; index =  2 , number in tuple =  cherry</span></span></code></pre></div>
+</div>
+<div id="loop-comprehension" class="section level2" number="11.7">
+<h2>
+<span class="header-section-number">11.7</span> [loop] comprehension<a class="anchor" aria-label="anchor" href="#loop-comprehension"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>tuple可以做list comprehension嗎？<br>
+</li>
+<li>之後再釐清，依樣畫葫蘆的結果，竟然是吐一個generator給我！？</li>
+</ul>
+<div class="sourceCode" id="cb131"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb131-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-1" aria-hidden="true" tabindex="-1"></a>doctor <span class="op">=</span> [<span class="st">'house'</span>, <span class="st">'cuddy'</span>, <span class="st">'chase'</span>, <span class="st">'thirteen'</span>, <span class="st">'wilson'</span>]</span>
+<span id="cb131-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 目標：抓出每個element中的第一個字  </span></span>
+<span id="cb131-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-4" aria-hidden="true" tabindex="-1"></a>doc_tuple <span class="op">=</span> (doc[<span class="dv">0</span>] <span class="cf">for</span> doc <span class="kw">in</span> doctor)</span>
+<span id="cb131-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(doc_tuple)</span>
+<span id="cb131-7"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb131-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;generator object &lt;genexpr&gt; at 0x11a3f1040&gt;</span></span></code></pre></div>
+</div>
+<div id="join兩個tuple用加號" class="section level2" number="11.8">
+<h2>
+<span class="header-section-number">11.8</span> join兩個tuple用加號<a class="anchor" aria-label="anchor" href="#join%E5%85%A9%E5%80%8Btuple%E7%94%A8%E5%8A%A0%E8%99%9F"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-1" aria-hidden="true" tabindex="-1"></a>tuple1 <span class="op">=</span> (<span class="st">"a"</span>, <span class="st">"b"</span> , <span class="st">"c"</span>)</span>
+<span id="cb132-2"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-2" aria-hidden="true" tabindex="-1"></a>tuple2 <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb132-3"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-4"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-4" aria-hidden="true" tabindex="-1"></a>tuple3 <span class="op">=</span> tuple1 <span class="op">+</span> tuple2</span>
+<span id="cb132-5"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuple3)</span>
+<span id="cb132-6"><a href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('a', 'b', 'c', 1, 2, 3)</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></div>
+<div class="next"><a href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="nav-link" href="#%E5%BB%BA-tuple%E5%AE%9A%E7%BE%A9%E8%88%87%E5%89%B5%E5%BB%BA"><span class="header-section-number">11.1</span> [建] tuple定義與創建</a></li>
+<li><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E5%9C%A8%E4%BF%9D%E8%AD%B7%E6%95%B8%E6%93%9A%E5%92%8Cunpack"><span class="header-section-number">11.2</span> 主要用在保護數據和unpack</a></li>
+<li>
+<a class="nav-link" href="#%E6%9F%A5-%E5%8F%96%E7%94%A8tuple%E4%B8%AD%E7%9A%84item"><span class="header-section-number">11.3</span> [查] 取用tuple中的item</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E7%94%A8list1index%E5%8F%96%E6%95%B8%E6%93%9A"><span class="header-section-number">11.3.1</span> 用list1[index]取數據</a></li>
+<li><a class="nav-link" href="#%E7%94%A8%E8%B2%A0%E8%99%9F%E5%BE%80%E5%9B%9E%E5%8F%96"><span class="header-section-number">11.3.2</span> 用負號往回取</a></li>
+<li><a class="nav-link" href="#%E6%98%AF%E6%8C%87%E5%8F%96index2%E5%88%B0index4"><span class="header-section-number">11.3.3</span> 2:5是指取index=2到index=4</a></li>
+<li><a class="nav-link" href="#%E6%89%BEindex%E7%94%A8.indexa"><span class="header-section-number">11.3.4</span> 找index用.index('a')</a></li>
+<li><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D%E6%AF%8F%E5%80%8Bitem%E6%9C%89%E6%B2%92%E6%9C%89%E5%9C%A8tuple%E5%85%A7%E4%B9%9F%E6%98%AF%E7%94%A8in"><span class="header-section-number">11.3.5</span> 確認每個item有沒有在tuple內也是用in</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%E6%94%B9-%E5%A2%9E-%E5%88%AA-tuple%E4%B8%8D%E5%8F%AF%E4%BF%AE%E6%94%B9"><span class="header-section-number">11.4</span> [改, 增, 刪] tuple不可修改</a></li>
+<li><a class="nav-link" href="#immutable"><span class="header-section-number">11.5</span> immutable</a></li>
+<li><a class="nav-link" href="#loop-for%E5%9B%9E%E5%9C%88"><span class="header-section-number">11.6</span> [loop] for回圈</a></li>
+<li><a class="nav-link" href="#loop-comprehension"><span class="header-section-number">11.7</span> [loop] comprehension</a></li>
+<li><a class="nav-link" href="#join%E5%85%A9%E5%80%8Btuple%E7%94%A8%E5%8A%A0%E8%99%9F"><span class="header-section-number">11.8</span> join兩個tuple用加號</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

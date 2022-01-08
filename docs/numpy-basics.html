@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 35 numpy basics | Python Tutorial</title>
+<meta name="author" content="Hank Lee">
+<meta name="description" content="35.1 Why numpy  numpy 是 numeric python 的縮寫，簡單來講，就是要來做數學運算的意思 之前學的 list 是無法做數學計算的，所以在 numpy 裡，會把 list 轉成 numpy array 這種型別，就可以做計算了。 看個例子： height = [1.73, 1.68, 1.71, 1.89, 1.79] weight = [65.4,...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 35 numpy basics | Python Tutorial">
+<meta property="og:type" content="book">
+<meta property="og:description" content="35.1 Why numpy  numpy 是 numeric python 的縮寫，簡單來講，就是要來做數學運算的意思 之前學的 list 是無法做數學計算的，所以在 numpy 裡，會把 list 轉成 numpy array 這種型別，就可以做計算了。 看個例子： height = [1.73, 1.68, 1.71, 1.89, 1.79] weight = [65.4,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 35 numpy basics | Python Tutorial">
+<meta name="twitter:description" content="35.1 Why numpy  numpy 是 numeric python 的縮寫，簡單來講，就是要來做數學運算的意思 之前學的 list 是無法做數學計算的，所以在 numpy 裡，會把 list 轉成 numpy array 這種型別，就可以做計算了。 看個例子： height = [1.73, 1.68, 1.71, 1.89, 1.79] weight = [65.4,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Python Tutorial</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">環境設置與執行</li>
+<li><a class="" href="python-environmental-setting.html"><span class="header-section-number">1</span> Python Environmental Setting</a></li>
+<li><a class="" href="%E5%9F%B7%E8%A1%8Cpython%E7%9A%84code.html"><span class="header-section-number">2</span> 執行Python的code</a></li>
+<li><a class="" href="%E8%A8%BB%E8%A7%A3%E8%88%87indention.html"><span class="header-section-number">3</span> 註解與indention</a></li>
+<li><a class="" href="print.html"><span class="header-section-number">4</span> print</a></li>
+<li><a class="" href="variables.html"><span class="header-section-number">5</span> Variables</a></li>
+<li class="book-part">Python Basic Data Types</li>
+<li><a class="" href="python-data-types.html"><span class="header-section-number">6</span> Python Data Types</a></li>
+<li><a class="" href="int-float-%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">7</span> int &amp; float 整理與實戰</a></li>
+<li><a class="" href="string%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">8</span> string整理與實戰</a></li>
+<li class="book-part">Python Collections</li>
+<li><a class="" href="collections-overview.html"><span class="header-section-number">9</span> collections overview</a></li>
+<li><a class="" href="list%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">10</span> list整理與實戰</a></li>
+<li><a class="" href="tuple%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">11</span> tuple整理與實戰</a></li>
+<li><a class="" href="dictionary%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">12</span> dictionary整理與實戰</a></li>
+<li><a class="" href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">13</span> set應用實戰</a></li>
+<li class="book-part">條件判斷</li>
+<li><a class="" href="none.html"><span class="header-section-number">14</span> None</a></li>
+<li><a class="" href="boolean%E6%95%B4%E7%90%86%E8%88%87%E5%AF%A6%E6%88%B0.html"><span class="header-section-number">15</span> boolean整理與實戰</a></li>
+<li><a class="" href="conditional-operators.html"><span class="header-section-number">16</span> Conditional Operators</a></li>
+<li><a class="" href="if-statement.html"><span class="header-section-number">17</span> If statement</a></li>
+<li class="book-part">Loops</li>
+<li><a class="" href="for-loop.html"><span class="header-section-number">18</span> for loop</a></li>
+<li><a class="" href="while-loop.html"><span class="header-section-number">19</span> while loop</a></li>
+<li class="book-part">Functions</li>
+<li><a class="" href="function101.html"><span class="header-section-number">20</span> function101</a></li>
+<li><a class="" href="exception-handling.html"><span class="header-section-number">21</span> Exception Handling</a></li>
+<li><a class="" href="flexible-arguments.html"><span class="header-section-number">22</span> flexible arguments</a></li>
+<li><a class="" href="recursion.html"><span class="header-section-number">23</span> recursion</a></li>
+<li><a class="" href="function%E5%B0%B1%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A8%AEtype%E7%9A%84object.html"><span class="header-section-number">24</span> Function就是另一種type的object</a></li>
+<li><a class="" href="nested-function.html"><span class="header-section-number">25</span> Nested Function</a></li>
+<li><a class="" href="variable-scope-1.html"><span class="header-section-number">26</span> Variable Scope</a></li>
+<li><a class="" href="closure.html"><span class="header-section-number">27</span> closure</a></li>
+<li><a class="" href="decorator.html"><span class="header-section-number">28</span> decorator</a></li>
+<li><a class="" href="functional-programming.html"><span class="header-section-number">29</span> functional programming</a></li>
+<li class="book-part">Object Oriented Programming</li>
+<li><a class="" href="oop-fundamentals.html"><span class="header-section-number">30</span> OOP Fundamentals</a></li>
+<li><a class="" href="class-level-vs-instance-level.html"><span class="header-section-number">31</span> Class-level vs Instance-level</a></li>
+<li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
+<li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
+<li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+<li class="book-part">NumPy</li>
+<li><a class="active" href="numpy-basics.html"><span class="header-section-number">35</span> numpy basics</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/LeeHank/python_tutorial">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="numpy-basics" class="section level1" number="35">
+<h1>
+<span class="header-section-number">35</span> numpy basics<a class="anchor" aria-label="anchor" href="#numpy-basics"><i class="fas fa-link"></i></a>
+</h1>
+<div id="why-numpy" class="section level2" number="35.1">
+<h2>
+<span class="header-section-number">35.1</span> Why numpy<a class="anchor" aria-label="anchor" href="#why-numpy"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<code>numpy</code> 是 <code>numeric python</code> 的縮寫，簡單來講，就是要來做數學運算的意思<br>
+</li>
+<li>之前學的 <code>list</code> 是無法做數學計算的，所以在 <code>numpy</code> 裡，會把 list 轉成 <code>numpy array</code> 這種型別，就可以做計算了。<br>
+</li>
+<li>看個例子：</li>
+</ul>
+<div class="sourceCode" id="cb426"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb426-1"><a href="numpy-basics.html#cb426-1" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>]</span>
+<span id="cb426-2"><a href="numpy-basics.html#cb426-2" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> [<span class="fl">65.4</span>, <span class="fl">59.2</span>, <span class="fl">63.6</span>, <span class="fl">88.4</span>, <span class="fl">68.7</span>]</span>
+<span id="cb426-3"><a href="numpy-basics.html#cb426-3" aria-hidden="true" tabindex="-1"></a>weight<span class="op">/</span>(height<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb426-4"><a href="numpy-basics.html#cb426-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: unsupported operand type(s) for ** or pow(): 'list' and 'int'</span></span>
+<span id="cb426-5"><a href="numpy-basics.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb426-6"><a href="numpy-basics.html#cb426-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Detailed traceback:</span></span>
+<span id="cb426-7"><a href="numpy-basics.html#cb426-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   File "&lt;string&gt;", line 1, in &lt;module&gt;</span></span></code></pre></div>
+<ul>
+<li>轉成 numpy array 就可以做計算了</li>
+</ul>
+<div class="sourceCode" id="cb427"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb427-1"><a href="numpy-basics.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb427-2"><a href="numpy-basics.html#cb427-2" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> np.array([<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>, <span class="fl">1.79</span>])</span>
+<span id="cb427-3"><a href="numpy-basics.html#cb427-3" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> np.array([<span class="fl">65.4</span>, <span class="fl">59.2</span>, <span class="fl">63.6</span>, <span class="fl">88.4</span>, <span class="fl">68.7</span>])</span>
+<span id="cb427-4"><a href="numpy-basics.html#cb427-4" aria-hidden="true" tabindex="-1"></a>weight<span class="op">/</span>(height<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb427-5"><a href="numpy-basics.html#cb427-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([21.85171573, 20.97505669, 21.75028214, 24.7473475 , 21.44127836])</span></span></code></pre></div>
+<ul>
+<li>再看個例子</li>
+</ul>
+<div class="sourceCode" id="cb428"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb428-1"><a href="numpy-basics.html#cb428-1" aria-hidden="true" tabindex="-1"></a>python_list <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb428-2"><a href="numpy-basics.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(python_list <span class="op">+</span> python_list)</span>
+<span id="cb428-3"><a href="numpy-basics.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2, 3, 1, 2, 3]</span></span>
+<span id="cb428-4"><a href="numpy-basics.html#cb428-4" aria-hidden="true" tabindex="-1"></a>numpy_array <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb428-5"><a href="numpy-basics.html#cb428-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numpy_array <span class="op">+</span> numpy_array)</span>
+<span id="cb428-6"><a href="numpy-basics.html#cb428-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2 4 6]</span></span></code></pre></div>
+</div>
+<div id="多層-list-的介紹" class="section level2" number="35.2">
+<h2>
+<span class="header-section-number">35.2</span> 多層 list 的介紹<a class="anchor" aria-label="anchor" href="#%E5%A4%9A%E5%B1%A4-list-%E7%9A%84%E4%BB%8B%E7%B4%B9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>從剛剛的介紹中，我們知道把 list 轉成 ndarray 後，就可以做數學運算。<br>
+</li>
+<li>但剛剛舉的例子都很簡單，比較像是我找10筆數據，存進 list 這個 collection 裡面。<br>
+</li>
+<li>但在 python 的 data science 應用中，我們可以收到更多不同類型的數據。例如：
+<ul>
+<li>1張灰階影像的數據，是個矩陣型資料，如何存到 list 中？<br>
+</li>
+<li>1張彩色影像數據，會是RGB 3 個通道，每個通道都是矩陣型資料，這要如何存到 list 中？<br>
+</li>
+<li>10 張彩色影像數據，如何存到 list 中？<br>
+</li>
+<li>5批資料，每批都有 10 張彩色影像，這樣的數據要如何存到 list 中？<br>
+</li>
+<li>3個年份，每個年份都有5批資料，每批都有 10 張彩色影像，這樣的數據要如何存到 list 中？<br>
+</li>
+</ul>
+</li>
+<li>這些問題可以一直問下去，但大概已經可以發現，我只要用一層又一層的list來儲存，就可以搞定了。</li>
+</ul>
+<div id="層-list" class="section level3" number="35.2.1">
+<h3>
+<span class="header-section-number">35.2.1</span> 2 層 list<a class="anchor" aria-label="anchor" href="#%E5%B1%A4-list"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>對於1張灰階影像資料，例如是這樣的一張矩陣型資料: <span class="math inline">\(\left[\begin{array}{cc} 0 &amp; 1\\1 &amp; 0 \\1 &amp; 1\end{array}\right]\)</span>，可以用數學寫成：</li>
+</ul>
+<p><span class="math display">\[
+\boldsymbol{X} \in R^{3 \times 2}
+\]</span></p>
+<ul>
+<li>在 python 中，會用這樣的 list 來儲存他：</li>
+</ul>
+<div class="sourceCode" id="cb429"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb429-1"><a href="numpy-basics.html#cb429-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [</span>
+<span id="cb429-2"><a href="numpy-basics.html#cb429-2" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span>, <span class="dv">1</span>], </span>
+<span id="cb429-3"><a href="numpy-basics.html#cb429-3" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb429-4"><a href="numpy-basics.html#cb429-4" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb429-5"><a href="numpy-basics.html#cb429-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb429-6"><a href="numpy-basics.html#cb429-6" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array(a)</span>
+<span id="cb429-7"><a href="numpy-basics.html#cb429-7" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb429-8"><a href="numpy-basics.html#cb429-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([[0, 1],</span></span>
+<span id="cb429-9"><a href="numpy-basics.html#cb429-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [1, 0],</span></span>
+<span id="cb429-10"><a href="numpy-basics.html#cb429-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [1, 1]])</span></span></code></pre></div>
+<ul>
+<li>我們總是會很想用矩陣的角度去看他，但拜託你忍一忍，不要這樣做。因為之後要一路推廣下去。</li>
+<li>所以，我們現在改成用層次的方式來理解他：<span class="math inline">\(R^{3 \times 2}\)</span> 就讀成: 總共有3列，每一列都有2筆數據。</li>
+<li>那他的階層就會長成：
+<ul>
+<li>第一列: [0, 1]
+<ul>
+<li>第一列的第一個 element: 0<br>
+</li>
+<li>第一列的第二個 element: 1<br>
+</li>
+</ul>
+</li>
+<li>第二列: [1, 0]
+<ul>
+<li>第二列的第一個 element: 1<br>
+</li>
+<li>第二列的第二個 element: 0<br>
+</li>
+</ul>
+</li>
+<li>第三列: [1, 1]
+<ul>
+<li>第三列的第一個 element: 1<br>
+</li>
+<li>第三列的第二個 element: 1<br>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>也就是第一層是 <span class="math inline">\(R^{3 \times 2}\)</span> 的 3，第二層是 <span class="math inline">\(R^{3 \times 2}\)</span> 的 2</li>
+<li>所以，我們要練習，這樣寫 list：</li>
+</ul>
+<div class="sourceCode" id="cb430"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb430-1"><a href="numpy-basics.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 第一步，先寫出第一層，有3列： a = [[], [], []] </span></span>
+<span id="cb430-2"><a href="numpy-basics.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 第二步，再把第二層的內容補進去，各2個element： a = [[0, 1], [1, 0], [1, 1]] </span></span></code></pre></div>
+<ul>
+<li>接著，來定義一些名詞： <span class="math inline">\(R^{3 \times 2}\)</span>，R的上面有<code>2</code>個數字相乘，我們稱它為<code>2</code>階張量，儲存的資料類型是 <code>2</code>d array。也就是說，這個張量的<code>維度是2</code>。然後 R 上面的長相是 <span class="math inline">\(3 \times 2\)</span>，所以我們說他的 shape 是 <code>(3,2)</code><br>
+</li>
+<li>我們來看一下這個 numpy array 的 attribute，就可以驗證上面講的內容：</li>
+</ul>
+<div class="sourceCode" id="cb431"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb431-1"><a href="numpy-basics.html#cb431-1" aria-hidden="true" tabindex="-1"></a>a.ndim</span>
+<span id="cb431-2"><a href="numpy-basics.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+<ul>
+<li>ndim 是 2，就表示 ndarray 是 2d array(n=2, 有兩層，R上面有2個數字相乘)</li>
+</ul>
+<div class="sourceCode" id="cb432"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb432-1"><a href="numpy-basics.html#cb432-1" aria-hidden="true" tabindex="-1"></a>a.shape</span>
+<span id="cb432-2"><a href="numpy-basics.html#cb432-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (3, 2)</span></span></code></pre></div>
+<ul>
+<li>shape 是 (3,2)，表示他是 <span class="math inline">\(R^{3 \times 2}\)</span> 的張量</li>
+</ul>
+</div>
+<div id="層-list-1" class="section level3" number="35.2.2">
+<h3>
+<span class="header-section-number">35.2.2</span> 3 層 list<a class="anchor" aria-label="anchor" href="#%E5%B1%A4-list-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>對於1張彩色影像資料，他會有3張矩陣型資料，例如長成這樣：</li>
+</ul>
+<p><span class="math display">\[
+\left[
+\left[\begin{array}{cc} 0 &amp; 1\\1 &amp; 0 \\1 &amp; 1\end{array}\right],
+\left[\begin{array}{cc} 0 &amp; 0\\1 &amp; 1 \\1 &amp; 0\end{array}\right],
+\left[\begin{array}{cc} 1 &amp; 1\\0 &amp; 0 \\0 &amp; 1\end{array}\right]
+\right]
+\]</span></p>
+<ul>
+<li>那我可以寫成這樣：<span class="math inline">\(\boldsymbol{X} \in R^{3 \times 3 \times 2}\)</span>
+</li>
+</ul>
+<p><span class="math display">\[
+\boldsymbol{X} = \left[
+R^{3 \times 2},
+G^{3 \times 2},
+B^{3 \times 2}
+\right]
+\]</span>
+* 由 <span class="math inline">\(R^{3 \times 3 \times 2}\)</span> 已可知道，他是 3d array(所以要給他3層)。shape是 <code>3*3*2</code>，所以第一層有3個 element，第二層有3個element，第三層有2個element。<br>
+* 那我再造 list 時，第一步就是先寫第一層：</p>
+<pre><code>a = [
+  [],
+  [],
+  []
+]</code></pre>
+<ul>
+<li>然後第二層：</li>
+</ul>
+<pre><code>a = [
+  [
+    [],
+    [], 
+    []
+  ],
+  [
+    [],
+    [], 
+    []
+  ],
+  [
+    [],
+    [], 
+    []
+  ]
+]</code></pre>
+<ul>
+<li>最後，做出第三層：</li>
+</ul>
+<div class="sourceCode" id="cb435"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb435-1"><a href="numpy-basics.html#cb435-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [</span>
+<span id="cb435-2"><a href="numpy-basics.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb435-3"><a href="numpy-basics.html#cb435-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb435-4"><a href="numpy-basics.html#cb435-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb435-5"><a href="numpy-basics.html#cb435-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb435-6"><a href="numpy-basics.html#cb435-6" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb435-7"><a href="numpy-basics.html#cb435-7" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb435-8"><a href="numpy-basics.html#cb435-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb435-9"><a href="numpy-basics.html#cb435-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb435-10"><a href="numpy-basics.html#cb435-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb435-11"><a href="numpy-basics.html#cb435-11" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb435-12"><a href="numpy-basics.html#cb435-12" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb435-13"><a href="numpy-basics.html#cb435-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb435-14"><a href="numpy-basics.html#cb435-14" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>], </span>
+<span id="cb435-15"><a href="numpy-basics.html#cb435-15" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb435-16"><a href="numpy-basics.html#cb435-16" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb435-17"><a href="numpy-basics.html#cb435-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb435-18"><a href="numpy-basics.html#cb435-18" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array(a)</span>
+<span id="cb435-19"><a href="numpy-basics.html#cb435-19" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb435-20"><a href="numpy-basics.html#cb435-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([[[0, 1],</span></span>
+<span id="cb435-21"><a href="numpy-basics.html#cb435-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [1, 0],</span></span>
+<span id="cb435-22"><a href="numpy-basics.html#cb435-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [1, 1]],</span></span>
+<span id="cb435-23"><a href="numpy-basics.html#cb435-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb435-24"><a href="numpy-basics.html#cb435-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [[0, 0],</span></span>
+<span id="cb435-25"><a href="numpy-basics.html#cb435-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [1, 1],</span></span>
+<span id="cb435-26"><a href="numpy-basics.html#cb435-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [1, 0]],</span></span>
+<span id="cb435-27"><a href="numpy-basics.html#cb435-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb435-28"><a href="numpy-basics.html#cb435-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [[1, 1],</span></span>
+<span id="cb435-29"><a href="numpy-basics.html#cb435-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [0, 0],</span></span>
+<span id="cb435-30"><a href="numpy-basics.html#cb435-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [0, 1]]])</span></span></code></pre></div>
+<ul>
+<li>驗證一下，這個 <span class="math inline">\(R^{3 \times 3 \times 2}\)</span> 是 3d array(因為R上面有3個數字相乘，或說，建立list的時候要寫到第3層)。shape是 <code>3*3*2</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb436"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb436-1"><a href="numpy-basics.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the dim of a is </span><span class="sc">{a.</span>ndim<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb436-2"><a href="numpy-basics.html#cb436-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the dim of a is 3</span></span>
+<span id="cb436-3"><a href="numpy-basics.html#cb436-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the shape of a is </span><span class="sc">{a.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb436-4"><a href="numpy-basics.html#cb436-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the shape of a is (3, 3, 2)</span></span></code></pre></div>
+</div>
+<div id="層-list-2" class="section level3" number="35.2.3">
+<h3>
+<span class="header-section-number">35.2.3</span> 4 層 list<a class="anchor" aria-label="anchor" href="#%E5%B1%A4-list-2"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>剛剛介紹完，1張彩色影像資料要如何儲存。那如果 2 張彩色影像數據，要如何存到 list 中？<br>
+</li>
+<li>很簡單嘛，現在變成是一個 <span class="math inline">\(R^{2張 \times 3通道 \times 3列 \times 2行}\)</span> 的資料，所以我要做一個 4D array(因為 R 上面有4個數字相乘，list要做到4層)，然後他的 shape 會是 <code>(2,3,3,2)</code><br>
+</li>
+<li>開始造 list ，第一步就是先寫第一層(2張圖片)：</li>
+</ul>
+<pre><code>a = [
+  [],
+  []
+]</code></pre>
+<ul>
+<li>然後第二層，每張圖片，都有RGB三個通道：</li>
+</ul>
+<pre><code>a = [
+  [
+    [],
+    [], 
+    []
+  ],
+  [
+    [],
+    [], 
+    []
+  ]
+]</code></pre>
+<ul>
+<li>然後，第三層，每個 RGB 中，都有三列：</li>
+</ul>
+<div class="sourceCode" id="cb439"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb439-1"><a href="numpy-basics.html#cb439-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [</span>
+<span id="cb439-2"><a href="numpy-basics.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb439-3"><a href="numpy-basics.html#cb439-3" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-4"><a href="numpy-basics.html#cb439-4" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-5"><a href="numpy-basics.html#cb439-5" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-6"><a href="numpy-basics.html#cb439-6" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-7"><a href="numpy-basics.html#cb439-7" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb439-8"><a href="numpy-basics.html#cb439-8" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-9"><a href="numpy-basics.html#cb439-9" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-10"><a href="numpy-basics.html#cb439-10" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-11"><a href="numpy-basics.html#cb439-11" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-12"><a href="numpy-basics.html#cb439-12" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb439-13"><a href="numpy-basics.html#cb439-13" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-14"><a href="numpy-basics.html#cb439-14" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-15"><a href="numpy-basics.html#cb439-15" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-16"><a href="numpy-basics.html#cb439-16" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-17"><a href="numpy-basics.html#cb439-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb439-18"><a href="numpy-basics.html#cb439-18" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb439-19"><a href="numpy-basics.html#cb439-19" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb439-20"><a href="numpy-basics.html#cb439-20" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-21"><a href="numpy-basics.html#cb439-21" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-22"><a href="numpy-basics.html#cb439-22" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-23"><a href="numpy-basics.html#cb439-23" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-24"><a href="numpy-basics.html#cb439-24" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb439-25"><a href="numpy-basics.html#cb439-25" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-26"><a href="numpy-basics.html#cb439-26" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-27"><a href="numpy-basics.html#cb439-27" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-28"><a href="numpy-basics.html#cb439-28" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-29"><a href="numpy-basics.html#cb439-29" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb439-30"><a href="numpy-basics.html#cb439-30" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb439-31"><a href="numpy-basics.html#cb439-31" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-32"><a href="numpy-basics.html#cb439-32" aria-hidden="true" tabindex="-1"></a>      [],</span>
+<span id="cb439-33"><a href="numpy-basics.html#cb439-33" aria-hidden="true" tabindex="-1"></a>      []</span>
+<span id="cb439-34"><a href="numpy-basics.html#cb439-34" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb439-35"><a href="numpy-basics.html#cb439-35" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb439-36"><a href="numpy-basics.html#cb439-36" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<ul>
+<li>最後，每一列裡面，都有兩個 element:</li>
+</ul>
+<div class="sourceCode" id="cb440"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb440-1"><a href="numpy-basics.html#cb440-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [</span>
+<span id="cb440-2"><a href="numpy-basics.html#cb440-2" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb440-3"><a href="numpy-basics.html#cb440-3" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-4"><a href="numpy-basics.html#cb440-4" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb440-5"><a href="numpy-basics.html#cb440-5" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb440-6"><a href="numpy-basics.html#cb440-6" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb440-7"><a href="numpy-basics.html#cb440-7" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb440-8"><a href="numpy-basics.html#cb440-8" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-9"><a href="numpy-basics.html#cb440-9" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb440-10"><a href="numpy-basics.html#cb440-10" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb440-11"><a href="numpy-basics.html#cb440-11" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb440-12"><a href="numpy-basics.html#cb440-12" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb440-13"><a href="numpy-basics.html#cb440-13" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-14"><a href="numpy-basics.html#cb440-14" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb440-15"><a href="numpy-basics.html#cb440-15" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">0</span>], </span>
+<span id="cb440-16"><a href="numpy-basics.html#cb440-16" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb440-17"><a href="numpy-basics.html#cb440-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb440-18"><a href="numpy-basics.html#cb440-18" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb440-19"><a href="numpy-basics.html#cb440-19" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb440-20"><a href="numpy-basics.html#cb440-20" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-21"><a href="numpy-basics.html#cb440-21" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb440-22"><a href="numpy-basics.html#cb440-22" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb440-23"><a href="numpy-basics.html#cb440-23" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb440-24"><a href="numpy-basics.html#cb440-24" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb440-25"><a href="numpy-basics.html#cb440-25" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-26"><a href="numpy-basics.html#cb440-26" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb440-27"><a href="numpy-basics.html#cb440-27" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb440-28"><a href="numpy-basics.html#cb440-28" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb440-29"><a href="numpy-basics.html#cb440-29" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb440-30"><a href="numpy-basics.html#cb440-30" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb440-31"><a href="numpy-basics.html#cb440-31" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb440-32"><a href="numpy-basics.html#cb440-32" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">0</span>, <span class="dv">1</span>], </span>
+<span id="cb440-33"><a href="numpy-basics.html#cb440-33" aria-hidden="true" tabindex="-1"></a>      [<span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb440-34"><a href="numpy-basics.html#cb440-34" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb440-35"><a href="numpy-basics.html#cb440-35" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb440-36"><a href="numpy-basics.html#cb440-36" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb440-37"><a href="numpy-basics.html#cb440-37" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array(a)</span>
+<span id="cb440-38"><a href="numpy-basics.html#cb440-38" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb440-39"><a href="numpy-basics.html#cb440-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([[[[0, 1],</span></span>
+<span id="cb440-40"><a href="numpy-basics.html#cb440-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 0],</span></span>
+<span id="cb440-41"><a href="numpy-basics.html#cb440-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 1]],</span></span>
+<span id="cb440-42"><a href="numpy-basics.html#cb440-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-43"><a href="numpy-basics.html#cb440-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [[0, 0],</span></span>
+<span id="cb440-44"><a href="numpy-basics.html#cb440-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 1],</span></span>
+<span id="cb440-45"><a href="numpy-basics.html#cb440-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 0]],</span></span>
+<span id="cb440-46"><a href="numpy-basics.html#cb440-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-47"><a href="numpy-basics.html#cb440-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [[1, 1],</span></span>
+<span id="cb440-48"><a href="numpy-basics.html#cb440-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [0, 0],</span></span>
+<span id="cb440-49"><a href="numpy-basics.html#cb440-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [0, 1]]],</span></span>
+<span id="cb440-50"><a href="numpy-basics.html#cb440-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-51"><a href="numpy-basics.html#cb440-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-52"><a href="numpy-basics.html#cb440-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        [[[0, 0],</span></span>
+<span id="cb440-53"><a href="numpy-basics.html#cb440-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 0],</span></span>
+<span id="cb440-54"><a href="numpy-basics.html#cb440-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [0, 1]],</span></span>
+<span id="cb440-55"><a href="numpy-basics.html#cb440-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-56"><a href="numpy-basics.html#cb440-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [[1, 1],</span></span>
+<span id="cb440-57"><a href="numpy-basics.html#cb440-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 1],</span></span>
+<span id="cb440-58"><a href="numpy-basics.html#cb440-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 1]],</span></span>
+<span id="cb440-59"><a href="numpy-basics.html#cb440-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb440-60"><a href="numpy-basics.html#cb440-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         [[0, 0],</span></span>
+<span id="cb440-61"><a href="numpy-basics.html#cb440-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [0, 1],</span></span>
+<span id="cb440-62"><a href="numpy-basics.html#cb440-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [1, 0]]]])</span></span></code></pre></div>
+<ul>
+<li>驗證一下，這個 <span class="math inline">\(R^{2張 \times 3通道 \times 3列 \times 2行}\)</span>是 4d array(因為R上面有4個數字相乘，或說，建立list的時候要寫到第4層)。shape是 <code>2*3*3*2</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb441"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb441-1"><a href="numpy-basics.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the dim of a is </span><span class="sc">{a.</span>ndim<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb441-2"><a href="numpy-basics.html#cb441-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the dim of a is 4</span></span>
+<span id="cb441-3"><a href="numpy-basics.html#cb441-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the shape of a is </span><span class="sc">{a.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb441-4"><a href="numpy-basics.html#cb441-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the shape of a is (2, 3, 3, 2)</span></span>
+<span id="cb441-5"><a href="numpy-basics.html#cb441-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.size)</span>
+<span id="cb441-6"><a href="numpy-basics.html#cb441-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36</span></span>
+<span id="cb441-7"><a href="numpy-basics.html#cb441-7" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(a)</span>
+<span id="cb441-8"><a href="numpy-basics.html#cb441-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+</div>
+</div>
+<div id="ndarray-的-dim-shape-與-axis" class="section level2" number="35.3">
+<h2>
+<span class="header-section-number">35.3</span> ndarray 的 dim, shape, 與 axis<a class="anchor" aria-label="anchor" href="#ndarray-%E7%9A%84-dim-shape-%E8%88%87-axis"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>在 ndarray 中，這三個詞很容易搞混，但又超重要，所以在這裡好好整理一下<br></p></li>
+<li><p>講到維度，就會想到以前線性代數學到的東西：維度是指向量空間裡基底的數量。簡單的判斷方法，就是把 <span class="math inline">\(R\)</span> 上面的數字乘出來就對了。<br></p></li>
+<li><p>例如 <span class="math inline">\(R^3\)</span> 表示3維，意思是這個歐式空間中，需要3個基底向量(e.g. <span class="math inline">\(\left[\begin{array}{cc} 1 \\0 \\ 0\end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{cc} 0 \\1 \\ 0\end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{cc} 0 \\0 \\ 1\end{array}\right]\)</span>)，才能span出這個空間。所以我們稱它為 3 維(空間)，這個空間裡的每個點，就是一個3維向量。<br></p></li>
+<li><p>又例如 <span class="math inline">\(R^{2 \times 2}\)</span> 是 <span class="math inline">\(2 \times 2\)</span> = 4維，意思是這個矩陣空間，需要 4 個基底向量(e.g. <span class="math inline">\(\left[\begin{array}{cc} 1 &amp; 0\\0 &amp; 0 \end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{cc} 0 &amp; 1\\0 &amp; 0 \end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{cc} 0 &amp; 0\\1 &amp; 0 \end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{cc} 0 &amp; 0\\0 &amp; 1 \end{array}\right]\)</span>)才能span出這個空間，所以我們稱它為 4 維，然後空間中的每個點都是 <span class="math inline">\(2 \times 2\)</span> 的矩陣。<br></p></li>
+<li>
+<p>對應到 R 的資料結構，就是：</p>
+<ul>
+<li>純量 (<span class="math inline">\(R\)</span>), 對應到 <code>numeric</code> 的資料結構，例如 <code>a = 3</code>
+</li>
+<li>n維向量 (<span class="math inline">\(R^n\)</span>), 對應到 n個element的<code>vector</code> 的資料結構，例如 <code>a = c(1,2,3)</code> 為 <span class="math inline">\(R^3\)</span>，三維向量<br>
+</li>
+<li>m by n 矩陣(<span class="math inline">\(R^{m \times n}\)</span>), 對應到 m*n個 element 的 <code>matrix</code> 的資料結構，例如 <code>a = matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)</code> 為 <span class="math inline">\(R^{2 \times 3}\)</span><br>
+</li>
+</ul>
+</li>
+<li><p>那以前只學到矩陣，所以只學到 <span class="math inline">\(R^{m \times n}\)</span>，那有沒有想過， <span class="math inline">\(R^{j \times m \times n}\)</span> 這是什麼東西？甚至，<span class="math inline">\(R^{i \times j \times m \times n}\)</span> 這是什麼東西？<br></p></li>
+<li>
+<p>簡單講，這種東西，就叫張量(tensor)。<span class="math inline">\(R\)</span>的上面，如果有 n 個數字相乘，我們就叫他 n 階張量。例如：</p>
+<ul>
+<li>
+<span class="math inline">\(R\)</span>: 0階張量，就是以前學的純量<br>
+</li>
+<li>
+<span class="math inline">\(R^3\)</span>: 1階張量(因為只有一個數字相乘)，就是以前學的向量<br>
+</li>
+<li>
+<span class="math inline">\(R^{2 \times 2}\)</span>: 2階張量(因為有2個數字相乘)，就是以前學的矩陣。對應到資料，就像是灰階影像，長寬各2個pixel。<br>
+</li>
+<li>
+<span class="math inline">\(R^{3 \times 2 \times 2}\)</span>: 3階張量(因為有3個數字相乘)，這以前就沒學過了。對應到的資料，就像是彩色影像，3個通道(RGB)，每個通道都是長寬各2個pixel。<br>
+</li>
+<li>
+<span class="math inline">\(R^{5 \times 3 \times 2 \times 2}\)</span>: 4階張量(因為有4個數字相乘)。對應到的資料，就是有5張彩色影像。每張彩色影像，都有3個通道(RGB)，每個通道，都是長寬各2個pixel。</li>
+</ul>
+</li>
+<li><p>那這個時候，我們講維度，就是在講 <code>張量</code> 的維度。</p></li>
+<li><p>所以，以前學的<code>維度</code>，在描述的對象，都是 <code>向量空間</code> 。<br></p></li>
+<li><p>那接下來要講的維度，他要描述的對象，是資料結構裡的陣列(array)，在python中叫他list，在deep learning中叫他tensor(張量)。都是同義詞。我們 focus 在 list 就好。<br></p></li>
+<li>
+<li><p>但在 Python 世界，就直接推廣到 <code>張量(tensor)</code> 的概念。而張量對應的資料結構，就是 ndarray(n-dim array, n階張量)<br></p></li>
+<li><p>重點來了，張量是啥？n-dim 的 dim 又是啥？ 哈哈笑死，這邊的 dim(維度) 根本就和以前線性代數學的不一樣，不要執著以前學過的定義，這樣會卡死。<br></p></li>
+<li><p>腦袋轉一下，直接來學新的系統。<code>n-d array 的 d，是指 $R$ 上面有 d 個數字相乘</code>，所以他的維度d (d-dimension)，就是指R上面有d個數字相乘。對應到list的資料結構，就是有d個階層。以下逐一介紹：</p></li>
+</ul>
+<div id="d-array-0-dim-array-0階張量-0層的資料結構" class="section level3" number="35.3.1">
+<h3>
+<span class="header-section-number">35.3.1</span> 0D array = 0-dim array = 0階張量 = 0層的資料結構<a class="anchor" aria-label="anchor" href="#d-array-0-dim-array-0%E9%9A%8E%E5%BC%B5%E9%87%8F-0%E5%B1%A4%E7%9A%84%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>例如純量3， <span class="math inline">\(3 \in R\)</span>，R上面有0個數字相乘，所以他叫 0D array。</li>
+<li>來看一下在 python 的資料結構會長怎樣：</li>
+</ul>
+<div class="sourceCode" id="cb442"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb442-1"><a href="numpy-basics.html#cb442-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array(<span class="dv">3</span>)</span>
+<span id="cb442-2"><a href="numpy-basics.html#cb442-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb442-3"><a href="numpy-basics.html#cb442-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb442-4"><a href="numpy-basics.html#cb442-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb442-5"><a href="numpy-basics.html#cb442-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'numpy.ndarray'&gt;</span></span></code></pre></div>
+<ul>
+<li>我們可以用 <code>.ndim</code> 這個屬性，來看他的dim，也就是幾D array:</li>
+</ul>
+<div class="sourceCode" id="cb443"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb443-1"><a href="numpy-basics.html#cb443-1" aria-hidden="true" tabindex="-1"></a>a.ndim</span>
+<span id="cb443-2"><a href="numpy-basics.html#cb443-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0</span></span></code></pre></div>
+<ul>
+<li>很明顯的，告訴我他是個 0D array<br>
+</li>
+<li>然後用 <code>.shape</code>，來看他的 shape</li>
+</ul>
+<div class="sourceCode" id="cb444"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb444-1"><a href="numpy-basics.html#cb444-1" aria-hidden="true" tabindex="-1"></a>a.shape</span>
+<span id="cb444-2"><a href="numpy-basics.html#cb444-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ()</span></span></code></pre></div>
+<ul>
+<li>是空的，也就是 <span class="math inline">\(R^{()}\)</span> 這樣的意思，裡面就是沒東西相乘</li>
+</ul>
+</div>
+<div id="階張量-1d-array" class="section level3" number="35.3.2">
+<h3>
+<span class="header-section-number">35.3.2</span> 1 階張量 (1D array)<a class="anchor" aria-label="anchor" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-1d-array"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>1 階張量，就是 <span class="math inline">\(R\)</span>的上面，有 1 個數字相乘。相乘的樣貌就叫shape<br>
+</li>
+<li>舉個例子，<span class="math inline">\(\left[\begin{array}{cc} 2 \\3 \\ 4\end{array}\right] \in R^{3}\)</span>，所以這樣的資料，應該是 1D array, 然後 shape = 3<br>
+</li>
+<li>在 python 的資料結構中，我就是用 1 層的list來處理：</li>
+</ul>
+<div class="sourceCode" id="cb445"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb445-1"><a href="numpy-basics.html#cb445-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
+<span id="cb445-2"><a href="numpy-basics.html#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb445-3"><a href="numpy-basics.html#cb445-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2 3 4]</span></span>
+<span id="cb445-4"><a href="numpy-basics.html#cb445-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb445-5"><a href="numpy-basics.html#cb445-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'numpy.ndarray'&gt;</span></span>
+<span id="cb445-6"><a href="numpy-basics.html#cb445-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the dim of a is </span><span class="sc">{a.</span>ndim<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb445-7"><a href="numpy-basics.html#cb445-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the dim of a is 1</span></span>
+<span id="cb445-8"><a href="numpy-basics.html#cb445-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the shape of a is </span><span class="sc">{a.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb445-9"><a href="numpy-basics.html#cb445-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the shape of a is (3,)</span></span></code></pre></div>
+</div>
+<div id="階張量-2d-array" class="section level3" number="35.3.3">
+<h3>
+<span class="header-section-number">35.3.3</span> 2 階張量 (2D array)<a class="anchor" aria-label="anchor" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-2d-array"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>灰階影像的數據，就都是長這樣。</li>
+<li>舉例來說，我拿到的影像，長寬都只有2個像素，所以長成<span class="math inline">\(\left[\begin{array}{cc} 1 &amp; 2\\3 &amp; 4 \end{array}\right] \in R^{2 \times 2}\)</span><br>
+</li>
+<li>那<span class="math inline">\(R\)</span>的上面，有 2 個數字相乘，所以是 2D array。相乘的樣貌是2*2，所以shape為(2,2)<br>
+</li>
+<li>那這種2D array，在python就是存成 2-dim array，也就是 2 層的list：</li>
+</ul>
+<div class="sourceCode" id="cb446"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb446-1"><a href="numpy-basics.html#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 層的結構  </span></span>
+<span id="cb446-2"><a href="numpy-basics.html#cb446-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [</span>
+<span id="cb446-3"><a href="numpy-basics.html#cb446-3" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb446-4"><a href="numpy-basics.html#cb446-4" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">3</span>,<span class="dv">4</span>]</span>
+<span id="cb446-5"><a href="numpy-basics.html#cb446-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb446-6"><a href="numpy-basics.html#cb446-6" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array(a)</span>
+<span id="cb446-7"><a href="numpy-basics.html#cb446-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb446-8"><a href="numpy-basics.html#cb446-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1 2]</span></span>
+<span id="cb446-9"><a href="numpy-basics.html#cb446-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [3 4]]</span></span>
+<span id="cb446-10"><a href="numpy-basics.html#cb446-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb446-11"><a href="numpy-basics.html#cb446-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'numpy.ndarray'&gt;</span></span>
+<span id="cb446-12"><a href="numpy-basics.html#cb446-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the dim of a is </span><span class="sc">{a.</span>ndim<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb446-13"><a href="numpy-basics.html#cb446-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the dim of a is 2</span></span>
+<span id="cb446-14"><a href="numpy-basics.html#cb446-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"the shape of a is </span><span class="sc">{a.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb446-15"><a href="numpy-basics.html#cb446-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the shape of a is (2, 2)</span></span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb447-1"><a href="numpy-basics.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(a)</span>
+<span id="cb447-2"><a href="numpy-basics.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+<ul>
+<li>從這邊開始，要特別注意 2D array 就是 2層list結構。可以這樣思考。<br>
+</li>
+<li>a:
+<ul>
+<li>[,]
+<ul>
+<li>1</li>
+<li>2</li>
+</ul>
+</li>
+<li>[,]
+<ul>
+<li>3</li>
+<li>4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所以由左到右看，第一層有2個 element，第二層也是2個element。</li>
+<li>第一層我們又叫他第0軸(axis = 0)，第二層我們又叫他第1軸(axis=1)。</li>
+</ul>
+</div>
+<div id="階張量-3d-array" class="section level3" number="35.3.4">
+<h3>
+<span class="header-section-number">35.3.4</span> 3 階張量 (3D array)<a class="anchor" aria-label="anchor" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-3d-array"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="階張量-4d-array" class="section level3" number="35.3.5">
+<h3>
+<span class="header-section-number">35.3.5</span> 4 階張量 (4D array)<a class="anchor" aria-label="anchor" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-4d-array"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#numpy-basics"><span class="header-section-number">35</span> numpy basics</a></li>
+<li><a class="nav-link" href="#why-numpy"><span class="header-section-number">35.1</span> Why numpy</a></li>
+<li>
+<a class="nav-link" href="#%E5%A4%9A%E5%B1%A4-list-%E7%9A%84%E4%BB%8B%E7%B4%B9"><span class="header-section-number">35.2</span> 多層 list 的介紹</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E5%B1%A4-list"><span class="header-section-number">35.2.1</span> 2 層 list</a></li>
+<li><a class="nav-link" href="#%E5%B1%A4-list-1"><span class="header-section-number">35.2.2</span> 3 層 list</a></li>
+<li><a class="nav-link" href="#%E5%B1%A4-list-2"><span class="header-section-number">35.2.3</span> 4 層 list</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ndarray-%E7%9A%84-dim-shape-%E8%88%87-axis"><span class="header-section-number">35.3</span> ndarray 的 dim, shape, 與 axis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d-array-0-dim-array-0%E9%9A%8E%E5%BC%B5%E9%87%8F-0%E5%B1%A4%E7%9A%84%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B"><span class="header-section-number">35.3.1</span> 0D array = 0-dim array = 0階張量 = 0層的資料結構</a></li>
+<li><a class="nav-link" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-1d-array"><span class="header-section-number">35.3.2</span> 1 階張量 (1D array)</a></li>
+<li><a class="nav-link" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-2d-array"><span class="header-section-number">35.3.3</span> 2 階張量 (2D array)</a></li>
+<li><a class="nav-link" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-3d-array"><span class="header-section-number">35.3.4</span> 3 階張量 (3D array)</a></li>
+<li><a class="nav-link" href="#%E9%9A%8E%E5%BC%B5%E9%87%8F-4d-array"><span class="header-section-number">35.3.5</span> 4 階張量 (4D array)</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/LeeHank/python_tutorial/blob/master/numpy_basics.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/LeeHank/python_tutorial/edit/master/numpy_basics.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

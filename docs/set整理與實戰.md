@@ -30,7 +30,7 @@ print(my_dict)
 ```python
 my_set = {'a', 'b'}
 print(my_set)
-#> {'b', 'a'}
+#> {'a', 'b'}
 ```
 
 * set的特點，其實和dictionary的key的特點一樣(也和數學上的集合的特點一樣)，就是'唯一'和'無序'。  
@@ -125,7 +125,7 @@ thisset = {"apple", "banana", "cherry"}
 thisset.add("orange")
 
 print(thisset)
-#> {'apple', 'banana', 'orange', 'cherry'}
+#> {'apple', 'orange', 'banana', 'cherry'}
 ```
 
 
@@ -139,7 +139,7 @@ tropical = {"pineapple", "mango", "papaya"}
 thisset.update(tropical)
 
 print(thisset)
-#> {'apple', 'banana', 'pineapple', 'mango', 'papaya', 'cherry'}
+#> {'apple', 'banana', 'pineapple', 'cherry', 'papaya', 'mango'}
 ```
 
 * 如果update的東西，裡面有和原本重複的值，那就只會留一個，因為set就是unique  
@@ -152,7 +152,7 @@ tropical = {"apple", "banana", "papaya"}
 thisset.update(tropical)
 
 print(thisset)
-#> {'apple', 'banana', 'papaya', 'cherry'}
+#> {'apple', 'banana', 'cherry', 'papaya'}
 ```
 
 ## [mutable]  請愛用`.copy()`  
@@ -167,9 +167,9 @@ set1_copy = set1
 set1_copy.remove("apple")
 
 print(set1_copy)
-#> {'banana', 'orange'}
+#> {'orange', 'banana'}
 print(set1)
-#> {'banana', 'orange'}
+#> {'orange', 'banana'}
 ```
 
 * 記得用`.copy()`來解決問題  
@@ -182,9 +182,9 @@ set1_copy = set1.copy()
 set1_copy.remove("apple")
 
 print(set1_copy)
-#> {'banana', 'orange'}
+#> {'orange', 'banana'}
 print(set1)
-#> {'apple', 'banana', 'orange'}
+#> {'apple', 'orange', 'banana'}
 ```
 
 ## [loop] for  
@@ -197,8 +197,8 @@ set1 = {"apple", "banana", "orange"}
 for item in set1:
   print(item)
 #> apple
-#> banana
 #> orange
+#> banana
 ```
 
 ## [loop] comprehension  
@@ -211,7 +211,7 @@ set1 = {"apple", "banana", "orange"}
 set2 = {item for item in set1}
 
 print(set2)
-#> {'apple', 'banana', 'orange'}
+#> {'apple', 'orange', 'banana'}
 ```
 
 
@@ -256,7 +256,7 @@ print(l_unique)
 my_string = "aabbcdefg"
 string_to_set = set(my_string)
 print(string_to_set)
-#> {'d', 'a', 'g', 'e', 'c', 'b', 'f'}
+#> {'a', 'g', 'e', 'b', 'f', 'c', 'd'}
 ```
 
 

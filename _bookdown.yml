@@ -53,3 +53,5 @@ rmd_files:
 # - "深入認識class和object"
 #- "_module_package.Rmd"
 #- "python_pandas.Rmd"
+- "H_NumPy.Rmd"
+- "numpy_basics.Rmd"

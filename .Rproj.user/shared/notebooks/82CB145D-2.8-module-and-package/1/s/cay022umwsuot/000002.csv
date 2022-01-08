@@ -1,6 +1,0 @@
-"0","# bash
-ls ./my_package"
-"1","__init__.py
-__pycache__
-math.py
-"

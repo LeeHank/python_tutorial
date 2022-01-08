@@ -81,6 +81,8 @@
 <li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
 <li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
 <li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+<li class="book-part">NumPy</li>
+<li><a class="" href="numpy-basics.html"><span class="header-section-number">35</span> numpy basics</a></li>
 </ul>
 
         <div class="book-extra">
@@ -131,7 +133,7 @@
 </ul>
 <div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-1" aria-hidden="true" tabindex="-1"></a>my_set <span class="op">=</span> {<span class="st">'a'</span>, <span class="st">'b'</span>}</span>
 <span id="cb182-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_set)</span>
-<span id="cb182-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'b', 'a'}</span></span></code></pre></div>
+<span id="cb182-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a', 'b'}</span></span></code></pre></div>
 <ul>
 <li>set的特點，其實和dictionary的key的特點一樣(也和數學上的集合的特點一樣)，就是’唯一’和’無序’。<br>
 </li>
@@ -225,7 +227,7 @@
 <span id="cb189-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-3" aria-hidden="true" tabindex="-1"></a>thisset.add(<span class="st">"orange"</span>)</span>
 <span id="cb189-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb189-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
-<span id="cb189-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'orange', 'cherry'}</span></span></code></pre></div>
+<span id="cb189-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'orange', 'banana', 'cherry'}</span></span></code></pre></div>
 </div>
 <div id="增加多個item用.update" class="section level3" number="13.5.2">
 <h3>
@@ -237,7 +239,7 @@
 <span id="cb190-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-4" aria-hidden="true" tabindex="-1"></a>thisset.update(tropical)</span>
 <span id="cb190-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb190-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
-<span id="cb190-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'pineapple', 'mango', 'papaya', 'cherry'}</span></span></code></pre></div>
+<span id="cb190-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'pineapple', 'cherry', 'papaya', 'mango'}</span></span></code></pre></div>
 <ul>
 <li>如果update的東西，裡面有和原本重複的值，那就只會留一個，因為set就是unique</li>
 </ul>
@@ -247,7 +249,7 @@
 <span id="cb191-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-4" aria-hidden="true" tabindex="-1"></a>thisset.update(tropical)</span>
 <span id="cb191-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb191-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(thisset)</span>
-<span id="cb191-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'papaya', 'cherry'}</span></span></code></pre></div>
+<span id="cb191-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'cherry', 'papaya'}</span></span></code></pre></div>
 </div>
 </div>
 <div id="mutable-請愛用.copy" class="section level2" number="13.6">
@@ -263,9 +265,9 @@
 <span id="cb192-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-4" aria-hidden="true" tabindex="-1"></a>set1_copy.remove(<span class="st">"apple"</span>)</span>
 <span id="cb192-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb192-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1_copy)</span>
-<span id="cb192-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'banana', 'orange'}</span></span>
+<span id="cb192-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span>
 <span id="cb192-8"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1)</span>
-<span id="cb192-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'banana', 'orange'}</span></span></code></pre></div>
+<span id="cb192-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span></code></pre></div>
 <ul>
 <li>記得用<code>.copy()</code>來解決問題</li>
 </ul>
@@ -275,9 +277,9 @@
 <span id="cb193-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-4" aria-hidden="true" tabindex="-1"></a>set1_copy.remove(<span class="st">"apple"</span>)</span>
 <span id="cb193-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb193-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1_copy)</span>
-<span id="cb193-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'banana', 'orange'}</span></span>
+<span id="cb193-7"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'orange', 'banana'}</span></span>
 <span id="cb193-8"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set1)</span>
-<span id="cb193-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'orange'}</span></span></code></pre></div>
+<span id="cb193-9"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'orange', 'banana'}</span></span></code></pre></div>
 </div>
 <div id="loop-for-1" class="section level2" number="13.7">
 <h2>
@@ -290,8 +292,8 @@
 <span id="cb194-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> set1:</span>
 <span id="cb194-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(item)</span>
 <span id="cb194-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; apple</span></span>
-<span id="cb194-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span>
-<span id="cb194-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; orange</span></span></code></pre></div>
+<span id="cb194-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; orange</span></span>
+<span id="cb194-6"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; banana</span></span></code></pre></div>
 </div>
 <div id="loop-comprehension-1" class="section level2" number="13.8">
 <h2>
@@ -304,7 +306,7 @@
 <span id="cb195-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-2" aria-hidden="true" tabindex="-1"></a>set2 <span class="op">=</span> {item <span class="cf">for</span> item <span class="kw">in</span> set1}</span>
 <span id="cb195-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb195-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set2)</span>
-<span id="cb195-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'banana', 'orange'}</span></span></code></pre></div>
+<span id="cb195-5"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'apple', 'orange', 'banana'}</span></span></code></pre></div>
 </div>
 <div id="特殊技-集合運算" class="section level2" number="13.9">
 <h2>
@@ -347,7 +349,7 @@
 <div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-1" aria-hidden="true" tabindex="-1"></a>my_string <span class="op">=</span> <span class="st">"aabbcdefg"</span></span>
 <span id="cb198-2"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-2" aria-hidden="true" tabindex="-1"></a>string_to_set <span class="op">=</span> <span class="bu">set</span>(my_string)</span>
 <span id="cb198-3"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(string_to_set)</span>
-<span id="cb198-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'d', 'a', 'g', 'e', 'c', 'b', 'f'}</span></span></code></pre></div>
+<span id="cb198-4"><a href="set%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'a', 'g', 'e', 'b', 'f', 'c', 'd'}</span></span></code></pre></div>
 
 </div>
 </div>
@@ -398,7 +400,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -81,6 +81,8 @@
 <li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
 <li><a class="active" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
 <li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+<li class="book-part">NumPy</li>
+<li><a class="" href="numpy-basics.html"><span class="header-section-number">35</span> numpy basics</a></li>
 </ul>
 
         <div class="book-extra">
@@ -187,9 +189,9 @@
 <li>為什麼會這樣？因為在比相不相同時，是比記憶體位置一不一樣：</li>
 </ul>
 <div class="sourceCode" id="cb401"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb401-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust1)</span>
-<span id="cb401-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x110028220&gt;</span></span>
+<span id="cb401-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x132b0ba30&gt;</span></span>
 <span id="cb401-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust2)</span>
-<span id="cb401-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x110028400&gt;</span></span></code></pre></div>
+<span id="cb401-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x132b103d0&gt;</span></span></code></pre></div>
 <ul>
 <li>很明顯的看到，兩個記憶體位置不同，所以才說不相等<br>
 </li>
@@ -201,9 +203,9 @@
 <span id="cb402-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
 <span id="cb402-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
 <span id="cb402-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-4" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(a)</span>
-<span id="cb402-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4563551856</span></span>
+<span id="cb402-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5145446480</span></span>
 <span id="cb402-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-6" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(b)</span>
-<span id="cb402-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4563552096</span></span>
+<span id="cb402-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5145446720</span></span>
 <span id="cb402-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">==</span> b)</span>
 <span id="cb402-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [ True]</span></span></code></pre></div>
 <ul>
@@ -358,7 +360,7 @@
 <span id="cb408-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb408-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-5" aria-hidden="true" tabindex="-1"></a>my_salary <span class="op">=</span> salary(<span class="dv">22000</span>)</span>
 <span id="cb408-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_salary)</span>
-<span id="cb408-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.salary object at 0x110038520&gt;</span></span></code></pre></div>
+<span id="cb408-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.salary object at 0x132b24520&gt;</span></span></code></pre></div>
 <ul>
 <li>damn…這麼簡單的class，我當然希望他直接print 22K給我看啊<br>
 </li>
@@ -430,7 +432,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

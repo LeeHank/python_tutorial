@@ -21,7 +21,7 @@ type(my_func)
 
 ```python
 my_func
-#> <function my_func at 0x13052bee0>
+#> <function my_func at 0x1346d1ee0>
 my_func()
 #> hello
 ```

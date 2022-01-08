@@ -81,6 +81,8 @@
 <li><a class="" href="attribute-protection.html"><span class="header-section-number">32</span> Attribute Protection</a></li>
 <li><a class="" href="isinstance-equality-%E8%88%87-string-representation.html"><span class="header-section-number">33</span> isinstance, equality, 與 string representation</a></li>
 <li><a class="" href="encapsulation-inheritacne-and-polymorphism.html"><span class="header-section-number">34</span> Encapsulation, Inheritacne, and Polymorphism</a></li>
+<li class="book-part">NumPy</li>
+<li><a class="" href="numpy-basics.html"><span class="header-section-number">35</span> numpy basics</a></li>
 </ul>
 
         <div class="book-extra">
@@ -126,7 +128,7 @@
 <code>my_func</code>是一個object，但<code>my_func()</code>是call這個函數</li>
 </ul>
 <div class="sourceCode" id="cb291"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="decorator.html#cb291-1" aria-hidden="true" tabindex="-1"></a>my_func</span>
-<span id="cb291-2"><a href="decorator.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function my_func at 0x13abbcee0&gt;</span></span>
+<span id="cb291-2"><a href="decorator.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function my_func at 0x10d0d3ee0&gt;</span></span>
 <span id="cb291-3"><a href="decorator.html#cb291-3" aria-hidden="true" tabindex="-1"></a>my_func()</span>
 <span id="cb291-4"><a href="decorator.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; hello</span></span></code></pre></div>
 <ul>
@@ -432,7 +434,7 @@
 <span id="cb307-4"><a href="decorator.html#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="co"># original function，可以直接使用這個裝飾前的function</span></span>
 <span id="cb307-5"><a href="decorator.html#cb307-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; None</span></span>
 <span id="cb307-6"><a href="decorator.html#cb307-6" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds.__wrapped__</span>
-<span id="cb307-7"><a href="decorator.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function sleep_n_seconds at 0x13ac05c10&gt;</span></span></code></pre></div>
+<span id="cb307-7"><a href="decorator.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function sleep_n_seconds at 0x10d11cc10&gt;</span></span></code></pre></div>
 <ul>
 <li>在實務上，這個original function蠻有用的。<br>
 </li>
@@ -592,9 +594,9 @@
 <span id="cb316-3"><a href="decorator.html#cb316-3" aria-hidden="true" tabindex="-1"></a>  time.sleep(n)</span>
 <span id="cb316-4"><a href="decorator.html#cb316-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb316-5"><a href="decorator.html#cb316-5" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds(<span class="dv">2</span>)</span>
-<span id="cb316-6"><a href="decorator.html#cb316-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 2.006437063217163 seconds to run</span></span>
+<span id="cb316-6"><a href="decorator.html#cb316-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 2.0073468685150146 seconds to run</span></span>
 <span id="cb316-7"><a href="decorator.html#cb316-7" aria-hidden="true" tabindex="-1"></a>sleep_n_seconds(<span class="dv">5</span>)</span>
-<span id="cb316-8"><a href="decorator.html#cb316-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 5.0095789432525635 seconds to run</span></span></code></pre></div>
+<span id="cb316-8"><a href="decorator.html#cb316-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sleep_n_seconds took 5.008097887039185 seconds to run</span></span></code></pre></div>
 </div>
 <div id="counter" class="section level3" number="28.5.2">
 <h3>
@@ -806,7 +808,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-08.</p>
+    <p>"<strong>Python Tutorial</strong>" was written by Hank Lee. It was last built on 2022-01-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

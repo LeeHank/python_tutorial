@@ -15,7 +15,7 @@ def test(x, y):
 
 ```python
 test
-#> <function test at 0x130c39ee0>
+#> <function test at 0x13e3ecee0>
 ```
 
 * 我們可以call此function做事  
@@ -60,7 +60,7 @@ f(1,2)
 voc_list = ["Hank", "statistics", "basketball", "nice guy"]
 result_map = map(lambda x: len(x)+2, voc_list)
 print(result_map)
-#> <map object at 0x130c88160>
+#> <map object at 0x13e43a160>
 print(list(result_map))
 #> [6, 12, 12, 10]
 ```

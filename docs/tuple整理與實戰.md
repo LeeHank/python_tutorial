@@ -243,7 +243,7 @@ doctor = ['house', 'cuddy', 'chase', 'thirteen', 'wilson']
 doc_tuple = (doc[0] for doc in doctor)
 
 print(doc_tuple)
-#> <generator object <genexpr> at 0x11a3f1040>
+#> <generator object <genexpr> at 0x118989040>
 ```
 
 ## join兩個tuple用加號  

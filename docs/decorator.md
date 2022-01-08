@@ -26,7 +26,7 @@ type(my_func)
 
 ```python
 my_func
-#> <function my_func at 0x10cef4ee0>
+#> <function my_func at 0x13abbcee0>
 my_func()
 #> hello
 ```
@@ -339,7 +339,7 @@ print(sleep_n_seconds.__defaults__)
 # original function，可以直接使用這個裝飾前的function
 #> None
 sleep_n_seconds.__wrapped__
-#> <function sleep_n_seconds at 0x10d079c10>
+#> <function sleep_n_seconds at 0x13ac05c10>
 ```
 
 * 在實務上，這個original function蠻有用的。  
@@ -501,9 +501,9 @@ def sleep_n_seconds(n):
   time.sleep(n)
 
 sleep_n_seconds(2)
-#> sleep_n_seconds took 2.0100839138031006 seconds to run
+#> sleep_n_seconds took 2.006437063217163 seconds to run
 sleep_n_seconds(5)
-#> sleep_n_seconds took 5.004548072814941 seconds to run
+#> sleep_n_seconds took 5.0095789432525635 seconds to run
 ```
 
 ### counter  

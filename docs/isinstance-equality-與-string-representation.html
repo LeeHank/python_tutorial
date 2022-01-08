@@ -84,7 +84,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/LeeHank/python_tutorial">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -187,9 +187,9 @@
 <li>為什麼會這樣？因為在比相不相同時，是比記憶體位置一不一樣：</li>
 </ul>
 <div class="sourceCode" id="cb401"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb401-1"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust1)</span>
-<span id="cb401-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x10f0e3220&gt;</span></span>
+<span id="cb401-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x110028220&gt;</span></span>
 <span id="cb401-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cust2)</span>
-<span id="cb401-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x10f0e3400&gt;</span></span></code></pre></div>
+<span id="cb401-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.Customer object at 0x110028400&gt;</span></span></code></pre></div>
 <ul>
 <li>很明顯的看到，兩個記憶體位置不同，所以才說不相等<br>
 </li>
@@ -201,9 +201,9 @@
 <span id="cb402-2"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
 <span id="cb402-3"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>])</span>
 <span id="cb402-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-4" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(a)</span>
-<span id="cb402-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4547578096</span></span>
+<span id="cb402-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4563551856</span></span>
 <span id="cb402-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-6" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(b)</span>
-<span id="cb402-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4547578336</span></span>
+<span id="cb402-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4563552096</span></span>
 <span id="cb402-8"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">==</span> b)</span>
 <span id="cb402-9"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb402-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [ True]</span></span></code></pre></div>
 <ul>
@@ -358,7 +358,7 @@
 <span id="cb408-4"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb408-5"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-5" aria-hidden="true" tabindex="-1"></a>my_salary <span class="op">=</span> salary(<span class="dv">22000</span>)</span>
 <span id="cb408-6"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_salary)</span>
-<span id="cb408-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.salary object at 0x10f0f8520&gt;</span></span></code></pre></div>
+<span id="cb408-7"><a href="isinstance-equality-%E8%88%87-string-representation.html#cb408-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;__main__.salary object at 0x110038520&gt;</span></span></code></pre></div>
 <ul>
 <li>damn…這麼簡單的class，我當然希望他直接print 22K給我看啊<br>
 </li>
@@ -417,8 +417,8 @@
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/equality_and_str.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/equality_and_str.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/LeeHank/python_tutorial/blob/master/equality_and_str.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/LeeHank/python_tutorial/edit/master/equality_and_str.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

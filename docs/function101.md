@@ -128,7 +128,7 @@ print(power(9))
 
 ```python
 square
-#> <function square at 0x139a72ee0>
+#> <function square at 0x132369ee0>
 ```
 
 * 但如果你打`square(3)`，那他會call這個函數：  

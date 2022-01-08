@@ -101,9 +101,9 @@ cust1 == cust2
 
 ```python
 print(cust1)
-#> <__main__.Customer object at 0x10f0e3220>
+#> <__main__.Customer object at 0x110028220>
 print(cust2)
-#> <__main__.Customer object at 0x10f0e3400>
+#> <__main__.Customer object at 0x110028400>
 ```
 
 -   很明顯的看到，兩個記憶體位置不同，所以才說不相等\
@@ -116,9 +116,9 @@ import numpy as np
 a = np.array([1])
 b = np.array([1])
 id(a)
-#> 4547578096
+#> 4563551856
 id(b)
-#> 4547578336
+#> 4563552096
 print(a == b)
 #> [ True]
 ```
@@ -261,7 +261,7 @@ class salary:
 
 my_salary = salary(22000)
 print(my_salary)
-#> <__main__.salary object at 0x10f0f8520>
+#> <__main__.salary object at 0x110038520>
 ```
 
 -   damn...這麼簡單的class，我當然希望他直接print 22K給我看啊\

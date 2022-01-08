@@ -30,7 +30,7 @@ print(my_dict)
 ```python
 my_set = {'a', 'b'}
 print(my_set)
-#> {'a', 'b'}
+#> {'b', 'a'}
 ```
 
 * set的特點，其實和dictionary的key的特點一樣(也和數學上的集合的特點一樣)，就是'唯一'和'無序'。  
@@ -49,9 +49,9 @@ thisset = {"apple", "banana", "cherry"}
 
 for x in thisset:
   print(x)
-#> cherry
-#> banana
 #> apple
+#> banana
+#> cherry
 ```
 
 * check "banana"是否在這個set中  
@@ -80,7 +80,7 @@ thisset = {"apple", "banana", "cherry"}
 thisset.remove("banana")
 
 print(thisset)
-#> {'cherry', 'apple'}
+#> {'apple', 'cherry'}
 ```
 
 
@@ -101,7 +101,7 @@ thisset = {"apple", "banana", "cherry"}
 thisset.discard("banana")
 
 print(thisset)
-#> {'cherry', 'apple'}
+#> {'apple', 'cherry'}
 ```
 
 
@@ -111,7 +111,7 @@ thisset = {"apple", "banana", "cherry"}
 thisset.discard("kiwi")
 
 print(thisset)
-#> {'cherry', 'banana', 'apple'}
+#> {'apple', 'banana', 'cherry'}
 ```
 
 ## [增] `.add()`與`.update()`  
@@ -125,7 +125,7 @@ thisset = {"apple", "banana", "cherry"}
 thisset.add("orange")
 
 print(thisset)
-#> {'cherry', 'banana', 'orange', 'apple'}
+#> {'apple', 'banana', 'orange', 'cherry'}
 ```
 
 
@@ -139,7 +139,7 @@ tropical = {"pineapple", "mango", "papaya"}
 thisset.update(tropical)
 
 print(thisset)
-#> {'banana', 'pineapple', 'mango', 'apple', 'cherry', 'papaya'}
+#> {'apple', 'banana', 'pineapple', 'mango', 'papaya', 'cherry'}
 ```
 
 * 如果update的東西，裡面有和原本重複的值，那就只會留一個，因為set就是unique  
@@ -152,7 +152,7 @@ tropical = {"apple", "banana", "papaya"}
 thisset.update(tropical)
 
 print(thisset)
-#> {'banana', 'apple', 'cherry', 'papaya'}
+#> {'apple', 'banana', 'papaya', 'cherry'}
 ```
 
 ## [mutable]  請愛用`.copy()`  
@@ -167,9 +167,9 @@ set1_copy = set1
 set1_copy.remove("apple")
 
 print(set1_copy)
-#> {'orange', 'banana'}
+#> {'banana', 'orange'}
 print(set1)
-#> {'orange', 'banana'}
+#> {'banana', 'orange'}
 ```
 
 * 記得用`.copy()`來解決問題  
@@ -182,9 +182,9 @@ set1_copy = set1.copy()
 set1_copy.remove("apple")
 
 print(set1_copy)
-#> {'orange', 'banana'}
+#> {'banana', 'orange'}
 print(set1)
-#> {'orange', 'banana', 'apple'}
+#> {'apple', 'banana', 'orange'}
 ```
 
 ## [loop] for  
@@ -196,9 +196,9 @@ print(set1)
 set1 = {"apple", "banana", "orange"}
 for item in set1:
   print(item)
-#> orange
-#> banana
 #> apple
+#> banana
+#> orange
 ```
 
 ## [loop] comprehension  
@@ -211,7 +211,7 @@ set1 = {"apple", "banana", "orange"}
 set2 = {item for item in set1}
 
 print(set2)
-#> {'orange', 'apple', 'banana'}
+#> {'apple', 'banana', 'orange'}
 ```
 
 
@@ -256,7 +256,7 @@ print(l_unique)
 my_string = "aabbcdefg"
 string_to_set = set(my_string)
 print(string_to_set)
-#> {'c', 'a', 'd', 'e', 'g', 'b', 'f'}
+#> {'d', 'a', 'g', 'e', 'c', 'b', 'f'}
 ```
 
 

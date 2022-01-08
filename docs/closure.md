@@ -53,7 +53,7 @@ f()
 
 ```python
 f.__closure__
-#> (<cell at 0x1378c3f10: int object at 0x10c64a960>,)
+#> (<cell at 0x1348a2f10: int object at 0x10946b960>,)
 ```
 
 * 發現，f果然存有`.__closure__`這個attribute  

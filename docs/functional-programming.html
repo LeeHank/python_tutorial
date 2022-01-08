@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 29 functional programming | Python Tutorial</title>
 <meta name="author" content="Hank Lee">
-<meta name="description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x1160a8ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
+<meta name="description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x130c39ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 29 functional programming | Python Tutorial">
 <meta property="og:type" content="book">
-<meta property="og:description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x1160a8ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
+<meta property="og:description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x130c39ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 29 functional programming | Python Tutorial">
-<meta name="twitter:description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x1160a8ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
+<meta name="twitter:description" content="29.1 lambda function 假設我們現在有一個function如下： def test(x, y):  return x + 2*y 那定義完成後，就建立了一個test物件，此物件佔有記憶體空間 test #&gt; &lt;function test at 0x130c39ee0&gt; 我們可以call此function做事 test(1,2) #&gt; 5 那lambda...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -84,7 +84,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/LeeHank/python_tutorial">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -105,7 +105,7 @@
 <li>那定義完成後，就建立了一個<code>test</code>物件，此物件佔有記憶體空間</li>
 </ul>
 <div class="sourceCode" id="cb327"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb327-1"><a href="functional-programming.html#cb327-1" aria-hidden="true" tabindex="-1"></a>test</span>
-<span id="cb327-2"><a href="functional-programming.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function test at 0x1160a8ee0&gt;</span></span></code></pre></div>
+<span id="cb327-2"><a href="functional-programming.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;function test at 0x130c39ee0&gt;</span></span></code></pre></div>
 <ul>
 <li>我們可以call此function做事</li>
 </ul>
@@ -151,7 +151,7 @@
 <div class="sourceCode" id="cb331"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb331-1"><a href="functional-programming.html#cb331-1" aria-hidden="true" tabindex="-1"></a>voc_list <span class="op">=</span> [<span class="st">"Hank"</span>, <span class="st">"statistics"</span>, <span class="st">"basketball"</span>, <span class="st">"nice guy"</span>]</span>
 <span id="cb331-2"><a href="functional-programming.html#cb331-2" aria-hidden="true" tabindex="-1"></a>result_map <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">len</span>(x)<span class="op">+</span><span class="dv">2</span>, voc_list)</span>
 <span id="cb331-3"><a href="functional-programming.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_map)</span>
-<span id="cb331-4"><a href="functional-programming.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;map object at 0x1160f21c0&gt;</span></span>
+<span id="cb331-4"><a href="functional-programming.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;map object at 0x130c88160&gt;</span></span>
 <span id="cb331-5"><a href="functional-programming.html#cb331-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(result_map))</span>
 <span id="cb331-6"><a href="functional-programming.html#cb331-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6, 12, 12, 10]</span></span></code></pre></div>
 <ul>
@@ -252,8 +252,8 @@
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/functional_programming.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/functional_programming.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/LeeHank/python_tutorial/blob/master/functional_programming.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/LeeHank/python_tutorial/edit/master/functional_programming.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

@@ -1,0 +1,269 @@
+---
+title: ""
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+---
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+```{python}
+import pandas as pd
+```
+
+# Transforming Data
+
+## Inspecting DataFrame
+
+-   拿到資料的第一步，就是去看看這份資料裡有甚麼東西\
+
+-   在R裡面，最常用的就是 `head()`來先看前幾筆，`dim()`來看一下列數和行數，`str()`來看各欄位的type，用`summary`來看各欄位的描述統計量
+
+-   在Python也是一樣，只是R都是用function，但python是物件導向，所以是用methods
+
+    | R           | Python        |
+    |-------------|---------------|
+    | head(df, n) | df.head(n)    |
+    | dim(df)     | df.shape      |
+    | str(df)     | df.info()     |
+    | summary(df) | df.describe() |
+
+-   接下來我們就來讀一筆資料，然後看看這些結果
+
+```{python}
+homelessness = pd.read_csv("homelessness.csv")
+```
+
+```{python}
+homelessness.head()
+```
+
+-   這筆資料是在描述美國各州無家可歸的人數有多少\
+-   第二個欄位和第一個欄位，就在講是哪個州的哪個地區\
+-   第三個欄位的individuals在講the number of homeless individuals not part of a family with children\
+-   第四個欄位的family\_members在講the number of homeless individuals part of a family with children\
+-   第五個欄位是這個州的人口有多少
+
+```{python}
+homelessness.shape
+```
+
+-   這筆資料有51的rows，5個column
+
+```{python}
+homelessness.info()
+```
+
+```{python}
+homelessness.describe()
+```
+
+## Parts of a DataFrame
+
+-   對data有初步認識後，我們常常就會想來擷取這份data的部分資訊\
+
+-   除了擷取某些column，某些row外，在R我們也常常用`colnames()`和`rownames()`，來擷取dataframe的column names & row names\
+
+-   在Python，一樣，又是因為物件導向，所以他是用attribute(因為是這份df的特性，而不是methods，所以使用時，也不用加括號)來得到這些資訊
+
+    | R              | Python       |
+    |----------------|--------------|
+    | colnames(data) | data.columns |
+    | rownames(data) | data.index   |
+    |                | data.values  |
+
+```{python}
+print(homelessness.columns)
+```
+
+```{python}
+print(homelessness.index)
+```
+
+-   最後，python比R多出來的東西，是value，他可以只取出DataFrame裡面的值。那此時的data type，就會是二維list:
+
+```{python}
+homelessness.values
+```
+
+```{python}
+type(homelessness.values)
+```
+
+## select, filter, arrange, & mutate
+
+-   在R裡面，我最常用到的四個函數，在pandas裡面都有對應的method可以用
+
+### select
+
+| dplyr                  | Pandas                               |
+|------------------------|--------------------------------------|
+| select(df, col1)       | df["col1"]是series, df[["col1"]]是df |
+| select(df, col1, col2) | df[["col1", "col2"]                  |
+| select(df, col1:col3)  | df.loc[:, "col1":"col3"]                 |
+
+-   來練習吧：我想先select "individual"這個欄位
+
+```{python}
+ind_series = homelessness["individuals"]
+print(type(ind_series))
+```
+
+```{python}
+ind_series.head()
+```
+
+```{python}
+ind_df = homelessness[["individuals"]]
+type(ind_df)
+```
+
+```{python}
+print(ind_df.head())
+```
+
+-   再來，我想select "state"和"family\_members"這兩個column
+
+```{python}
+state_fam = homelessness[["state", "family_members"]]
+print(state_fam.head())
+```
+
+-   再來，我想select從individuals到family\_members
+
+```{python}
+ind_to_fam = homelessness.loc[:, "individuals":"family_members"]
+print(ind_to_fam.head())
+```
+
+### filter  
+
+* 篩選出individuals > 10000的資料  
+
+```{python}
+homelessness.query("individuals > 10000")
+```
+
+* 篩選出region = "Mountain"的資料  
+
+```{python}
+homelessness.query("region == 'Mountain'").head()
+```
+
+* 篩選出family members < 1000 & region = "Pacific"  
+
+```{python}
+homelessness.query("family_members < 1000 & region == 'Pacific'")
+```
+
+* 篩選出region是"South Atlantic"或是"Mid_atlantic"  
+
+```{python}
+homelessness[homelessness["region"].isin(["South Atlantic", "Mid_atlantic"])]
+```
+
+### arrange  
+
+* 我想看individuals的top5  
+
+```{python}
+homelessness.sort_values("individuals", ascending = False).head()
+```
+
+* 我想先依照region由小到大排，然後，region平手的，再依照family_members由大到小排，最後print出前五個  
+
+```{python}
+homelessness.sort_values(["region", "family_members"], ascending = [True, False]).head()
+```
+
+### mutate and rename  
+
+* 我想新增一個total的欄位，定義為individuals + family_members  
+
+```{python}
+new = homelessness.assign(total = homelessness["individuals"]+homelessness["family_members"])
+
+new[["individuals", "family_members", "total"]].head()
+```
+* 我想把new這個table的"region"改名為region2就好  
+
+```{python}
+new.rename(columns = {"region": "region2"}).head()
+```
+
+### summarise  
+
+* 接下來，先讀一個新的資料集  
+
+```{python}
+sales = pd.read_csv("sales_subset.csv")
+sales.shape
+```
+
+* 看一下內容：  
+
+```{r}
+py$sales
+```
+
+* 看一下overall:  
+
+```{python}
+sales.info()
+```
+
+* 算出"weekly_sales"的mean  
+
+```{python}
+sales["weekly_sales"].mean()
+```
+
+* 先定義四分位差，然後去計算temperature_c, fuel_price_usd_per_l, unemployment的四分位差  
+
+```{python}
+import numpy as np
+def iqr(x):
+  return x.quantile(0.75) - x.quantile(0.25)
+
+sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, np.mean, np.min, np.max])
+```
+
+### group_by + summarise  
+
+* 我想先group_by "type(A, B, C)"，再計算weekly_sales的sum  
+
+```{python}
+tt_series = sales.groupby("type")["weekly_sales"].sum()
+print(tt_series)
+print(type(tt_series))
+```
+
+```{python}
+tt_df = sales.groupby("type")[["weekly_sales"]].sum()
+print(tt_df)
+print(type(tt_df))
+```
+
+* 我想by "type"+"is_holiday"，去算出weekly_sales的sum, min, max  
+
+```{python}
+tt_group = sales.groupby(["type", "is_holiday"])["weekly_sales"].agg([np.min, np.max])
+print(tt_group)
+print(type(tt_group))
+```
+
